@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "926398052207",
+    "project_id": "healthc-79f9e",
+    "storage_bucket": "healthc-79f9e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:926398052207:android:d05b86b74081d5e6dd5a9a",
+        "android_client_info": {
+          "package_name": "com.example.healthc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "926398052207-0pbnq4j80ehoces5gtpdqg2o6m3deip9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.healthc",
+            "certificate_hash": "cebde848d72394dc06da13b4db2323eb334edb5a"
+          }
+        },
+        {
+          "client_id": "926398052207-endtnsr79l779f9nsjc5iss7ejfru4ij.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsVeWy4g1MEXa-EGltJJ6wi1JJ9z5Ine0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "926398052207-endtnsr79l779f9nsjc5iss7ejfru4ij.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
