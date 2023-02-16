@@ -3,10 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/cameraFragment">
+    app:startDestination="@id/permissionsFragment">
     <fragment
         android:id="@+id/cameraFragment"
         android:name="com.example.healthc.presentation.camera.CameraFragment"
         android:label="fragment_camera"
         tools:layout="@layout/fragment_camera" />
+    <fragment
+        android:id="@+id/permissionsFragment"
+        android:name="com.example.healthc.presentation.camera.PermissionsFragment"
+        android:label="PermissionsFragment" >
+        <action
+            android:id="@+id/action_permissionsFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
+    </fragment>
 </navigation>
