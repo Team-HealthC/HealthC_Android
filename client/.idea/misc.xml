@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/drawable/ic_baseline_camera_24.xml" value="0.2895" />
+        <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/drawable/ic_baseline_switch_camera_24.xml" value="0.2895" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/activity_main.xml" value="0.3072916666666667" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/fragment_camera.xml" value="0.2296875" />
       </map>
