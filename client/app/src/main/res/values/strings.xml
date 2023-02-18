@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">HealthC</string>
+    <string name="sign_up_name">반가워요! 제이름은 헬씨에요. \n그쪽은 이름이 어떻게 되시나요?</string>
+    <string name="sign_up_email">사용할 이메일을 입력해주세요.</string>
+    <string name="sign_up_password">사용할 비밀번호를 입력해주세요.</string>
+    <string name="sign_up_info">갖고 있는 질환이나 알레르기가 있다면 선택해주세요. </string>
+    <string name="next">다음</string>
+    <string name="done">확인</string>
+    <string name="hint_email">이메일을 입력하세요.</string>
+    <string name="hint_password">비밀번호을 입력하세요.</string>
+    <string name="hint_name">이름을 알려주세요.</string>
+
 </resources>
