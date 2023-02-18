@@ -6,12 +6,13 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentCameraBinding
 import com.example.healthc.util.getCurrentFileName
@@ -29,7 +30,6 @@ class CameraFragment : Fragment() {
     private lateinit var imageCapture : ImageCapture
     private lateinit var imagePreview : Preview
     private lateinit var imageAnalyzer : ImageAnalysis
-    private lateinit var windowManager: WindowManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -105,7 +105,7 @@ class CameraFragment : Fragment() {
         imageCapture.takePicture(outputFileOptions, ContextCompat.getMainExecutor(requireContext()),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                    Timber.d(outputFileResults.savedUri.toString())
+                    navigateToCamera(outputFileResults.savedUri.toString())
                 }
 
                 override fun onError(exception: ImageCaptureException) {
@@ -113,6 +113,15 @@ class CameraFragment : Fragment() {
                 }
             }
         )
+    }
+
+    private fun navigateToCamera(imageUrl : String) {
+        lifecycleScope.launchWhenStarted {
+            val direction = CameraFragmentDirections.actionCameraFragmentToShowImageFragment(
+                imageUrl = imageUrl
+            )
+            findNavController().navigate(direction)
+        }
     }
 
     override fun onDestroyView() {

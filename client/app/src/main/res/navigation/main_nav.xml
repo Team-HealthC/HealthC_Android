@@ -8,13 +8,34 @@
         android:id="@+id/cameraFragment"
         android:name="com.example.healthc.presentation.camera.CameraFragment"
         android:label="fragment_camera"
-        tools:layout="@layout/fragment_camera" />
+        tools:layout="@layout/fragment_camera" >
+        <action
+            android:id="@+id/action_cameraFragment_to_showImageFragment"
+            app:destination="@id/showImageFragment" >
+            <argument
+                android:name="imageUrl"
+                app:argType="string"/>
+        </action>
+    </fragment>
     <fragment
         android:id="@+id/permissionsFragment"
         android:name="com.example.healthc.presentation.camera.PermissionsFragment"
         android:label="PermissionsFragment" >
         <action
             android:id="@+id/action_permissionsFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/showImageFragment"
+        android:name="com.example.healthc.presentation.camera.image_process.ShowImageFragment"
+        android:label="fragment_show_image"
+        tools:layout="@layout/fragment_show_image" >
+        <argument
+            android:name="imageUrl"
+            android:defaultValue="file:///android_asset/"
+            app:argType="string"/>
+        <action
+            android:id="@+id/action_showImageFragment_to_cameraFragment"
             app:destination="@id/cameraFragment" />
     </fragment>
 </navigation>
