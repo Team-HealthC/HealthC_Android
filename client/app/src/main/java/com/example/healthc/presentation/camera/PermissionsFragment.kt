@@ -11,7 +11,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.healthc.R
 
 private var PERMISSIONS_REQUIRED = arrayOf(Manifest.permission.CAMERA)
 
@@ -37,7 +36,7 @@ class PermissionsFragment : Fragment() {
 
     private fun navigateToCamera() {
         lifecycleScope.launchWhenStarted {
-            val direction = R.id.action_permissionsFragment_to_cameraFragment
+            val direction = PermissionsFragmentDirections.actionPermissionsFragmentToCameraFragment()
             findNavController().navigate(direction)
         }
     }
