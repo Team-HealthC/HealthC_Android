@@ -1,4 +1,4 @@
-package com.example.healthc.domain
+package com.example.healthc.domain.repository
 
 import com.example.healthc.domain.model.auth.User
 import com.example.healthc.domain.model.auth.UserInfo

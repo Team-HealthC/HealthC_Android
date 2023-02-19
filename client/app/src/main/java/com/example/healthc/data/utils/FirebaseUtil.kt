@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.utils
+package com.example.healthc.data.utils
 
 import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.ExperimentalCoroutinesApi

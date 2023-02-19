@@ -4,7 +4,7 @@ import com.example.healthc.data.entity.auth.UserEntity
 import com.example.healthc.data.entity.auth.UserInfoEntity
 import com.example.healthc.data.source.auth.SignInDataSource
 import com.example.healthc.data.source.auth.SignUpDataSource
-import com.example.healthc.domain.AuthRepository
+import com.example.healthc.domain.repository.AuthRepository
 import com.example.healthc.domain.model.auth.User
 import com.example.healthc.domain.model.auth.UserInfo
 import com.example.healthc.domain.utils.Resource

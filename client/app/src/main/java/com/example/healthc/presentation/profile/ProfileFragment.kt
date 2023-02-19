@@ -21,6 +21,7 @@ class ProfileFragment : Fragment() {
     private val binding get() = checkNotNull(_binding)
 
     private val authViewModel : AuthViewModel by viewModels()
+    private val viewModel : ProfileViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,6 +37,7 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+        viewModel.getUserInfo()
     }
 
     private fun initView(){
