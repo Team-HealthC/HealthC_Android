@@ -4,6 +4,8 @@ import com.example.healthc.data.source.auth.SignInDataSource
 import com.example.healthc.data.source.auth.SignInDataSourceImpl
 import com.example.healthc.data.source.auth.SignUpDataSource
 import com.example.healthc.data.source.auth.SignUpDataSourceImpl
+import com.example.healthc.data.source.user.GetUserInfoDataSource
+import com.example.healthc.data.source.user.GetUserInfoDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -25,5 +27,11 @@ abstract class DataSourceModule {
     abstract fun provideSignInDataSource(
         signInDataSourceImpl: SignInDataSourceImpl
     ): SignInDataSource
+
+    @Binds
+    @Singleton
+    abstract fun providesGetUserInfoDataSource(
+        getUserInfoDataSourceImpl: GetUserInfoDataSourceImpl
+    ): GetUserInfoDataSource
 
 }
