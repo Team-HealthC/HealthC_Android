@@ -4,6 +4,7 @@
     <string name="sign_up_email">사용할 이메일을 입력해주세요.</string>
     <string name="sign_up_password">사용할 비밀번호를 입력해주세요.</string>
     <string name="sign_up_info">갖고 있는 질환이나 알레르기가 있다면 선택해주세요.</string>
+    <string name="splash_string">영양성분을 분석하는 스마트 돋보기 헬씨</string>
     <string name="sign_up">회원가입</string>
     <string name="sign_in">로그인</string>
     <string name="sign_out">로그아웃</string>

@@ -2,10 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.healthc">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
+
     <application
         android:name=".application.HealthCApplication"
         android:allowBackup="true"
@@ -17,18 +20,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HealthC">
         <activity
-            android:name=".presentation.main.MainActivity"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name=".presentation.auth.AuthActivity"
-            android:exported="true">
+            android:name=".presentation.splash.SplashActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".presentation.main.MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".presentation.auth.AuthActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

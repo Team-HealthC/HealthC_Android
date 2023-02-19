@@ -25,10 +25,6 @@ class AuthRepositoryImpl @Inject constructor(
             UserInfoEntity(userInfo.name, userInfo.disease, userInfo.allergy)
         )
 
-    // TODO source 구현
-    override val currentUser: FirebaseUser?
-        get() = firebaseAuth.currentUser
-
     override fun signOut() {
         firebaseAuth.signOut()
     }
