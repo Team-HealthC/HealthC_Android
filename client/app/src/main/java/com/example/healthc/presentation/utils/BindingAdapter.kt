@@ -1,4 +1,4 @@
-package com.example.healthc.util
+package com.example.healthc.presentation.utils
 
 import android.graphics.drawable.Drawable
 import android.widget.ImageView

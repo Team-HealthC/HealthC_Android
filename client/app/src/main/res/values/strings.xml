@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">HealthC</string>
+    <string name="sign_up_name">반가워요! 제이름은 헬씨에요. \n그쪽은 이름이 어떻게 되시나요?</string>
+    <string name="sign_up_email">사용할 이메일을 입력해주세요.</string>
+    <string name="sign_up_password">사용할 비밀번호를 입력해주세요.</string>
+    <string name="sign_up_info">갖고 있는 질환이나 알레르기가 있다면 선택해주세요.</string>
+    <string name="sign_up">회원가입</string>
+    <string name="sign_in">로그인</string>
+    <string name="next">다음</string>
+    <string name="done">완료</string>
+    <string name="hint_email">이메일을 입력하세요.</string>
+    <string name="hint_password">비밀번호을 입력하세요.</string>
+    <string name="hint_name">이름을 알려주세요.</string>
+    <string name="hint_info">질환이나 알러지를 유발할 수 있는 성분을 가진 음식을 알려드릴게요!</string>
+    <string name="sign_in_healthc">헬씨에 온걸 반가워요!</string>
+    <string name="sign_in_email">이메일을 입력하세요.</string>
+    <string name="sign_in_password">비밀번호를 입력하세요.</string>
+    <string name="email">이메일</string>
+    <string name="password">비밀번호</string>
+    <string name="honey">꿀</string>
+    <string name="bean">대두</string>
+    <string name="peanut">땅콩</string>
+    <string name="egg">계란</string>
+    <string name="milk">우유</string>
+    <string name="wheat">밀</string>
+    <string name="crap">게</string>
+    <string name="peach">복숭아</string>
+    <string name="Pomegranate">석류</string>
+
 </resources>

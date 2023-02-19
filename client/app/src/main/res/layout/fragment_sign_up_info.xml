@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.healthc.presentation.auth.AuthViewModel"
+            />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/signUpInfoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_up_info"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/signUpInfoHintTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hint_info"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/signUpInfoTextView" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/allergy_chip_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/signUpInfoHintTextView">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/honey_chip"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/honey"
+                    app:layout_constraintEnd_toStartOf="@+id/egg_chip"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/pomegranate_chip"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/Pomegranate"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/wheat_chip"
+                    app:layout_constraintTop_toTopOf="@+id/wheat_chip" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/egg_chip"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/egg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/honey_chip"
+                    app:layout_constraintTop_toTopOf="@+id/honey_chip" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/milk_chip"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/milk"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/bean_chip"
+                    app:layout_constraintTop_toTopOf="@+id/bean_chip" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/crap_chip"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/crap"
+                    app:layout_constraintEnd_toStartOf="@+id/bean_chip"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/honey_chip" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/bean_chip"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:background="@color/green"
+                    android:text="@string/bean"
+                    app:layout_constraintEnd_toStartOf="@+id/milk_chip"
+                    app:layout_constraintStart_toEndOf="@+id/crap_chip"
+                    app:layout_constraintTop_toTopOf="@+id/crap_chip" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/peanut_chip"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/peanut"
+                    app:layout_constraintEnd_toStartOf="@+id/wheat_chip"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/crap_chip" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/wheat_chip"
+                    style="@style/Widget.MaterialComponents.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/wheat"
+                    app:layout_constraintEnd_toStartOf="@+id/pomegranate_chip"
+                    app:layout_constraintStart_toEndOf="@+id/peanut_chip"
+                    app:layout_constraintTop_toTopOf="@+id/peanut_chip" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.chip.ChipGroup>
+
+        <Button
+            android:id="@+id/signUpInfoDoneButton"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/green"
+            android:text="@string/done"
+            android:onClick="@{() -> viewModel.signUpUser()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
