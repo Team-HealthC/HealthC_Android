@@ -12,5 +12,5 @@ interface AuthRepository {
 
     suspend fun signUp(user: User, userInfo: UserInfo): Resource<FirebaseUser>
 
-    fun logout()
+    fun signOut()
 }

@@ -37,9 +37,15 @@ class CameraFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_camera, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initCamera()
         initButton()
-        return binding.root
     }
 
     private fun initCamera(){
@@ -65,6 +71,10 @@ class CameraFragment : Fragment() {
             }
             // 카메라 렌즈 바인딩 변경으로, UseCases 재설정
             bindCameraUseCases()
+        }
+
+        binding.goToProfileButton.setOnClickListener{
+            navigateToProfile()
         }
     }
 
@@ -120,6 +130,13 @@ class CameraFragment : Fragment() {
             val direction = CameraFragmentDirections.actionCameraFragmentToShowImageFragment(
                 imageUrl = imageUrl
             )
+            findNavController().navigate(direction)
+        }
+    }
+
+    private fun navigateToProfile() {
+        lifecycleScope.launchWhenStarted {
+            val direction = CameraFragmentDirections.actionCameraFragmentToProfileFragment()
             findNavController().navigate(direction)
         }
     }
