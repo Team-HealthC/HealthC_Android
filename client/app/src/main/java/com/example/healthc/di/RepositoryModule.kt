@@ -17,8 +17,10 @@ class RepositoryModule {
     fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
 
     @Provides
-    fun providesAuthRepository(signInDataSource: SignInDataSource, signUpDataSource: SignUpDataSource): AuthRepository =
+    fun providesAuthRepository(signInDataSource: SignInDataSource,
+                               signUpDataSource: SignUpDataSource,
+                               firebaseAuth: FirebaseAuth): AuthRepository =
         AuthRepositoryImpl(
-            signInDataSource, signUpDataSource
+            signInDataSource, signUpDataSource, firebaseAuth
         )
 }
