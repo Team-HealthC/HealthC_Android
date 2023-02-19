@@ -15,7 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentCameraBinding
-import com.example.healthc.util.getCurrentFileName
+import com.example.healthc.presentation.utils.getCurrentFileName
 import com.google.common.util.concurrent.ListenableFuture
 import timber.log.Timber
 
