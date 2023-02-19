@@ -30,6 +30,10 @@ class AuthViewModel @Inject constructor(
     val signUpEvent : StateFlow<Resource<FirebaseUser>?>
         get() = _signUpEvent
 
+    private val _signInEvent = MutableStateFlow<Resource<FirebaseUser>?>(null)
+    val signInEvent : StateFlow<Resource<FirebaseUser>?>
+        get() = _signInEvent
+
     // 사용자 input
     val email = MutableLiveData<String>("")
     val password = MutableLiveData<String>("")
@@ -40,6 +44,17 @@ class AuthViewModel @Inject constructor(
     private val validateEmailUseCase by lazy { ValidateEmail() }
     private val validatePasswordUseCase by lazy { ValidatePassword() }
     private val validateNameUseCase by lazy { ValidateName() }
+
+    init{
+        autoLogin()
+    }
+
+    // 자동 로그인
+    private fun autoLogin(){
+        if (authRepository.currentUser != null) {
+            _signInEvent.value = Resource.Success(requireNotNull(authRepository.currentUser))
+        }
+    }
 
     fun validateEmail(){
         val result = validateEmailUseCase(requireNotNull(email.value))
@@ -74,11 +89,11 @@ class AuthViewModel @Inject constructor(
 
     fun signInUser(){
         viewModelScope.launch {
-            _signUpEvent.value = Resource.Loading
+            _signInEvent.value = Resource.Loading
             val result = authRepository.signIn(
                 User(requireNotNull(email.value), requireNotNull(password.value)),
             )
-            _signUpEvent.value = result
+            _signInEvent.value = result
         }
     }
 
@@ -101,6 +116,12 @@ class AuthViewModel @Inject constructor(
     fun initInput(){
         email.value = ""
         password.value = ""
+    }
+
+    fun signOut() {
+        authRepository.signOut()
+        _signInEvent.value = null
+        _signUpEvent.value = null
     }
 
     sealed class SignUpUiEvent {
