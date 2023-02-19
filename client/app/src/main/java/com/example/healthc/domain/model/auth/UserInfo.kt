@@ -2,6 +2,6 @@ package com.example.healthc.domain.model.auth
 
 data class UserInfo (
     val name: String,
-    val disease: String,
-    val allergy: String,
-        )
+    val disease: List<String>,
+    val allergy: List<String>,
+)
