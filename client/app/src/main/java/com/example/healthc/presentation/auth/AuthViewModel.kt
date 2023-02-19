@@ -3,7 +3,7 @@ package com.example.healthc.presentation.auth
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.healthc.domain.AuthRepository
+import com.example.healthc.domain.repository.AuthRepository
 import com.example.healthc.domain.model.auth.User
 import com.example.healthc.domain.model.auth.UserInfo
 import com.example.healthc.domain.use_case.ValidateEmail

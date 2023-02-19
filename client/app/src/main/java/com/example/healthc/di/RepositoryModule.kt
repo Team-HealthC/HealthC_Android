@@ -3,7 +3,7 @@ package com.example.healthc.di
 import com.example.healthc.data.repository.AuthRepositoryImpl
 import com.example.healthc.data.source.auth.SignInDataSource
 import com.example.healthc.data.source.auth.SignUpDataSource
-import com.example.healthc.domain.AuthRepository
+import com.example.healthc.domain.repository.AuthRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
