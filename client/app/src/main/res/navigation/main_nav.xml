@@ -16,6 +16,9 @@
                 android:name="imageUrl"
                 app:argType="string"/>
         </action>
+        <action
+            android:id="@+id/action_cameraFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/permissionsFragment"
@@ -38,4 +41,8 @@
             android:id="@+id/action_showImageFragment_to_cameraFragment"
             app:destination="@id/cameraFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.healthc.presentation.profile.ProfileFragment"
+        android:label="ProfileFragment" />
 </navigation>
