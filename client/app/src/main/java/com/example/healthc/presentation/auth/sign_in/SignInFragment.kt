@@ -47,7 +47,7 @@ class SignInFragment : Fragment() {
     }
 
     private fun observeData(){
-        viewModel.signUpEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+        viewModel.signInEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                 when(it){
                     is Resource.Loading ->{
