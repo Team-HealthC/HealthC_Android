@@ -45,17 +45,6 @@ class AuthViewModel @Inject constructor(
     private val validatePasswordUseCase by lazy { ValidatePassword() }
     private val validateNameUseCase by lazy { ValidateName() }
 
-    init{
-        autoLogin()
-    }
-
-    // 자동 로그인
-    private fun autoLogin(){
-        if (authRepository.currentUser != null) {
-            _signInEvent.value = Resource.Success(requireNotNull(authRepository.currentUser))
-        }
-    }
-
     fun validateEmail(){
         val result = validateEmailUseCase(requireNotNull(email.value))
         if(result.successful){

@@ -6,7 +6,6 @@ import com.example.healthc.domain.utils.Resource
 import com.google.firebase.auth.FirebaseUser
 
 interface AuthRepository {
-    val currentUser: FirebaseUser?
 
     suspend fun signIn(user: User) : Resource<FirebaseUser>
 
