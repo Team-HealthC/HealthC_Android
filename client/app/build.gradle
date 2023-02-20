@@ -93,4 +93,7 @@ dependencies {
 
     // Gson
     implementation 'com.google.code.gson:gson:2.10.1'
+
+    // ML Kit
+    implementation 'com.google.mlkit:text-recognition-korean:16.0.0-beta6'
 }
