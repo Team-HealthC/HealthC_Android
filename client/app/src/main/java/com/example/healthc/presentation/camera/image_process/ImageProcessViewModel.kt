@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import timber.log.Timber
 
-class ShowImageViewModel: ViewModel() {
+class ImageProcessViewModel: ViewModel() {
 
     // 사진 저장 URL
     private val _imageUrl = MutableStateFlow("") // TODO Default image url 세팅
