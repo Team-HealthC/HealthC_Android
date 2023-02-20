@@ -115,7 +115,7 @@ class CameraFragment : Fragment() {
         imageCapture.takePicture(outputFileOptions, ContextCompat.getMainExecutor(requireContext()),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                    navigateToCamera(outputFileResults.savedUri.toString())
+                    navigateToImageProcess(outputFileResults.savedUri.toString())
                 }
 
                 override fun onError(exception: ImageCaptureException) {
@@ -125,9 +125,9 @@ class CameraFragment : Fragment() {
         )
     }
 
-    private fun navigateToCamera(imageUrl : String) {
+    private fun navigateToImageProcess(imageUrl : String) {
         lifecycleScope.launchWhenStarted {
-            val direction = CameraFragmentDirections.actionCameraFragmentToShowImageFragment(
+            val direction = CameraFragmentDirections.actionCameraFragmentToImageProcessFragment(
                 imageUrl = imageUrl
             )
             findNavController().navigate(direction)
