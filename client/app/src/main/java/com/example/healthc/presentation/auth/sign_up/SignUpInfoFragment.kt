@@ -54,6 +54,14 @@ class SignUpInfoFragment : Fragment() {
             }
             viewModel.setAllergy(allergyList)
         }
+
+        binding.diseaseChipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
+            val diseaseList : MutableList<String> = mutableListOf()
+            checkedIds.forEach{ id ->
+                diseaseList.add(group.findViewById<Chip>(id).text.toString())
+            }
+            viewModel.setDisease(diseaseList)
+        }
     }
     private fun observeData(){
         viewModel.signUpEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
