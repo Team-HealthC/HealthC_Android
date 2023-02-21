@@ -10,8 +10,8 @@
         android:label="fragment_camera"
         tools:layout="@layout/fragment_camera" >
         <action
-            android:id="@+id/action_cameraFragment_to_showImageFragment"
-            app:destination="@id/showImageFragment" >
+            android:id="@+id/action_cameraFragment_to_imageProcessFragment"
+            app:destination="@id/imageProcessFragment" >
             <argument
                 android:name="imageUrl"
                 app:argType="string"/>
@@ -29,16 +29,15 @@
             app:destination="@id/cameraFragment" />
     </fragment>
     <fragment
-        android:id="@+id/showImageFragment"
-        android:name="com.example.healthc.presentation.camera.image_process.ShowImageFragment"
-        android:label="fragment_show_image"
-        tools:layout="@layout/fragment_show_image" >
+        android:id="@+id/imageProcessFragment"
+        android:name="com.example.healthc.presentation.camera.image_process.ImageProcessFragment"
+        android:label="fragment_image_process"
+        tools:layout="@layout/fragment_image_process" >
         <argument
             android:name="imageUrl"
-            android:defaultValue="file:///android_asset/"
             app:argType="string"/>
         <action
-            android:id="@+id/action_showImageFragment_to_cameraFragment"
+            android:id="@+id/action_imageProcessFragment_to_cameraFragment"
             app:destination="@id/cameraFragment" />
     </fragment>
     <fragment

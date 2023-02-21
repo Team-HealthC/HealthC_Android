@@ -28,5 +28,8 @@
     <string name="crap">게</string>
     <string name="peach">복숭아</string>
     <string name="Pomegranate">석류</string>
+    <string name="positive_dialog_title">먹을 수 있는 음식</string>
+    <string name="positive_dialog_content">알레르기를 유발하는 성분이 포함되어 있지 않습니다.</string>
+    <string name="negative_dialog_title">먹을 수 없는 음식</string>
 
 </resources>
