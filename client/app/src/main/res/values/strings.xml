@@ -28,8 +28,18 @@
     <string name="crap">게</string>
     <string name="peach">복숭아</string>
     <string name="Pomegranate">석류</string>
+    <string name="allergy">가지고 있는 알레르기</string>
+    <string name="disease">가지고 있는 질환</string>
+    <string name="Diabetes">당뇨</string>
+    <string name="hypertension">고혈압</string>
+    <string name="hyperlipidemia">고지혈증(콜레스테롤 높음)</string>
+    <string name="liverDisease">간질환</string>
+    <string name="kidneyDisease">신장질환</string>
+    <string name="anemia">빈혈</string>
+    <string name="vitaminDeficiency">비타민D 부족</string>
     <string name="positive_dialog_title">먹을 수 있는 음식</string>
     <string name="positive_dialog_content">알레르기를 유발하는 성분이 포함되어 있지 않습니다.</string>
     <string name="negative_dialog_title">먹을 수 없는 음식</string>
-
+    <string name="profile_title">%1$s 님\n오늘도 건강한 하루 보내세요!</string>
+    <string name ="profile_edit">정보 수정</string>
 </resources>
