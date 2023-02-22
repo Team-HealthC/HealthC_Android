@@ -1,7 +1,7 @@
 package com.example.healthc.data.source.auth
 
-import com.example.healthc.data.dto.auth.UserEntity
-import com.example.healthc.data.dto.auth.UserInfoEntity
+import com.example.healthc.data.dto.auth.UserDto
+import com.example.healthc.data.dto.auth.UserInfoDto
 import com.example.healthc.data.utils.CollectionsUtil.Companion.DB_USERS
 import com.example.healthc.domain.utils.Resource
 import com.example.healthc.data.utils.await
@@ -15,18 +15,18 @@ class SignUpDataSourceImpl @Inject constructor(
     private val fireStore: FirebaseFirestore
 ): SignUpDataSource{
     override suspend fun signUp(
-        userEntity: UserEntity,
-        userInfoEntity: UserInfoEntity,
+        userDto: UserDto,
+        userInfoDto: UserInfoDto,
     ): Resource<FirebaseUser> {
         return try{
             val result = firebaseAuth.createUserWithEmailAndPassword(
-                userEntity.email, userEntity.password
+                userDto.email, userDto.password
             ).await()
             if(result.user != null){
                 // 사용자 정보 DB에 입력
                 fireStore.collection(DB_USERS).document(
                     requireNotNull(result.user).uid
-                ).set(userInfoEntity).await()
+                ).set(userInfoDto).await()
             }
             Resource.Success(checkNotNull(result.user))
         }

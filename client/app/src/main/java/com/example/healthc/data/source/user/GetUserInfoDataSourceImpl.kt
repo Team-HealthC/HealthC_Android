@@ -1,6 +1,6 @@
 package com.example.healthc.data.source.user
 
-import com.example.healthc.data.dto.auth.UserInfoEntity
+import com.example.healthc.data.dto.auth.UserInfoDto
 import com.example.healthc.data.utils.CollectionsUtil.Companion.DB_USERS
 import com.example.healthc.data.utils.await
 import com.example.healthc.domain.model.auth.UserInfo
@@ -14,7 +14,7 @@ class GetUserInfoDataSourceImpl @Inject constructor(
     override suspend fun getUserInfo(uid: String): Resource<UserInfo> {
         return try{
             val result = fireStore.collection(DB_USERS).document(uid).get().await()
-                .toObject(UserInfoEntity::class.java)
+                .toObject(UserInfoDto::class.java)
             Resource.Success(
                 requireNotNull(result).toUserInfo()
             )

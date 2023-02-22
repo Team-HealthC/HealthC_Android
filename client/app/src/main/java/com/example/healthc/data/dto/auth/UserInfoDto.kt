@@ -1,22 +1,17 @@
-package com.example.healthc.data.local.entity
+package com.example.healthc.data.dto.auth
 
-import androidx.room.PrimaryKey
-import androidx.room.Entity
 import com.example.healthc.domain.model.auth.UserInfo
 
-@Entity(
-    tableName = "USER_INFO"
-)
-data class LocalUserInfoEntity(
+data class UserInfoDto (
     val name: String,
     val disease: List<String>,
     val allergy: List<String>,
-    @PrimaryKey val id: Int? = null
-) {
+){
+    // firebase constructor
     constructor(): this("", emptyList(), emptyList())
 
     // to domain model
-    fun toUserInfo(): UserInfo {
+    fun toUserInfo() : UserInfo {
         return UserInfo(
             name = name,
             disease = disease,
