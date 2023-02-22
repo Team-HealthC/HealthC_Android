@@ -1,7 +1,7 @@
 package com.example.healthc.data.repository
 
-import com.example.healthc.data.entity.auth.UserEntity
-import com.example.healthc.data.entity.auth.UserInfoEntity
+import com.example.healthc.data.dto.auth.UserEntity
+import com.example.healthc.data.dto.auth.UserInfoEntity
 import com.example.healthc.data.source.auth.SignInDataSource
 import com.example.healthc.data.source.auth.SignUpDataSource
 import com.example.healthc.domain.repository.AuthRepository

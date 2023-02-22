@@ -1,7 +1,7 @@
 package com.example.healthc.data.local
 
 import androidx.room.*
-import com.example.healthc.data.entity.local.LocalUserInfoEntity
+import com.example.healthc.data.local.entity.LocalUserInfoEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

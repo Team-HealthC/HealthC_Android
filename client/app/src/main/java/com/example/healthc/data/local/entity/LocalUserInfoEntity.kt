@@ -1,4 +1,4 @@
-package com.example.healthc.data.entity.local
+package com.example.healthc.data.local.entity
 
 import androidx.room.PrimaryKey
 import androidx.room.Entity

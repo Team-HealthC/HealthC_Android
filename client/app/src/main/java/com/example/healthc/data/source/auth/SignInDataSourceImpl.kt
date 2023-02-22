@@ -1,6 +1,6 @@
 package com.example.healthc.data.source.auth
 
-import com.example.healthc.data.entity.auth.UserEntity
+import com.example.healthc.data.dto.auth.UserEntity
 import com.example.healthc.domain.utils.Resource
 import com.example.healthc.data.utils.await
 import com.google.firebase.auth.FirebaseAuth

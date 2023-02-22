@@ -1,6 +1,6 @@
 package com.example.healthc.data.source.user
 
-import com.example.healthc.data.entity.auth.UserInfoEntity
+import com.example.healthc.data.dto.auth.UserInfoEntity
 import com.example.healthc.data.utils.CollectionsUtil.Companion.DB_USERS
 import com.example.healthc.data.utils.await
 import com.example.healthc.domain.model.auth.UserInfo

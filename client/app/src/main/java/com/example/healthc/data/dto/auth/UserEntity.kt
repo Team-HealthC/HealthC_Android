@@ -1,4 +1,4 @@
-package com.example.healthc.data.entity.auth
+package com.example.healthc.data.dto.auth
 
 data class UserEntity (
     val email : String,
