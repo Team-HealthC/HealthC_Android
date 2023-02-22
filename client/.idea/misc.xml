@@ -26,6 +26,9 @@
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/fragment_sign_up_info.xml" value="0.5" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/fragment_sign_up_name.xml" value="0.3828125" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/fragment_sign_up_password.xml" value="0.38177083333333334" />
+        <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/item_profile.xml" value="0.38645833333333335" />
+        <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/item_profile_allergy.xml" value="0.26666666666666666" />
+        <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/item_profile_disease.xml" value="0.38645833333333335" />
       </map>
     </option>
   </component>
