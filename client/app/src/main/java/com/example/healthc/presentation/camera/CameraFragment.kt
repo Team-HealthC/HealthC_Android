@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -24,7 +25,8 @@ class CameraFragment : Fragment() {
     private var _binding: FragmentCameraBinding? = null
     private val binding get() = checkNotNull(_binding)
 
-    private var lensFacing: Int = CameraSelector.LENS_FACING_BACK
+    private var lensFacing: Int = CameraSelector.LENS_FACING_BACK // 후면 비율
+    private var screenAspectRatio = AspectRatio.RATIO_4_3 // 3 : 4비율
 
     private lateinit var cameraProviderFuture : ListenableFuture<ProcessCameraProvider>
     private lateinit var imageCapture : ImageCapture
@@ -38,7 +40,6 @@ class CameraFragment : Fragment() {
     ): View {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_camera, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-
         return binding.root
     }
 
@@ -73,6 +74,15 @@ class CameraFragment : Fragment() {
             bindCameraUseCases()
         }
 
+        binding.resizeRatioButton.setOnClickListener{
+            screenAspectRatio = if(screenAspectRatio == AspectRatio.RATIO_4_3) {
+                AspectRatio.RATIO_16_9
+            } else {
+                AspectRatio.RATIO_4_3
+            }
+            bindCameraUseCases()
+        }
+
         binding.goToProfileButton.setOnClickListener{
             navigateToProfile()
         }
@@ -80,7 +90,6 @@ class CameraFragment : Fragment() {
 
     private fun bindCameraUseCases(){
         val cameraProvider = cameraProviderFuture.get()
-        val screenAspectRatio = AspectRatio.RATIO_16_9 // 16 : 9 비율
         val cameraSelector : CameraSelector = CameraSelector.Builder() // 카메라 옵션
             .requireLensFacing(lensFacing) // 후면 카메라
             .build()
@@ -101,6 +110,7 @@ class CameraFragment : Fragment() {
         cameraProvider.unbindAll() // for rebinding
 
         imagePreview.setSurfaceProvider(binding.CameraPreview.surfaceProvider) // view 와 객체 결합
+        binding.CameraPreview.scaleType = PreviewView.ScaleType.FIT_CENTER
 
         cameraProvider.bindToLifecycle(this, cameraSelector, imagePreview,
             imageAnalyzer, imageCapture) // 라이프 사이클 바인딩
