@@ -8,11 +8,19 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentProfileBinding
 import com.example.healthc.presentation.auth.AuthActivity
 import com.example.healthc.presentation.auth.AuthViewModel
+import com.example.healthc.presentation.profile.adapter.ProfileAllergyAdapter
+import com.example.healthc.presentation.profile.adapter.ProfileDiseaseAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
@@ -23,31 +31,59 @@ class ProfileFragment : Fragment() {
     private val authViewModel : AuthViewModel by viewModels()
     private val viewModel : ProfileViewModel by viewModels()
 
+    private lateinit var profileAllergyAdapter: ProfileAllergyAdapter
+    private lateinit var profileDiseaseAdapter: ProfileDiseaseAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
-        binding.viewModel = authViewModel
+        binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView()
-        viewModel.getUserInfo()
+        viewModel.getUserInfo2()
+        initAdapter()
+        initButton()
+        observeData()
     }
 
-    private fun initView(){
+    private fun observeData(){
+        viewModel.userInfo.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+            .onEach { userInfo ->
+                profileAllergyAdapter.submitList(userInfo.allergy)
+                profileDiseaseAdapter.submitList(userInfo.disease)
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
+    }
+
+    private fun initButton(){
         binding.signOutButton.setOnClickListener{
-            authViewModel.signOut()
-            startAuthActivity()
+            authViewModel.signOut() // 로그아웃
+            startAuthActivity() // 로그인 화면으로 전환
         }
     }
 
-    private fun startAuthActivity(){
+    private fun initAdapter(){
+        profileAllergyAdapter = ProfileAllergyAdapter()
+        profileDiseaseAdapter = ProfileDiseaseAdapter()
+
+        with(binding){
+            profileAllergyRecyclerView.layoutManager = LinearLayoutManager(requireContext(),
+                RecyclerView.HORIZONTAL, false)
+            profileAllergyRecyclerView.adapter = profileAllergyAdapter
+
+            profileDiseaseRecyclerView.layoutManager = LinearLayoutManager(requireContext(),
+                RecyclerView.HORIZONTAL, false)
+            profileDiseaseRecyclerView.adapter = profileDiseaseAdapter
+        }
+    }
+
+    private fun startAuthActivity() {
         val intent = Intent(requireContext(), AuthActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
