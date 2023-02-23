@@ -31,7 +31,7 @@
 - Timber
 
 <h2>Project Proposal</h2>
-https://www.miricanvas.com/v/11rxz6u
+https://treejin99.notion.site/5ce7db7993854eb0905c0623e723dcf5
 
 <h2>Project Presentation</h2>
-https://treejin99.notion.site/5ce7db7993854eb0905c0623e723dcf5
+https://www.miricanvas.com/v/11rxz6u
