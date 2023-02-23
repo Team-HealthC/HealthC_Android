@@ -1,7 +1,7 @@
 package com.example.healthc.data.repository
 
-import com.example.healthc.data.entity.auth.UserEntity
-import com.example.healthc.data.entity.auth.UserInfoEntity
+import com.example.healthc.data.dto.auth.UserDto
+import com.example.healthc.data.dto.auth.UserInfoDto
 import com.example.healthc.data.source.auth.SignInDataSource
 import com.example.healthc.data.source.auth.SignUpDataSource
 import com.example.healthc.domain.repository.AuthRepository
@@ -18,11 +18,11 @@ class AuthRepositoryImpl @Inject constructor(
     private val firebaseAuth: FirebaseAuth
 ) : AuthRepository {
     override suspend fun signIn(user: User): Resource<FirebaseUser> =
-        signInDataSource.signIn(UserEntity(user.email, user.password))
+        signInDataSource.signIn(UserDto(user.email, user.password))
 
     override suspend fun signUp(user: User, userInfo: UserInfo): Resource<FirebaseUser> =
-        signUpDataSource.signUp(UserEntity(user.email, user.password),
-            UserInfoEntity(userInfo.name, userInfo.disease, userInfo.allergy)
+        signUpDataSource.signUp(UserDto(user.email, user.password),
+            UserInfoDto(userInfo.name, userInfo.disease, userInfo.allergy)
         )
 
     override fun signOut() {

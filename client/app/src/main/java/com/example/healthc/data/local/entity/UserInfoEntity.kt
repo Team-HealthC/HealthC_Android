@@ -1,17 +1,22 @@
-package com.example.healthc.data.entity.auth
+package com.example.healthc.data.local.entity
 
+import androidx.room.PrimaryKey
+import androidx.room.Entity
 import com.example.healthc.domain.model.auth.UserInfo
 
-data class UserInfoEntity (
+@Entity(
+    tableName = "USER_INFO"
+)
+data class UserInfoEntity(
     val name: String,
     val disease: List<String>,
     val allergy: List<String>,
-){
-    // firebase constructor
+    @PrimaryKey val id: Int? = null
+) {
     constructor(): this("", emptyList(), emptyList())
 
     // to domain model
-    fun toUserInfo() : UserInfo {
+    fun toUserInfo(): UserInfo {
         return UserInfo(
             name = name,
             disease = disease,
