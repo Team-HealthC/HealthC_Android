@@ -10,9 +10,9 @@ interface UserInfoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUserInfo(userInfo: UserInfoEntity)
 
-    @Query("DELETE FROM USER_INFO WHERE name in (:name)")
-    suspend fun deleteUserInfo(name: String)
+    @Delete
+    suspend fun deleteUserInfo(userInfo : UserInfoEntity)
 
-    @Query("select * from USER_INFO")
+    @Query("select * FROM USER_INFO")
     fun getUserInfo(): Flow<UserInfoEntity>
 }
