@@ -1,14 +1,17 @@
 package com.example.healthc.di
 
 import com.example.healthc.data.repository.AuthRepositoryImpl
+import com.example.healthc.data.repository.FoodRepositoryImpl
 import com.example.healthc.data.repository.UserRepositoryImpl
 import com.example.healthc.data.source.auth.SignInDataSource
 import com.example.healthc.data.source.auth.SignUpDataSource
+import com.example.healthc.data.source.food.SearchIngredientDataSource
 import com.example.healthc.data.source.local.user.GetLocalUserInfoDataSource
 import com.example.healthc.data.source.local.user.UpdateLocalUserInfoDataSource
 import com.example.healthc.data.source.user.GetUserInfoDataSource
 import com.example.healthc.data.source.user.UpdateUserInfoDataSource
 import com.example.healthc.domain.repository.AuthRepository
+import com.example.healthc.domain.repository.FoodRepository
 import com.example.healthc.domain.repository.UserRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -41,4 +44,9 @@ object RepositoryModule {
     ) : UserRepository
         = UserRepositoryImpl(getUserInfoDataSource, updateUserInfoDataSource,
         updateLocalUserInfoDataSource, getLocalUserInfoDataSource, )
+
+    @Provides
+    fun providesFoodRepository(searchIngredientDataSource: SearchIngredientDataSource)
+        : FoodRepository = FoodRepositoryImpl(searchIngredientDataSource)
+
 }
