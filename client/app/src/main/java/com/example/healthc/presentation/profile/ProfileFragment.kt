@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.healthc.R
@@ -61,6 +62,10 @@ class ProfileFragment : Fragment() {
     }
 
     private fun initButton(){
+        binding.goToEditProfile.setOnClickListener{
+            navigateToEditProfile()
+        }
+
         binding.signOutButton.setOnClickListener{
             authViewModel.signOut() // 로그아웃
             startAuthActivity() // 로그인 화면으로 전환
@@ -86,6 +91,13 @@ class ProfileFragment : Fragment() {
         val intent = Intent(requireContext(), AuthActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
+    }
+
+    private fun navigateToEditProfile(){
+        lifecycleScope.launchWhenStarted {
+            val direction = ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment()
+            findNavController().navigate(direction)
+        }
     }
 
     override fun onDestroyView() {

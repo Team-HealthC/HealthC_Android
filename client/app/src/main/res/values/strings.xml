@@ -42,4 +42,6 @@
     <string name="negative_dialog_title">먹을 수 없는 음식</string>
     <string name="profile_title">%1$s 님\n오늘도 건강한 하루 보내세요!</string>
     <string name ="profile_edit">정보 수정</string>
+    <string name="profile_edit_userName">%1$s 님의 가지고 계신 알러지 및 질환입니다.</string>
+    <string name="profile_edit_userHave">알러지 : %1$s \n질환 : %2$s</string>
 </resources>
