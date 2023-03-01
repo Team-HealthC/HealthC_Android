@@ -12,7 +12,7 @@ interface UserRepository {
     // Firestore UPDATE USER_INFO
     suspend fun updateUserInfo(uid: String, userInfo : UserInfo): Resource<Unit>
 
-    // save data to local (sign up, sign in) TODO RETURN VALUE
+    // save data to local (sign up, sign in)
     suspend fun updateLocalUserInfo(userInfo: UserInfo) : Resource<Unit>
 
     // Local RETRIEVE USER_INFO
