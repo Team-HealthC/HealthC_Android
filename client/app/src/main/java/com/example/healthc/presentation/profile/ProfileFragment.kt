@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -19,6 +20,7 @@ import com.example.healthc.presentation.auth.AuthActivity
 import com.example.healthc.presentation.auth.AuthViewModel
 import com.example.healthc.presentation.profile.adapter.ProfileAllergyAdapter
 import com.example.healthc.presentation.profile.adapter.ProfileDiseaseAdapter
+import com.example.healthc.presentation.profile.ProfileViewModel.ProfileUiEvent
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -54,10 +56,20 @@ class ProfileFragment : Fragment() {
     }
 
     private fun observeData(){
-        viewModel.userInfo.flowWithLifecycle(viewLifecycleOwner.lifecycle)
-            .onEach { userInfo ->
-                profileAllergyAdapter.submitList(userInfo.allergy)
-                profileDiseaseAdapter.submitList(userInfo.disease)
+        viewModel.profileUiEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+            .onEach {
+                when(it){
+                    is ProfileUiEvent.Unit -> {}
+
+                    is ProfileUiEvent.Success -> {
+                        profileAllergyAdapter.submitList(it.userInfo.allergy)
+                        profileDiseaseAdapter.submitList(it.userInfo.disease)
+                    }
+
+                    is ProfileUiEvent.Failure -> {
+                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
