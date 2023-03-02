@@ -9,7 +9,6 @@ interface SearchFoodService {
 
     @GET("/food/ingredients/search")
     suspend fun searchFoodIngredient(
-        @Query("apiKey") apiKey : String = BuildConfig.SPOON_API_KEY,
         @Query("query") query : String,
         @Query("number") number : Int = 10
     ) : SearchFoodIngredientDto
