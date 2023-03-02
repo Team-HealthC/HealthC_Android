@@ -30,7 +30,7 @@ object BindingAdapter {
     fun loadWebImage(view: ImageView, src: String?, placeHolder: Drawable) {
         if (src != null) {
             Glide.with(view.context)
-                .load(BuildConfig.SPOON_API_BASE_URI + src)
+                .load(BuildConfig.SPOON_API_BASE_URL + src)
                 .placeholder(placeHolder)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .apply(RequestOptions().fitCenter())

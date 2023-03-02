@@ -24,8 +24,10 @@ android {
 
         // Local Properties
         buildConfigField "String", "SPOON_API_KEY",properties['SPOON_API_KEY']
-        buildConfigField "String", "SPOON_BASE_URI",properties['SPOON_BASE_URI']
-        buildConfigField "String", "SPOON_API_BASE_URI",properties['SPOON_API_BASE_URI']
+        buildConfigField "String", "SPOON_BASE_URL",properties['SPOON_BASE_URL']
+        buildConfigField "String", "SPOON_API_BASE_URL",properties['SPOON_API_BASE_URL']
+        buildConfigField "String", "DATA_GO_PRODUCT_BASE_URL",properties['DATA_GO_PRODUCT_BASE_URL']
+        buildConfigField "String", "DATA_GO_PRODUCT_API_KEY",properties['DATA_GO_PRODUCT_API_KEY']
     }
 
     buildTypes {
@@ -105,9 +107,7 @@ dependencies {
     // ML Kit
     implementation 'com.google.mlkit:text-recognition-korean:16.0.0-beta6'
 
-    // Retrofit && Moshi && OkHttp3
+    // Retrofit && Moshi
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
-    implementation "com.squareup.okhttp3:okhttp:5.0.0-alpha.3"
-    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.3"
 }
