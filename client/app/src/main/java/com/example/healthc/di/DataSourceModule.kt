@@ -4,6 +4,8 @@ import com.example.healthc.data.source.auth.SignInDataSource
 import com.example.healthc.data.source.auth.SignInDataSourceImpl
 import com.example.healthc.data.source.auth.SignUpDataSource
 import com.example.healthc.data.source.auth.SignUpDataSourceImpl
+import com.example.healthc.data.source.food.SearchIngredientDataSource
+import com.example.healthc.data.source.food.SearchIngredientDataSourceImpl
 import com.example.healthc.data.source.local.user.GetLocalUserInfoDataSource
 import com.example.healthc.data.source.local.user.GetLocalUserInfoDataSourceImpl
 import com.example.healthc.data.source.local.user.UpdateLocalUserInfoDataSource
@@ -57,4 +59,10 @@ abstract class DataSourceModule {
     abstract fun providesUpdateLocalUserInfoDataSource(
         updateUserInfoDataSourceImpl: UpdateLocalUserInfoDataSourceImpl
     ): UpdateLocalUserInfoDataSource
+
+    @Binds
+    @Singleton
+    abstract fun providesSearchIngredientDataSource(
+        searchIngredientDataSourceImpl : SearchIngredientDataSourceImpl
+    ) : SearchIngredientDataSource
 }

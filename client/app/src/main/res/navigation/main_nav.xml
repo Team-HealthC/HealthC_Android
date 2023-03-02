@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_cameraFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_cameraFragment_to_ingredientFragment"
+            app:destination="@id/ingredientFragment" />
     </fragment>
     <fragment
         android:id="@+id/permissionsFragment"
@@ -57,5 +60,33 @@
     <action
             android:id="@+id/action_editProfileFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ingredientFragment"
+        android:name="com.example.healthc.presentation.food.FoodFragment"
+        android:label="IngredientFragment"
+        tools:layout="@layout/fragment_food" >
+        <action
+            android:id="@+id/action_ingredientFragment_to_searchIngredientFragment"
+            app:destination="@id/searchIngredientFragment">
+            <argument
+                android:name="allergy"
+                app:argType="string"/>
+        </action>
+        <action
+            android:id="@+id/action_ingredientFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchIngredientFragment"
+        android:name="com.example.healthc.presentation.food.search_ingredient.SearchIngredientFragment"
+        android:label="SearchIngredientFragment"
+        tools:layout="@layout/fragment_search_ingredient" >
+        <argument
+            android:name="allergy"
+            app:argType="string"/>
+    <action
+            android:id="@+id/action_searchIngredientFragment_to_ingredientFragment"
+            app:destination="@id/ingredientFragment" />
     </fragment>
 </navigation>

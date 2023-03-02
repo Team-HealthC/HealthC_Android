@@ -86,6 +86,10 @@ class CameraFragment : Fragment() {
         binding.goToProfileButton.setOnClickListener{
             navigateToProfile()
         }
+
+        binding.goToFoodButton.setOnClickListener{
+            navigateToFood()
+        }
     }
 
     private fun bindCameraUseCases(){
@@ -147,6 +151,13 @@ class CameraFragment : Fragment() {
     private fun navigateToProfile() {
         lifecycleScope.launchWhenStarted {
             val direction = CameraFragmentDirections.actionCameraFragmentToProfileFragment()
+            findNavController().navigate(direction)
+        }
+    }
+
+    private fun navigateToFood(){
+        lifecycleScope.launchWhenStarted {
+            val direction = CameraFragmentDirections.actionCameraFragmentToIngredientFragment()
             findNavController().navigate(direction)
         }
     }
