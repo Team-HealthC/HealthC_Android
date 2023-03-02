@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.food.search_ingredient
+package com.example.healthc.presentation.food.ingredient.search_ingredient
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

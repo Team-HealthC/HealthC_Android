@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.food.search_ingredient
+package com.example.healthc.presentation.food.ingredient.search_ingredient
 
 import android.content.Context
 import android.os.Bundle
@@ -16,8 +16,8 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentSearchIngredientBinding
-import com.example.healthc.presentation.food.search_ingredient.SearchIngredientViewModel.SearchDictionaryUiEvent
-import com.example.healthc.presentation.food.search_ingredient.adapter.SearchIngredientAdapter
+import com.example.healthc.presentation.food.ingredient.search_ingredient.SearchIngredientViewModel.SearchDictionaryUiEvent
+import com.example.healthc.presentation.food.ingredient.search_ingredient.adapter.SearchIngredientAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach

@@ -63,9 +63,9 @@
     </fragment>
     <fragment
         android:id="@+id/ingredientFragment"
-        android:name="com.example.healthc.presentation.food.FoodFragment"
+        android:name="com.example.healthc.presentation.food.ingredient.IngredientFragment"
         android:label="IngredientFragment"
-        tools:layout="@layout/fragment_food" >
+        tools:layout="@layout/fragment_ingredient" >
         <action
             android:id="@+id/action_ingredientFragment_to_searchIngredientFragment"
             app:destination="@id/searchIngredientFragment">
@@ -79,7 +79,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchIngredientFragment"
-        android:name="com.example.healthc.presentation.food.search_ingredient.SearchIngredientFragment"
+        android:name="com.example.healthc.presentation.food.ingredient.search_ingredient.SearchIngredientFragment"
         android:label="SearchIngredientFragment"
         tools:layout="@layout/fragment_search_ingredient" >
         <argument

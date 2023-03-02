@@ -3,14 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".presentation.food.FoodFragment">
+    tools:context=".presentation.food.ingredient.IngredientFragment">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/foodSearchCardView"
+            android:id="@+id/ingredientSearchCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -69,7 +69,7 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/foodSearchCardView" />
+            app:layout_constraintTop_toBottomOf="@+id/ingredientSearchCardView" />
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/food_allergy_chip_group"
