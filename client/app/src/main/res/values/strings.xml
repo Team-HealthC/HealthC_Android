@@ -47,4 +47,12 @@
     <string name="food_search">알러지가 있으신가요? (English Only)</string>
     <string name="food_title">남들이 많이 가진 알러지에요</string>
     <string name="search_ingredient_title">%1$s 알러지가 있으면,\n이 음식을 조심하세요.</string>
+    <string name="search_product">가공 식품을 검색하세요.</string>
+    <string name="product_name_capacity">%1$s(%2$s)</string>
+    <string name="product_kind">제품 카테고리: %1$s</string>
+    <string name="product_allergy">알러지 발생 성분: %1$s</string>
+    <string name="product_raw">원재료 구성: %1$s</string>
+    <string name="product_nutrient">영양 성분: %1$s</string>
+    <string name="product_manufacture">제조사: %1$s</string>
+    <string name="search_product_title">%1$s에 대한 가공 식품 검색 결과입니다.</string>
 </resources>

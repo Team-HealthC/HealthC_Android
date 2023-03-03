@@ -18,10 +18,6 @@ data class ProductHeader(
 )
 
 data class ProductItem(
-    val item: ProductItemX
-)
-
-data class ProductItemX(
     val allergy: String, // 알러지 유발 물질
     val capacity: String, // 용량
     val imgurl1: String, // 이미지 소스
