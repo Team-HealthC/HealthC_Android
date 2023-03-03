@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    tools:context=".presentation.food.ingredient.search_ingredient.SearchIngredientFragment" >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".presentation.food.product.search_product.SearchProductFragment">
     <data>
         <variable
             name="viewModel"
-            type="com.example.healthc.presentation.food.ingredient.search_ingredient.SearchIngredientViewModel"
+            type="com.example.healthc.presentation.food.product.search_product.SearchProductViewModel"
             />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +16,7 @@
         android:padding="16dp">
 
         <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/back_to_food_button"
+            android:id="@+id/back_to_product_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/ic_launcher_background"
@@ -24,26 +25,25 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/search_ingredient_title"
+            android:id="@+id/search_product_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/samsung_bold"
-            android:text="@{@string/search_ingredient_title(viewModel.allergy)}"
+            android:text="@{@string/search_product_title(viewModel.productName)}"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/back_to_food_button" />
+            app:layout_constraintTop_toBottomOf="@+id/back_to_product_button" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/search_ingredient_list"
+            android:id="@+id/search_product_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search_ingredient_title" />
-
+            app:layout_constraintTop_toBottomOf="@+id/search_product_title" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

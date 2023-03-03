@@ -24,8 +24,10 @@ android {
 
         // Local Properties
         buildConfigField "String", "SPOON_API_KEY",properties['SPOON_API_KEY']
-        buildConfigField "String", "SPOON_BASE_URI",properties['SPOON_BASE_URI']
-        buildConfigField "String", "SPOON_API_BASE_URI",properties['SPOON_API_BASE_URI']
+        buildConfigField "String", "SPOON_BASE_URL",properties['SPOON_BASE_URL']
+        buildConfigField "String", "SPOON_API_BASE_URL",properties['SPOON_API_BASE_URL']
+        buildConfigField "String", "DATA_GO_PRODUCT_BASE_URL",properties['DATA_GO_PRODUCT_BASE_URL']
+        buildConfigField "String", "DATA_GO_PRODUCT_API_KEY",properties['DATA_GO_PRODUCT_API_KEY']
     }
 
     buildTypes {

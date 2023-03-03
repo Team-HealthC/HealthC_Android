@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_cameraFragment_to_ingredientFragment"
             app:destination="@id/ingredientFragment" />
+        <action
+            android:id="@+id/action_cameraFragment_to_productFragment"
+            app:destination="@id/productFragment" />
     </fragment>
     <fragment
         android:id="@+id/permissionsFragment"
@@ -63,9 +66,9 @@
     </fragment>
     <fragment
         android:id="@+id/ingredientFragment"
-        android:name="com.example.healthc.presentation.food.FoodFragment"
+        android:name="com.example.healthc.presentation.food.ingredient.IngredientFragment"
         android:label="IngredientFragment"
-        tools:layout="@layout/fragment_food" >
+        tools:layout="@layout/fragment_ingredient" >
         <action
             android:id="@+id/action_ingredientFragment_to_searchIngredientFragment"
             app:destination="@id/searchIngredientFragment">
@@ -79,7 +82,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchIngredientFragment"
-        android:name="com.example.healthc.presentation.food.search_ingredient.SearchIngredientFragment"
+        android:name="com.example.healthc.presentation.food.ingredient.search_ingredient.SearchIngredientFragment"
         android:label="SearchIngredientFragment"
         tools:layout="@layout/fragment_search_ingredient" >
         <argument
@@ -88,5 +91,33 @@
     <action
             android:id="@+id/action_searchIngredientFragment_to_ingredientFragment"
             app:destination="@id/ingredientFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productFragment"
+        android:name="com.example.healthc.presentation.food.product.ProductFragment"
+        android:label="ProductFragment"
+        tools:layout="@layout/fragment_product">
+        <action
+            android:id="@+id/action_productFragment_to_searchProductFragment"
+            app:destination="@id/searchProductFragment" >
+            <argument
+                android:name="category"
+                app:argType="string"/>
+        </action>
+        <action
+            android:id="@+id/action_productFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchProductFragment"
+        android:name="com.example.healthc.presentation.food.product.search_product.SearchProductFragment"
+        android:label="fragment_search_product"
+        tools:layout="@layout/fragment_search_product" >
+        <argument
+            android:name="category"
+            app:argType="string"/>
+        <action
+            android:id="@+id/action_searchProductFragment_to_productFragment"
+            app:destination="@id/productFragment" />
     </fragment>
 </navigation>

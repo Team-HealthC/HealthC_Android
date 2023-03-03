@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.food.search_ingredient.adapter
+package com.example.healthc.presentation.food.ingredient.search_ingredient.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.healthc.databinding.ItemSearchIngredientBinding
 import com.example.healthc.domain.model.food.Ingredient
-import com.example.healthc.presentation.food.search_ingredient.adapter.SearchIngredientAdapter.SearchIngredientViewHolder
+import com.example.healthc.presentation.food.ingredient.search_ingredient.adapter.SearchIngredientAdapter.SearchIngredientViewHolder
 
 class SearchIngredientAdapter : ListAdapter<Ingredient, SearchIngredientViewHolder>(IngredientCallback){
     

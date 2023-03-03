@@ -5,6 +5,7 @@ import com.example.healthc.data.repository.FoodRepositoryImpl
 import com.example.healthc.data.repository.UserRepositoryImpl
 import com.example.healthc.data.source.auth.SignInDataSource
 import com.example.healthc.data.source.auth.SignUpDataSource
+import com.example.healthc.data.source.food.SearchFoodProductSource
 import com.example.healthc.data.source.food.SearchIngredientDataSource
 import com.example.healthc.data.source.local.user.GetLocalUserInfoDataSource
 import com.example.healthc.data.source.local.user.UpdateLocalUserInfoDataSource
@@ -46,7 +47,8 @@ object RepositoryModule {
         updateLocalUserInfoDataSource, getLocalUserInfoDataSource, )
 
     @Provides
-    fun providesFoodRepository(searchIngredientDataSource: SearchIngredientDataSource)
-        : FoodRepository = FoodRepositoryImpl(searchIngredientDataSource)
+    fun providesFoodRepository(searchIngredientDataSource: SearchIngredientDataSource,
+                               searchFoodProductSource: SearchFoodProductSource)
+        : FoodRepository = FoodRepositoryImpl(searchIngredientDataSource, searchFoodProductSource)
 
 }
