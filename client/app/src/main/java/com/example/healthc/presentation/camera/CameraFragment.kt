@@ -1,6 +1,7 @@
 package com.example.healthc.presentation.camera
 
 import android.content.ContentValues
+import android.graphics.Color
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
@@ -17,7 +18,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentCameraBinding
 import com.example.healthc.presentation.utils.getCurrentFileName
+import com.example.healthc.presentation.widget.SearchDialog
 import com.google.common.util.concurrent.ListenableFuture
+import land.sungbin.systemuicontroller.setNavigationBarColor
 import timber.log.Timber
 
 class CameraFragment : Fragment() {
@@ -50,6 +53,7 @@ class CameraFragment : Fragment() {
     }
 
     private fun initCamera(){
+        setNavigationBarColor(Color.BLACK) // navigation bar color black
         cameraProviderFuture = ProcessCameraProvider.getInstance(requireActivity())
         cameraProviderFuture.addListener(
             {
@@ -87,12 +91,8 @@ class CameraFragment : Fragment() {
             navigateToProfile()
         }
 
-        binding.goToFoodButton.setOnClickListener{
-            navigateToFood()
-        }
-
-        binding.goToProductButton.setOnClickListener{
-            navigateToProduct()
+        binding.goToSearchButton.setOnClickListener{
+            showDialog()
         }
     }
 
@@ -143,6 +143,14 @@ class CameraFragment : Fragment() {
         )
     }
 
+    private fun showDialog(){
+        SearchDialog(
+            requireContext(),
+            onSearchIngredient = { navigateToIngredient() },
+            onSearchProduct = { navigateToProduct() }
+        ).show()
+    }
+
     private fun navigateToImageProcess(imageUrl : String) {
         lifecycleScope.launchWhenStarted {
             val direction = CameraFragmentDirections.actionCameraFragmentToImageProcessFragment(
@@ -159,7 +167,7 @@ class CameraFragment : Fragment() {
         }
     }
 
-    private fun navigateToFood(){
+    private fun navigateToIngredient(){
         lifecycleScope.launchWhenStarted {
             val direction = CameraFragmentDirections.actionCameraFragmentToIngredientFragment()
             findNavController().navigate(direction)
