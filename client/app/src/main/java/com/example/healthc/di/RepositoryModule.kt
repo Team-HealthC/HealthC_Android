@@ -11,6 +11,7 @@ import com.example.healthc.data.source.local.user.GetLocalUserInfoDataSource
 import com.example.healthc.data.source.local.user.UpdateLocalUserInfoDataSource
 import com.example.healthc.data.source.user.GetUserInfoDataSource
 import com.example.healthc.data.source.user.UpdateUserInfoDataSource
+import com.example.healthc.data.source.user.UpdateUserNameDataSource
 import com.example.healthc.domain.repository.AuthRepository
 import com.example.healthc.domain.repository.FoodRepository
 import com.example.healthc.domain.repository.UserRepository
@@ -40,11 +41,12 @@ object RepositoryModule {
     @Provides
     fun providesUserRepository(getUserInfoDataSource: GetUserInfoDataSource,
                                updateLocalUserInfoDataSource: UpdateLocalUserInfoDataSource,
+                               updateUserNameDataSource: UpdateUserNameDataSource,
                                getLocalUserInfoDataSource: GetLocalUserInfoDataSource,
                                updateUserInfoDataSource: UpdateUserInfoDataSource
     ) : UserRepository
         = UserRepositoryImpl(getUserInfoDataSource, updateUserInfoDataSource,
-        updateLocalUserInfoDataSource, getLocalUserInfoDataSource, )
+        updateUserNameDataSource, updateLocalUserInfoDataSource, getLocalUserInfoDataSource )
 
     @Provides
     fun providesFoodRepository(searchIngredientDataSource: SearchIngredientDataSource,
