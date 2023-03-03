@@ -12,6 +12,9 @@ interface UserRepository {
     // Firestore UPDATE USER_INFO
     suspend fun updateUserInfo(uid: String, userInfo : UserInfo): Resource<Unit>
 
+    // Firestore UPDATE USER_NAME
+    suspend fun updateUserName(uid: String, userName: String) : Resource<Unit>
+
     // save data to local (sign up, sign in)
     suspend fun updateLocalUserInfo(userInfo: UserInfo) : Resource<Unit>
 

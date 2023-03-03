@@ -12,10 +12,7 @@ import com.example.healthc.data.source.local.user.GetLocalUserInfoDataSource
 import com.example.healthc.data.source.local.user.GetLocalUserInfoDataSourceImpl
 import com.example.healthc.data.source.local.user.UpdateLocalUserInfoDataSource
 import com.example.healthc.data.source.local.user.UpdateLocalUserInfoDataSourceImpl
-import com.example.healthc.data.source.user.GetUserInfoDataSource
-import com.example.healthc.data.source.user.GetUserInfoDataSourceImpl
-import com.example.healthc.data.source.user.UpdateUserInfoDataSource
-import com.example.healthc.data.source.user.UpdateUserInfoDataSourceImpl
+import com.example.healthc.data.source.user.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -61,6 +58,12 @@ abstract class DataSourceModule {
     abstract fun providesUpdateLocalUserInfoDataSource(
         updateUserInfoDataSourceImpl: UpdateLocalUserInfoDataSourceImpl
     ): UpdateLocalUserInfoDataSource
+
+    @Binds
+    @Singleton
+    abstract fun providesUpdateUserNameDataSource(
+        updateUserNameDataSourceImpl: UpdateUserNameDataSourceImpl
+    ): UpdateUserNameDataSource
 
     @Binds
     @Singleton

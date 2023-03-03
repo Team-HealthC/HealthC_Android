@@ -1,11 +1,13 @@
 package com.example.healthc.presentation.profile
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -21,6 +23,7 @@ import com.example.healthc.presentation.auth.AuthViewModel
 import com.example.healthc.presentation.profile.adapter.ProfileAllergyAdapter
 import com.example.healthc.presentation.profile.adapter.ProfileDiseaseAdapter
 import com.example.healthc.presentation.profile.ProfileViewModel.ProfileUiEvent
+import com.example.healthc.presentation.widget.EditNameDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -34,8 +37,15 @@ class ProfileFragment : Fragment() {
     private val authViewModel : AuthViewModel by viewModels()
     private val viewModel : ProfileViewModel by viewModels()
 
+    private lateinit var callback: OnBackPressedCallback
+
     private lateinit var profileAllergyAdapter: ProfileAllergyAdapter
     private lateinit var profileDiseaseAdapter: ProfileDiseaseAdapter
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        onBackPressButton()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,9 +60,14 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initViewModelState()
         initAdapter()
         initButton()
         observeData()
+    }
+
+    private fun initViewModelState(){
+        viewModel.getProfile()
     }
 
     private fun observeData(){
@@ -75,6 +90,14 @@ class ProfileFragment : Fragment() {
 
     private fun initButton(){
         binding.goToEditProfile.setOnClickListener{
+            showDialog()
+        }
+
+        binding.goToEditAllergy.setOnClickListener{
+            navigateToEditProfile()
+        }
+
+        binding.goToEditDisease.setOnClickListener {
             navigateToEditProfile()
         }
 
@@ -99,6 +122,15 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    private fun showDialog(){
+        EditNameDialog(
+            requireContext(),
+            onDoneButtonClick = { name ->
+                viewModel.editName(name)
+            }
+        ).show()
+    }
+
     private fun startAuthActivity() {
         val intent = Intent(requireContext(), AuthActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -112,8 +144,25 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    private fun navigateToCamera(){
+        lifecycleScope.launchWhenStarted {
+            val direction = ProfileFragmentDirections.actionProfileFragmentToCameraFragment()
+            findNavController().navigate(direction)
+        }
+    }
+
+    private fun onBackPressButton(){
+        callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                navigateToCamera()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+
     override fun onDestroyView() {
         _binding = null
+        callback.remove()
         super.onDestroyView()
     }
 }
