@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.healthc.R
@@ -44,6 +45,7 @@ class SearchProductFragment : Fragment() {
         observeData()
         initViewModelState()
         initAdapter()
+        initButton()
     }
 
     private fun observeData(){
@@ -73,6 +75,20 @@ class SearchProductFragment : Fragment() {
         searchProductAdapter = SearchProductAdapter()
         binding.searchProductRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.searchProductRecyclerView.adapter = searchProductAdapter
+    }
+
+    private fun initButton(){
+        binding.backToProductButton.setOnClickListener{
+            navigateToProduct()
+        }
+    }
+
+    private fun navigateToProduct(){
+        lifecycleScope.launchWhenStarted {
+            val direction = SearchProductFragmentDirections
+                .actionSearchProductFragmentToProductFragment()
+            findNavController().navigate(direction)
+        }
     }
 
     override fun onDestroy() {
