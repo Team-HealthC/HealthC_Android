@@ -29,7 +29,7 @@
 - Remote
     - Retrofit
     - Moshi
-    - okHttp3
+    - OkHttp3
 - Glide
 - Material Components
 - ML Kit
