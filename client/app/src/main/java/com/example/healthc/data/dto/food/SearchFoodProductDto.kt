@@ -14,12 +14,12 @@ data class SearchFoodProductDto(
 
 data class ProductBodyDto(
     val items: List<ProductItemDto>,
-    val numOfRows: String,
+    val totalCount: String,
     val pageNo: String,
-    val totalCount: String
-){
+    val numOfRows: String
+    ){
     fun toProductBody(): ProductBody = ProductBody(
-        items = items.map{ it.toProductItem() },
+        items = items.map{ it.item.toProductItemX() },
         numOfRows = numOfRows,
         pageNo = pageNo,
         totalCount = totalCount
@@ -38,11 +38,7 @@ data class ProductHeaderDto(
 
 data class ProductItemDto(
     val item: ProductItemXDto
-){
-    fun toProductItem() : ProductItem = ProductItem(
-        item = item.toProductItemX()
-    )
-}
+)
 
 data class ProductItemXDto(
     val allergy: String,
@@ -61,7 +57,11 @@ data class ProductItemXDto(
     val rnum: String,
     val seller: String
 ){
-    fun toProductItemX() : ProductItemX = ProductItemX(
+    constructor(): this("", "", "", "", "", "",
+        "", "", "", "", "", "", "",
+        "", "")
+
+    fun toProductItemX() : ProductItem = ProductItem(
         allergy = allergy,
         capacity = capacity,
         imgurl1 = imgurl1,
