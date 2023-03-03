@@ -15,7 +15,6 @@
 - Kotlin
     - Coroutines & Flow 
 - Dagger-Hilt
-- Room
 - CameraX
 - Android Jetpack
     - LiveData & ViewModel
@@ -24,7 +23,13 @@
 - Firebase
     - Firebase Analytics
     - Firebase Auth, FireStore
-- Gson
+- Local 
+    - Room
+    - Gson
+- Remote
+    - Retrofit
+    - Moshi
+    - okHttp3
 - Glide
 - Material Components
 - ML Kit
