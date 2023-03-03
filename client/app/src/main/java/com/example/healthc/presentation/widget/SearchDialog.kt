@@ -22,11 +22,11 @@ class SearchDialog(
 
     private fun initViews(){
         binding.dialogProductButton.setOnClickListener{
-            onSearchIngredient()
+            onSearchProduct()
             dismiss()
         }
         binding.dialogIngredientButton.setOnClickListener{
-            onSearchProduct()
+            onSearchIngredient()
             dismiss()
         }
     }
