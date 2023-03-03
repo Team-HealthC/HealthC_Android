@@ -207,6 +207,7 @@ class CameraFragment : Fragment() {
         _binding = null
         super.onDestroyView()
         cameraExecutor.shutdown()
+        cameraSound.release()
     }
 
     companion object{
