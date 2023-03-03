@@ -19,7 +19,7 @@ class ProductFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_product, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
@@ -34,6 +34,9 @@ class ProductFragment : Fragment() {
         binding.searchProductButton.setOnClickListener {
             navigateToSearchProduct()
         }
+        binding.backToCameraButton.setOnClickListener {
+            navigateToCamera()
+        }
     }
 
     private fun navigateToSearchProduct(){
@@ -41,6 +44,13 @@ class ProductFragment : Fragment() {
             val direction = ProductFragmentDirections.actionProductFragmentToSearchProductFragment(
                 binding.searchEditTextView.text.toString()
             )
+            findNavController().navigate(direction)
+        }
+    }
+
+    private fun navigateToCamera(){
+        lifecycleScope.launchWhenStarted {
+            val direction = ProductFragmentDirections.actionProductFragmentToCameraFragment()
             findNavController().navigate(direction)
         }
     }
