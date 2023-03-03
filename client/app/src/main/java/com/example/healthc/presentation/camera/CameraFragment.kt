@@ -2,6 +2,9 @@ package com.example.healthc.presentation.camera
 
 import android.content.ContentValues
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.media.MediaActionSound
+import android.media.MediaActionSound.SHUTTER_CLICK
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
@@ -22,6 +25,8 @@ import com.example.healthc.presentation.widget.SearchDialog
 import com.google.common.util.concurrent.ListenableFuture
 import land.sungbin.systemuicontroller.setNavigationBarColor
 import timber.log.Timber
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 class CameraFragment : Fragment() {
 
@@ -36,6 +41,9 @@ class CameraFragment : Fragment() {
     private lateinit var imagePreview : Preview
     private lateinit var imageAnalyzer : ImageAnalysis
 
+    private lateinit var cameraExecutor: ExecutorService
+    private lateinit var cameraSound: MediaActionSound
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -49,11 +57,17 @@ class CameraFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initCamera()
+        setUpCamera()
         initButton()
     }
 
     private fun initCamera(){
         setNavigationBarColor(Color.BLACK) // navigation bar color black
+        cameraExecutor = Executors.newSingleThreadExecutor() // init executors
+        cameraSound = MediaActionSound() // init cameraSound
+    }
+
+    private fun setUpCamera(){
         cameraProviderFuture = ProcessCameraProvider.getInstance(requireActivity())
         cameraProviderFuture.addListener(
             {
@@ -130,7 +144,7 @@ class CameraFragment : Fragment() {
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI, ContentValues().getCurrentFileName()
             ).build()
 
-        imageCapture.takePicture(outputFileOptions, ContextCompat.getMainExecutor(requireContext()),
+        imageCapture.takePicture(outputFileOptions, cameraExecutor,
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     navigateToImageProcess(outputFileResults.savedUri.toString())
@@ -141,6 +155,14 @@ class CameraFragment : Fragment() {
                 }
             }
         )
+
+        // Display flash animation to indicate that photo was captured
+        binding.root.postDelayed({
+            cameraSound.play(SHUTTER_CLICK) // camera sound
+            binding.root.foreground = ColorDrawable(Color.WHITE)
+            binding.root.postDelayed(
+                { binding.root.foreground = null }, ANIMATION_FAST_MILLIS)
+        }, ANIMATION_SLOW_MILLIS)
     }
 
     private fun showDialog(){
@@ -184,5 +206,11 @@ class CameraFragment : Fragment() {
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+        cameraExecutor.shutdown()
+    }
+
+    companion object{
+        const val ANIMATION_FAST_MILLIS = 100L
+        const val ANIMATION_SLOW_MILLIS = 200L
     }
 }
