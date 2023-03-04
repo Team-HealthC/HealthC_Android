@@ -156,13 +156,9 @@ class CameraFragment : Fragment() {
             }
         )
 
-        // Display flash animation to indicate that photo was captured
-        binding.root.postDelayed({
-            cameraSound.play(SHUTTER_CLICK) // camera sound
-            binding.root.foreground = ColorDrawable(Color.WHITE)
-            binding.root.postDelayed(
-                { binding.root.foreground = null }, ANIMATION_FAST_MILLIS)
-        }, ANIMATION_SLOW_MILLIS)
+        // Capture effect
+        startCameraSound()
+        startCameraScreenAnimation()
     }
 
     private fun showDialog(){
@@ -173,10 +169,24 @@ class CameraFragment : Fragment() {
         ).show()
     }
 
+    private fun startCameraSound(){
+        cameraSound.play(SHUTTER_CLICK) // camera sound
+    }
+
+    private fun startCameraScreenAnimation(){
+        // Display flash animation to indicate that photo was captured
+        binding.root.postDelayed({
+            binding.root.foreground = ColorDrawable(Color.WHITE)
+            binding.root.postDelayed(
+                { binding.root.foreground = null }, ANIMATION_FAST_MILLIS)
+        }, ANIMATION_SLOW_MILLIS)
+    }
+
     private fun navigateToImageProcess(imageUrl : String) {
         lifecycleScope.launchWhenStarted {
             val direction = CameraFragmentDirections.actionCameraFragmentToImageProcessFragment(
-                imageUrl = imageUrl
+                imageUrl = imageUrl,
+                language = binding.toggleLanguageButton.text.toString()
             )
             findNavController().navigate(direction)
         }
