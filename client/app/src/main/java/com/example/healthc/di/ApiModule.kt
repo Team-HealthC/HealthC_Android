@@ -1,7 +1,7 @@
 package com.example.healthc.di
 
 import com.example.healthc.BuildConfig
-import com.example.healthc.data.remote.api.SearchFoodIngredientService
+import com.example.healthc.data.remote.api.SearchFoodService
 import com.example.healthc.data.remote.api.SearchFoodProductService
 import dagger.Module
 import dagger.Provides
@@ -58,9 +58,9 @@ object ApiModule {
 
     @Provides
     @Singleton
-    fun searchFoodIngredientService(
+    fun searchFoodService(
         @SpoonRetrofit retrofit: Retrofit
-    ): SearchFoodIngredientService = retrofit.create(SearchFoodIngredientService::class.java)
+    ): SearchFoodService = retrofit.create(SearchFoodService::class.java)
 
     @Provides
     @Singleton
