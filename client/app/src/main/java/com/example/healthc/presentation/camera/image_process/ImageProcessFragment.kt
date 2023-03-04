@@ -26,7 +26,6 @@ import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import timber.log.Timber
 
 @AndroidEntryPoint
 class ImageProcessFragment : Fragment() {
@@ -81,7 +80,6 @@ class ImageProcessFragment : Fragment() {
         textRecognizer.process(image)
             .addOnSuccessListener { text ->
                 val recognizedText = text.text.replace("\n", "")
-                Timber.d(recognizedText)
                 viewModel.detectImage(recognizedText)
             }
             .addOnFailureListener {
