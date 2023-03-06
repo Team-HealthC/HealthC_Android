@@ -60,4 +60,6 @@
     <string name="dialog_edit_name">변경하실 이름을 입력하세요.</string>
     <string name="toggle_lang_kor">한국어</string>
     <string name="toggle_lang_eng">English</string>
+    <string name="toggle_camera_ocr">성분 인식</string>
+    <string name="toggle_camera_obj_detect">음식 인식</string>
 </resources>
