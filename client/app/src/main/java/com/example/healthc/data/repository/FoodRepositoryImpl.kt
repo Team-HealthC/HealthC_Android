@@ -24,7 +24,7 @@ class FoodRepositoryImpl @Inject constructor(
         return searchFoodProductSource.searchProduct(category)
     }
 
-    override suspend fun searchFoodCategory(fileUrl: String, file : File): Resource<SearchFoodCategory> {
-        return searchCategoryDataSource.searchFoodCategory(fileUrl, file)
+    override suspend fun searchFoodCategory(encodedImage: String): Resource<SearchFoodCategory> {
+        return searchCategoryDataSource.searchFoodCategory(encodedImage)
     }
 }

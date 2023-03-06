@@ -11,6 +11,6 @@ interface FoodRepository {
 
     suspend fun searchFoodProduct(category: String): Resource<SearchFoodProduct>
 
-    suspend fun searchFoodCategory(fileUrl: String, file : File) : Resource<SearchFoodCategory>
+    suspend fun searchFoodCategory(encodedImage: String) : Resource<SearchFoodCategory>
 
 }
