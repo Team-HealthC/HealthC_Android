@@ -20,7 +20,9 @@ import com.example.healthc.presentation.widget.NegativeSignDialog
 import com.example.healthc.presentation.widget.PositiveSignDialog
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
+import com.google.mlkit.vision.text.TextRecognizer
 import com.google.mlkit.vision.text.korean.KoreanTextRecognizerOptions
+import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -34,6 +36,8 @@ class ImageProcessFragment : Fragment() {
     private val viewModel : ImageProcessViewModel by viewModels()
     private val args : ImageProcessFragmentArgs by navArgs()
 
+    private lateinit var textRecognizer : TextRecognizer
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,22 +50,33 @@ class ImageProcessFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recognizeText()
         initViews()
         observeData()
     }
 
     private fun initViews(){
-        viewModel.setImageUrl(args.imageUrl) // set ImageUri
-
         binding.backToCameraButton.setOnClickListener{
             navigateToCamera()
         }
+
+        when (args.language) {
+            KOR -> {
+                textRecognizer = TextRecognition.getClient(KoreanTextRecognizerOptions.Builder().build())
+            }
+            ENG -> {
+                textRecognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
+            }
+            else -> {
+                Toast.makeText(requireContext(), "알 수 없는 오류가 발생하였습니다.", Toast.LENGTH_SHORT).show()
+                navigateToCamera()
+            }
+        }
+        recognizeText()
+        viewModel.setImageUrl(args.imageUrl) // set ImageUri
     }
 
     private fun recognizeText(){
         val image = InputImage.fromFilePath(requireContext(), args.imageUrl.toUri())
-        val textRecognizer = TextRecognition.getClient(KoreanTextRecognizerOptions.Builder().build())
         textRecognizer.process(image)
             .addOnSuccessListener { text ->
                 val recognizedText = text.text.replace("\n", "")
@@ -108,6 +123,12 @@ class ImageProcessFragment : Fragment() {
 
     override fun onDestroyView() {
         _binding = null
+        textRecognizer.close()
         super.onDestroyView()
+    }
+
+    companion object{
+        const val ENG = "English"
+        const val KOR = "한국어"
     }
 }

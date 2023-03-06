@@ -21,6 +21,7 @@
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/dialog_negative.xml" value="0.3170940170940171" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/dialog_positive.xml" value="0.2890625" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/dialog_search.xml" value="0.25" />
+        <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/dialog_search_category.xml" value="0.38645833333333335" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/fragment_camera.xml" value="0.33" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/fragment_dictionary.xml" value="0.39114583333333336" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/fragment_edit_profile.xml" value="0.29052715021799447" />
@@ -29,6 +30,7 @@
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/fragment_ingredient.xml" value="0.385617509119333" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/fragment_product.xml" value="0.26927083333333335" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/fragment_profile.xml" value="0.3854166666666667" />
+        <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/fragment_search_category.xml" value="0.25" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/fragment_search_dictionary.xml" value="0.3854166666666667" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/fragment_search_ingredient.xml" value="0.3854166666666667" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/fragment_search_product.xml" value="0.32865168539325845" />

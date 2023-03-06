@@ -156,13 +156,9 @@ class CameraFragment : Fragment() {
             }
         )
 
-        // Display flash animation to indicate that photo was captured
-        binding.root.postDelayed({
-            cameraSound.play(SHUTTER_CLICK) // camera sound
-            binding.root.foreground = ColorDrawable(Color.WHITE)
-            binding.root.postDelayed(
-                { binding.root.foreground = null }, ANIMATION_FAST_MILLIS)
-        }, ANIMATION_SLOW_MILLIS)
+        // Capture effect
+        // startCameraSound()
+        startCameraScreenAnimation()
     }
 
     private fun showDialog(){
@@ -173,12 +169,35 @@ class CameraFragment : Fragment() {
         ).show()
     }
 
+    private fun startCameraSound(){
+        cameraSound.play(SHUTTER_CLICK) // camera sound
+    }
+
+    private fun startCameraScreenAnimation(){
+        // Display flash animation to indicate that photo was captured
+        binding.root.postDelayed({
+            binding.root.foreground = ColorDrawable(Color.WHITE)
+            binding.root.postDelayed(
+                { binding.root.foreground = null }, ANIMATION_FAST_MILLIS)
+        }, ANIMATION_SLOW_MILLIS)
+    }
+
     private fun navigateToImageProcess(imageUrl : String) {
         lifecycleScope.launchWhenStarted {
-            val direction = CameraFragmentDirections.actionCameraFragmentToImageProcessFragment(
-                imageUrl = imageUrl
-            )
-            findNavController().navigate(direction)
+            val currentCamera = binding.toggleCameraButton.text.toString()
+            if(currentCamera == IMAGE_PROCESS) {
+                val direction = CameraFragmentDirections.actionCameraFragmentToImageProcessFragment(
+                    imageUrl = imageUrl,
+                    language = binding.toggleLanguageButton.text.toString()
+                )
+                findNavController().navigate(direction)
+            }
+            else if(currentCamera == OBJECT_DETECT){
+                val direction = CameraFragmentDirections.actionCameraFragmentToSearchCategoryFragment(
+                    imageUrl = imageUrl
+                )
+                findNavController().navigate(direction)
+            }
         }
     }
 
@@ -213,5 +232,7 @@ class CameraFragment : Fragment() {
     companion object{
         const val ANIMATION_FAST_MILLIS = 100L
         const val ANIMATION_SLOW_MILLIS = 200L
+        const val IMAGE_PROCESS = "성분 인식"
+        const val OBJECT_DETECT = "음식 인식"
     }
 }
