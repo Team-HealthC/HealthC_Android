@@ -157,7 +157,7 @@ class CameraFragment : Fragment() {
         )
 
         // Capture effect
-        startCameraSound()
+        // startCameraSound()
         startCameraScreenAnimation()
     }
 
@@ -184,11 +184,20 @@ class CameraFragment : Fragment() {
 
     private fun navigateToImageProcess(imageUrl : String) {
         lifecycleScope.launchWhenStarted {
-            val direction = CameraFragmentDirections.actionCameraFragmentToImageProcessFragment(
-                imageUrl = imageUrl,
-                language = binding.toggleLanguageButton.text.toString()
-            )
-            findNavController().navigate(direction)
+            val currentCamera = binding.toggleCameraButton.text.toString()
+            if(currentCamera == IMAGE_PROCESS) {
+                val direction = CameraFragmentDirections.actionCameraFragmentToImageProcessFragment(
+                    imageUrl = imageUrl,
+                    language = binding.toggleLanguageButton.text.toString()
+                )
+                findNavController().navigate(direction)
+            }
+            else if(currentCamera == OBJECT_DETECT){
+                val direction = CameraFragmentDirections.actionCameraFragmentToSearchCategoryFragment(
+                    imageUrl = imageUrl
+                )
+                findNavController().navigate(direction)
+            }
         }
     }
 
@@ -223,5 +232,7 @@ class CameraFragment : Fragment() {
     companion object{
         const val ANIMATION_FAST_MILLIS = 100L
         const val ANIMATION_SLOW_MILLIS = 200L
+        const val IMAGE_PROCESS = "성분 인식"
+        const val OBJECT_DETECT = "음식 인식"
     }
 }
