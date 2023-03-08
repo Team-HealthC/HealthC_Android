@@ -1,15 +1,19 @@
 package com.example.healthc.presentation.camera
 
 import android.content.ContentValues
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.media.MediaActionSound
 import android.media.MediaActionSound.SHUTTER_CLICK
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.launch
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
@@ -20,6 +24,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentCameraBinding
+import com.example.healthc.presentation.utils.PickSinglePhotoContract
 import com.example.healthc.presentation.utils.getCurrentFileName
 import com.example.healthc.presentation.widget.SearchDialog
 import com.google.common.util.concurrent.ListenableFuture
@@ -43,6 +48,17 @@ class CameraFragment : Fragment() {
 
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var cameraSound: MediaActionSound
+
+    private lateinit var singlePhotoPickerLauncher : ActivityResultLauncher<Void?>
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        singlePhotoPickerLauncher =  registerForActivityResult(PickSinglePhotoContract()) { imageUri: Uri? ->
+            if (imageUri != null) {
+                navigateToImageProcess(imageUri.toString())
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -107,6 +123,10 @@ class CameraFragment : Fragment() {
 
         binding.goToSearchButton.setOnClickListener{
             showDialog()
+        }
+
+        binding.goToGalleryButton.setOnClickListener{
+            singlePhotoPickerLauncher.launch()
         }
     }
 
