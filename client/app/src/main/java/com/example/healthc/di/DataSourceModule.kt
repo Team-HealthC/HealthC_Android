@@ -4,10 +4,10 @@ import com.example.healthc.data.source.auth.SignInDataSource
 import com.example.healthc.data.source.auth.SignInDataSourceImpl
 import com.example.healthc.data.source.auth.SignUpDataSource
 import com.example.healthc.data.source.auth.SignUpDataSourceImpl
-import com.example.healthc.data.source.food.SearchFoodProductSource
-import com.example.healthc.data.source.food.SearchFoodProductSourceImpl
-import com.example.healthc.data.source.food.SearchIngredientDataSource
-import com.example.healthc.data.source.food.SearchIngredientDataSourceImpl
+import com.example.healthc.data.source.food.kor_product.SearchFoodProductSource
+import com.example.healthc.data.source.food.kor_product.SearchFoodProductSourceImpl
+import com.example.healthc.data.source.food.ingredient.SearchIngredientDataSource
+import com.example.healthc.data.source.food.ingredient.SearchIngredientDataSourceImpl
 import com.example.healthc.data.source.food.object_detect.SearchCategoryDataSource
 import com.example.healthc.data.source.food.object_detect.SearchCategoryDataSourceImpl
 import com.example.healthc.data.source.local.user.GetLocalUserInfoDataSource

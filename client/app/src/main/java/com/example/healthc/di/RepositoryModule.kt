@@ -5,8 +5,8 @@ import com.example.healthc.data.repository.FoodRepositoryImpl
 import com.example.healthc.data.repository.UserRepositoryImpl
 import com.example.healthc.data.source.auth.SignInDataSource
 import com.example.healthc.data.source.auth.SignUpDataSource
-import com.example.healthc.data.source.food.SearchFoodProductSource
-import com.example.healthc.data.source.food.SearchIngredientDataSource
+import com.example.healthc.data.source.food.kor_product.SearchFoodProductSource
+import com.example.healthc.data.source.food.ingredient.SearchIngredientDataSource
 import com.example.healthc.data.source.food.object_detect.SearchCategoryDataSource
 import com.example.healthc.data.source.local.user.GetLocalUserInfoDataSource
 import com.example.healthc.data.source.local.user.UpdateLocalUserInfoDataSource

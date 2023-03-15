@@ -1,4 +1,4 @@
-package com.example.healthc.data.dto.food
+package com.example.healthc.data.dto.food.ingredient
 
 import com.example.healthc.domain.model.food.Ingredient
 import com.example.healthc.domain.model.food.SearchFoodIngredient
