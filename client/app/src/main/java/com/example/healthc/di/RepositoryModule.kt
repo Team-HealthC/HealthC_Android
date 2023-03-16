@@ -8,6 +8,7 @@ import com.example.healthc.data.source.auth.SignUpDataSource
 import com.example.healthc.data.source.food.kor_product.SearchFoodProductSource
 import com.example.healthc.data.source.food.ingredient.SearchIngredientDataSource
 import com.example.healthc.data.source.food.object_detect.SearchCategoryDataSource
+import com.example.healthc.data.source.food.product.*
 import com.example.healthc.data.source.local.user.GetLocalUserInfoDataSource
 import com.example.healthc.data.source.local.user.UpdateLocalUserInfoDataSource
 import com.example.healthc.data.source.user.GetUserInfoDataSource
@@ -52,8 +53,12 @@ object RepositoryModule {
     @Provides
     fun providesFoodRepository(searchIngredientDataSource: SearchIngredientDataSource,
                                searchFoodProductSource: SearchFoodProductSource,
-                               searchFoodCategoryDataSource: SearchCategoryDataSource)
+                               searchFoodCategoryDataSource: SearchCategoryDataSource,
+                               searchProductIdDataSource : SearchProductIdDataSource,
+                               searchProductFactsDataSource : SearchProductFactsDataSource,
+                               searchProductInfoDataSource: SearchProductInfoDataSource)
         : FoodRepository = FoodRepositoryImpl(searchIngredientDataSource, searchFoodProductSource,
-        searchFoodCategoryDataSource)
+        searchFoodCategoryDataSource, searchProductIdDataSource,
+    searchProductInfoDataSource, searchProductFactsDataSource)
 
 }
