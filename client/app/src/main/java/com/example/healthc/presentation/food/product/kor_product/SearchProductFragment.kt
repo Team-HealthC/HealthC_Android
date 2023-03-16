@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.food.product.search_product
+package com.example.healthc.presentation.food.product.kor_product
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,8 +14,8 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentSearchProductBinding
-import com.example.healthc.presentation.food.product.search_product.SearchProductViewModel.SearchProductUiEvent
-import com.example.healthc.presentation.food.product.search_product.adapter.SearchProductAdapter
+import com.example.healthc.presentation.food.product.kor_product.SearchProductViewModel.SearchProductUiEvent
+import com.example.healthc.presentation.food.product.kor_product.adapter.SearchProductAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -69,7 +69,7 @@ class SearchProductFragment : Fragment() {
 
     private fun initViewModelState(){
         viewModel.setProduct(args.category)
-        viewModel.getFoodIngredient()
+        viewModel.getFoodProduct()
     }
 
     private fun initAdapter(){

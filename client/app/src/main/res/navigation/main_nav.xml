@@ -126,7 +126,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchProductFragment"
-        android:name="com.example.healthc.presentation.food.product.search_product.SearchProductFragment"
+        android:name="com.example.healthc.presentation.food.product.kor_product.SearchProductFragment"
         android:label="fragment_search_product"
         tools:layout="@layout/fragment_search_product" >
         <argument

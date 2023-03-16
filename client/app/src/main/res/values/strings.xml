@@ -62,4 +62,6 @@
     <string name="toggle_lang_eng">English</string>
     <string name="toggle_camera_ocr">성분 인식</string>
     <string name="toggle_camera_obj_detect">음식 인식</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

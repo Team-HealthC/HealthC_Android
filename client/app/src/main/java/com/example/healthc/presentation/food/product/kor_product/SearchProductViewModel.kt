@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.food.product.search_product
+package com.example.healthc.presentation.food.product.kor_product
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -29,7 +29,7 @@ class SearchProductViewModel @Inject constructor(
         _productName.value = productName
     }
 
-    fun getFoodIngredient(){
+    fun getFoodProduct(){
         viewModelScope.launch {
             val searchResult = repository.searchFoodProduct(
                 requireNotNull(_productName.value)
