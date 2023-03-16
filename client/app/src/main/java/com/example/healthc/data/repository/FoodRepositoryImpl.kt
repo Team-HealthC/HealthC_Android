@@ -3,9 +3,10 @@ package com.example.healthc.data.repository
 import com.example.healthc.data.source.food.kor_product.SearchFoodProductSource
 import com.example.healthc.data.source.food.ingredient.SearchIngredientDataSource
 import com.example.healthc.data.source.food.object_detect.SearchCategoryDataSource
-import com.example.healthc.domain.model.food.SearchFoodCategory
-import com.example.healthc.domain.model.food.SearchFoodIngredient
-import com.example.healthc.domain.model.food.SearchFoodProduct
+import com.example.healthc.data.source.food.product.SearchProductFactsDataSource
+import com.example.healthc.data.source.food.product.SearchProductIdDataSource
+import com.example.healthc.data.source.food.product.SearchProductInfoDataSource
+import com.example.healthc.domain.model.food.*
 import com.example.healthc.domain.repository.FoodRepository
 import com.example.healthc.domain.utils.Resource
 import javax.inject.Inject
@@ -13,8 +14,11 @@ import javax.inject.Inject
 class FoodRepositoryImpl @Inject constructor(
     private val searchFoodDataSource: SearchIngredientDataSource,
     private val searchFoodProductSource : SearchFoodProductSource,
-    private val searchCategoryDataSource: SearchCategoryDataSource
-) : FoodRepository{
+    private val searchCategoryDataSource: SearchCategoryDataSource,
+    private val searchProductDataSource: SearchProductIdDataSource,
+    private val searchProductInfoDataSource : SearchProductInfoDataSource,
+    private val searchProductFactsDataSource: SearchProductFactsDataSource
+    ) : FoodRepository{
     override suspend fun searchFoodMenu(element: String): Resource<SearchFoodIngredient> {
         return searchFoodDataSource.searchFoodMenu(element)
     }
@@ -25,5 +29,17 @@ class FoodRepositoryImpl @Inject constructor(
 
     override suspend fun searchFoodCategory(encodedImage: String): Resource<SearchFoodCategory> {
         return searchCategoryDataSource.searchFoodCategory(encodedImage)
+    }
+
+    override suspend fun searchFoodProductId(query: String): Resource<SearchProductId> {
+        return searchProductDataSource.searchProduct(query)
+    }
+
+    override suspend fun searchFoodProductInfo(id: Int): Resource<SearchProductInfo> {
+        return searchProductInfoDataSource.searchProductInfo(id)
+    }
+
+    override suspend fun searchFoodFacts(id: Int): Resource<String> {
+        return searchProductFactsDataSource.searchProductFacts(id)
     }
 }
