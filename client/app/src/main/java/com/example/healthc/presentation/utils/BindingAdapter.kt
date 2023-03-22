@@ -1,6 +1,7 @@
 package com.example.healthc.presentation.utils
 
 import android.graphics.drawable.Drawable
+import android.util.Base64
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -26,11 +27,40 @@ object BindingAdapter {
     }
 
     @JvmStatic
-    @BindingAdapter("app:imageWebUrl", "app:placeholder")
-    fun loadWebImage(view: ImageView, src: String?, placeHolder: Drawable) {
+    @BindingAdapter("app:imageIngredientUrl", "app:placeholder")
+    fun loadIngredientImage(view: ImageView, src: String?, placeHolder: Drawable) {
         if (src != null) {
             Glide.with(view.context)
-                .load(BuildConfig.SPOON_API_BASE_URL + src)
+                .load(BuildConfig.SPOON_API_INGREDIENT_URL + src)
+                .placeholder(placeHolder)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .apply(RequestOptions().fitCenter())
+                .error(R.drawable.health_c)
+                .into(view)
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("app:imageProductUrl", "app:placeholder")
+    fun loadProductImage(view: ImageView, src: String?, placeHolder: Drawable) {
+        if (src != null) {
+            Glide.with(view.context)
+                .load(BuildConfig.SPOON_API_PRODUCT_URL + src + "-90x90.jpeg")
+                .placeholder(placeHolder)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .apply(RequestOptions().fitCenter())
+                .error(R.drawable.health_c)
+                .into(view)
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("app:ByteArrayImage", "app:placeholder")
+    fun loadByteArrayImage(view: ImageView, src: String?, placeHolder: Drawable) {
+        if (src != null) {
+            val image: ByteArray = Base64.decode(src, Base64.DEFAULT)
+            Glide.with(view.context)
+                .load(image)
                 .placeholder(placeHolder)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .apply(RequestOptions().fitCenter())
