@@ -4,12 +4,13 @@ import com.example.healthc.data.source.auth.SignInDataSource
 import com.example.healthc.data.source.auth.SignInDataSourceImpl
 import com.example.healthc.data.source.auth.SignUpDataSource
 import com.example.healthc.data.source.auth.SignUpDataSourceImpl
-import com.example.healthc.data.source.food.SearchFoodProductSource
-import com.example.healthc.data.source.food.SearchFoodProductSourceImpl
-import com.example.healthc.data.source.food.SearchIngredientDataSource
-import com.example.healthc.data.source.food.SearchIngredientDataSourceImpl
+import com.example.healthc.data.source.food.kor_product.SearchFoodProductSource
+import com.example.healthc.data.source.food.kor_product.SearchFoodProductSourceImpl
+import com.example.healthc.data.source.food.ingredient.SearchIngredientDataSource
+import com.example.healthc.data.source.food.ingredient.SearchIngredientDataSourceImpl
 import com.example.healthc.data.source.food.object_detect.SearchCategoryDataSource
 import com.example.healthc.data.source.food.object_detect.SearchCategoryDataSourceImpl
+import com.example.healthc.data.source.food.product.*
 import com.example.healthc.data.source.local.user.GetLocalUserInfoDataSource
 import com.example.healthc.data.source.local.user.GetLocalUserInfoDataSourceImpl
 import com.example.healthc.data.source.local.user.UpdateLocalUserInfoDataSource
@@ -84,4 +85,22 @@ abstract class DataSourceModule {
     abstract fun providesSearchCategoryDataSource(
         searchCategoryDataSourceImpl: SearchCategoryDataSourceImpl
     ) : SearchCategoryDataSource
+
+    @Binds
+    @Singleton
+    abstract fun providesSearchProductIdDataSource(
+        searchProductIdDataSourceImpl : SearchProductIdDataSourceImpl
+    ) : SearchProductIdDataSource
+
+    @Binds
+    @Singleton
+    abstract fun providesSearchProductInfoDataSource(
+        searchProductInfoDataSourceImpl: SearchProductInfoDataSourceImpl
+    ) : SearchProductInfoDataSource
+
+    @Binds
+    @Singleton
+    abstract fun providesSearchProductFactsDataSource(
+        searchProductFactsDataSourceImpl: SearchProductFactsDataSourceImpl
+    ) : SearchProductFactsDataSource
 }

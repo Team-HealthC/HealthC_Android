@@ -1,7 +1,7 @@
 package com.example.healthc.data.remote.api
 
 import com.example.healthc.BuildConfig
-import com.example.healthc.data.dto.food.SearchFoodProductDto
+import com.example.healthc.data.dto.food.ingredient.SearchFoodProductDto
 import retrofit2.http.GET
 import retrofit2.http.Query
 

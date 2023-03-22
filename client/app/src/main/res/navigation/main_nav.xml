@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/permissionsFragment">
+    app:startDestination="@id/cameraFragment">
     <fragment
         android:id="@+id/cameraFragment"
         android:name="com.example.healthc.presentation.camera.CameraFragment"
@@ -26,15 +26,15 @@
             android:id="@+id/action_cameraFragment_to_ingredientFragment"
             app:destination="@id/ingredientFragment" />
         <action
-            android:id="@+id/action_cameraFragment_to_productFragment"
-            app:destination="@id/productFragment" />
-        <action
             android:id="@+id/action_cameraFragment_to_searchCategoryFragment"
             app:destination="@id/searchCategoryFragment" >
             <argument
                 android:name="imageUrl"
                 app:argType="string"/>
         </action>
+        <action
+            android:id="@+id/action_cameraFragment_to_productFragment"
+            app:destination="@id/productFragment" />
     </fragment>
     <fragment
         android:id="@+id/permissionsFragment"
@@ -109,34 +109,6 @@
             app:destination="@id/ingredientFragment" />
     </fragment>
     <fragment
-        android:id="@+id/productFragment"
-        android:name="com.example.healthc.presentation.food.product.ProductFragment"
-        android:label="ProductFragment"
-        tools:layout="@layout/fragment_product">
-        <action
-            android:id="@+id/action_productFragment_to_searchProductFragment"
-            app:destination="@id/searchProductFragment" >
-            <argument
-                android:name="category"
-                app:argType="string"/>
-        </action>
-        <action
-            android:id="@+id/action_productFragment_to_cameraFragment"
-            app:destination="@id/cameraFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/searchProductFragment"
-        android:name="com.example.healthc.presentation.food.product.search_product.SearchProductFragment"
-        android:label="fragment_search_product"
-        tools:layout="@layout/fragment_search_product" >
-        <argument
-            android:name="category"
-            app:argType="string"/>
-        <action
-            android:id="@+id/action_searchProductFragment_to_productFragment"
-            app:destination="@id/productFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/searchCategoryFragment"
         android:name="com.example.healthc.presentation.camera.object_detect.SearchCategoryFragment"
         android:label="fragment_search_category"
@@ -146,6 +118,43 @@
             app:argType="string"/>
         <action
             android:id="@+id/action_searchCategoryFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productFragment"
+        android:name="com.example.healthc.presentation.food.product.ProductFragment"
+        android:label="fragment_product"
+        tools:layout="@layout/fragment_product" >
+        <action
+            android:id="@+id/action_productFragment_to_productInfoFragment"
+            app:destination="@id/productInfoFragment" >
+            <argument
+                android:name="productId"
+                app:argType="integer"/>
+        </action>
+        <action
+            android:id="@+id/action_productFragment_to_korProductFragment"
+            app:destination="@id/korProductFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productInfoFragment"
+        android:name="com.example.healthc.presentation.food.product.product_info.ProductInfoFragment"
+        android:label="fragment_product_info"
+        tools:layout="@layout/fragment_product_info" >
+        <action
+            android:id="@+id/action_productInfoFragment_to_productFragment"
+            app:destination="@id/productFragment" />
+        <argument
+            android:name="productId"
+            app:argType="integer"/>
+    </fragment>
+    <fragment
+        android:id="@+id/korProductFragment"
+        android:name="com.example.healthc.presentation.food.product.kor_product.KorProductFragment"
+        android:label="fragment_kor_product"
+        tools:layout="@layout/fragment_kor_product" >
+        <action
+            android:id="@+id/action_korProductFragment_to_cameraFragment"
             app:destination="@id/cameraFragment" />
     </fragment>
 </navigation>

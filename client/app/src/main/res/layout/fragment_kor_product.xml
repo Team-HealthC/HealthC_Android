@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.food.product.ProductFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".presentation.food.product.kor_product.KorProductFragment">
     <data>
         <variable
             name="viewModel"
-            type="com.example.healthc.presentation.food.product.ProductViewModel"
+            type="com.example.healthc.presentation.food.product.kor_product.KorProductViewModel"
             />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,7 +15,7 @@
         android:layout_height="match_parent">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/productIdSearchCardView"
+            android:id="@+id/productSearchCardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -38,15 +39,15 @@
 
 
                 <EditText
-                    android:id="@+id/ProductsearchEditTextView"
+                    android:id="@+id/searchEditTextView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:background="@color/ic_launcher_background"
-                    android:hint="@string/eng_search_product"
+                    android:hint="@string/search_product"
                     android:inputType="textEmailAddress"
                     android:singleLine="true"
-                    android:text="@={viewModel.product}"
+                    android:background="@color/ic_launcher_background"
+                    android:layout_marginHorizontal="16dp"
+                    android:text="@={viewModel.productName}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/search_product_button"
                     app:layout_constraintStart_toEndOf="@+id/back_to_camera_button"
@@ -54,23 +55,11 @@
 
                 <ImageButton
                     android:id="@+id/search_product_button"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:background="@color/ic_launcher_background"
-                    android:onClick="@{() -> viewModel.getProductIds()}"
                     android:src="@drawable/ic_baseline_search_24"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/goToKorProductButton"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageButton
-                    android:id="@+id/goToKorProductButton"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/south_korea"
-                    android:background="@color/android:transparent"
+                    android:onClick="@{() -> viewModel.getFoodProduct()}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -78,13 +67,13 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/product_id_recyclerView"
+            android:id="@+id/search_product_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/productIdSearchCardView" />
+            app:layout_constraintTop_toBottomOf="@+id/productSearchCardView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

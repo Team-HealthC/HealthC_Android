@@ -1,6 +1,7 @@
-package com.example.healthc.data.source.food
+package com.example.healthc.data.source.food.kor_product
 
 import com.example.healthc.data.remote.api.SearchFoodProductService
+import com.example.healthc.data.source.food.kor_product.SearchFoodProductSource
 import com.example.healthc.di.IoDispatcher
 import com.example.healthc.domain.model.food.SearchFoodProduct
 import com.example.healthc.domain.utils.Resource
@@ -11,7 +12,7 @@ import javax.inject.Inject
 class SearchFoodProductSourceImpl @Inject constructor(
     private val service : SearchFoodProductService,
     @IoDispatcher private val coroutineDispatcher: CoroutineDispatcher
-): SearchFoodProductSource{
+): SearchFoodProductSource {
     override suspend fun searchProduct(category: String): Resource<SearchFoodProduct>
     = withContext(coroutineDispatcher){
         try{
