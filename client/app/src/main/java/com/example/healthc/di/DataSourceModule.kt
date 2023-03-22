@@ -94,13 +94,13 @@ abstract class DataSourceModule {
 
     @Binds
     @Singleton
-    abstract fun providesSearchCategoryDataSource(
+    abstract fun providesSearchProductInfoDataSource(
         searchProductInfoDataSourceImpl: SearchProductInfoDataSourceImpl
     ) : SearchProductInfoDataSource
 
     @Binds
     @Singleton
-    abstract fun providesSearchCategoryDataSource(
+    abstract fun providesSearchProductFactsDataSource(
         searchProductFactsDataSourceImpl: SearchProductFactsDataSourceImpl
     ) : SearchProductFactsDataSource
 }
