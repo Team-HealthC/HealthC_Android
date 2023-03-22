@@ -1,6 +1,5 @@
 package com.example.healthc.data.dto.food.product
 
-import com.example.healthc.domain.model.food.ProductNutrient
 import com.example.healthc.domain.model.food.ProductNutrition
 import com.example.healthc.domain.model.food.SearchProductInfo
 
@@ -33,7 +32,7 @@ data class SearchProductInfoDto(
 
 data class ProductServingsDto(
     val number: Int,
-    val size: Int,
+    val size: Int?,
     val unit: String
 )
 
@@ -42,22 +41,16 @@ data class ProductNutritionDto(
     val nutrients: List<ProductNutrientDto>
 ){
     fun toProductNutrition() : ProductNutrition =  ProductNutrition(
-        nutrients = nutrients.map{ it.toProductNutrient() }
+        nutrients = nutrients.map{ it.name }
     )
 }
 
 data class ProductNutrientDto(
-    val amount: Int,
+    val amount: Double,
     val name: String,
     val percentOfDailyNeeds: Double,
     val unit: String
-){
-    fun toProductNutrient() : ProductNutrient = ProductNutrient(
-        amount = amount,
-        name = name,
-        unit = unit
-    )
-}
+)
 
 data class ProductIngredientDto(
     val description: String,
@@ -67,6 +60,6 @@ data class ProductIngredientDto(
 
 data class ProductCaloricBreakdownDto(
     val percentCarbs: Double,
-    val percentFat: Int,
+    val percentFat: Double,
     val percentProtein: Double
 )

@@ -6,14 +6,10 @@ data class SearchProductInfo(
     val likes: Int,
     val nutrition: ProductNutrition,
     val title: String
-)
+){
+    constructor() : this(0, "", 0, ProductNutrition(emptyList()),"")
+}
 
 data class ProductNutrition(
-    val nutrients: List<ProductNutrient>
-)
-
-data class ProductNutrient(
-    val amount: Int,
-    val name: String,
-    val unit: String
+    val nutrients: List<String>
 )

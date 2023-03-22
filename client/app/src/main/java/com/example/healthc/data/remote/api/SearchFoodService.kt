@@ -38,15 +38,15 @@ interface SearchFoodService {
     // 가공식품 라벨 찾기
     @GET("/recipes/{id}/nutritionLabel.png")
     suspend fun searchFoodFacts(
-        @Query("apiKey") apiKey: String = BuildConfig.SPOON_API_KEY,
         @Path("id") id : Int,
+        @Query("apiKey") apiKey: String = BuildConfig.SPOON_API_KEY,
         @Query("showIngredients") showIngredient : Boolean = true
     ) : ResponseBody
 
     // 가공식품 정보 찾기
     @GET("/food/products/{id}")
     suspend fun searchProductInformation(
-        @Query("apiKey") apiKey: String = BuildConfig.SPOON_API_KEY,
         @Path("id") id : Int,
+        @Query("apiKey") apiKey: String = BuildConfig.SPOON_API_KEY
     ) : SearchProductInfoDto
 }
