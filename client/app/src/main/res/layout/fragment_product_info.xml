@@ -22,6 +22,15 @@
             android:layout_height="wrap_content"
             android:padding="16dp">
 
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/back_to_product_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/ic_launcher_background"
+                android:src="@drawable/ic_baseline_arrow_back_ios_new_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/product_image"
                 android:layout_width="match_parent"
