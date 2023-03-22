@@ -237,7 +237,7 @@ class CameraFragment : Fragment() {
 
     private fun navigateToProduct(){
         lifecycleScope.launchWhenStarted {
-            val direction = CameraFragmentDirections.actionCameraFragmentToProductFragment()
+            val direction = CameraFragmentDirections.actionCameraFragmentToProductIdFragment()
             findNavController().navigate(direction)
         }
     }
