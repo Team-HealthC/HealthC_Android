@@ -1,6 +1,7 @@
 package com.example.healthc.data.source.food.product
 
 import com.example.healthc.data.remote.api.SearchFoodService
+import com.example.healthc.di.IoDispatcher
 import com.example.healthc.domain.model.food.SearchProductId
 import com.example.healthc.domain.utils.Resource
 import kotlinx.coroutines.CoroutineDispatcher
@@ -9,7 +10,7 @@ import javax.inject.Inject
 
 class SearchProductIdDataSourceImpl @Inject constructor(
     private val service : SearchFoodService,
-    private val coroutineDispatcher: CoroutineDispatcher
+    @IoDispatcher private val coroutineDispatcher: CoroutineDispatcher
 ) : SearchProductIdDataSource {
     override suspend fun searchProduct(query: String): Resource<SearchProductId>
     = withContext(coroutineDispatcher){
