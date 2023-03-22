@@ -22,7 +22,7 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun signUp(user: User, userInfo: UserInfo): Resource<FirebaseUser> =
         signUpDataSource.signUp(UserDto(user.email, user.password),
-            UserInfoDto(userInfo.name, userInfo.disease, userInfo.allergy)
+            UserInfoDto(userInfo.name, userInfo.allergy)
         )
 
     override fun signOut() {

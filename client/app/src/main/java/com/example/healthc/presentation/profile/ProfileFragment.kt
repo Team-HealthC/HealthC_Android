@@ -21,7 +21,6 @@ import com.example.healthc.databinding.FragmentProfileBinding
 import com.example.healthc.presentation.auth.AuthActivity
 import com.example.healthc.presentation.auth.AuthViewModel
 import com.example.healthc.presentation.profile.adapter.ProfileAllergyAdapter
-import com.example.healthc.presentation.profile.adapter.ProfileDiseaseAdapter
 import com.example.healthc.presentation.profile.ProfileViewModel.ProfileUiEvent
 import com.example.healthc.presentation.widget.EditNameDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,7 +39,6 @@ class ProfileFragment : Fragment() {
     private lateinit var callback: OnBackPressedCallback
 
     private lateinit var profileAllergyAdapter: ProfileAllergyAdapter
-    private lateinit var profileDiseaseAdapter: ProfileDiseaseAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -78,7 +76,6 @@ class ProfileFragment : Fragment() {
 
                     is ProfileUiEvent.Success -> {
                         profileAllergyAdapter.submitList(it.userInfo.allergy)
-                        profileDiseaseAdapter.submitList(it.userInfo.disease)
                     }
 
                     is ProfileUiEvent.Failure -> {
@@ -97,10 +94,6 @@ class ProfileFragment : Fragment() {
             navigateToEditProfile()
         }
 
-        binding.goToEditDisease.setOnClickListener {
-            navigateToEditProfile()
-        }
-
         binding.signOutButton.setOnClickListener{
             authViewModel.signOut() // 로그아웃
             startAuthActivity() // 로그인 화면으로 전환
@@ -109,16 +102,11 @@ class ProfileFragment : Fragment() {
 
     private fun initAdapter(){
         profileAllergyAdapter = ProfileAllergyAdapter()
-        profileDiseaseAdapter = ProfileDiseaseAdapter()
 
         with(binding){
             profileAllergyRecyclerView.layoutManager = LinearLayoutManager(requireContext(),
                 RecyclerView.HORIZONTAL, false)
             profileAllergyRecyclerView.adapter = profileAllergyAdapter
-
-            profileDiseaseRecyclerView.layoutManager = LinearLayoutManager(requireContext(),
-                RecyclerView.HORIZONTAL, false)
-            profileDiseaseRecyclerView.adapter = profileDiseaseAdapter
         }
     }
 

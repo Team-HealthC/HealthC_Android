@@ -67,14 +67,6 @@ class EditProfileFragment : Fragment(){
             }
             viewModel.setAllergy(allergyList)
         }
-
-        binding.diseaseChipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
-            val diseaseList : MutableList<String> = mutableListOf()
-            checkedIds.forEach{ id ->
-                diseaseList.add(group.findViewById<Chip>(id).text.toString())
-            }
-            viewModel.setDisease(diseaseList)
-        }
     }
 
     private fun navigateToProfile(){
