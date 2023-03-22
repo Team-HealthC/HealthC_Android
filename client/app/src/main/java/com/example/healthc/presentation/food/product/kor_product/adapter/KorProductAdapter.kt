@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.healthc.databinding.ItemSearchProductBinding
 import com.example.healthc.domain.model.food.ProductItem
-import com.example.healthc.presentation.food.product.kor_product.adapter.SearchProductAdapter.SearchProductViewHolder
+import com.example.healthc.presentation.food.product.kor_product.adapter.KorProductAdapter.SearchProductViewHolder
 
-class SearchProductAdapter : ListAdapter<ProductItem, SearchProductViewHolder>(ProductItemCallback){
+class KorProductAdapter : ListAdapter<ProductItem, SearchProductViewHolder>(ProductItemCallback){
     
     companion object {
         val ProductItemCallback = object : DiffUtil.ItemCallback<ProductItem>(){

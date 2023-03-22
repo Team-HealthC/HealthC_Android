@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SearchProductViewModel @Inject constructor(
+class KorProductViewModel @Inject constructor(
     private val repository : FoodRepository
 ) : ViewModel() {
     private val _searchProductUiEvent = MutableStateFlow<SearchProductUiEvent>(
@@ -22,17 +22,12 @@ class SearchProductViewModel @Inject constructor(
     val searchProductUiEvent : StateFlow<SearchProductUiEvent>
         get() = _searchProductUiEvent
 
-    private val _productName = MutableLiveData<String>("")
-    val productName : LiveData<String> get() = _productName
-
-    fun setProduct(productName: String){
-        _productName.value = productName
-    }
+    val productName : MutableLiveData<String> =MutableLiveData<String>("")
 
     fun getFoodProduct(){
         viewModelScope.launch {
             val searchResult = repository.searchFoodProduct(
-                requireNotNull(_productName.value)
+                requireNotNull(productName.value)
             )
             when(searchResult){
                 is Resource.Success -> {
