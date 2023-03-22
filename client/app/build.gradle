@@ -25,7 +25,8 @@ android {
         // Local Properties
         buildConfigField "String", "SPOON_API_KEY",properties['SPOON_API_KEY']
         buildConfigField "String", "SPOON_BASE_URL",properties['SPOON_BASE_URL']
-        buildConfigField "String", "SPOON_API_BASE_URL",properties['SPOON_API_BASE_URL']
+        buildConfigField "String", "SPOON_API_INGREDIENT_URL",properties['SPOON_API_INGREDIENT_URL']
+        buildConfigField "String", "SPOON_API_PRODUCT_URL",properties['SPOON_API_PRODUCT_URL']
         buildConfigField "String", "DATA_GO_PRODUCT_BASE_URL",properties['DATA_GO_PRODUCT_BASE_URL']
         buildConfigField "String", "DATA_GO_PRODUCT_API_KEY",properties['DATA_GO_PRODUCT_API_KEY']
     }
