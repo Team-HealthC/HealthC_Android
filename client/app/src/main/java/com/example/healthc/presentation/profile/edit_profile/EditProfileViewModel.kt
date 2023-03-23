@@ -24,7 +24,6 @@ class EditProfileViewModel @Inject constructor(
         get() = _profileUiEvent
 
     val userAllergy = MutableLiveData<String>()
-    val userDisease = MutableLiveData<String>()
     val userName = MutableLiveData<String>()
     private val modifiedAllergyList = MutableLiveData<List<String>>(emptyList())
     private val modifiedDiseaseList = MutableLiveData<List<String>>(emptyList())
@@ -41,7 +40,6 @@ class EditProfileViewModel @Inject constructor(
                     val userInfo = profileResult.result
                     userName.value = userInfo.name
                     userAllergy.value = userInfo.allergy.joinToString(separator = ", ")
-                    userDisease.value = userInfo.disease.joinToString(separator =  ", ")
                 }
                 is Resource.Failure -> {
                     _profileUiEvent.value = ProfileUiEvent.Failure("사용자 정보를 가져오는데 실패하였습니다.")
@@ -55,16 +53,11 @@ class EditProfileViewModel @Inject constructor(
         this.modifiedAllergyList.value = allergyList.toList()
     }
 
-    fun setDisease(diseaseList : MutableList<String>){
-        this.modifiedDiseaseList.value = diseaseList.toList()
-    }
-
     fun updateProfile(){
         viewModelScope.launch{
             val profileEditResult = updateProfileUseCase(
                 UserInfo(
                     requireNotNull(userName.value),
-                    requireNotNull(modifiedDiseaseList.value),
                     requireNotNull(modifiedAllergyList.value)
                 )
             )

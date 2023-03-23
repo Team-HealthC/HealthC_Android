@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:layout_marginTop="16dp"
-            android:text="@{@string/profile_edit_userHave(viewModel.userAllergy, viewModel.userDisease)}"
+            android:text="@{@string/profile_edit_userHave(viewModel.userAllergy)}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileEditUserNameText" />
 
@@ -66,21 +66,21 @@
             app:layout_constraintTop_toBottomOf="@+id/profileEditAllergyText">
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/honey_chip"
+                android:id="@+id/peach_chip"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/honey"
+                android:text="@string/peach"
                 app:chipBackgroundColor="@color/chip_background"
                 />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/pomegranate_chip"
+                android:id="@+id/fork_chip"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="@string/Pomegranate"
+                android:text="@string/pork"
                 app:chipBackgroundColor="@color/chip_background"
                 />
 
@@ -105,12 +105,12 @@
                 />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/crap_chip"
+                android:id="@+id/crustacean_chip"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="@string/crap"
+                android:text="@string/crustacean"
                 app:chipBackgroundColor="@color/chip_background"
                 />
 
@@ -121,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:background="@color/green"
-                android:text="@string/bean"
+                android:text="@string/soyBean"
                 app:chipBackgroundColor="@color/chip_background"
                 />
 
@@ -131,7 +131,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="@string/peanut"
+                android:text="@string/peanuts"
                 app:chipBackgroundColor="@color/chip_background"
                 />
 
@@ -144,97 +144,35 @@
                 android:text="@string/wheat"
                 app:chipBackgroundColor="@color/chip_background"
                 />
-        </com.google.android.material.chip.ChipGroup>
-
-        <TextView
-            android:id="@+id/profileEditDiseaseText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/disease"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/allergy_chip_group" />
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/disease_chip_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileEditDiseaseText">
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/Diabetes_chip"
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Diabetes"
-                app:chipBackgroundColor="@color/chip_background"
-                />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/hypertension_chip"
+                android:id="@+id/shellfish_chip"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="@string/hypertension"
+                android:text="@string/shellfish"
                 app:chipBackgroundColor="@color/chip_background"
                 />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/hyperlipidemia_chip"
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="@string/hyperlipidemia"
-                app:chipBackgroundColor="@color/chip_background"
-                />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/liverDisease_chip"
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="@string/liverDisease"
-                app:chipBackgroundColor="@color/chip_background"
-                />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/kidneyDisease_chip"
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="@string/kidneyDisease"
-                app:chipBackgroundColor="@color/chip_background"
-                />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/anemia_chip"
+                android:id="@+id/fish_chip"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:background="@color/green"
-                android:text="@string/anemia"
+                android:text="@string/fish"
                 app:chipBackgroundColor="@color/chip_background"
                 />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/vitaminDeficiency_chip"
+                android:id="@+id/nuts_chip"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="@string/vitaminDeficiency"
+                android:text="@string/nuts"
                 app:chipBackgroundColor="@color/chip_background"
                 />
 

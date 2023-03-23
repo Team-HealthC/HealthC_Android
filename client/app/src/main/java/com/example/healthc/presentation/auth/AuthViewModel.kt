@@ -39,8 +39,6 @@ class AuthViewModel @Inject constructor(
     val password = MutableLiveData<String>("")
     val name = MutableLiveData<String>("")
     private val allergyList = MutableLiveData<List<String>>(emptyList())
-    private val diseaseList = MutableLiveData<List<String>>(emptyList())
-
 
     // 유효성 검사
     private val validateEmailUseCase by lazy { ValidateEmail() }
@@ -78,10 +76,6 @@ class AuthViewModel @Inject constructor(
         this.allergyList.value = allergyList.toList()
     }
 
-    fun setDisease(diseaseList : MutableList<String>){
-        this.diseaseList.value = diseaseList.toList()
-    }
-
     fun signInUser(){
         viewModelScope.launch {
             _signInEvent.value = Resource.Loading
@@ -97,8 +91,7 @@ class AuthViewModel @Inject constructor(
             _signUpEvent.value = Resource.Loading
             val result = authRepository.signUp(
                 User(requireNotNull(email.value), requireNotNull(password.value)),
-                UserInfo(requireNotNull(name.value), requireNotNull(diseaseList.value),
-                    requireNotNull(allergyList.value))
+                UserInfo(requireNotNull(name.value), requireNotNull(allergyList.value))
             )
             _signUpEvent.value = result
         }

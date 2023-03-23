@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentIngredientBinding
-import com.example.healthc.presentation.utils.toEng
+import com.example.healthc.presentation.utils.toIngredientEng
 
 import com.google.android.material.chip.Chip
 
@@ -49,7 +49,7 @@ class IngredientFragment : Fragment() {
             checkedIds.forEach{ id ->
                 checkedAllergy = group.findViewById<Chip>(id).text.toString()
             }
-            navigateToSearchDictionary(checkedAllergy.toEng())
+            navigateToSearchDictionary(checkedAllergy.toIngredientEng())
         }
         binding.searchFoodButton.setOnClickListener {
             navigateToSearchDictionary(

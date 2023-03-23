@@ -21,7 +21,6 @@ class UpdateUserInfoDataSourceImpl @Inject constructor(
         try{
             val userInfoMap = mutableMapOf<String, Any>()
             userInfoMap["allergy"] = userInfo.allergy
-            userInfoMap["disease"] = userInfo.disease
             userInfoMap["name"] = userInfo.name
 
             fireStore.collection(DB_USERS).document(uid).set(
