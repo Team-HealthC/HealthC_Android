@@ -1,10 +1,10 @@
 package com.example.healthc.presentation.utils
 
-fun String.toEng(): String =
+fun String.toIngredientEng(): String =
     when(this){
-        "꿀" -> { "Honey" }
+        "돼지고기" -> { "Pork" }
 
-        "대두" -> { "Bean" }
+        "대두" -> { "Soy" }
 
         "땅콩" -> { "Peanut" }
 
@@ -16,9 +16,13 @@ fun String.toEng(): String =
 
         "복숭아" -> { "Peach" }
 
-        "석류" -> { "Pomegranate" }
+        "견과류" -> { "Nuts" }
 
-        "게" -> { "Crab"}
+        "갑각류" -> { "Crab"}
 
-        else -> { "egg" }
+        "조개류" -> { "Shell"}
+
+        "생선" -> { "Fish"}
+
+        else -> { "" }
     }

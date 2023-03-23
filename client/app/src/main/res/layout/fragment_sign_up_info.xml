@@ -57,21 +57,21 @@
             app:layout_constraintTop_toBottomOf="@+id/signInFoAllergyText">
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/honey_chip"
+                android:id="@+id/peach_chip"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/honey"
+                android:text="@string/peach"
                 app:chipBackgroundColor="@color/chip_background"
                 />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/pomegranate_chip"
+                android:id="@+id/fork_chip"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="@string/Pomegranate"
+                android:text="@string/pork"
                 app:chipBackgroundColor="@color/chip_background"
                 />
 
@@ -96,12 +96,12 @@
                 />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/crap_chip"
+                android:id="@+id/crustacean_chip"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="@string/crap"
+                android:text="@string/crustacean"
                 app:chipBackgroundColor="@color/chip_background"
                 />
 
@@ -112,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:background="@color/green"
-                android:text="@string/bean"
+                android:text="@string/soyBean"
                 app:chipBackgroundColor="@color/chip_background"
                 />
 
@@ -122,7 +122,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="@string/peanut"
+                android:text="@string/peanuts"
                 app:chipBackgroundColor="@color/chip_background"
                 />
 
@@ -133,6 +133,37 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="@string/wheat"
+                app:chipBackgroundColor="@color/chip_background"
+                />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/shellfish_chip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/shellfish"
+                app:chipBackgroundColor="@color/chip_background"
+                />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/fish_chip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:background="@color/green"
+                android:text="@string/fish"
+                app:chipBackgroundColor="@color/chip_background"
+                />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/nuts_chip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/nuts"
                 app:chipBackgroundColor="@color/chip_background"
                 />
 
