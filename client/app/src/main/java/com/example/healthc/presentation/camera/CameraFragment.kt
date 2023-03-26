@@ -27,7 +27,7 @@ import com.example.healthc.databinding.FragmentCameraBinding
 import com.example.healthc.presentation.utils.PickSinglePhotoContract
 import com.example.healthc.presentation.utils.getCurrentFileName
 import com.example.healthc.presentation.widget.CameraStateDialog
-import com.example.healthc.presentation.widget.SearchDialog
+import com.example.healthc.presentation.widget.ChooseSearchingDialog
 import com.google.common.util.concurrent.ListenableFuture
 import land.sungbin.systemuicontroller.setNavigationBarColor
 import timber.log.Timber
@@ -196,10 +196,10 @@ class CameraFragment : Fragment() {
     }
 
     private fun showSearchDialog(){
-        SearchDialog(
+        ChooseSearchingDialog(
             requireContext(),
             onSearchIngredient = { navigateToIngredient() },
-            onSearchProduct = { navigateToProduct() }
+            onSearchProduct = { navigateToProduct() },
         ).show()
     }
 
@@ -207,7 +207,7 @@ class CameraFragment : Fragment() {
         CameraStateDialog(
             requireContext(),
             setCameraState = {
-                binding.cameraStateTextView.text = it.toString()
+                binding.cameraStateTextView.text = it
             }
         ).show()
     }

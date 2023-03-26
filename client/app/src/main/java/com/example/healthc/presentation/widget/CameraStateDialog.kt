@@ -1,21 +1,20 @@
 package com.example.healthc.presentation.widget
 
-import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.view.WindowManager
+import com.example.healthc.R
 import com.example.healthc.databinding.DialogCameraStateBinding
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class CameraStateDialog(
     context : Context,
     private val setCameraState : (String) -> Unit,
-): Dialog(context) {
+): BottomSheetDialog(context) {
     private val binding by lazy { DialogCameraStateBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.setContentView(binding.root)
-        resizeDialog()
         initViews()
     }
 
@@ -38,12 +37,5 @@ class CameraStateDialog(
                 dismiss()
             }
         }
-    }
-
-    private fun resizeDialog(){
-        window?.setLayout(
-            WindowManager.LayoutParams.MATCH_PARENT,
-            WindowManager.LayoutParams.WRAP_CONTENT
-        )
     }
 }

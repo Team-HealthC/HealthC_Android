@@ -1,22 +1,20 @@
 package com.example.healthc.presentation.widget
 
-import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.view.WindowManager
-import com.example.healthc.databinding.DialogSearchBinding
+import com.example.healthc.databinding.DialogChooseSearchingBinding
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
-class SearchDialog(
+class ChooseSearchingDialog(
     context : Context,
     private val onSearchProduct : () -> Unit,
     private val onSearchIngredient : () -> Unit
-): Dialog(context) {
-    private val binding by lazy { DialogSearchBinding.inflate(layoutInflater) }
+): BottomSheetDialog(context) {
+    private val binding by lazy { DialogChooseSearchingBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.setContentView(binding.root)
-        resizeDialog()
         initViews()
     }
 
@@ -29,12 +27,5 @@ class SearchDialog(
             onSearchIngredient()
             dismiss()
         }
-    }
-
-    private fun resizeDialog(){
-        window?.setLayout(
-            WindowManager.LayoutParams.MATCH_PARENT,
-            WindowManager.LayoutParams.WRAP_CONTENT
-        )
     }
 }
