@@ -5,6 +5,7 @@ import com.example.healthc.data.dto.food.ingredient.SearchFoodIngredientDto
 import com.example.healthc.data.dto.food.object_detect.SearchFoodCategoryDto
 import com.example.healthc.data.dto.food.product.SearchProductIdDto
 import com.example.healthc.data.dto.food.product.SearchProductInfoDto
+import com.example.healthc.data.dto.food.recipe.RecipeByIngredientDto
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
 import retrofit2.http.*
@@ -49,4 +50,12 @@ interface SearchFoodService {
         @Path("id") id : Int,
         @Query("apiKey") apiKey: String = BuildConfig.SPOON_API_KEY
     ) : SearchProductInfoDto
+
+    // 재료로 음식 레시피 검색하기
+    @GET("/recipes/findByIngredients")
+    suspend fun searchRecipeByIng(
+        @Query("apiKey") apiKey: String = BuildConfig.SPOON_API_KEY,
+        @Query("ingredients") ingredients : String,
+        @Query("number") number : Int = 10
+    ) : List<RecipeByIngredientDto>
 }
