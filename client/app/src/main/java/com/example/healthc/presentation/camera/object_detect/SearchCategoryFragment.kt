@@ -97,7 +97,13 @@ class SearchCategoryFragment : Fragment() {
     private fun showDialog(category: SearchFoodCategory){
         SearchCategoryDialog(
             context = requireContext(),
-            category = category
+            category = category,
+            onClickNegButton = {
+                navigateToCamera()
+            },
+            onClickPosButton = {
+
+            }
         ).show()
     }
 
