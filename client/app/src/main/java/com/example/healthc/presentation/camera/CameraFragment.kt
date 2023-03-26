@@ -26,6 +26,7 @@ import com.example.healthc.R
 import com.example.healthc.databinding.FragmentCameraBinding
 import com.example.healthc.presentation.utils.PickSinglePhotoContract
 import com.example.healthc.presentation.utils.getCurrentFileName
+import com.example.healthc.presentation.widget.CameraStateDialog
 import com.example.healthc.presentation.widget.SearchDialog
 import com.google.common.util.concurrent.ListenableFuture
 import land.sungbin.systemuicontroller.setNavigationBarColor
@@ -73,6 +74,7 @@ class CameraFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initCamera()
+        initView()
         setUpCamera()
         initButton()
     }
@@ -81,6 +83,10 @@ class CameraFragment : Fragment() {
         setNavigationBarColor(Color.BLACK) // navigation bar color black
         cameraExecutor = Executors.newSingleThreadExecutor() // init executors
         cameraSound = MediaActionSound() // init cameraSound
+    }
+
+    private fun initView(){
+        binding.cameraStateTextView.text = OBJECT_DETECT
     }
 
     private fun setUpCamera(){
@@ -122,11 +128,15 @@ class CameraFragment : Fragment() {
         }
 
         binding.goToSearchButton.setOnClickListener{
-            showDialog()
+            showSearchDialog()
         }
 
         binding.goToGalleryButton.setOnClickListener{
             singlePhotoPickerLauncher.launch()
+        }
+
+        binding.toggleCameraButton.setOnClickListener {
+            showCameraStateDialog()
         }
     }
 
@@ -152,7 +162,11 @@ class CameraFragment : Fragment() {
         cameraProvider.unbindAll() // for rebinding
 
         imagePreview.setSurfaceProvider(binding.CameraPreview.surfaceProvider) // view 와 객체 결합
-        binding.CameraPreview.scaleType = PreviewView.ScaleType.FIT_CENTER
+        if(screenAspectRatio == AspectRatio.RATIO_4_3) {
+            binding.CameraPreview.scaleType = PreviewView.ScaleType.FIT_CENTER
+        }else{
+            binding.CameraPreview.scaleType = PreviewView.ScaleType.FILL_CENTER
+        }
 
         cameraProvider.bindToLifecycle(this, cameraSelector, imagePreview,
             imageAnalyzer, imageCapture) // 라이프 사이클 바인딩
@@ -177,15 +191,24 @@ class CameraFragment : Fragment() {
         )
 
         // Capture effect
-        // startCameraSound()
+        startCameraSound()
         startCameraScreenAnimation()
     }
 
-    private fun showDialog(){
+    private fun showSearchDialog(){
         SearchDialog(
             requireContext(),
             onSearchIngredient = { navigateToIngredient() },
             onSearchProduct = { navigateToProduct() }
+        ).show()
+    }
+
+    private fun showCameraStateDialog(){
+        CameraStateDialog(
+            requireContext(),
+            setCameraState = {
+                binding.cameraStateTextView.text = it.toString()
+            }
         ).show()
     }
 
@@ -204,19 +227,28 @@ class CameraFragment : Fragment() {
 
     private fun navigateToImageProcess(imageUrl : String) {
         lifecycleScope.launchWhenStarted {
-            val currentCamera = binding.toggleCameraButton.text.toString()
-            if(currentCamera == IMAGE_PROCESS) {
-                val direction = CameraFragmentDirections.actionCameraFragmentToImageProcessFragment(
-                    imageUrl = imageUrl,
-                    language = binding.toggleLanguageButton.text.toString()
-                )
-                findNavController().navigate(direction)
-            }
-            else if(currentCamera == OBJECT_DETECT){
-                val direction = CameraFragmentDirections.actionCameraFragmentToSearchCategoryFragment(
-                    imageUrl = imageUrl
-                )
-                findNavController().navigate(direction)
+            val currentCamera = binding.cameraStateTextView.text.toString()
+            when(currentCamera){
+                IMAGE_PROCESS_ENG -> {
+                    val direction = CameraFragmentDirections.actionCameraFragmentToImageProcessFragment(
+                        imageUrl = imageUrl,
+                        language = ENG
+                    )
+                    findNavController().navigate(direction)
+                }
+                IMAGE_PROCESS_KOR -> {
+                    val direction = CameraFragmentDirections.actionCameraFragmentToImageProcessFragment(
+                        imageUrl = imageUrl,
+                        language = KOR
+                    )
+                    findNavController().navigate(direction)
+                }
+                OBJECT_DETECT -> {
+                    val direction = CameraFragmentDirections.actionCameraFragmentToSearchCategoryFragment(
+                        imageUrl = imageUrl
+                    )
+                    findNavController().navigate(direction)
+                }
             }
         }
     }
@@ -252,7 +284,10 @@ class CameraFragment : Fragment() {
     companion object{
         const val ANIMATION_FAST_MILLIS = 100L
         const val ANIMATION_SLOW_MILLIS = 200L
-        const val IMAGE_PROCESS = "성분 인식"
-        const val OBJECT_DETECT = "음식 인식"
+        const val IMAGE_PROCESS_ENG = "영어 성분표 인식 카메라"
+        const val IMAGE_PROCESS_KOR = "한국어 성분표 인식 카메라"
+        const val OBJECT_DETECT = "음식 인식 카메라"
+        const val ENG = "English"
+        const val KOR = "한국어"
     }
 }
