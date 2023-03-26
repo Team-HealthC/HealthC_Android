@@ -2,8 +2,6 @@ package com.example.healthc.domain.repository
 
 import com.example.healthc.domain.model.food.*
 import com.example.healthc.domain.utils.Resource
-import com.example.healthc.presentation.widget.SearchDialog
-import java.io.File
 
 interface FoodRepository {
     suspend fun searchFoodMenu(element : String): Resource<SearchFoodIngredient>
