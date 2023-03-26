@@ -8,10 +8,18 @@
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/drawable/chip_background.xml" value="0.2955" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/drawable/flag_toggle_button.xml" value="0.271" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/drawable/ic_baseline_arrow_back_ios_new_24.xml" value="0.3225" />
+        <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/drawable/ic_baseline_aspect_ratio.xml" value="0.282" />
+        <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/drawable/ic_baseline_aspect_ratio_24.xml" value="0.282" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/drawable/ic_baseline_bookmark_24.xml" value="0.2955" />
+        <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/drawable/ic_baseline_camera.xml" value="0.282" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/drawable/ic_baseline_camera_24.xml" value="0.2895" />
+        <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/drawable/ic_baseline_clear_24.xml" value="0.282" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/drawable/ic_baseline_download_24.xml" value="0.2895" />
+        <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/drawable/ic_baseline_image.xml" value="0.282" />
+        <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/drawable/ic_baseline_image_24.xml" value="0.282" />
+        <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/drawable/ic_baseline_person.xml" value="0.282" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.2895" />
+        <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/drawable/ic_baseline_search.xml" value="0.282" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.2955" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/drawable/ic_baseline_switch_camera_24.xml" value="0.2895" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2895" />
@@ -19,6 +27,7 @@
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/activity_auth.xml" value="0.38177083333333334" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/activity_main.xml" value="0.3072916666666667" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/activity_splash.xml" value="0.38645833333333335" />
+        <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/dialog_camera_state.xml" value="0.38645833333333335" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/dialog_edit_name.xml" value="0.3854166666666667" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/dialog_negative.xml" value="0.3170940170940171" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/dialog_positive.xml" value="0.2890625" />
@@ -54,6 +63,7 @@
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/item_profile_allergy.xml" value="0.26666666666666666" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/item_profile_disease.xml" value="0.38645833333333335" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/item_search_dictionary.xml" value="0.2890625" />
+        <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/item_search_dish.xml" value="0.38645833333333335" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/item_search_ingredient.xml" value="0.3854166666666667" />
         <entry key="..\:/Users/jaino/HealthC/client/app/src/main/res/layout/item_search_product.xml" value="0.384375" />
       </map>
