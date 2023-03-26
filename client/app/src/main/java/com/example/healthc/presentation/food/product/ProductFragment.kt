@@ -72,9 +72,6 @@ class ProductFragment : Fragment() {
     }
 
     private fun initViews(){
-        binding.goToKorProductButton.setOnClickListener {
-            navigateKorProduct()
-        }
         binding.backToCameraButton.setOnClickListener {
             navigateCamera()
         }
@@ -85,13 +82,6 @@ class ProductFragment : Fragment() {
             val direction = ProductFragmentDirections.actionProductFragmentToProductInfoFragment(
                 productId = id
             )
-            findNavController().navigate(direction)
-        }
-    }
-
-    private fun navigateKorProduct(){
-        lifecycleScope.launchWhenStarted {
-            val direction = ProductFragmentDirections.actionProductFragmentToKorProductFragment()
             findNavController().navigate(direction)
         }
     }
