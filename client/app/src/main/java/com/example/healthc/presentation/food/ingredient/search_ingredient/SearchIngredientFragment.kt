@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
@@ -16,8 +17,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentSearchIngredientBinding
-import com.example.healthc.presentation.food.ingredient.search_ingredient.SearchIngredientViewModel.SearchDictionaryUiEvent
-import com.example.healthc.presentation.food.ingredient.search_ingredient.adapter.SearchIngredientAdapter
+import com.example.healthc.presentation.food.Dish.search_Dish.adapter.SearchDishAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -32,7 +32,7 @@ class SearchIngredientFragment : Fragment() {
     private val args : SearchIngredientFragmentArgs by navArgs()
 
     private lateinit var callback: OnBackPressedCallback
-    private lateinit var searchIngredientAdapter: SearchIngredientAdapter
+    private lateinit var searchIngredientAdapter: SearchDishAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -58,17 +58,18 @@ class SearchIngredientFragment : Fragment() {
     }
 
     private fun observeData(){
-        viewModel.searchDictionaryUiEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+        viewModel.searchDishUiEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                 when(it){
-                    is SearchDictionaryUiEvent.Unit -> {}
+                    is SearchIngredientViewModel.SearchDishUiEvent.Unit -> {}
 
-                    is SearchDictionaryUiEvent.Success -> {
-                        searchIngredientAdapter.submitList(it.foodIngredient.results)
+                    is SearchIngredientViewModel.SearchDishUiEvent.Success -> {
+                        searchIngredientAdapter.submitList(it.dish)
                     }
 
-                    is SearchDictionaryUiEvent.Failure -> {
-                        // TODO ERROR
+                    is SearchIngredientViewModel.SearchDishUiEvent.Failure -> {
+                        Toast.makeText(requireContext(), "음식을 불러오지 못하였습니다.", Toast.LENGTH_SHORT)
+                            .show()
                     }
                 }
             }
@@ -81,7 +82,7 @@ class SearchIngredientFragment : Fragment() {
     }
 
     private fun initAdapter(){
-        searchIngredientAdapter = SearchIngredientAdapter()
+        searchIngredientAdapter = SearchDishAdapter()
         binding.searchIngredientList.layoutManager = LinearLayoutManager(requireContext())
         binding.searchIngredientList.adapter = searchIngredientAdapter
     }

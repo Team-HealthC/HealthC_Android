@@ -11,6 +11,8 @@ import com.example.healthc.data.source.food.ingredient.SearchIngredientDataSourc
 import com.example.healthc.data.source.food.object_detect.SearchCategoryDataSource
 import com.example.healthc.data.source.food.object_detect.SearchCategoryDataSourceImpl
 import com.example.healthc.data.source.food.product.*
+import com.example.healthc.data.source.food.recipe.SearchRecipeByIngDataSource
+import com.example.healthc.data.source.food.recipe.SearchRecipeByIngDataSourceImpl
 import com.example.healthc.data.source.local.user.GetLocalUserInfoDataSource
 import com.example.healthc.data.source.local.user.GetLocalUserInfoDataSourceImpl
 import com.example.healthc.data.source.local.user.UpdateLocalUserInfoDataSource
@@ -103,4 +105,10 @@ abstract class DataSourceModule {
     abstract fun providesSearchProductFactsDataSource(
         searchProductFactsDataSourceImpl: SearchProductFactsDataSourceImpl
     ) : SearchProductFactsDataSource
+
+    @Binds
+    @Singleton
+    abstract fun providesSearchRecipeByIngDataSource(
+        searchRecipeByIngDataSourceImpl: SearchRecipeByIngDataSourceImpl
+    ): SearchRecipeByIngDataSource
 }

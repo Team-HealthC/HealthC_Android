@@ -2,27 +2,27 @@ package com.example.healthc.presentation.utils
 
 fun String.toIngredientEng(): String =
     when(this){
-        "돼지고기" -> { "Pork" }
+        "돼지고기" -> { "pork" }
 
-        "대두" -> { "Soy" }
+        "대두" -> { "soyBean" }
 
-        "땅콩" -> { "Peanut" }
+        "땅콩" -> { "peanut" }
 
-        "계란" -> { "Egg" }
+        "계란" -> { "egg" }
 
-        "우유" -> { "Milk" }
+        "우유" -> { "milk" }
 
-        "밀" -> { "Wheat" }
+        "밀" -> { "flour" }
 
-        "복숭아" -> { "Peach" }
+        "복숭아" -> { "peach" }
 
-        "견과류" -> { "Nuts" }
+        "견과류" -> { "nuts" }
 
-        "갑각류" -> { "Crab"}
+        "갑각류" -> { "crab"}
 
-        "조개류" -> { "Shell"}
+        "조개류" -> { "clam"}
 
-        "생선" -> { "Fish"}
+        "생선" -> { "fish"}
 
         else -> { "" }
     }

@@ -12,7 +12,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentIngredientBinding
-import com.example.healthc.presentation.utils.toIngredientEng
 
 import com.google.android.material.chip.Chip
 
@@ -49,10 +48,10 @@ class IngredientFragment : Fragment() {
             checkedIds.forEach{ id ->
                 checkedAllergy = group.findViewById<Chip>(id).text.toString()
             }
-            navigateToSearchDictionary(checkedAllergy.toIngredientEng())
+            navigateToSearchIngredient(checkedAllergy)
         }
         binding.searchFoodButton.setOnClickListener {
-            navigateToSearchDictionary(
+            navigateToSearchIngredient(
                 binding.searchEditTextView.text.toString()
             )
         }
@@ -64,7 +63,7 @@ class IngredientFragment : Fragment() {
         }
     }
 
-    private fun navigateToSearchDictionary(allergy: String){
+    private fun navigateToSearchIngredient(allergy: String){
         lifecycleScope.launchWhenStarted {
             val direction = IngredientFragmentDirections
                 .actionIngredientFragmentToSearchIngredientFragment(allergy)
@@ -95,6 +94,6 @@ class IngredientFragment : Fragment() {
     }
 
     companion object{
-        const val DEFAULT_TEXT = "egg"
+        const val DEFAULT_TEXT = ""
     }
 }

@@ -57,4 +57,10 @@
     <string name="toggle_camera_ocr">성분 인식</string>
     <string name="toggle_camera_obj_detect">음식 인식</string>
     <string name="eng_search_product">Enter the product name.</string>
+    <string name="dialog_object_detect">음식 인식 카메라</string>
+    <string name="dialog_image_process_kor">한국어 성분표 인식 카메라</string>
+    <string name="dialog_image_process_eng">영어 성분표 인식 카메라</string>
+    <string name="dialog_object_detect_title">판별된 음식 : %1$s </string>
+    <string name="dialog_object_detect_pos_button">알러지 요소 확인</string>
+    <string name="dialog_object_detect_neg_button">한번 더 촬영</string>
 </resources>

@@ -6,6 +6,7 @@ import com.example.healthc.data.source.food.object_detect.SearchCategoryDataSour
 import com.example.healthc.data.source.food.product.SearchProductFactsDataSource
 import com.example.healthc.data.source.food.product.SearchProductIdDataSource
 import com.example.healthc.data.source.food.product.SearchProductInfoDataSource
+import com.example.healthc.data.source.food.recipe.SearchRecipeByIngDataSource
 import com.example.healthc.domain.model.food.*
 import com.example.healthc.domain.repository.FoodRepository
 import com.example.healthc.domain.utils.Resource
@@ -17,7 +18,8 @@ class FoodRepositoryImpl @Inject constructor(
     private val searchCategoryDataSource: SearchCategoryDataSource,
     private val searchProductDataSource: SearchProductIdDataSource,
     private val searchProductInfoDataSource : SearchProductInfoDataSource,
-    private val searchProductFactsDataSource: SearchProductFactsDataSource
+    private val searchProductFactsDataSource: SearchProductFactsDataSource,
+    private val searchRecipeByIngDataSource: SearchRecipeByIngDataSource
     ) : FoodRepository{
     override suspend fun searchFoodMenu(element: String): Resource<SearchFoodIngredient> {
         return searchFoodDataSource.searchFoodMenu(element)
@@ -41,5 +43,9 @@ class FoodRepositoryImpl @Inject constructor(
 
     override suspend fun searchFoodFacts(id: Int): Resource<String> {
         return searchProductFactsDataSource.searchProductFacts(id)
+    }
+
+    override suspend fun searchDish(ingredient: String): Resource<List<DishItem>> {
+        return searchRecipeByIngDataSource.searchRecipeByIng(ingredient)
     }
 }

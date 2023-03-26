@@ -135,6 +135,9 @@
         <action
             android:id="@+id/action_productFragment_to_korProductFragment"
             app:destination="@id/korProductFragment" />
+        <action
+            android:id="@+id/action_productFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
     </fragment>
     <fragment
         android:id="@+id/productInfoFragment"

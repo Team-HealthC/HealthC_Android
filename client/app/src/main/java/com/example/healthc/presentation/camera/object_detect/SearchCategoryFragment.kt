@@ -45,8 +45,16 @@ class SearchCategoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadImage()
-        viewModel.setImageUrl(args.imageUrl)
         observeData()
+        initViews()
+    }
+
+    private fun initViews() {
+        viewModel.setImageUrl(args.imageUrl)
+
+        binding.backToCameraButton.setOnClickListener {
+            navigateToCamera()
+        }
     }
 
     private fun loadImage(){
@@ -89,7 +97,13 @@ class SearchCategoryFragment : Fragment() {
     private fun showDialog(category: SearchFoodCategory){
         SearchCategoryDialog(
             context = requireContext(),
-            category = category
+            category = category,
+            onClickNegButton = {
+                navigateToCamera()
+            },
+            onClickPosButton = {
+
+            }
         ).show()
     }
 

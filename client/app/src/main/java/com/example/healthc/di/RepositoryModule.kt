@@ -9,6 +9,7 @@ import com.example.healthc.data.source.food.kor_product.SearchFoodProductSource
 import com.example.healthc.data.source.food.ingredient.SearchIngredientDataSource
 import com.example.healthc.data.source.food.object_detect.SearchCategoryDataSource
 import com.example.healthc.data.source.food.product.*
+import com.example.healthc.data.source.food.recipe.SearchRecipeByIngDataSource
 import com.example.healthc.data.source.local.user.GetLocalUserInfoDataSource
 import com.example.healthc.data.source.local.user.UpdateLocalUserInfoDataSource
 import com.example.healthc.data.source.user.GetUserInfoDataSource
@@ -56,9 +57,10 @@ object RepositoryModule {
                                searchFoodCategoryDataSource: SearchCategoryDataSource,
                                searchProductIdDataSource : SearchProductIdDataSource,
                                searchProductFactsDataSource : SearchProductFactsDataSource,
-                               searchProductInfoDataSource: SearchProductInfoDataSource)
+                               searchProductInfoDataSource: SearchProductInfoDataSource,
+                               searchRecipeByIngDataSource: SearchRecipeByIngDataSource)
         : FoodRepository = FoodRepositoryImpl(searchIngredientDataSource, searchFoodProductSource,
         searchFoodCategoryDataSource, searchProductIdDataSource,
-    searchProductInfoDataSource, searchProductFactsDataSource)
+    searchProductInfoDataSource, searchProductFactsDataSource, searchRecipeByIngDataSource)
 
 }
