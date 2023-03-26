@@ -57,4 +57,7 @@
     <string name="toggle_camera_ocr">성분 인식</string>
     <string name="toggle_camera_obj_detect">음식 인식</string>
     <string name="eng_search_product">Enter the product name.</string>
+    <string name="dialog_object_detect">음식 인식 카메라</string>
+    <string name="dialog_image_process_kor">한국어 성분표 인식 카메라</string>
+    <string name="dialog_image_process_eng">영어 성분표 인식 카메라</string>
 </resources>

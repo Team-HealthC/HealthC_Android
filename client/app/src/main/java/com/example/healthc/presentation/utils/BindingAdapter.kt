@@ -9,6 +9,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.example.healthc.BuildConfig
 import com.example.healthc.R
+import timber.log.Timber
 
 object BindingAdapter {
 
@@ -30,6 +31,7 @@ object BindingAdapter {
     @BindingAdapter("app:imageIngredientUrl", "app:placeholder")
     fun loadIngredientImage(view: ImageView, src: String?, placeHolder: Drawable) {
         if (src != null) {
+            Timber.d(src)
             Glide.with(view.context)
                 .load(BuildConfig.SPOON_API_INGREDIENT_URL + src)
                 .placeholder(placeHolder)

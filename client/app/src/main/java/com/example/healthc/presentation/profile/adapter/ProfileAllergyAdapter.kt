@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.healthc.databinding.ItemProfileAllergyBinding
 import com.example.healthc.presentation.profile.adapter.ProfileAllergyAdapter.ProfileAllergyViewHolder
+import com.example.healthc.presentation.profile.model.ProfileUiModel
+import com.example.healthc.presentation.utils.toIngredientEng
 
 class ProfileAllergyAdapter : ListAdapter<String, ProfileAllergyViewHolder>(AllergyDiffCallback){
 
@@ -35,7 +37,10 @@ class ProfileAllergyAdapter : ListAdapter<String, ProfileAllergyViewHolder>(Alle
     inner class ProfileAllergyViewHolder(private val binding: ItemProfileAllergyBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(allergy : String) {
-            binding.itemAllergyTextView.text = allergy
+            binding.item = ProfileUiModel(
+                allergy = allergy,
+                imageSrc = "${allergy.toIngredientEng()}.png"
+            )
         }
     }
 }
