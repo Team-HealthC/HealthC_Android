@@ -4,7 +4,7 @@ import com.example.healthc.domain.model.food.*
 import com.example.healthc.domain.utils.Resource
 
 interface FoodRepository {
-    suspend fun searchFoodMenu(element : String): Resource<SearchFoodIngredient>
+    suspend fun searchIngredients(element : String): Resource<SearchFoodIngredient>
 
     suspend fun searchFoodProduct(category: String): Resource<SearchFoodProduct>
 
