@@ -29,7 +29,7 @@ class ImageProcessViewModel @Inject constructor(
 
     fun detectImage(recognizedText: String) {
         viewModelScope.launch {
-            val result = detectTextUseCase(recognizedText)
+            val result = detectTextUseCase(recognizedText, isEnglish = false)
             if(result.successful){
                 if(result.detected) {
                     _imageProcessUiEvent.value = ImageProcessEvent.Detected(result.detectedList)
