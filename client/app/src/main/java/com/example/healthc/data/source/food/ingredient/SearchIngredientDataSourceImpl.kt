@@ -13,7 +13,7 @@ class SearchIngredientDataSourceImpl @Inject constructor(
     private val service : SearchFoodService,
     @IoDispatcher private val coroutineDispatcher: CoroutineDispatcher
 ) : SearchIngredientDataSource {
-    override suspend fun searchFoodMenu(element: String): Resource<SearchFoodIngredient>
+    override suspend fun searchIngredients(element: String): Resource<SearchFoodIngredient>
     = withContext(coroutineDispatcher){
         try{
             Resource.Success(

@@ -12,13 +12,15 @@ import retrofit2.http.*
 
 interface SearchFoodService {
 
-    // 해당 재표가 포함된 메뉴 찾기
-    @GET("/food/ingredients/search")
+    // 해당 메뉴에 재료 찾기
+    @GET("/recipes/complexSearch")
     suspend fun searchFoodIngredient(
         @Query("apiKey") apiKey : String = BuildConfig.SPOON_API_KEY,
         @Query("query") query : String,
-        @Query("number") number : Int = 10
-    ) : SearchFoodIngredientDto
+        @Query("number") number : Int = 1,
+        @Query("fillIngredients") fillIngredients : Boolean = true,
+        @Query("ignorePantry") ignorePantry : Boolean = false
+        ) : SearchFoodIngredientDto
 
     // 음식 사진 인식
     @Multipart

@@ -200,6 +200,7 @@ class CameraFragment : Fragment() {
             requireContext(),
             onSearchIngredient = { navigateToIngredient() },
             onSearchProduct = { navigateToProduct() },
+            onSearchKorProduct = { navigateToKorProduct() }
         ).show()
     }
 
@@ -270,6 +271,13 @@ class CameraFragment : Fragment() {
     private fun navigateToProduct(){
         lifecycleScope.launchWhenStarted {
             val direction = CameraFragmentDirections.actionCameraFragmentToProductFragment()
+            findNavController().navigate(direction)
+        }
+    }
+
+    private fun navigateToKorProduct(){
+        lifecycleScope.launchWhenStarted {
+            val direction = CameraFragmentDirections.actionCameraFragmentToKorProductFragment()
             findNavController().navigate(direction)
         }
     }

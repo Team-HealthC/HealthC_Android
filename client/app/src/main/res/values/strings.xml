@@ -49,7 +49,8 @@
     <string name="product_nutrient">영양 성분: %1$s</string>
     <string name="product_manufacture">제조사: %1$s</string>
     <string name="search_product_title">%1$s에 대한 가공식품 검색 결과입니다.</string>
-    <string name="dialog_search_product">가공식품 영양 성분 검색</string>
+    <string name="dialog_search_product_eng">해외 가공식품 영양 성분 검색</string>
+    <string name="dialog_search_product_kor">국내 가공식품 영양 성분 검색</string>
     <string name="dialog_search_ingredient">알러지 성분이 포함된 음식 검색</string>
     <string name="dialog_edit_name">변경하실 이름을 입력하세요.</string>
     <string name="toggle_lang_kor">한국어</string>

@@ -20,25 +20,37 @@
             android:outlineProvider="none"
             android:background="@drawable/rounded_courner_button"
             android:fontFamily="@font/samsung_400"
-            android:text="@string/dialog_search_product"
+            android:text="@string/dialog_search_product_eng"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/dialog_kor_product_button" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/dialog_ingredient_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="16dp"
             android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rounded_courner_button"
             android:fontFamily="@font/samsung_400"
             android:outlineProvider="none"
-            android:background="@drawable/rounded_courner_button"
             android:text="@string/dialog_search_ingredient"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dialog_product_button" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/dialog_kor_product_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:background="@drawable/rounded_courner_button"
+            android:fontFamily="@font/samsung_400"
+            android:outlineProvider="none"
+            android:text="@string/dialog_search_product_kor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

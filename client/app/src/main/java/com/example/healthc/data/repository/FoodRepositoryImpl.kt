@@ -21,8 +21,8 @@ class FoodRepositoryImpl @Inject constructor(
     private val searchProductFactsDataSource: SearchProductFactsDataSource,
     private val searchRecipeByIngDataSource: SearchRecipeByIngDataSource
     ) : FoodRepository{
-    override suspend fun searchFoodMenu(element: String): Resource<SearchFoodIngredient> {
-        return searchFoodDataSource.searchFoodMenu(element)
+    override suspend fun searchIngredients(element: String): Resource<SearchFoodIngredient> {
+        return searchFoodDataSource.searchIngredients(element)
     }
 
     override suspend fun searchFoodProduct(category: String): Resource<SearchFoodProduct> {
