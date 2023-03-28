@@ -17,7 +17,9 @@ import androidx.navigation.fragment.navArgs
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentSearchCategoryBinding
 import com.example.healthc.domain.model.food.SearchFoodCategory
-import com.example.healthc.presentation.camera.object_detect.SearchCategoryViewModel.SearchCategoryUiEvent
+import com.example.healthc.presentation.camera.object_detect.SearchCategoryViewModel.UiEvent
+import com.example.healthc.presentation.widget.NegativeSignDialog
+import com.example.healthc.presentation.widget.PositiveSignDialog
 import com.example.healthc.presentation.widget.SearchCategoryDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -81,17 +83,34 @@ class SearchCategoryFragment : Fragment() {
         viewModel.searchCategoryUiEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                 when(it){
-                    is SearchCategoryUiEvent.Unit -> {}
+                    is UiEvent.Unit -> {}
 
-                    is SearchCategoryUiEvent.Success -> {
+                    is UiEvent.Success -> { // 객체 인식 성공
                         showDialog(it.category)
+                        makeInvisibleProgressBar()
                     }
 
-                    is SearchCategoryUiEvent.Failure -> {
+                    is UiEvent.Failure -> { // 객체 인식 실패
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                        makeInvisibleProgressBar()
+                    }
+
+                    is UiEvent.Detected -> { // 알러지 성분 검출
+                        NegativeSignDialog(
+                            context = requireContext(),
+                            detectedList = it.detectedList
+                        ).show()
+                    }
+
+                    is UiEvent.DetectNoting -> { // 알러지 성분 불검출
+                        PositiveSignDialog(requireContext()).show()
                     }
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
+    }
+
+    private fun makeInvisibleProgressBar(){
+        binding.progressBar.visibility = View.GONE
     }
 
     private fun showDialog(category: SearchFoodCategory){
@@ -102,7 +121,7 @@ class SearchCategoryFragment : Fragment() {
                 navigateToCamera()
             },
             onClickPosButton = {
-
+                viewModel.searchIngredients(it)
             }
         ).show()
     }
