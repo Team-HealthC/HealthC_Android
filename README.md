@@ -18,9 +18,9 @@ You can sign up according to the description and order in the following picture:
 
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/90708425/229324413-74240f15-35d4-42d7-98fc-b2fedbface01.png" width="40%" height="60%">
-<img src="https://user-images.githubusercontent.com/90708425/229324463-e78bce02-db97-4010-9ef8-4f25bc38afb6.png" width="40%" height="60%">
-<img src="https://user-images.githubusercontent.com/90708425/229324492-4585c0ed-f048-4ae4-9c42-8edc8d304c1c.png" width="40%" height="60%">
+<img src="https://user-images.githubusercontent.com/90708425/229324413-74240f15-35d4-42d7-98fc-b2fedbface01.png" width="30%" height="40%">
+<img src="https://user-images.githubusercontent.com/90708425/229324463-e78bce02-db97-4010-9ef8-4f25bc38afb6.png" width="30%" height="40%">
+<img src="https://user-images.githubusercontent.com/90708425/229324492-4585c0ed-f048-4ae4-9c42-8edc8d304c1c.png" width="30%" height="40%">
 </p>
 
 
