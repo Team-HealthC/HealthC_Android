@@ -17,8 +17,10 @@ If you use "HealthC" for the first time, you need to get sign up. <br>
 You can sign up according to the description and order in the following picture:
 
 <figure class="half">
+
 	![image](https://user-images.githubusercontent.com/90708425/229324413-74240f15-35d4-42d7-98fc-b2fedbface01.png)
 	![image](https://user-images.githubusercontent.com/90708425/229324463-e78bce02-db97-4010-9ef8-4f25bc38afb6.png) 
+	
 figure>
 
 
