@@ -17,17 +17,33 @@ If you use "HealthC" for the first time, you need to get sign up. <br>
 You can sign up according to the description and order in the following picture:
 
 
-<p align="center">
+<p>
 <img src="https://user-images.githubusercontent.com/90708425/229324413-74240f15-35d4-42d7-98fc-b2fedbface01.png" width="30%" height="40%">
 <img src="https://user-images.githubusercontent.com/90708425/229324463-e78bce02-db97-4010-9ef8-4f25bc38afb6.png" width="30%" height="40%">
 <img src="https://user-images.githubusercontent.com/90708425/229324492-4585c0ed-f048-4ae4-9c42-8edc8d304c1c.png" width="30%" height="40%">
 </p>
 
-<p align="center">
+<p>
 <img src="https://user-images.githubusercontent.com/90708425/229324663-aba000c4-8ec2-4428-a52d-4ea0ccf81c35.png" width="30%" height="40%">
 <img src="https://user-images.githubusercontent.com/90708425/229324594-84684427-6756-45b2-87ed-3267acba2943.png" width="30%" height="40%">
 </p>
 
+
+### 2. Take a Photo with HealthC!
+<p align="center">
+![image](https://user-images.githubusercontent.com/90708425/229352598-499482f6-10fd-4270-beba-a1c411f1efae.png)
+</p>
+
+If you finish Sign In/Up your account, you can use Healthc's food scanner
+Details of the functional contents are as follows :
+
+1. User Profile
+You can check or modify the information about you. <br>
+Details can be found through the "User Profile" sequence below :
+
+
+
+2. 
 
 ## Android Tech Stack</h2>
 
