@@ -37,19 +37,34 @@ You can sign up according to the description and order in the following picture:
 If you finish Sign In/Up your account, you can use Healthc's food scanner
 Details of the functional contents are as follows :
 
-1. User Profile
-You can check or modify the information about you. <br>
-Details can be found through the "User Profile" sequence below :
+1. User Profile : You can check or modify the information about you.
+2. Choose HealthC Camera mode : You can change your camera mode as OCR(Korean, English) or Object Detection
+3. Searching for Nutritional/Allergic components : Searching for Korean or Foregin Nutritional Ingredients of Processed Food or allergy-causing food
+4. Change camera resolution
+5. Current Camera Mode
+6. Open device's gallery
+7. Photo button
+8. Change front/rear camera
 
+### 3. Menu Detail Description
+1. User Profile
 <p>
-<img src="https://user-images.githubusercontent.com/90708425/229352843-386dc3a2-84bf-45c1-99ee-8b349e98641d.png" width="30%" height="40%">
-<img src="" width="30%" height="40%">
-<img src="" width="30%" height="40%">
+<img src="https://user-images.githubusercontent.com/90708425/229353091-67049de4-44aa-4e79-a2ee-dd2336e5e368.png" width="30%" height="40%">
+<img src="https://user-images.githubusercontent.com/90708425/229353677-5ffeda41-21a8-4b9f-8660-623aa9817185.png" width="30%" height="40%">
 </p>
 
-![image]()
 
-2. 
+2. Choose HealthC Camera mode
+<p>
+<img src="https://user-images.githubusercontent.com/90708425/229353300-08b9d17b-5363-45b1-947b-82698374d607.png" width="30%" height="40%">
+</p>
+
+
+3. Searching for Nutritional/Allergic components
+<p>
+<img src="https://user-images.githubusercontent.com/90708425/229353820-0abfa5df-b6bd-4117-b92d-cfa9b6b6e6e3.png" width="30%" height="40%">
+</p>
+
 
 ## Android Tech Stack</h2>
 
