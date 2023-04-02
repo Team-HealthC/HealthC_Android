@@ -31,7 +31,7 @@ You can sign up according to the description and order in the following picture:
 
 ### 2. Take a Photo with HealthC!
 <p align="center">
-![image](https://user-images.githubusercontent.com/90708425/229352598-499482f6-10fd-4270-beba-a1c411f1efae.png)
+<img src="https://user-images.githubusercontent.com/90708425/229352598-499482f6-10fd-4270-beba-a1c411f1efae.png" width="30%" height="40%">
 </p>
 
 If you finish Sign In/Up your account, you can use Healthc's food scanner
@@ -41,7 +41,13 @@ Details of the functional contents are as follows :
 You can check or modify the information about you. <br>
 Details can be found through the "User Profile" sequence below :
 
+<p>
+<img src="https://user-images.githubusercontent.com/90708425/229352843-386dc3a2-84bf-45c1-99ee-8b349e98641d.png" width="30%" height="40%">
+<img src="" width="30%" height="40%">
+<img src="" width="30%" height="40%">
+</p>
 
+![image]()
 
 2. 
 
