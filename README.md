@@ -5,9 +5,12 @@
 
 <p align="center">
 	<h3 align="center">
-		 영양 성분 검출을 위한 스마트 돋보기<br>HealthC(Health See)
+		 Smart magnifying glass for nutrient detection <br>HealthC
 	</h3>	
 </p>
+
+Health-C is a healthcare solution for people's health, meaning 'Seeing Health (SEE).
+Using "OCR" and "Object Detection" technologies, HealthC reads labels or ingredients in foods full of hard-to-read small letters and complex terms instead and analyzes them according to the user's disease information.
 
 
 ## How to use HealthC
