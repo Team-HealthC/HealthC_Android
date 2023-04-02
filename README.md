@@ -23,14 +23,10 @@ You can sign up according to the description and order in the following picture:
 <img src="https://user-images.githubusercontent.com/90708425/229324492-4585c0ed-f048-4ae4-9c42-8edc8d304c1c.png" width="30%" height="40%">
 </p>
 
-
-
-
-![image]() ![image](https://user-images.githubusercontent.com/90708425/229324663-aba000c4-8ec2-4428-a52d-4ea0ccf81c35.png)
-
-![image](https://user-images.githubusercontent.com/90708425/229324594-84684427-6756-45b2-87ed-3267acba2943.png)
-
-
+<p align="center">
+<img src="https://user-images.githubusercontent.com/90708425/229324663-aba000c4-8ec2-4428-a52d-4ea0ccf81c35.png" width="30%" height="40%">
+<img src="https://user-images.githubusercontent.com/90708425/229324594-84684427-6756-45b2-87ed-3267acba2943.png" width="30%" height="40%">
+</p>
 
 
 ## Android Tech Stack</h2>
