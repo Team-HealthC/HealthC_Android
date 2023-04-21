@@ -61,6 +61,10 @@ class KorProductFragment : Fragment() {
                         Toast.makeText(requireContext(), "상품 정보를 가져오는데 실패하였습니다.",
                             Toast.LENGTH_SHORT).show()
                     }
+
+                    is SearchProductUiEvent.NotFounded -> {
+                        showNotFoundedText()
+                    }
                 }
             }
             .launchIn(viewLifecycleOwner.lifecycleScope)
@@ -76,6 +80,10 @@ class KorProductFragment : Fragment() {
         binding.backToCameraButton.setOnClickListener{
             navigateToCamera()
         }
+    }
+
+    private fun showNotFoundedText(){
+        binding.notFoundedKorProduct.visibility = View.VISIBLE
     }
 
     private fun navigateToCamera(){
