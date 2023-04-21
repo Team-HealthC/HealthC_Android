@@ -67,13 +67,23 @@ class SearchIngredientFragment : Fragment() {
                         searchIngredientAdapter.submitList(it.dish)
                     }
 
+                    is SearchIngredientViewModel.SearchDishUiEvent.NotFounded -> {
+                        showNotFoundedTextView()
+                    }
+
                     is SearchIngredientViewModel.SearchDishUiEvent.Failure -> {
-                        Toast.makeText(requireContext(), "음식을 불러오지 못하였습니다.", Toast.LENGTH_SHORT)
-                            .show()
+                        Toast.makeText(requireContext(),
+                            "음식 정보를 불러오는데 실패하였습니다.", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
             .launchIn(viewLifecycleOwner.lifecycleScope)
+    }
+
+    private fun showNotFoundedTextView(){
+        with(binding.notFoundedIngredientTextView){
+            this.visibility = View.VISIBLE
+        }
     }
 
     private fun initViewModelState(){
