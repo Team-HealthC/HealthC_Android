@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentProductBinding
 import com.example.healthc.presentation.food.product.adapter.ProductIdAdapter
+import com.example.healthc.presentation.food.product.kor_product.KorProductViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -54,8 +56,14 @@ class ProductFragment : Fragment() {
                         )
                     }
                     is ProductViewModel.ProductIdUiEvent.Failure -> {
-
+                        Toast.makeText(requireContext(), "상품 정보를 가져오는데 실패하였습니다.",
+                            Toast.LENGTH_SHORT).show()
                     }
+
+                    is ProductViewModel.ProductIdUiEvent.NotFounded -> {
+                        showNotFoundedText()
+                    }
+
                     is ProductViewModel.ProductIdUiEvent.Unit -> {}
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
@@ -75,6 +83,10 @@ class ProductFragment : Fragment() {
         binding.backToCameraButton.setOnClickListener {
             navigateCamera()
         }
+    }
+
+    private fun showNotFoundedText(){
+        binding.notFoundedProductTextView.visibility = View.VISIBLE
     }
 
     private fun navigateProductInfo(id: Int){
