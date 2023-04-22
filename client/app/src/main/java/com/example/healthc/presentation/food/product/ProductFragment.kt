@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentProductBinding
 import com.example.healthc.presentation.food.product.adapter.ProductIdAdapter
-import com.example.healthc.presentation.food.product.kor_product.KorProductViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -50,21 +49,28 @@ class ProductFragment : Fragment() {
         viewModel.productIdEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                 when(it){
+                    is ProductViewModel.ProductIdUiEvent.Unit -> {}
+
+                    is ProductViewModel.ProductIdUiEvent.Loading -> {
+                        showProgressbar()
+                    }
+
                     is ProductViewModel.ProductIdUiEvent.Success -> {
+                        hideProgressbar()
                         productIdAdapter.submitList(
                             it.productId.products
                         )
                     }
                     is ProductViewModel.ProductIdUiEvent.Failure -> {
+                        hideProgressbar()
                         Toast.makeText(requireContext(), "상품 정보를 가져오는데 실패하였습니다.",
                             Toast.LENGTH_SHORT).show()
                     }
 
                     is ProductViewModel.ProductIdUiEvent.NotFounded -> {
+                        hideProgressbar()
                         showNotFoundedText()
                     }
-
-                    is ProductViewModel.ProductIdUiEvent.Unit -> {}
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
@@ -87,6 +93,14 @@ class ProductFragment : Fragment() {
 
     private fun showNotFoundedText(){
         binding.notFoundedProductTextView.visibility = View.VISIBLE
+    }
+
+    private fun hideProgressbar(){
+        binding.progressBar.visibility = View.GONE
+    }
+
+    private fun showProgressbar() {
+        binding.progressBar.visibility = View.VISIBLE
     }
 
     private fun navigateProductInfo(id: Int){

@@ -27,6 +27,7 @@ class ProductViewModel @Inject constructor(
 
     fun getProductIds(){
         viewModelScope.launch{
+            _productIdEvent.value = ProductIdUiEvent.Loading
             val result = repository.searchFoodProductId(
                 requireNotNull(product.value)
             )
@@ -52,6 +53,7 @@ class ProductViewModel @Inject constructor(
         data class Success(val productId: SearchProductId) : ProductIdUiEvent()
         object Failure : ProductIdUiEvent()
         object NotFounded : ProductIdUiEvent()
+        object Loading : ProductIdUiEvent()
         object Unit : ProductIdUiEvent()
     }
 }
