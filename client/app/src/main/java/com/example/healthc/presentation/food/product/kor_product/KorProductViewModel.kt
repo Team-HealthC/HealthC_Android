@@ -1,7 +1,5 @@
 package com.example.healthc.presentation.food.product.kor_product
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.healthc.domain.model.food.SearchFoodProduct
@@ -27,6 +25,7 @@ class KorProductViewModel @Inject constructor(
 
     fun getFoodProduct(){
         viewModelScope.launch {
+            _searchProductUiEvent.value = SearchProductUiEvent.Loading
             val searchResult = repository.searchFoodProduct(
                 requireNotNull(productName.value)
             )
@@ -55,6 +54,7 @@ class KorProductViewModel @Inject constructor(
         data class Success(val foodIngredient: SearchFoodProduct) : SearchProductUiEvent()
         object Failure : SearchProductUiEvent()
         object NotFounded: SearchProductUiEvent()
+        object Loading : SearchProductUiEvent()
         object Unit : SearchProductUiEvent()
     }
 }
