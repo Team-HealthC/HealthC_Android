@@ -38,8 +38,12 @@ class SearchIngredientViewModel @Inject constructor(
             )
             when(searchResult){
                 is Resource.Success -> {
-                    _searchDishUiEvent.value =
-                        SearchDishUiEvent.Success(searchResult.result)
+                    if(searchResult.result.isNotEmpty()){
+                        _searchDishUiEvent.value =
+                            SearchDishUiEvent.Success(searchResult.result)
+                    }else{
+                        _searchDishUiEvent.value = SearchDishUiEvent.NotFounded
+                    }
                 }
 
                 is Resource.Failure -> {
@@ -54,6 +58,7 @@ class SearchIngredientViewModel @Inject constructor(
     sealed class SearchDishUiEvent {
         data class Success(val dish: List<DishItem>) : SearchDishUiEvent()
         object Failure : SearchDishUiEvent()
+        object NotFounded : SearchDishUiEvent()
         object Unit : SearchDishUiEvent()
     }
 }

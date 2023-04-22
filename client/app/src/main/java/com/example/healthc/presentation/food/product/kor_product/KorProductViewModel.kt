@@ -1,7 +1,5 @@
 package com.example.healthc.presentation.food.product.kor_product
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.healthc.domain.model.food.SearchFoodProduct
@@ -22,17 +20,25 @@ class KorProductViewModel @Inject constructor(
     val searchProductUiEvent : StateFlow<SearchProductUiEvent>
         get() = _searchProductUiEvent
 
-    val productName : MutableLiveData<String> =MutableLiveData<String>("")
+    val productName : MutableStateFlow<String> =MutableStateFlow<String>("")
+    val notFounded : MutableStateFlow<String> =MutableStateFlow<String>("")
 
     fun getFoodProduct(){
         viewModelScope.launch {
+            _searchProductUiEvent.value = SearchProductUiEvent.Loading
             val searchResult = repository.searchFoodProduct(
                 requireNotNull(productName.value)
             )
             when(searchResult){
                 is Resource.Success -> {
-                    _searchProductUiEvent.value =
-                        SearchProductUiEvent.Success(searchResult.result)
+                    val result = searchResult.result
+                    if(result.body.items.isNotEmpty()){
+                        _searchProductUiEvent.value =
+                            SearchProductUiEvent.Success(searchResult.result)
+                    }else{
+                        _searchProductUiEvent.value = SearchProductUiEvent.NotFounded
+                        notFounded.value = productName.value
+                    }
                 }
 
                 is Resource.Failure -> {
@@ -47,6 +53,8 @@ class KorProductViewModel @Inject constructor(
     sealed class SearchProductUiEvent {
         data class Success(val foodIngredient: SearchFoodProduct) : SearchProductUiEvent()
         object Failure : SearchProductUiEvent()
+        object NotFounded: SearchProductUiEvent()
+        object Loading : SearchProductUiEvent()
         object Unit : SearchProductUiEvent()
     }
 }

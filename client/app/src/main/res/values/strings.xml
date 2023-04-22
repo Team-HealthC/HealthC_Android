@@ -64,4 +64,5 @@
     <string name="dialog_object_detect_title">판별된 음식 : %1$s </string>
     <string name="dialog_object_detect_pos_button">알러지 요소 확인</string>
     <string name="dialog_object_detect_neg_button">한번 더 촬영</string>
+    <string name="not_founded">%1$s에 대한 검색 결과를 찾을 수 없습니다.</string>
 </resources>

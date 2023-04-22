@@ -23,15 +23,22 @@ class ProductViewModel @Inject constructor(
         get() = _productIdEvent
 
     val product : MutableStateFlow<String> = MutableStateFlow<String>("")
+    val notFounded : MutableStateFlow<String> = MutableStateFlow<String>("")
 
     fun getProductIds(){
         viewModelScope.launch{
+            _productIdEvent.value = ProductIdUiEvent.Loading
             val result = repository.searchFoodProductId(
                 requireNotNull(product.value)
             )
             when(result){
                 is Resource.Success -> {
-                    _productIdEvent.value = ProductIdUiEvent.Success(result.result)
+                    if(result.result.products.isNotEmpty()){
+                        _productIdEvent.value = ProductIdUiEvent.Success(result.result)
+                    }else{
+                        notFounded.value = product.value
+                        _productIdEvent.value = ProductIdUiEvent.NotFounded
+                    }
                 }
                 is Resource.Failure -> {
                     _productIdEvent.value = ProductIdUiEvent.Failure
@@ -45,6 +52,8 @@ class ProductViewModel @Inject constructor(
     sealed class ProductIdUiEvent {
         data class Success(val productId: SearchProductId) : ProductIdUiEvent()
         object Failure : ProductIdUiEvent()
+        object NotFounded : ProductIdUiEvent()
+        object Loading : ProductIdUiEvent()
         object Unit : ProductIdUiEvent()
     }
 }

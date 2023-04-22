@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
@@ -48,15 +49,28 @@ class ProductFragment : Fragment() {
         viewModel.productIdEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                 when(it){
+                    is ProductViewModel.ProductIdUiEvent.Unit -> {}
+
+                    is ProductViewModel.ProductIdUiEvent.Loading -> {
+                        showProgressbar()
+                    }
+
                     is ProductViewModel.ProductIdUiEvent.Success -> {
+                        hideProgressbar()
                         productIdAdapter.submitList(
                             it.productId.products
                         )
                     }
                     is ProductViewModel.ProductIdUiEvent.Failure -> {
-
+                        hideProgressbar()
+                        Toast.makeText(requireContext(), "상품 정보를 가져오는데 실패하였습니다.",
+                            Toast.LENGTH_SHORT).show()
                     }
-                    is ProductViewModel.ProductIdUiEvent.Unit -> {}
+
+                    is ProductViewModel.ProductIdUiEvent.NotFounded -> {
+                        hideProgressbar()
+                        showNotFoundedText()
+                    }
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
@@ -75,6 +89,18 @@ class ProductFragment : Fragment() {
         binding.backToCameraButton.setOnClickListener {
             navigateCamera()
         }
+    }
+
+    private fun showNotFoundedText(){
+        binding.notFoundedProductTextView.visibility = View.VISIBLE
+    }
+
+    private fun hideProgressbar(){
+        binding.progressBar.visibility = View.GONE
+    }
+
+    private fun showProgressbar() {
+        binding.progressBar.visibility = View.VISIBLE
     }
 
     private fun navigateProductInfo(id: Int){
