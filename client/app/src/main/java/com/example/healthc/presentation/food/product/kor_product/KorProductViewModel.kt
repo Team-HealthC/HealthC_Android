@@ -23,12 +23,14 @@ class KorProductViewModel @Inject constructor(
     val productName : MutableStateFlow<String> =MutableStateFlow<String>("")
     val notFounded : MutableStateFlow<String> =MutableStateFlow<String>("")
 
-    fun getFoodProduct(){
+    fun getFoodProduct() : Boolean{
+        if(productName.value.isBlank()){
+            _searchProductUiEvent.value = SearchProductUiEvent.NotFounded
+            return false
+        }
         viewModelScope.launch {
             _searchProductUiEvent.value = SearchProductUiEvent.Loading
-            val searchResult = repository.searchFoodProduct(
-                requireNotNull(productName.value)
-            )
+            val searchResult = repository.searchFoodProduct(productName.value)
             when(searchResult){
                 is Resource.Success -> {
                     val result = searchResult.result
@@ -48,6 +50,7 @@ class KorProductViewModel @Inject constructor(
                 is Resource.Loading -> { }
             }
         }
+        return true
     }
 
     sealed class SearchProductUiEvent {
