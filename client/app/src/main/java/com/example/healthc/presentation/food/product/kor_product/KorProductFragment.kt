@@ -44,12 +44,13 @@ class KorProductFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         observeData()
         initAdapter()
-        initButton()
+        initButtons()
     }
 
     private fun observeData(){
         viewModel.searchProductUiEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
+                initViews() // View State 초기화
                 when(it){
                     is SearchProductUiEvent.Unit -> {}
 
@@ -58,23 +59,26 @@ class KorProductFragment : Fragment() {
                     }
 
                     is SearchProductUiEvent.Success -> {
-                        hideProgressbar()
                         korProductAdapter.submitList(it.foodIngredient.body.items)
                     }
 
                     is SearchProductUiEvent.Failure -> {
-                        hideProgressbar()
                         Toast.makeText(requireContext(), "상품 정보를 가져오는데 실패하였습니다.",
                             Toast.LENGTH_SHORT).show()
                     }
 
                     is SearchProductUiEvent.NotFounded -> {
-                        hideProgressbar()
                         showNotFoundedText()
                     }
                 }
             }
             .launchIn(viewLifecycleOwner.lifecycleScope)
+    }
+
+    private fun initViews(){
+        binding.progressBar.visibility = View.GONE
+        binding.notFoundedKorProduct.visibility = View.GONE
+        korProductAdapter.submitList(emptyList())
     }
 
     private fun initAdapter(){
@@ -83,7 +87,7 @@ class KorProductFragment : Fragment() {
         binding.searchProductRecyclerView.adapter = korProductAdapter
     }
 
-    private fun initButton(){
+    private fun initButtons(){
         binding.backToCameraButton.setOnClickListener{
             navigateToCamera()
         }

@@ -42,12 +42,14 @@ class ProductFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         observeData()
         initAdapter()
-        initViews()
+        initButtons()
     }
 
     private fun observeData(){
         viewModel.productIdEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
+                initViews() // View 상태 초기화
+
                 when(it){
                     is ProductViewModel.ProductIdUiEvent.Unit -> {}
 
@@ -56,25 +58,28 @@ class ProductFragment : Fragment() {
                     }
 
                     is ProductViewModel.ProductIdUiEvent.Success -> {
-                        hideProgressbar()
                         productIdAdapter.submitList(
                             it.productId.products
                         )
                     }
                     is ProductViewModel.ProductIdUiEvent.Failure -> {
-                        hideProgressbar()
                         Toast.makeText(requireContext(), "상품 정보를 가져오는데 실패하였습니다.",
                             Toast.LENGTH_SHORT).show()
                     }
 
                     is ProductViewModel.ProductIdUiEvent.NotFounded -> {
-                        hideProgressbar()
                         showNotFoundedText()
                     }
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
-    
+
+    private fun initViews(){
+        binding.progressBar.visibility = View.GONE
+        binding.notFoundedProductTextView.visibility = View.GONE
+        productIdAdapter.submitList(emptyList())
+    }
+
     private fun initAdapter(){
         productIdAdapter = ProductIdAdapter(
             onItemClick = { id ->
@@ -85,7 +90,7 @@ class ProductFragment : Fragment() {
         binding.productIdRecyclerView.adapter = productIdAdapter
     }
 
-    private fun initViews(){
+    private fun initButtons(){
         binding.backToCameraButton.setOnClickListener {
             navigateCamera()
         }
@@ -93,10 +98,6 @@ class ProductFragment : Fragment() {
 
     private fun showNotFoundedText(){
         binding.notFoundedProductTextView.visibility = View.VISIBLE
-    }
-
-    private fun hideProgressbar(){
-        binding.progressBar.visibility = View.GONE
     }
 
     private fun showProgressbar() {
