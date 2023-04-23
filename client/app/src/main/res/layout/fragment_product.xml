@@ -44,23 +44,13 @@
                     android:layout_marginHorizontal="16dp"
                     android:background="@color/ic_launcher_background"
                     android:hint="@string/eng_search_product"
-                    android:inputType="textEmailAddress"
+                    android:imeOptions="actionSearch"
+                    android:onEditorAction="@{ () -> viewModel.getProductIds()}"
                     android:singleLine="true"
                     android:text="@={viewModel.product}"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/search_product_button"
-                    app:layout_constraintStart_toEndOf="@+id/back_to_camera_button"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageButton
-                    android:id="@+id/search_product_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/ic_launcher_background"
-                    android:onClick="@{() -> viewModel.getProductIds()}"
-                    android:src="@drawable/ic_baseline_search_24"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/back_to_camera_button"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

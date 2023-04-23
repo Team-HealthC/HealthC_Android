@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -50,10 +51,15 @@ class IngredientFragment : Fragment() {
             }
             navigateToSearchIngredient(checkedAllergy)
         }
-        binding.searchFoodButton.setOnClickListener {
-            navigateToSearchIngredient(
-                binding.searchEditTextView.text.toString()
-            )
+
+        binding.searchEditTextView.setOnEditorActionListener { textView, actionId, keyEvent ->
+            if(actionId == EditorInfo.IME_ACTION_SEARCH){
+                navigateToSearchIngredient(
+                    textView.text.toString()
+                )
+                true
+            }
+            else false
         }
     }
 
