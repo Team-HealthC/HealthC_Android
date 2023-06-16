@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.food.product
+package com.example.healthc.presentation.product.product_search
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,26 +13,26 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.healthc.R
-import com.example.healthc.databinding.FragmentProductBinding
-import com.example.healthc.presentation.food.product.adapter.ProductIdAdapter
+import com.example.healthc.databinding.FragmentProductSearchBinding
+import com.example.healthc.presentation.product.product_search.adapter.ProductIdAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
-class ProductFragment : Fragment() {
+class ProductSearchFragment : Fragment() {
 
-    private var _binding: FragmentProductBinding? = null
+    private var _binding: FragmentProductSearchBinding? = null
     private val binding get() = checkNotNull(_binding)
 
-    private val viewModel : ProductViewModel by viewModels()
+    private val viewModel : ProductSearchViewModel by viewModels()
     private lateinit var productIdAdapter : ProductIdAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_product, container, false)
+        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_product_search, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         return binding.root
@@ -51,23 +51,23 @@ class ProductFragment : Fragment() {
                 initViews() // View 상태 초기화
 
                 when(it){
-                    is ProductViewModel.ProductIdUiEvent.Unit -> {}
+                    is ProductSearchViewModel.ProductIdUiEvent.Unit -> {}
 
-                    is ProductViewModel.ProductIdUiEvent.Loading -> {
+                    is ProductSearchViewModel.ProductIdUiEvent.Loading -> {
                         showProgressbar()
                     }
 
-                    is ProductViewModel.ProductIdUiEvent.Success -> {
+                    is ProductSearchViewModel.ProductIdUiEvent.Success -> {
                         productIdAdapter.submitList(
                             it.productId.products
                         )
                     }
-                    is ProductViewModel.ProductIdUiEvent.Failure -> {
+                    is ProductSearchViewModel.ProductIdUiEvent.Failure -> {
                         Toast.makeText(requireContext(), "상품 정보를 가져오는데 실패하였습니다.",
                             Toast.LENGTH_SHORT).show()
                     }
 
-                    is ProductViewModel.ProductIdUiEvent.NotFounded -> {
+                    is ProductSearchViewModel.ProductIdUiEvent.NotFounded -> {
                         showNotFoundedText()
                     }
                 }
@@ -106,7 +106,7 @@ class ProductFragment : Fragment() {
 
     private fun navigateProductInfo(id: Int){
         lifecycleScope.launchWhenStarted {
-            val direction = ProductFragmentDirections.actionProductFragmentToProductInfoFragment(
+            val direction = ProductSearchFragmentDirections.actionProductSearchFragmentToProductFragment(
                 productId = id
             )
             findNavController().navigate(direction)
@@ -115,7 +115,7 @@ class ProductFragment : Fragment() {
 
     private fun navigateCamera(){
         lifecycleScope.launchWhenStarted {
-            val direction = ProductFragmentDirections.actionProductFragmentToCameraFragment()
+            val direction = ProductSearchFragmentDirections.actionProductSearchFragmentToCameraFragment()
             findNavController().navigate(direction)
         }
     }

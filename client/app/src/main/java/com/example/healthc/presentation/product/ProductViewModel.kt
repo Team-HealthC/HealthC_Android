@@ -1,9 +1,10 @@
-package com.example.healthc.presentation.food.product.product_info
+package com.example.healthc.presentation.product
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.healthc.domain.model.food.SearchProductInfo
-import com.example.healthc.domain.repository.FoodRepository
+import com.example.healthc.domain.model.product.NutritionLabel
+import com.example.healthc.domain.model.product.Product
+import com.example.healthc.domain.repository.ProductRepository
 import com.example.healthc.domain.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,12 +12,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ProductInfoViewModel @Inject constructor(
-    private val repository : FoodRepository
+class ProductViewModel @Inject constructor(
+    private val repository : ProductRepository
 ): ViewModel() {
-    val product : MutableStateFlow<SearchProductInfo> = MutableStateFlow(SearchProductInfo())
-    val nutrients : MutableStateFlow<String> = MutableStateFlow<String>("")
-    val productFact : MutableStateFlow<String> = MutableStateFlow<String>("")
+    val product : MutableStateFlow<Product> = MutableStateFlow(Product())
+    val nutrients : MutableStateFlow<String> = MutableStateFlow("")
+    val productFact : MutableStateFlow<NutritionLabel> = MutableStateFlow(NutritionLabel(""))
 
     private val _productInfoUiEvent =
         MutableStateFlow<UiEvent>(UiEvent.Unit)
@@ -24,11 +25,11 @@ class ProductInfoViewModel @Inject constructor(
 
     fun getProductInfo(id : Int){
         viewModelScope.launch {
-            val result = repository.searchFoodProductInfo(id)
+            val result = repository.getProduct(id)
             when(result){
                 is Resource.Success -> {
                     product.value = result.result
-                    nutrients.value = result.result.nutrition.nutrients.joinToString(", ")
+                    nutrients.value = result.result.nutrients.joinToString(", ")
                 }
                 is Resource.Failure -> {
                     _productInfoUiEvent.value = UiEvent.Failure("상품 정보를 불러오는데 실패하였습니다.")
@@ -42,7 +43,7 @@ class ProductInfoViewModel @Inject constructor(
 
     fun getProductFact(id : Int){
         viewModelScope.launch {
-            val result = repository.searchFoodFacts(id)
+            val result = repository.getNutritionLabel(id)
             when(result){
                 is Resource.Success -> {
                     productFact.value = result.result

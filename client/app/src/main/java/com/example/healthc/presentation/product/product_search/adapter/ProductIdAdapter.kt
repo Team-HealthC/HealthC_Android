@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.food.product.adapter
+package com.example.healthc.presentation.product.product_search.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,23 +6,22 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.healthc.databinding.ItemProductIdBinding
-import com.example.healthc.domain.model.food.ProductId
+import com.example.healthc.domain.model.product.ProductIdInfo
 
 class ProductIdAdapter(
     private val onItemClick : (Int) -> Unit
-) : ListAdapter<ProductId,
-        ProductIdAdapter.ProductIdViewHolder>(ProductItemCallback){
+) : ListAdapter<ProductIdInfo, ProductIdAdapter.ProductIdViewHolder>(ProductItemCallback){
     
     companion object {
-        val ProductItemCallback = object : DiffUtil.ItemCallback<ProductId>(){
+        val ProductItemCallback = object : DiffUtil.ItemCallback<ProductIdInfo>(){
             override fun areItemsTheSame(
-                oldItem: ProductId, newItem: ProductId): Boolean {
+                oldItem: ProductIdInfo, newItem: ProductIdInfo): Boolean {
                 return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
-                oldItem: ProductId,
-                newItem: ProductId
+                oldItem: ProductIdInfo,
+                newItem: ProductIdInfo
             ): Boolean {
                 return oldItem == newItem
             }
@@ -42,7 +41,7 @@ class ProductIdAdapter(
 
     inner class ProductIdViewHolder(private val binding : ItemProductIdBinding)
         : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item : ProductId) {
+        fun bind(item : ProductIdInfo) {
             binding.item = item
             binding.root.setOnClickListener{
                 onItemClick(item.id)
