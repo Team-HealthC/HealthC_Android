@@ -3,17 +3,18 @@ package com.example.healthc.presentation.widget
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import com.example.healthc.databinding.DialogSearchCategoryBinding
-import com.example.healthc.domain.model.food.SearchFoodCategory
+import com.example.healthc.databinding.DialogObjectDetectionBinding
+import com.example.healthc.domain.model.object_detection.DetectedObject
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
-class SearchCategoryDialog(
+class ObjectDetectionDialog(
     context : Context,
-    private val category : SearchFoodCategory,
+    private val category : DetectedObject,
     private val onClickPosButton : (String) -> Unit,
     private val onClickNegButton : () -> Unit,
-    ): BottomSheetDialog(context) {
-    private val binding by lazy { DialogSearchCategoryBinding.inflate(layoutInflater) }
+): BottomSheetDialog(context) {
+
+    private val binding by lazy { DialogObjectDetectionBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
