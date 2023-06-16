@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.example.healthc.domain.model.food.ProductItem"
+            type="com.example.healthc.domain.model.kor_product.KorProductInfo"
             />
     </data>
     <androidx.cardview.widget.CardView
