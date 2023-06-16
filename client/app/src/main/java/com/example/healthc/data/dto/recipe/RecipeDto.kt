@@ -1,8 +1,8 @@
-package com.example.healthc.data.dto.food.recipe
+package com.example.healthc.data.dto.recipe
 
-import com.example.healthc.domain.model.food.DishItem
+import com.example.healthc.domain.model.recipe.Recipe
 
-data class RecipeByIngredientDto(
+data class RecipeDto(
     val id: Int,
     val image: String,
     val imageType: String,
@@ -14,7 +14,7 @@ data class RecipeByIngredientDto(
     val usedIngredientCount: Int,
     val usedIngredients: List<UsedIngredientDto>
 ){
-    fun toDishItem() : DishItem = DishItem(
+    fun toRecipe() : Recipe = Recipe(
         id = id,
         image = image,
         imageType = imageType,

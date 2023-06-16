@@ -1,9 +1,8 @@
-package com.example.healthc.data.dto.food.product
+package com.example.healthc.data.dto.product
 
-import com.example.healthc.domain.model.food.ProductNutrition
-import com.example.healthc.domain.model.food.SearchProductInfo
+import com.example.healthc.domain.model.product.Product
 
-data class SearchProductInfoDto(
+data class ProductDto(
     val aisle: String,
     val badges: List<String>,
     val breadcrumbs: List<String>,
@@ -21,12 +20,12 @@ data class SearchProductInfoDto(
     val spoonacularScore: Double,
     val title: String
 ){
-    fun toSearchProductInfo(): SearchProductInfo = SearchProductInfo(
+    fun toProduct(): Product = Product(
         id = id,
         ingredientList = ingredientList,
         likes = likes,
         title = title,
-        nutrition = nutrition.toProductNutrition()
+        nutrients = nutrition.nutrients.map{ it.name }
     )
 }
 
@@ -39,11 +38,7 @@ data class ProductServingsDto(
 data class ProductNutritionDto(
     val caloricBreakdown: ProductCaloricBreakdownDto,
     val nutrients: List<ProductNutrientDto>
-){
-    fun toProductNutrition() : ProductNutrition =  ProductNutrition(
-        nutrients = nutrients.map{ it.name }
-    )
-}
+)
 
 data class ProductNutrientDto(
     val amount: Double,

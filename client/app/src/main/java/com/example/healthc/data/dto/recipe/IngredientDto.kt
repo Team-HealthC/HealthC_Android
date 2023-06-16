@@ -1,14 +1,14 @@
-package com.example.healthc.data.dto.food.ingredient
+package com.example.healthc.data.dto.ingredient
 
-import com.example.healthc.domain.model.food.SearchFoodIngredient
+import com.example.healthc.domain.model.recipe.Ingredient
 
-data class SearchFoodIngredientDto(
+data class IngredientDto(
     val number: Int,
     val offset: Int,
     val results: List<IngredientResultDto>,
     val totalResults: Int
 ){
-    fun toSearchFoodIngredient() : SearchFoodIngredient = SearchFoodIngredient(
+    fun toIngredient() : Ingredient = Ingredient(
         number = number,
         offset = offset,
         ingredients = results.first().missedIngredients.map{ it.name },

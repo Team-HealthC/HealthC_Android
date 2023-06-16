@@ -1,6 +1,6 @@
-package com.example.healthc.domain.model.food
+package com.example.healthc.domain.model.recipe
 
-data class DishItem(
+data class Recipe(
     val id: Int,
     val image: String,
     val imageType: String,

@@ -1,14 +1,14 @@
-package com.example.healthc.domain.model.food
+package com.example.healthc.domain.model.product
 
-data class SearchProductId(
+data class ProductId(
     val number: Int,
     val offset: Int,
-    val products: List<ProductId>,
+    val products: List<ProductIdInfo>,
     val totalProducts: Int,
     val type: String
 )
 
-data class ProductId(
+data class ProductIdInfo(
     val id: Int,
     val imageType: String,
     val title: String

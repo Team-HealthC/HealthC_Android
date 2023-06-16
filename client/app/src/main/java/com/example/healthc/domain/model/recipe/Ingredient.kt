@@ -1,6 +1,6 @@
-package com.example.healthc.domain.model.food
+package com.example.healthc.domain.model.recipe
 
-data class SearchFoodIngredient(
+data class Ingredient(
     val number: Int,
     val offset: Int,
     val ingredients: List<String>,

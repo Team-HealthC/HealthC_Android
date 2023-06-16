@@ -1,23 +1,13 @@
-package com.example.healthc.domain.model.food
+package com.example.healthc.domain.model.kor_product
 
-data class SearchFoodProduct(
-    val body: ProductBody,
-    val header: ProductHeader
-)
-
-data class ProductBody(
-    val items: List<ProductItem>,
+data class KorProduct(
+    val items: List<KorProductInfo>,
     val numOfRows: String,
     val pageNo: String,
     val totalCount: String
 )
 
-data class ProductHeader(
-    val resultCode: String,
-    val resultMessage: String
-)
-
-data class ProductItem(
+data class KorProductInfo(
     val allergy: String, // 알러지 유발 물질
     val capacity: String, // 용량
     val imgurl1: String, // 이미지 소스
