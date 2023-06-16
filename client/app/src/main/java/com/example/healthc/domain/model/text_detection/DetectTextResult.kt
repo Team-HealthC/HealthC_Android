@@ -1,4 +1,4 @@
-package com.example.healthc.domain.model.detect_text
+package com.example.healthc.domain.model.text_detection
 
 data class DetectTextResult (
     val successful: Boolean,

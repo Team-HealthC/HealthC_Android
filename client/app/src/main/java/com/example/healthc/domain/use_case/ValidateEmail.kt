@@ -1,7 +1,7 @@
 package com.example.healthc.domain.use_case
 
 import android.util.Patterns
-import com.example.healthc.domain.model.validate.ValidationResult
+import com.example.healthc.domain.model.validation.ValidationResult
 
 class ValidateEmail {
     operator fun invoke(email: String): ValidationResult{

@@ -1,4 +1,4 @@
-package com.example.healthc.domain.model.validate
+package com.example.healthc.domain.model.validation
 
 data class ValidationResult(
     val successful: Boolean,
