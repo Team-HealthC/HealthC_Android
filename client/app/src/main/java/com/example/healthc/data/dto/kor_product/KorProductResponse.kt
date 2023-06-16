@@ -1,25 +1,22 @@
-package com.example.healthc.data.dto.food.ingredient
+package com.example.healthc.data.dto.kor_product
 
-import com.example.healthc.domain.model.food.*
+import com.example.healthc.domain.model.kor_product.KorProduct
+import com.example.healthc.domain.model.kor_product.KorProductInfo
 
-data class SearchFoodProductDto(
-    val body: ProductBodyDto,
+
+data class KorProductResponse(
+    val body: KorProductDto,
     val header: ProductHeaderDto
-){
-    fun toSearchFoodProduct(): SearchFoodProduct = SearchFoodProduct(
-        body = body.toProductBody(),
-        header = header.toProductHeader()
-    )
-}
+)
 
-data class ProductBodyDto(
+data class KorProductDto(
     val items: List<ProductItemDto>,
     val totalCount: String,
     val pageNo: String,
     val numOfRows: String
     ){
-    fun toProductBody(): ProductBody = ProductBody(
-        items = items.map{ it.item.toProductItemX() },
+    fun toKorProduct(): KorProduct = KorProduct(
+        items = items.map{ it.item.toProductInfo() },
         numOfRows = numOfRows,
         pageNo = pageNo,
         totalCount = totalCount
@@ -29,12 +26,7 @@ data class ProductBodyDto(
 data class ProductHeaderDto(
     val resultCode: String,
     val resultMessage: String
-){
-    fun toProductHeader() : ProductHeader = ProductHeader(
-        resultCode = resultCode,
-        resultMessage = resultMessage
-    )
-}
+)
 
 data class ProductItemDto(
     val item: ProductItemXDto
@@ -57,11 +49,8 @@ data class ProductItemXDto(
     val rnum: String,
     val seller: String
 ){
-    constructor(): this("", "", "", "", "", "",
-        "", "", "", "", "", "", "",
-        "", "")
 
-    fun toProductItemX() : ProductItem = ProductItem(
+    fun toProductInfo() : KorProductInfo = KorProductInfo(
         allergy = allergy,
         capacity = capacity,
         imgurl1 = imgurl1,

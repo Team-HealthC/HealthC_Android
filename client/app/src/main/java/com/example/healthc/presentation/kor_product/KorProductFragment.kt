@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.food.product.kor_product
+package com.example.healthc.presentation.kor_product
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,8 +14,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentKorProductBinding
-import com.example.healthc.presentation.food.product.kor_product.KorProductViewModel.SearchProductUiEvent
-import com.example.healthc.presentation.food.product.kor_product.adapter.KorProductAdapter
+import com.example.healthc.presentation.kor_product.KorProductViewModel.SearchProductUiEvent
+import com.example.healthc.presentation.kor_product.adapter.KorProductAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -59,16 +59,19 @@ class KorProductFragment : Fragment() {
                     }
 
                     is SearchProductUiEvent.Success -> {
-                        korProductAdapter.submitList(it.foodIngredient.body.items)
+                        korProductAdapter.submitList(it.foodIngredient)
+                        hideProgressbar()
                     }
 
                     is SearchProductUiEvent.Failure -> {
                         Toast.makeText(requireContext(), "상품 정보를 가져오는데 실패하였습니다.",
                             Toast.LENGTH_SHORT).show()
+                        hideProgressbar()
                     }
 
                     is SearchProductUiEvent.NotFounded -> {
                         showNotFoundedText()
+                        hideProgressbar()
                     }
                 }
             }

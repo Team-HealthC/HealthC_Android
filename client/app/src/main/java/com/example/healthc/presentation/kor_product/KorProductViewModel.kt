@@ -1,9 +1,9 @@
-package com.example.healthc.presentation.food.product.kor_product
+package com.example.healthc.presentation.kor_product
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.healthc.domain.model.food.SearchFoodProduct
-import com.example.healthc.domain.repository.FoodRepository
+import com.example.healthc.domain.model.kor_product.KorProductInfo
+import com.example.healthc.domain.repository.KorProductRepository
 import com.example.healthc.domain.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,10 +13,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class KorProductViewModel @Inject constructor(
-    private val repository : FoodRepository
+    private val repository : KorProductRepository
 ) : ViewModel() {
     private val _searchProductUiEvent = MutableStateFlow<SearchProductUiEvent>(
-        SearchProductUiEvent.Unit)
+        SearchProductUiEvent.Unit
+    )
     val searchProductUiEvent : StateFlow<SearchProductUiEvent>
         get() = _searchProductUiEvent
 
@@ -30,13 +31,13 @@ class KorProductViewModel @Inject constructor(
         }
         viewModelScope.launch {
             _searchProductUiEvent.value = SearchProductUiEvent.Loading
-            val searchResult = repository.searchFoodProduct(productName.value)
+            val searchResult = repository.getKorProducts(productName.value)
             when(searchResult){
                 is Resource.Success -> {
                     val result = searchResult.result
-                    if(result.body.items.isNotEmpty()){
+                    if(result.items.isNotEmpty()){
                         _searchProductUiEvent.value =
-                            SearchProductUiEvent.Success(searchResult.result)
+                            SearchProductUiEvent.Success(result.items)
                     }else{
                         _searchProductUiEvent.value = SearchProductUiEvent.NotFounded
                         notFounded.value = productName.value
@@ -54,7 +55,7 @@ class KorProductViewModel @Inject constructor(
     }
 
     sealed class SearchProductUiEvent {
-        data class Success(val foodIngredient: SearchFoodProduct) : SearchProductUiEvent()
+        data class Success(val foodIngredient: List<KorProductInfo>) : SearchProductUiEvent()
         object Failure : SearchProductUiEvent()
         object NotFounded: SearchProductUiEvent()
         object Loading : SearchProductUiEvent()
