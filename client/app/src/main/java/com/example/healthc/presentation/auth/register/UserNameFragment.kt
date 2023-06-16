@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.auth.sign_up
+package com.example.healthc.presentation.auth.register
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,16 +11,16 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.healthc.R
-import com.example.healthc.databinding.FragmentSignUpNameBinding
+import com.example.healthc.databinding.FragmentUserNameBinding
 import com.example.healthc.presentation.auth.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
-class SignUpNameFragment : Fragment() {
+class UserNameFragment : Fragment() {
 
-    private var _binding: FragmentSignUpNameBinding? = null
+    private var _binding: FragmentUserNameBinding? = null
     private val binding get() = checkNotNull(_binding)
 
     private val viewModel by activityViewModels<AuthViewModel>()
@@ -30,7 +30,7 @@ class SignUpNameFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sign_up_name, container, false)
+        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user_name, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
@@ -59,7 +59,7 @@ class SignUpNameFragment : Fragment() {
 
     private fun navigateToEmail() {
         lifecycleScope.launchWhenStarted {
-            val direction = SignUpNameFragmentDirections.actionSignUpNameFragmentToSignUpEmailFragment()
+            val direction = UserNameFragmentDirections.actionUserNameFragmentToUserEmailFragment()
             findNavController().navigate(direction)
         }
     }

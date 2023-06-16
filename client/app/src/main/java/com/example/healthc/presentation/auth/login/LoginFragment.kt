@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.auth.sign_up
+package com.example.healthc.presentation.auth.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,20 +11,20 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.healthc.R
-import com.example.healthc.databinding.FragmentSignUpInfoBinding
+import com.example.healthc.databinding.FragmentLoginBinding
 import com.example.healthc.domain.utils.Resource
 import com.example.healthc.presentation.auth.AuthViewModel
 import com.example.healthc.presentation.main.MainActivity
-import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
-class SignUpInfoFragment : Fragment() {
+class LoginFragment : Fragment() {
 
-    private var _binding: FragmentSignUpInfoBinding? = null
+    private var _binding: FragmentLoginBinding? = null
     private val binding get() = checkNotNull(_binding)
 
     private val viewModel by activityViewModels<AuthViewModel>()
@@ -34,7 +34,7 @@ class SignUpInfoFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sign_up_info, container, false)
+        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
@@ -42,21 +42,12 @@ class SignUpInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView()
         observeData()
+        initView()
     }
 
-    private fun initView(){
-        binding.allergyChipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
-            val allergyList : MutableList<String> = mutableListOf()
-            checkedIds.forEach{ id ->
-                allergyList.add(group.findViewById<Chip>(id).text.toString())
-            }
-            viewModel.setAllergy(allergyList)
-        }
-    }
     private fun observeData(){
-        viewModel.signUpEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+        viewModel.signInEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                 when(it){
                     is Resource.Loading ->{
@@ -66,11 +57,25 @@ class SignUpInfoFragment : Fragment() {
                         startMainActivity()
                     }
                     is Resource.Failure -> {
-                        Toast.makeText(requireContext(), "회원가입에 실패하였습니다.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show()
                     }
                     else -> {}
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
+    }
+
+    private fun initView(){
+        binding.goToSignUpButton.setOnClickListener {
+            viewModel.initInput()
+            navigateSignUp()
+        }
+    }
+
+    private fun navigateSignUp(){
+        lifecycleScope.launchWhenStarted {
+            val direction = LoginFragmentDirections.actionLoginFragmentToUserNameFragment()
+            findNavController().navigate(direction)
+        }
     }
 
     private fun startMainActivity(){
