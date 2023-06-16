@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.utils
+package com.example.healthc.utils
 
 import android.graphics.drawable.Drawable
 import android.util.Base64

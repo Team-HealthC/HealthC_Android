@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.utils
+package com.example.healthc.utils
 
 fun String.toIngredientEng(): String =
     when(this){
