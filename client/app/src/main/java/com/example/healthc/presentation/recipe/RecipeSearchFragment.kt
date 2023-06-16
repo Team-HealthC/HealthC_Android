@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.food.ingredient
+package com.example.healthc.presentation.recipe
 
 import android.content.Context
 import android.os.Bundle
@@ -12,13 +12,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.healthc.R
-import com.example.healthc.databinding.FragmentIngredientBinding
+import com.example.healthc.databinding.FragmentRecipeSearchBinding
 
 import com.google.android.material.chip.Chip
 
-class IngredientFragment : Fragment() {
+class RecipeSearchFragment : Fragment() {
 
-    private var _binding: FragmentIngredientBinding? = null
+    private var _binding: FragmentRecipeSearchBinding? = null
     private val binding get() = checkNotNull(_binding)
 
     private lateinit var callback: OnBackPressedCallback
@@ -32,7 +32,7 @@ class IngredientFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_ingredient, container, false)
+        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_recipe_search, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
@@ -49,12 +49,12 @@ class IngredientFragment : Fragment() {
             checkedIds.forEach{ id ->
                 checkedAllergy = group.findViewById<Chip>(id).text.toString()
             }
-            navigateToSearchIngredient(checkedAllergy)
+            navigateToRecipe(checkedAllergy)
         }
 
         binding.searchEditTextView.setOnEditorActionListener { textView, actionId, keyEvent ->
             if(actionId == EditorInfo.IME_ACTION_SEARCH){
-                navigateToSearchIngredient(
+                navigateToRecipe(
                     textView.text.toString()
                 )
                 true
@@ -69,17 +69,17 @@ class IngredientFragment : Fragment() {
         }
     }
 
-    private fun navigateToSearchIngredient(allergy: String){
+    private fun navigateToRecipe(allergy: String){
         lifecycleScope.launchWhenStarted {
-            val direction = IngredientFragmentDirections
-                .actionIngredientFragmentToSearchIngredientFragment(allergy)
+            val direction = RecipeSearchFragmentDirections
+                .actionRecipeSearchFragmentToRecipeFragment(allergy)
             findNavController().navigate(direction)
         }
     }
 
     private fun navigateToCamera(){
         lifecycleScope.launchWhenStarted {
-            val direction = IngredientFragmentDirections.actionIngredientFragmentToCameraFragment()
+            val direction = RecipeSearchFragmentDirections.actionRecipeFragmentToCameraFragment()
             findNavController().navigate(direction)
         }
     }
