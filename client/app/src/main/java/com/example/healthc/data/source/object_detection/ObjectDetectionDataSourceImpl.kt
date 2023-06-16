@@ -1,9 +1,9 @@
-package com.example.healthc.data.source.food.object_detect
+package com.example.healthc.data.source.object_detection
 
 import android.util.Base64
-import com.example.healthc.data.remote.api.SearchFoodService
+import com.example.healthc.data.remote.api.ObjectDetectionService
 import com.example.healthc.di.IoDispatcher
-import com.example.healthc.domain.model.food.SearchFoodCategory
+import com.example.healthc.domain.model.object_detection.DetectedObject
 import com.example.healthc.domain.utils.Resource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -14,23 +14,23 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import javax.inject.Inject
 
 
-class SearchCategoryDataSourceImpl @Inject constructor(
-    private val service : SearchFoodService,
+class ObjectDetectionDataSourceImpl @Inject constructor(
+    private val service : ObjectDetectionService,
     @IoDispatcher private val coroutineDispatcher: CoroutineDispatcher
-) : SearchCategoryDataSource{
-    override suspend fun searchFoodCategory(encodedImage: String): Resource<SearchFoodCategory>
+) : ObjectDetectionDataSource {
+    override suspend fun postFoodImage(encodedImage: String): Resource<DetectedObject>
     = withContext(coroutineDispatcher){
         try{
             val image: ByteArray = Base64.decode(encodedImage, Base64.DEFAULT)
             val requestFile: RequestBody = image
                 .toRequestBody("image/*".toMediaTypeOrNull())
-            val result = service.searchFoodCategory(
+            val result = service.postFoodImage(
                 file = MultipartBody.Part.createFormData(
                     "file",
                     "image.jpg",
                     requestFile
                 )
-            ).toSearchFoodCategory()
+            ).toDetectedObject()
             Resource.Success(result)
         } catch (e : Exception){
             e.printStackTrace()

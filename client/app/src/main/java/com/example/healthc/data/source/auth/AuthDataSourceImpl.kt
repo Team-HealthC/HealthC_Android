@@ -13,11 +13,24 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class SignUpDataSourceImpl @Inject constructor(
+class AuthDataSourceImpl @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
     private val fireStore: FirebaseFirestore,
     @IoDispatcher private val coroutineDispatcher: CoroutineDispatcher
-): SignUpDataSource{
+): AuthDataSource{
+    override suspend fun signIn(userDto: UserDto): Resource<FirebaseUser>
+            = withContext(coroutineDispatcher){
+        try{
+            val result = firebaseAuth.signInWithEmailAndPassword(
+                userDto.email, userDto.password
+            ).await()
+            Resource.Success(checkNotNull(result.user))
+        }
+        catch(e : Exception){
+            e.printStackTrace()
+            Resource.Failure(e)
+        }
+    }
     override suspend fun signUp(
         userDto: UserDto,
         userInfoDto: UserInfoDto,
