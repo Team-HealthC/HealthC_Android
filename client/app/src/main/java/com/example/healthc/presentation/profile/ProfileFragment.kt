@@ -20,9 +20,9 @@ import com.example.healthc.R
 import com.example.healthc.databinding.FragmentProfileBinding
 import com.example.healthc.presentation.auth.AuthActivity
 import com.example.healthc.presentation.auth.AuthViewModel
-import com.example.healthc.presentation.profile.adapter.ProfileAllergyAdapter
+import com.example.healthc.presentation.profile.profile_allergy.adapter.ProfileAllergyAdapter
 import com.example.healthc.presentation.profile.ProfileViewModel.ProfileUiEvent
-import com.example.healthc.presentation.widget.EditNameDialog
+import com.example.healthc.presentation.widget.NameEditDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -111,7 +111,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun showDialog(){
-        EditNameDialog(
+        NameEditDialog(
             requireContext(),
             onDoneButtonClick = { name ->
                 viewModel.editName(name)
@@ -127,7 +127,7 @@ class ProfileFragment : Fragment() {
 
     private fun navigateToEditProfile(){
         lifecycleScope.launchWhenStarted {
-            val direction = ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment()
+            val direction = ProfileFragmentDirections.actionProfileFragmentToProfileAllergyFragment()
             findNavController().navigate(direction)
         }
     }

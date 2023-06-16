@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.profile.edit_profile
+package com.example.healthc.presentation.profile.profile_allergy
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,27 +12,27 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.healthc.R
-import com.example.healthc.databinding.FragmentEditProfileBinding
-import com.example.healthc.presentation.profile.edit_profile.EditProfileViewModel.ProfileUiEvent
+import com.example.healthc.databinding.FragmentProfileAllergyBinding
+import com.example.healthc.presentation.profile.profile_allergy.ProfileAllergyViewModel.ProfileUiEvent
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
-class EditProfileFragment : Fragment(){
+class ProfileAllergyFragment : Fragment(){
 
-    private var _binding: FragmentEditProfileBinding? = null
+    private var _binding: FragmentProfileAllergyBinding? = null
     private val binding get() = checkNotNull(_binding)
 
-    private val viewModel : EditProfileViewModel by viewModels()
+    private val viewModel : ProfileAllergyViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_edit_profile, container, false)
+        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile_allergy, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
@@ -71,7 +71,7 @@ class EditProfileFragment : Fragment(){
 
     private fun navigateToProfile(){
         lifecycleScope.launchWhenStarted {
-            val direction = EditProfileFragmentDirections.actionEditProfileFragmentToProfileFragment()
+            val direction = ProfileAllergyFragmentDirections.actionProfileAllergyFragmentToProfileFragment()
             findNavController().navigate(direction)
         }
     }

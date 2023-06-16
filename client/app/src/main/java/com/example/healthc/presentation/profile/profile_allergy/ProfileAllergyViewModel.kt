@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.profile.edit_profile
+package com.example.healthc.presentation.profile.profile_allergy
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class EditProfileViewModel @Inject constructor(
+class ProfileAllergyViewModel @Inject constructor(
     private val updateProfileUseCase: UpdateProfile,
     private val getProfileUseCase: GetProfile
 ): ViewModel() {

@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.profile.adapter
+package com.example.healthc.presentation.profile.profile_allergy.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.healthc.databinding.ItemProfileAllergyBinding
-import com.example.healthc.presentation.profile.adapter.ProfileAllergyAdapter.ProfileAllergyViewHolder
+import com.example.healthc.presentation.profile.profile_allergy.adapter.ProfileAllergyAdapter.ProfileAllergyViewHolder
 import com.example.healthc.presentation.profile.model.ProfileUiModel
-import com.example.healthc.presentation.utils.toIngredientEng
+import com.example.healthc.utils.toIngredientEng
 
 class ProfileAllergyAdapter : ListAdapter<String, ProfileAllergyViewHolder>(AllergyDiffCallback){
 
