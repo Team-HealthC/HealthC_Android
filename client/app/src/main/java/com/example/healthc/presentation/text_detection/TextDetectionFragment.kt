@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.camera.image_process
+package com.example.healthc.presentation.text_detection
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,8 +14,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.healthc.R
-import com.example.healthc.databinding.FragmentImageProcessBinding
-import com.example.healthc.presentation.camera.image_process.ImageProcessViewModel.ImageProcessEvent
+import com.example.healthc.databinding.FragmentTextDetectionBinding
+import com.example.healthc.presentation.text_detection.TextDetectionViewModel.ImageProcessEvent
 import com.example.healthc.presentation.widget.NegativeSignDialog
 import com.example.healthc.presentation.widget.PositiveSignDialog
 import com.google.mlkit.vision.common.InputImage
@@ -28,13 +28,13 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
-class ImageProcessFragment : Fragment() {
+class TextDetectionFragment : Fragment() {
 
-    private var _binding: FragmentImageProcessBinding? = null
+    private var _binding: FragmentTextDetectionBinding? = null
     private val binding get() = checkNotNull(_binding)
 
-    private val viewModel : ImageProcessViewModel by viewModels()
-    private val args : ImageProcessFragmentArgs by navArgs()
+    private val viewModel : TextDetectionViewModel by viewModels()
+    private val args : TextDetectionFragmentArgs by navArgs()
 
     private lateinit var textRecognizer : TextRecognizer
 
@@ -43,7 +43,7 @@ class ImageProcessFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_image_process, container, false)
+        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_text_detection, container, false)
         binding.viewModel = viewModel // xml viewModel init
         return binding.root
     }
@@ -116,7 +116,7 @@ class ImageProcessFragment : Fragment() {
 
     private fun navigateToCamera(){
         lifecycleScope.launchWhenStarted {
-            val direction = ImageProcessFragmentDirections.actionImageProcessFragmentToCameraFragment()
+            val direction = TextDetectionFragmentDirections.actionTextDetectionFragmentToCameraFragment()
             findNavController().navigate(direction)
         }
     }

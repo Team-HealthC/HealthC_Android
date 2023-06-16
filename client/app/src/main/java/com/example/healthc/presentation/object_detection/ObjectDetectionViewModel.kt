@@ -1,9 +1,9 @@
-package com.example.healthc.presentation.camera.object_detect
+package com.example.healthc.presentation.object_detection
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.healthc.domain.model.food.SearchFoodCategory
-import com.example.healthc.domain.repository.FoodRepository
+import com.example.healthc.domain.model.object_detection.DetectedObject
+import com.example.healthc.domain.repository.ObjectDetectionRepository
 import com.example.healthc.domain.use_case.DetectText
 import com.example.healthc.domain.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,9 +13,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SearchCategoryViewModel @Inject constructor(
-    private val repository : FoodRepository,
-    private val detectTextUseCase :  DetectText
+class ObjectDetectionViewModel @Inject constructor(
+    private val repository : ObjectDetectionRepository,
+    private val detectTextUseCase : DetectText
 ) : ViewModel() {
 
     // imageUrl
@@ -28,7 +28,7 @@ class SearchCategoryViewModel @Inject constructor(
 
     fun searchCategory(encodedImage: String) {
         viewModelScope.launch {
-            val result = repository.searchFoodCategory(encodedImage)
+            val result = repository.postFoodImage(encodedImage)
             when(result){
                 is Resource.Loading -> {}
 
@@ -46,7 +46,7 @@ class SearchCategoryViewModel @Inject constructor(
 
     fun searchIngredients(dish: String){
         viewModelScope.launch {
-            val result = repository.searchIngredients(dish)
+            val result = repository.getIngredients(dish)
             when(result){
                 is Resource.Loading -> {}
 
@@ -85,7 +85,7 @@ class SearchCategoryViewModel @Inject constructor(
 
     sealed class UiEvent {
         data class Failure(val message : String) : UiEvent()
-        data class Success(val category: SearchFoodCategory) : UiEvent()
+        data class Success(val category: DetectedObject) : UiEvent()
         data class Detected(val detectedList : List<String>) : UiEvent()
         object DetectNoting : UiEvent()
         object Unit : UiEvent()

@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.camera.image_process
+package com.example.healthc.presentation.text_detection
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ImageProcessViewModel @Inject constructor(
+class TextDetectionViewModel @Inject constructor(
     private val detectTextUseCase : DetectText
 ): ViewModel() {
 
