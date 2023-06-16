@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.healthc.presentation.profile.profile_allergy.ProfileAllergyViewModel"
+            />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/editProfileTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_up_info"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/profileEditUserNameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            android:text="@{@string/profile_edit_userName(viewModel.userName)}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editProfileTitle" />
+
+        <TextView
+            android:id="@+id/profileEditUserHaveText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            android:text="@{@string/profile_edit_userHave(viewModel.userAllergy)}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileEditUserNameText" />
+
+        <TextView
+            android:id="@+id/profileEditAllergyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/allergy"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileEditUserHaveText" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/allergy_chip_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileEditAllergyText">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/peach_chip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/peach"
+                app:chipBackgroundColor="@color/chip_background"
+                />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/fork_chip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/pork"
+                app:chipBackgroundColor="@color/chip_background"
+                />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/egg_chip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/egg"
+                app:chipBackgroundColor="@color/chip_background"
+                />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/milk_chip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/milk"
+                app:chipBackgroundColor="@color/chip_background"
+                />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/crustacean_chip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/crustacean"
+                app:chipBackgroundColor="@color/chip_background"
+                />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/bean_chip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:background="@color/green"
+                android:text="@string/soyBean"
+                app:chipBackgroundColor="@color/chip_background"
+                />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/peanut_chip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/peanuts"
+                app:chipBackgroundColor="@color/chip_background"
+                />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/wheat_chip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/wheat"
+                app:chipBackgroundColor="@color/chip_background"
+                />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/shellfish_chip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/shellfish"
+                app:chipBackgroundColor="@color/chip_background"
+                />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/fish_chip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:background="@color/green"
+                android:text="@string/fish"
+                app:chipBackgroundColor="@color/chip_background"
+                />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/nuts_chip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/nuts"
+                app:chipBackgroundColor="@color/chip_background"
+                />
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <Button
+            android:id="@+id/signUpInfoDoneButton"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/green"
+            android:text="@string/done"
+            android:onClick="@{() -> viewModel.updateProfile()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

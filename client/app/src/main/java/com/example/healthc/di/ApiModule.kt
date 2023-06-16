@@ -1,8 +1,10 @@
 package com.example.healthc.di
 
 import com.example.healthc.BuildConfig
-import com.example.healthc.data.remote.api.SearchFoodService
-import com.example.healthc.data.remote.api.SearchFoodProductService
+import com.example.healthc.data.remote.api.ProductService
+import com.example.healthc.data.remote.api.KorProductService
+import com.example.healthc.data.remote.api.ObjectDetectionService
+import com.example.healthc.data.remote.api.RecipeService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -58,15 +60,27 @@ object ApiModule {
 
     @Provides
     @Singleton
-    fun searchFoodService(
+    fun providesProductService(
         @SpoonRetrofit retrofit: Retrofit
-    ): SearchFoodService = retrofit.create(SearchFoodService::class.java)
+    ): ProductService = retrofit.create(ProductService::class.java)
 
     @Provides
     @Singleton
-    fun searchFoodProductService(
+    fun providesObjectDetectionService(
+        @SpoonRetrofit retrofit: Retrofit
+    ): ObjectDetectionService = retrofit.create(ObjectDetectionService::class.java)
+
+    @Provides
+    @Singleton
+    fun providesRecipeService(
+        @SpoonRetrofit retrofit: Retrofit
+    ): RecipeService = retrofit.create(RecipeService::class.java)
+
+    @Provides
+    @Singleton
+    fun providesKorProductService(
         @DataGoRetrofit retrofit: Retrofit
-    ) : SearchFoodProductService = retrofit.create(SearchFoodProductService::class.java)
+    ) : KorProductService = retrofit.create(KorProductService::class.java)
 
 }
 

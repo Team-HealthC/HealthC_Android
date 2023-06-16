@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.example.healthc.domain.model.food.ProductId"
+            type="com.example.healthc.domain.model.product.ProductIdInfo"
             />
     </data>
 

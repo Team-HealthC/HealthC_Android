@@ -1,9 +1,9 @@
 package com.example.healthc.domain.use_case
 
-import com.example.healthc.domain.model.detect_text.DetectTextResult
+import com.example.healthc.domain.model.text_detection.DetectTextResult
 import com.example.healthc.domain.repository.UserRepository
 import com.example.healthc.domain.utils.Resource
-import com.example.healthc.presentation.utils.toIngredientEng
+import com.example.healthc.utils.toIngredientEng
 import com.google.firebase.auth.FirebaseAuth
 import javax.inject.Inject
 

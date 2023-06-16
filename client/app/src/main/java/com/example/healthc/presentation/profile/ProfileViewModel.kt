@@ -6,9 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.healthc.domain.model.auth.UserInfo
 import com.example.healthc.domain.use_case.GetProfile
 import com.example.healthc.domain.use_case.UpdateUserName
-import com.example.healthc.domain.use_case.ValidateName
 import com.example.healthc.domain.utils.Resource
-import com.example.healthc.presentation.profile.edit_profile.EditProfileViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

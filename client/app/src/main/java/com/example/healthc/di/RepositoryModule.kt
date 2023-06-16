@@ -1,23 +1,14 @@
 package com.example.healthc.di
 
-import com.example.healthc.data.repository.AuthRepositoryImpl
-import com.example.healthc.data.repository.FoodRepositoryImpl
-import com.example.healthc.data.repository.UserRepositoryImpl
-import com.example.healthc.data.source.auth.SignInDataSource
-import com.example.healthc.data.source.auth.SignUpDataSource
-import com.example.healthc.data.source.food.kor_product.SearchFoodProductSource
-import com.example.healthc.data.source.food.ingredient.SearchIngredientDataSource
-import com.example.healthc.data.source.food.object_detect.SearchCategoryDataSource
-import com.example.healthc.data.source.food.product.*
-import com.example.healthc.data.source.food.recipe.SearchRecipeByIngDataSource
-import com.example.healthc.data.source.local.user.GetLocalUserInfoDataSource
-import com.example.healthc.data.source.local.user.UpdateLocalUserInfoDataSource
-import com.example.healthc.data.source.user.GetUserInfoDataSource
-import com.example.healthc.data.source.user.UpdateUserInfoDataSource
-import com.example.healthc.data.source.user.UpdateUserNameDataSource
-import com.example.healthc.domain.repository.AuthRepository
-import com.example.healthc.domain.repository.FoodRepository
-import com.example.healthc.domain.repository.UserRepository
+import com.example.healthc.data.repository.*
+import com.example.healthc.data.source.auth.AuthDataSource
+import com.example.healthc.data.source.kor_product.KorProductDataSource
+import com.example.healthc.data.source.object_detection.ObjectDetectionDataSource
+import com.example.healthc.data.source.product.ProductDataSource
+import com.example.healthc.data.source.recipe.RecipeDataSource
+import com.example.healthc.data.source.user.local.LocalUserDataSource
+import com.example.healthc.data.source.user.UserDataSource
+import com.example.healthc.domain.repository.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
@@ -30,37 +21,39 @@ import dagger.hilt.components.SingletonComponent
 object RepositoryModule {
 
     @Provides
-    fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
+    fun providesFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
 
     @Provides
-    fun provideFirestore() : FirebaseFirestore = FirebaseFirestore.getInstance()
+    fun providesFirestore() : FirebaseFirestore = FirebaseFirestore.getInstance()
 
     @Provides
-    fun providesAuthRepository(signInDataSource: SignInDataSource,
-                               signUpDataSource: SignUpDataSource,
-                               firebaseAuth: FirebaseAuth): AuthRepository
-        = AuthRepositoryImpl(signInDataSource, signUpDataSource, firebaseAuth)
+    fun providesAuthRepository(
+        authDataSource: AuthDataSource, firebaseAuth: FirebaseAuth
+    ): AuthRepository = AuthRepositoryImpl(authDataSource, firebaseAuth)
 
     @Provides
-    fun providesUserRepository(getUserInfoDataSource: GetUserInfoDataSource,
-                               updateLocalUserInfoDataSource: UpdateLocalUserInfoDataSource,
-                               updateUserNameDataSource: UpdateUserNameDataSource,
-                               getLocalUserInfoDataSource: GetLocalUserInfoDataSource,
-                               updateUserInfoDataSource: UpdateUserInfoDataSource
-    ) : UserRepository
-        = UserRepositoryImpl(getUserInfoDataSource, updateUserInfoDataSource,
-        updateUserNameDataSource, updateLocalUserInfoDataSource, getLocalUserInfoDataSource )
+    fun providesUserRepository(
+        userDataSource: UserDataSource, localUserDataSource: LocalUserDataSource
+    ) : UserRepository = UserRepositoryImpl(userDataSource, localUserDataSource)
 
     @Provides
-    fun providesFoodRepository(searchIngredientDataSource: SearchIngredientDataSource,
-                               searchFoodProductSource: SearchFoodProductSource,
-                               searchFoodCategoryDataSource: SearchCategoryDataSource,
-                               searchProductIdDataSource : SearchProductIdDataSource,
-                               searchProductFactsDataSource : SearchProductFactsDataSource,
-                               searchProductInfoDataSource: SearchProductInfoDataSource,
-                               searchRecipeByIngDataSource: SearchRecipeByIngDataSource)
-        : FoodRepository = FoodRepositoryImpl(searchIngredientDataSource, searchFoodProductSource,
-        searchFoodCategoryDataSource, searchProductIdDataSource,
-    searchProductInfoDataSource, searchProductFactsDataSource, searchRecipeByIngDataSource)
+    fun providesProductRepository(
+        productDataSource: ProductDataSource, recipeDataSource: RecipeDataSource
+    ): ProductRepository = ProductRepositoryImpl(productDataSource, recipeDataSource)
 
+    @Provides
+    fun providesKorProductRepository(korProductDataSource: KorProductDataSource)
+        : KorProductRepository = KorProductRepositoryImpl(korProductDataSource)
+
+    @Provides
+    fun providesObjectDetectionRepository(
+        objectDetectionDataSource: ObjectDetectionDataSource, recipeDataSource: RecipeDataSource
+    ): ObjectDetectionRepository = ObjectDetectionRepositoryImpl(
+        objectDetectionDataSource, recipeDataSource
+    )
+
+    @Provides
+    fun providesRecipeRepository(
+        recipeDataSource: RecipeDataSource
+    ): RecipeRepository = RecipeRepositoryImpl(recipeDataSource)
 }

@@ -1,6 +1,6 @@
 package com.example.healthc.domain.use_case
 
-import com.example.healthc.domain.model.validate.ValidationResult
+import com.example.healthc.domain.model.validation.ValidationResult
 
 class ValidateName {
     operator fun invoke(nickName: String): ValidationResult {

@@ -3,47 +3,47 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/auth_nav"
-    app:startDestination="@id/signInFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
-        android:id="@+id/signUpEmailFragment"
-        android:name="com.example.healthc.presentation.auth.sign_up.SignUpEmailFragment"
-        android:label="SignUpEmailFragment"
-        tools:layout="@layout/fragment_sign_up_email" >
+        android:id="@+id/userEmailFragment"
+        android:name="com.example.healthc.presentation.auth.register.UserEmailFragment"
+        android:label="UserEmailFragment"
+        tools:layout="@layout/fragment_user_email" >
         <action
-            android:id="@+id/action_signUpEmailFragment_to_signUpPasswordFragment"
-            app:destination="@id/signUpPasswordFragment" />
+            android:id="@+id/action_userEmailFragment_to_userPasswordFragment"
+            app:destination="@id/userPasswordFragment" />
     </fragment>
     <fragment
-        android:id="@+id/signUpPasswordFragment"
-        android:name="com.example.healthc.presentation.auth.sign_up.SignUpPasswordFragment"
-        android:label="SignUpPasswordFragment"
-        tools:layout="@layout/fragment_sign_up_password" >
+        android:id="@+id/userPasswordFragment"
+        android:name="com.example.healthc.presentation.auth.register.UserPasswordFragment"
+        android:label="UserPasswordFragment"
+        tools:layout="@layout/fragment_user_password" >
     <action
-            android:id="@+id/action_signUpPasswordFragment_to_signUpInfoFragment"
-            app:destination="@id/signUpInfoFragment" />
+            android:id="@+id/action_userPasswordFragment_to_userInfoFragment"
+            app:destination="@id/userInfoFragment" />
     </fragment>
     <fragment
-        android:id="@+id/signUpInfoFragment"
-        android:name="com.example.healthc.presentation.auth.sign_up.SignUpInfoFragment"
-        android:label="SignUpInfoFragment"
-        tools:layout="@layout/fragment_sign_up_info" />
+        android:id="@+id/userInfoFragment"
+        android:name="com.example.healthc.presentation.auth.register.UserInfoFragment"
+        android:label="UserInfoFragment"
+        tools:layout="@layout/fragment_user_info" />
     <fragment
-        android:id="@+id/signUpNameFragment"
-        android:name="com.example.healthc.presentation.auth.sign_up.SignUpNameFragment"
-        android:label="SignUpNameFragment"
-        tools:layout="@layout/fragment_sign_up_name" >
+        android:id="@+id/userNameFragment"
+        android:name="com.example.healthc.presentation.auth.register.UserNameFragment"
+        android:label="userNameFragment"
+        tools:layout="@layout/fragment_user_name" >
     <action
-            android:id="@+id/action_signUpNameFragment_to_signUpEmailFragment"
-            app:destination="@id/signUpEmailFragment" />
+            android:id="@+id/action_userNameFragment_to_userEmailFragment"
+            app:destination="@id/userEmailFragment" />
     </fragment>
     <fragment
-        android:id="@+id/signInFragment"
-        android:name="com.example.healthc.presentation.auth.sign_in.SignInFragment"
-        android:label="SignInFragment"
-        tools:layout="@layout/fragment_sign_in" >
+        android:id="@+id/loginFragment"
+        android:name="com.example.healthc.presentation.auth.login.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login" >
     <action
-            android:id="@+id/action_signInFragment_to_signUpNameFragment"
-            app:destination="@id/signUpNameFragment" />
+            android:id="@+id/action_loginFragment_to_userNameFragment"
+            app:destination="@id/userNameFragment" />
     </fragment>
 </navigation>

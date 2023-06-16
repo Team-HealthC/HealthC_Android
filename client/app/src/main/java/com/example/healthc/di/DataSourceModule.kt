@@ -1,22 +1,17 @@
 package com.example.healthc.di
 
-import com.example.healthc.data.source.auth.SignInDataSource
-import com.example.healthc.data.source.auth.SignInDataSourceImpl
-import com.example.healthc.data.source.auth.SignUpDataSource
-import com.example.healthc.data.source.auth.SignUpDataSourceImpl
-import com.example.healthc.data.source.food.kor_product.SearchFoodProductSource
-import com.example.healthc.data.source.food.kor_product.SearchFoodProductSourceImpl
-import com.example.healthc.data.source.food.ingredient.SearchIngredientDataSource
-import com.example.healthc.data.source.food.ingredient.SearchIngredientDataSourceImpl
-import com.example.healthc.data.source.food.object_detect.SearchCategoryDataSource
-import com.example.healthc.data.source.food.object_detect.SearchCategoryDataSourceImpl
-import com.example.healthc.data.source.food.product.*
-import com.example.healthc.data.source.food.recipe.SearchRecipeByIngDataSource
-import com.example.healthc.data.source.food.recipe.SearchRecipeByIngDataSourceImpl
-import com.example.healthc.data.source.local.user.GetLocalUserInfoDataSource
-import com.example.healthc.data.source.local.user.GetLocalUserInfoDataSourceImpl
-import com.example.healthc.data.source.local.user.UpdateLocalUserInfoDataSource
-import com.example.healthc.data.source.local.user.UpdateLocalUserInfoDataSourceImpl
+import com.example.healthc.data.source.auth.AuthDataSource
+import com.example.healthc.data.source.auth.AuthDataSourceImpl
+import com.example.healthc.data.source.kor_product.KorProductDataSource
+import com.example.healthc.data.source.kor_product.KorProductDataSourceImpl
+import com.example.healthc.data.source.object_detection.ObjectDetectionDataSource
+import com.example.healthc.data.source.object_detection.ObjectDetectionDataSourceImpl
+import com.example.healthc.data.source.recipe.RecipeDataSource
+import com.example.healthc.data.source.recipe.RecipeDataSourceImpl
+import com.example.healthc.data.source.user.local.LocalUserDataSource
+import com.example.healthc.data.source.user.local.LocalUserDataSourceImpl
+import com.example.healthc.data.source.product.ProductDataSource
+import com.example.healthc.data.source.product.ProductDataSourceImpl
 import com.example.healthc.data.source.user.*
 import dagger.Binds
 import dagger.Module
@@ -30,85 +25,44 @@ abstract class DataSourceModule {
 
     @Binds
     @Singleton
-    abstract fun provideSignUpDataSource(
-        signUpDataSourceImpl: SignUpDataSourceImpl
-    ): SignUpDataSource
+    abstract fun provideAuthDataSource(
+        authDataSourceImpl: AuthDataSourceImpl
+    ): AuthDataSource
 
     @Binds
     @Singleton
-    abstract fun provideSignInDataSource(
-        signInDataSourceImpl: SignInDataSourceImpl
-    ): SignInDataSource
+    abstract fun providesUserDataSource(
+        userDataSourceImpl: UserDataSourceImpl
+    ): UserDataSource
+
 
     @Binds
     @Singleton
-    abstract fun providesGetUserInfoDataSource(
-        getUserInfoDataSourceImpl: GetUserInfoDataSourceImpl
-    ): GetUserInfoDataSource
+    abstract fun provideLocalUserDataSource(
+        localUserDataSourceImpl: LocalUserDataSourceImpl
+    ): LocalUserDataSource
 
     @Binds
     @Singleton
-    abstract fun providesUpdateUserInfoDataSource(
-        updateUserInfoDataSourceImpl: UpdateUserInfoDataSourceImpl
-    ) : UpdateUserInfoDataSource
+    abstract fun providesKorProductDataSource(
+        korProductDataSourceImpl : KorProductDataSourceImpl
+    ) : KorProductDataSource
 
     @Binds
     @Singleton
-    abstract fun providesGetLocalUserInfoDataSource(
-        getLocalUserInfoDataSourceImpl: GetLocalUserInfoDataSourceImpl
-    ): GetLocalUserInfoDataSource
-
-    @Binds
-    @Singleton
-    abstract fun providesUpdateLocalUserInfoDataSource(
-        updateUserInfoDataSourceImpl: UpdateLocalUserInfoDataSourceImpl
-    ): UpdateLocalUserInfoDataSource
-
-    @Binds
-    @Singleton
-    abstract fun providesUpdateUserNameDataSource(
-        updateUserNameDataSourceImpl: UpdateUserNameDataSourceImpl
-    ): UpdateUserNameDataSource
-
-    @Binds
-    @Singleton
-    abstract fun providesSearchIngredientDataSource(
-        searchIngredientDataSourceImpl : SearchIngredientDataSourceImpl
-    ) : SearchIngredientDataSource
-
-    @Binds
-    @Singleton
-    abstract fun providesSearchProductDataSource(
-        searchFoodProductSourceImpl : SearchFoodProductSourceImpl
-    ) : SearchFoodProductSource
-
-    @Binds
-    @Singleton
-    abstract fun providesSearchCategoryDataSource(
-        searchCategoryDataSourceImpl: SearchCategoryDataSourceImpl
-    ) : SearchCategoryDataSource
-
-    @Binds
-    @Singleton
-    abstract fun providesSearchProductIdDataSource(
-        searchProductIdDataSourceImpl : SearchProductIdDataSourceImpl
-    ) : SearchProductIdDataSource
+    abstract fun providesObjectDetectionDataSource(
+        objectDetectionDataSourceImpl: ObjectDetectionDataSourceImpl
+    ) : ObjectDetectionDataSource
 
     @Binds
     @Singleton
     abstract fun providesSearchProductInfoDataSource(
-        searchProductInfoDataSourceImpl: SearchProductInfoDataSourceImpl
-    ) : SearchProductInfoDataSource
+        ProductataSourceImpl: ProductDataSourceImpl
+    ) : ProductDataSource
 
     @Binds
     @Singleton
-    abstract fun providesSearchProductFactsDataSource(
-        searchProductFactsDataSourceImpl: SearchProductFactsDataSourceImpl
-    ) : SearchProductFactsDataSource
-
-    @Binds
-    @Singleton
-    abstract fun providesSearchRecipeByIngDataSource(
-        searchRecipeByIngDataSourceImpl: SearchRecipeByIngDataSourceImpl
-    ): SearchRecipeByIngDataSource
+    abstract fun providesRecipeDataSource(
+        recipeDataSourceImpl: RecipeDataSourceImpl
+    ): RecipeDataSource
 }
