@@ -24,10 +24,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentCameraBinding
-import com.example.healthc.presentation.utils.PickSinglePhotoContract
-import com.example.healthc.presentation.utils.getCurrentFileName
+import com.example.healthc.presentation.camera.contract.PickSinglePhotoContract
+import com.example.healthc.utils.getCurrentFileName
 import com.example.healthc.presentation.widget.CameraStateDialog
-import com.example.healthc.presentation.widget.ChooseSearchingDialog
+import com.example.healthc.presentation.widget.SearchChoiceDialog
 import com.google.common.util.concurrent.ListenableFuture
 import land.sungbin.systemuicontroller.setNavigationBarColor
 import timber.log.Timber
@@ -196,9 +196,9 @@ class CameraFragment : Fragment() {
     }
 
     private fun showSearchDialog(){
-        ChooseSearchingDialog(
+        SearchChoiceDialog(
             requireContext(),
-            onSearchIngredient = { navigateToIngredient() },
+            onSearchIngredient = { navigateToRecipe() },
             onSearchProduct = { navigateToProduct() },
             onSearchKorProduct = { navigateToKorProduct() }
         ).show()
@@ -231,21 +231,21 @@ class CameraFragment : Fragment() {
             val currentCamera = binding.cameraStateTextView.text.toString()
             when(currentCamera){
                 IMAGE_PROCESS_ENG -> {
-                    val direction = CameraFragmentDirections.actionCameraFragmentToImageProcessFragment(
+                    val direction = CameraFragmentDirections.actionCameraFragmentToTextDetectionFragment(
                         imageUrl = imageUrl,
                         language = ENG
                     )
                     findNavController().navigate(direction)
                 }
                 IMAGE_PROCESS_KOR -> {
-                    val direction = CameraFragmentDirections.actionCameraFragmentToImageProcessFragment(
+                    val direction = CameraFragmentDirections.actionCameraFragmentToTextDetectionFragment(
                         imageUrl = imageUrl,
                         language = KOR
                     )
                     findNavController().navigate(direction)
                 }
                 OBJECT_DETECT -> {
-                    val direction = CameraFragmentDirections.actionCameraFragmentToSearchCategoryFragment(
+                    val direction = CameraFragmentDirections.actionCameraFragmentToObjectDetectionFragment(
                         imageUrl = imageUrl
                     )
                     findNavController().navigate(direction)
@@ -261,16 +261,16 @@ class CameraFragment : Fragment() {
         }
     }
 
-    private fun navigateToIngredient(){
+    private fun navigateToRecipe(){
         lifecycleScope.launchWhenStarted {
-            val direction = CameraFragmentDirections.actionCameraFragmentToIngredientFragment()
+            val direction = CameraFragmentDirections.actionCameraFragmentToRecipeSearchFragment()
             findNavController().navigate(direction)
         }
     }
 
     private fun navigateToProduct(){
         lifecycleScope.launchWhenStarted {
-            val direction = CameraFragmentDirections.actionCameraFragmentToProductFragment()
+            val direction = CameraFragmentDirections.actionCameraFragmentToProductSearchFragment()
             findNavController().navigate(direction)
         }
     }
