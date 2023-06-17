@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.kor_product.adapter
+package com.example.healthc.presentation.allergy_information.kor_product.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.healthc.databinding.ItemKorProductBinding
 import com.example.healthc.domain.model.kor_product.KorProductInfo
-import com.example.healthc.presentation.kor_product.adapter.KorProductAdapter.KorProductViewHolder
+import com.example.healthc.presentation.allergy_information.kor_product.adapter.KorProductAdapter.KorProductViewHolder
 
 class KorProductAdapter : ListAdapter<KorProductInfo, KorProductViewHolder>(KorProductInfoCallback){
     

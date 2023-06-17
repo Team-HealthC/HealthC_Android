@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.kor_product
+package com.example.healthc.presentation.allergy_information.kor_product
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,8 +14,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentKorProductBinding
-import com.example.healthc.presentation.kor_product.KorProductViewModel.SearchProductUiEvent
-import com.example.healthc.presentation.kor_product.adapter.KorProductAdapter
+import com.example.healthc.presentation.allergy_information.kor_product.KorProductViewModel.SearchProductUiEvent
+import com.example.healthc.presentation.allergy_information.kor_product.adapter.KorProductAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach

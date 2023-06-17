@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.recipe
+package com.example.healthc.presentation.allergy_information.recipe
 
 import android.content.Context
 import android.os.Bundle
@@ -17,7 +17,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentRecipeBinding
-import com.example.healthc.presentation.recipe.adapter.RecipeAdapter
+import com.example.healthc.presentation.allergy_information.recipe.adapter.RecipeAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach

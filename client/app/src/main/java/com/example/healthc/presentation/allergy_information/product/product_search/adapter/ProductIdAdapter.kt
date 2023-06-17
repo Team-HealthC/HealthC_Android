@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.product.product_search.adapter
+package com.example.healthc.presentation.allergy_information.product.product_search.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

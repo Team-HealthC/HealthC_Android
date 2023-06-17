@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.recipe.adapter
+package com.example.healthc.presentation.allergy_information.recipe.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

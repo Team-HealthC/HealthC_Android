@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.product.product_search
+package com.example.healthc.presentation.allergy_information.product.product_search
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,7 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentProductSearchBinding
-import com.example.healthc.presentation.product.product_search.adapter.ProductIdAdapter
+import com.example.healthc.presentation.allergy_information.product.product_search.adapter.ProductIdAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach

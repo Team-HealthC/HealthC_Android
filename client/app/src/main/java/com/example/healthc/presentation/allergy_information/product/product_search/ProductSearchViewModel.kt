@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.product.product_search
+package com.example.healthc.presentation.allergy_information.product.product_search
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -2,11 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.product.product_search.ProductSearchFragment">
+    tools:context=".presentation.allergy_information.product.product_search.ProductSearchFragment">
     <data>
         <variable
             name="viewModel"
-            type="com.example.healthc.presentation.product.product_search.ProductSearchViewModel"
+            type="com.example.healthc.presentation.allergy_information.product.product_search.ProductSearchViewModel"
             />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout

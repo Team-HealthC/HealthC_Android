@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.recipe
+package com.example.healthc.presentation.allergy_information.recipe
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
