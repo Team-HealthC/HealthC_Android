@@ -12,8 +12,8 @@ class ObjectDetectionRepositoryImpl @Inject constructor(
     private val objectDetectionDataSource: ObjectDetectionDataSource,
     private val recipeDataSource: RecipeDataSource
 ): ObjectDetectionRepository{
-    override suspend fun postFoodImage(encodedImage: String): Resource<DetectedObject> {
-        return objectDetectionDataSource.postFoodImage(encodedImage)
+    override suspend fun postFoodImage(image: ByteArray): Resource<DetectedObject> {
+        return objectDetectionDataSource.postFoodImage(image)
     }
 
     override suspend fun getIngredients(dish: String): Resource<Ingredient> {
