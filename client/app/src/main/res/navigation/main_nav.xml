@@ -6,7 +6,7 @@
     app:startDestination="@id/permissionsFragment">
     <fragment
         android:id="@+id/cameraFragment"
-        android:name="com.example.healthc.presentation.camera.CameraFragment"
+        android:name="com.example.healthc.presentation.home.camera.CameraFragment"
         android:label="fragment_camera"
         tools:layout="@layout/fragment_camera" >
         <action
@@ -41,7 +41,7 @@
     </fragment>
     <fragment
         android:id="@+id/permissionsFragment"
-        android:name="com.example.healthc.presentation.camera.PermissionsFragment"
+        android:name="com.example.healthc.presentation.home.camera.PermissionsFragment"
         android:label="PermissionsFragment" >
         <action
             android:id="@+id/action_permissionsFragment_to_cameraFragment"
@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/textDetectionFragment"
-        android:name="com.example.healthc.presentation.text_detection.TextDetectionFragment"
+        android:name="com.example.healthc.presentation.ml.text_detection.TextDetectionFragment"
         android:label="TextDetectionFragment"
         tools:layout="@layout/fragment_text_detection" >
         <argument
@@ -85,7 +85,7 @@
     </fragment>
     <fragment
         android:id="@+id/recipeSearchFragment"
-        android:name="com.example.healthc.presentation.recipe.RecipeSearchFragment"
+        android:name="com.example.healthc.presentation.allergy_information.recipe.RecipeSearchFragment"
         android:label="RecipeSearchFragment"
         tools:layout="@layout/fragment_recipe_search" >
         <action
@@ -101,7 +101,7 @@
     </fragment>
     <fragment
         android:id="@+id/recipeFragment"
-        android:name="com.example.healthc.presentation.recipe.RecipeFragment"
+        android:name="com.example.healthc.presentation.allergy_information.recipe.RecipeFragment"
         android:label="RecipeFragment"
         tools:layout="@layout/fragment_recipe" >
         <argument
@@ -113,7 +113,7 @@
     </fragment>
     <fragment
         android:id="@+id/objectDetectionFragment"
-        android:name="com.example.healthc.presentation.object_detection.ObjectDetectionFragment"
+        android:name="com.example.healthc.presentation.ml.object_detection.ObjectDetectionFragment"
         android:label="ObjectDetectionFragment"
         tools:layout="@layout/fragment_object_detection" >
         <argument
@@ -125,7 +125,7 @@
     </fragment>
     <fragment
         android:id="@+id/productSearchFragment"
-        android:name="com.example.healthc.presentation.product.product_search.ProductSearchFragment"
+        android:name="com.example.healthc.presentation.allergy_information.product.product_search.ProductSearchFragment"
         android:label="ProductSearchFragment"
         tools:layout="@layout/fragment_product_search" >
         <action
@@ -141,7 +141,7 @@
     </fragment>
     <fragment
         android:id="@+id/productFragment"
-        android:name="com.example.healthc.presentation.product.ProductFragment"
+        android:name="com.example.healthc.presentation.allergy_information.product.ProductFragment"
         android:label="ProductFragment"
         tools:layout="@layout/fragment_product" >
         <action
@@ -153,7 +153,7 @@
     </fragment>
     <fragment
         android:id="@+id/korProductFragment"
-        android:name="com.example.healthc.presentation.kor_product.KorProductFragment"
+        android:name="com.example.healthc.presentation.allergy_information.kor_product.KorProductFragment"
         android:label="KorProductFragment"
         tools:layout="@layout/fragment_kor_product" >
         <action

@@ -1,4 +1,4 @@
-package com.example.healthc.data.dto.ingredient
+package com.example.healthc.data.dto.recipe
 
 import com.example.healthc.domain.model.recipe.Ingredient
 
@@ -17,30 +17,10 @@ data class IngredientDto(
 }
 
 data class IngredientResultDto(
-    val id: Int,
-    val image: String,
-    val imageType: String,
-    val likes: Int,
-    val missedIngredientCount: Int,
     val missedIngredients: List<MissedIngredientDto>,
-    val title: String,
-    val unusedIngredients: List<String>,
-    val usedIngredientCount: Int,
-    val usedIngredients: List<String>
 )
 
 data class MissedIngredientDto(
-    val aisle: String,
-    val amount: Double,
-    val extendedName: String,
-    val id: Int,
-    val image: String,
-    val meta: List<String>,
     val name: String,
-    val original: String,
-    val originalName: String,
-    val unit: String,
-    val unitLong: String,
-    val unitShort: String
 )
 

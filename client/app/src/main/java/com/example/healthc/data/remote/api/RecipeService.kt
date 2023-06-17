@@ -1,7 +1,7 @@
 package com.example.healthc.data.remote.api
 
 import com.example.healthc.BuildConfig
-import com.example.healthc.data.dto.ingredient.IngredientDto
+import com.example.healthc.data.dto.recipe.IngredientDto
 import com.example.healthc.data.dto.recipe.RecipeDto
 import okhttp3.ResponseBody
 import retrofit2.http.GET
