@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.camera
+package com.example.healthc.presentation.home.camera
 
 import android.Manifest
 import android.content.Context

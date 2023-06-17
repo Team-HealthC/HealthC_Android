@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.main
+package com.example.healthc.presentation.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

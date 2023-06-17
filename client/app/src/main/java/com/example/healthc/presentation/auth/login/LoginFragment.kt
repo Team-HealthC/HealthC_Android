@@ -16,7 +16,7 @@ import com.example.healthc.R
 import com.example.healthc.databinding.FragmentLoginBinding
 import com.example.healthc.domain.utils.Resource
 import com.example.healthc.presentation.auth.AuthViewModel
-import com.example.healthc.presentation.main.MainActivity
+import com.example.healthc.presentation.home.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach

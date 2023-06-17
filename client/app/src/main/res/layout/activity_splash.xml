@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.splash.SplashActivity">
+    tools:context=".presentation.home.SplashActivity">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/splash_image"

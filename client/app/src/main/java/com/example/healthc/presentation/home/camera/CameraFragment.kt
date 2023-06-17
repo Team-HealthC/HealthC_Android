@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.camera
+package com.example.healthc.presentation.home.camera
 
 import android.content.ContentValues
 import android.content.Context
@@ -24,11 +24,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentCameraBinding
-import com.example.healthc.presentation.camera.contract.PickSinglePhotoContract
+import com.example.healthc.presentation.home.camera.contract.PickSinglePhotoContract
 import com.example.healthc.utils.getCurrentFileName
 import com.example.healthc.presentation.widget.CameraStateDialog
 import com.example.healthc.presentation.widget.SearchChoiceDialog
 import com.google.common.util.concurrent.ListenableFuture
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import land.sungbin.systemuicontroller.setNavigationBarColor
 import timber.log.Timber
 import java.util.concurrent.ExecutorService
@@ -56,7 +58,7 @@ class CameraFragment : Fragment() {
         super.onAttach(context)
         singlePhotoPickerLauncher =  registerForActivityResult(PickSinglePhotoContract()) { imageUri: Uri? ->
             if (imageUri != null) {
-                navigateToImageProcess(imageUri.toString())
+                navigateToML(imageUri.toString())
             }
         }
     }
@@ -102,6 +104,7 @@ class CameraFragment : Fragment() {
     private fun initButton(){
         binding.CaptureImageButton.setOnClickListener{
             captureImage()
+            binding.CaptureImageButton.isEnabled = false
         }
 
         binding.SwitchCameraButton.setOnClickListener{
@@ -181,7 +184,7 @@ class CameraFragment : Fragment() {
         imageCapture.takePicture(outputFileOptions, cameraExecutor,
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                    navigateToImageProcess(outputFileResults.savedUri.toString())
+                    navigateToML(outputFileResults.savedUri.toString())
                 }
 
                 override fun onError(exception: ImageCaptureException) {
@@ -189,10 +192,7 @@ class CameraFragment : Fragment() {
                 }
             }
         )
-
-        // Capture effect
-        startCameraSound()
-        startCameraScreenAnimation()
+        startCaptureSound()
     }
 
     private fun showSearchDialog(){
@@ -213,21 +213,12 @@ class CameraFragment : Fragment() {
         ).show()
     }
 
-    private fun startCameraSound(){
+    private fun startCaptureSound(){
         cameraSound.play(SHUTTER_CLICK) // camera sound
     }
 
-    private fun startCameraScreenAnimation(){
-        // Display flash animation to indicate that photo was captured
-        binding.root.postDelayed({
-            binding.root.foreground = ColorDrawable(Color.WHITE)
-            binding.root.postDelayed(
-                { binding.root.foreground = null }, ANIMATION_FAST_MILLIS)
-        }, ANIMATION_SLOW_MILLIS)
-    }
-
-    private fun navigateToImageProcess(imageUrl : String) {
-        lifecycleScope.launchWhenStarted {
+    private fun navigateToML(imageUrl : String) {
+        lifecycleScope.launch(Dispatchers.Main) {
             val currentCamera = binding.cameraStateTextView.text.toString()
             when(currentCamera){
                 IMAGE_PROCESS_ENG -> {
