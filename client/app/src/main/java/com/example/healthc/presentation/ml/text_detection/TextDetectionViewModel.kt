@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.text_detection
+package com.example.healthc.presentation.ml.text_detection
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

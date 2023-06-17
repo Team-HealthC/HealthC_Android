@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.object_detection
+package com.example.healthc.presentation.ml.object_detection
 
 import android.net.Uri
 import android.os.Bundle
@@ -16,14 +16,13 @@ import androidx.navigation.fragment.navArgs
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentObjectDetectionBinding
 import com.example.healthc.domain.model.object_detection.DetectedObject
-import com.example.healthc.presentation.object_detection.ObjectDetectionViewModel.UiEvent
+import com.example.healthc.presentation.ml.object_detection.ObjectDetectionViewModel.UiEvent
 import com.example.healthc.presentation.widget.NegativeSignDialog
 import com.example.healthc.presentation.widget.PositiveSignDialog
 import com.example.healthc.presentation.widget.ObjectDetectionDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import java.util.*
 
 @AndroidEntryPoint
 class ObjectDetectionFragment : Fragment() {
@@ -64,8 +63,7 @@ class ObjectDetectionFragment : Fragment() {
         if(inputStream != null) {
             val bytes = ByteArray(inputStream.available())
             inputStream.read(bytes)
-            val encodedImage: String = Base64.getUrlEncoder().encodeToString(bytes)
-            viewModel.searchCategory(encodedImage)
+            viewModel.postImage(bytes)
         }else{
             Toast.makeText(requireContext(), "알 수 없는 오류가 발생하였습니다.", Toast.LENGTH_SHORT).show()
             navigateToCamera()
@@ -73,11 +71,8 @@ class ObjectDetectionFragment : Fragment() {
     }
 
     private fun navigateToCamera(){
-        lifecycleScope.launchWhenStarted {
-            val direction = ObjectDetectionFragmentDirections
-                .actionObjectDetectionFragmentToCameraFragment()
-            findNavController().navigate(direction)
-        }
+        val direction = ObjectDetectionFragmentDirections.actionObjectDetectionFragmentToCameraFragment()
+        findNavController().navigate(direction)
     }
 
     private fun observeData(){

@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.object_detection
+package com.example.healthc.presentation.ml.object_detection
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -19,16 +19,15 @@ class ObjectDetectionViewModel @Inject constructor(
 ) : ViewModel() {
 
     // imageUrl
-    private val _imageUrl = MutableStateFlow("")
-    val imageUrl : StateFlow<String>
-        get() = _imageUrl
+    private val _imageUrl : MutableStateFlow<String> = MutableStateFlow("")
+    val imageUrl : StateFlow<String> get() = _imageUrl
 
     private val _searchCategoryUiEvent = MutableStateFlow<UiEvent>(UiEvent.Unit)
     val searchCategoryUiEvent get() = _searchCategoryUiEvent
 
-    fun searchCategory(encodedImage: String) {
+    fun postImage(image: ByteArray) {
         viewModelScope.launch {
-            val result = repository.postFoodImage(encodedImage)
+            val result = repository.postFoodImage(image)
             when(result){
                 is Resource.Loading -> {}
 

@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.text_detection
+package com.example.healthc.presentation.ml.text_detection
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,7 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentTextDetectionBinding
-import com.example.healthc.presentation.text_detection.TextDetectionViewModel.ImageProcessEvent
+import com.example.healthc.presentation.ml.text_detection.TextDetectionViewModel.ImageProcessEvent
 import com.example.healthc.presentation.widget.NegativeSignDialog
 import com.example.healthc.presentation.widget.PositiveSignDialog
 import com.google.mlkit.vision.common.InputImage
