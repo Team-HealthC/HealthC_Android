@@ -15,7 +15,7 @@ import com.example.healthc.R
 import com.example.healthc.databinding.FragmentUserInfoBinding
 import com.example.healthc.domain.utils.Resource
 import com.example.healthc.presentation.auth.AuthViewModel
-import com.example.healthc.presentation.main.MainActivity
+import com.example.healthc.presentation.home.MainActivity
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
