@@ -9,7 +9,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.example.healthc.BuildConfig
 import com.example.healthc.R
-import timber.log.Timber
 
 object BindingAdapter {
 
@@ -29,17 +28,14 @@ object BindingAdapter {
 
     @JvmStatic
     @BindingAdapter("app:imageIngredientUrl", "app:placeholder")
-    fun loadIngredientImage(view: ImageView, src: String?, placeHolder: Drawable) {
-        if (src != null) {
-            Timber.d(src)
-            Glide.with(view.context)
-                .load(BuildConfig.SPOON_API_INGREDIENT_URL + src)
-                .placeholder(placeHolder)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .apply(RequestOptions().fitCenter())
-                .error(R.drawable.health_c)
-                .into(view)
-        }
+    fun loadIngredientImage(view: ImageView, src: Int, placeHolder: Drawable) {
+        Glide.with(view.context)
+            .load(src)
+            .placeholder(placeHolder)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .apply(RequestOptions().fitCenter())
+            .error(R.drawable.health_c)
+            .into(view)
     }
 
     @JvmStatic
