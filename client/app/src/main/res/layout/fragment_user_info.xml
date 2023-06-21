@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sign_up_info"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,8 +29,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/hint_info"
-            android:textSize="16sp"
-            android:layout_marginTop="16dp"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/signUpInfoTextView" />
 
@@ -38,7 +38,6 @@
             android:id="@+id/signInFoAllergyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
             android:text="@string/allergy"
             android:textColor="@color/black"
@@ -49,9 +48,10 @@
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/allergy_chip_group"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            app:chipSpacingHorizontal="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/signInFoAllergyText">
@@ -62,6 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/peach"
+                android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
                 />
 
@@ -70,8 +71,8 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:text="@string/pork"
+                android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
                 />
 
@@ -80,8 +81,8 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:text="@string/egg"
+                android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
                 />
 
@@ -90,8 +91,8 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:text="@string/milk"
+                android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
                 />
 
@@ -100,8 +101,8 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:text="@string/crustacean"
+                android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
                 />
 
@@ -110,9 +111,9 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:background="@color/green"
                 android:text="@string/soyBean"
+                android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
                 />
 
@@ -121,8 +122,8 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:text="@string/peanuts"
+                android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
                 />
 
@@ -131,8 +132,8 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:text="@string/wheat"
+                android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
                 />
 
@@ -141,8 +142,8 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:text="@string/shellfish"
+                android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
                 />
 
@@ -151,9 +152,9 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:background="@color/green"
                 android:text="@string/fish"
+                android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
                 />
 
@@ -162,8 +163,8 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:text="@string/nuts"
+                android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
                 />
 

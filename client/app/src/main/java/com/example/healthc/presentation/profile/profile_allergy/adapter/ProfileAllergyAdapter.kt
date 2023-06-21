@@ -1,5 +1,6 @@
 package com.example.healthc.presentation.profile.profile_allergy.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,7 +11,9 @@ import com.example.healthc.presentation.profile.profile_allergy.adapter.ProfileA
 import com.example.healthc.presentation.profile.model.ProfileUiModel
 import com.example.healthc.utils.toIngredientEng
 
-class ProfileAllergyAdapter : ListAdapter<String, ProfileAllergyViewHolder>(AllergyDiffCallback){
+class ProfileAllergyAdapter(
+    private val context: Context
+) : ListAdapter<String, ProfileAllergyViewHolder>(AllergyDiffCallback){
 
     companion object {
         val AllergyDiffCallback = object : DiffUtil.ItemCallback<String>() {
@@ -39,7 +42,8 @@ class ProfileAllergyAdapter : ListAdapter<String, ProfileAllergyViewHolder>(Alle
         fun bind(allergy : String) {
             binding.item = ProfileUiModel(
                 allergy = allergy,
-                imageSrc = "${allergy.toIngredientEng()}.png"
+                imageSrc = context.resources.getIdentifier(
+                    allergy.toIngredientEng(), "drawable", context.packageName)
             )
         }
     }

@@ -56,19 +56,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:fontFamily="@font/samsung_bold"
             android:text="@string/food_title"
+            android:fontFamily="@font/sc_dream_nor"
             android:textColor="@color/black"
-            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ingredientSearchCardView" />
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/food_allergy_chip_group"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:padding="16dp"
+            android:layout_margin="16dp"
+            app:chipSpacingHorizontal="16dp"
             app:singleSelection="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -80,7 +79,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/peach"
+                android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
+                app:checkedIconEnabled="false"
                 />
 
             <com.google.android.material.chip.Chip
@@ -88,9 +89,10 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:text="@string/pork"
+                android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
+                app:checkedIconEnabled="false"
                 />
 
             <com.google.android.material.chip.Chip
@@ -98,9 +100,10 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:text="@string/egg"
+                android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
+                app:checkedIconEnabled="false"
                 />
 
             <com.google.android.material.chip.Chip
@@ -108,9 +111,10 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:text="@string/milk"
+                android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
+                app:checkedIconEnabled="false"
                 />
 
             <com.google.android.material.chip.Chip
@@ -118,9 +122,10 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:text="@string/crustacean"
+                android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
+                app:checkedIconEnabled="false"
                 />
 
             <com.google.android.material.chip.Chip
@@ -128,10 +133,11 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:background="@color/green"
                 android:text="@string/soyBean"
+                android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
+                app:checkedIconEnabled="false"
                 />
 
             <com.google.android.material.chip.Chip
@@ -139,9 +145,10 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:text="@string/peanuts"
+                android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
+                app:checkedIconEnabled="false"
                 />
 
             <com.google.android.material.chip.Chip
@@ -149,9 +156,10 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:text="@string/wheat"
+                android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
+                app:checkedIconEnabled="false"
                 />
 
             <com.google.android.material.chip.Chip
@@ -159,9 +167,10 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:text="@string/shellfish"
+                android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
+                app:checkedIconEnabled="false"
                 />
 
             <com.google.android.material.chip.Chip
@@ -169,10 +178,11 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:background="@color/green"
                 android:text="@string/fish"
+                android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
+                app:checkedIconEnabled="false"
                 />
 
             <com.google.android.material.chip.Chip
@@ -180,9 +190,10 @@
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:text="@string/nuts"
+                android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
+                app:checkedIconEnabled="false"
                 />
 
         </com.google.android.material.chip.ChipGroup>

@@ -98,10 +98,14 @@ class ProfileFragment : Fragment() {
             authViewModel.signOut() // 로그아웃
             startAuthActivity() // 로그인 화면으로 전환
         }
+
+        binding.backToCameraButton.setOnClickListener {
+            navigateToCamera()
+        }
     }
 
     private fun initAdapter(){
-        profileAllergyAdapter = ProfileAllergyAdapter()
+        profileAllergyAdapter = ProfileAllergyAdapter(requireContext())
 
         with(binding){
             profileAllergyRecyclerView.layoutManager = LinearLayoutManager(requireContext(),
@@ -126,17 +130,13 @@ class ProfileFragment : Fragment() {
     }
 
     private fun navigateToEditProfile(){
-        lifecycleScope.launchWhenStarted {
-            val direction = ProfileFragmentDirections.actionProfileFragmentToProfileAllergyFragment()
-            findNavController().navigate(direction)
-        }
+        val direction = ProfileFragmentDirections.actionProfileFragmentToProfileAllergyFragment()
+        findNavController().navigate(direction)
     }
 
     private fun navigateToCamera(){
-        lifecycleScope.launchWhenStarted {
-            val direction = ProfileFragmentDirections.actionProfileFragmentToCameraFragment()
-            findNavController().navigate(direction)
-        }
+        val direction = ProfileFragmentDirections.actionProfileFragmentToCameraFragment()
+        findNavController().navigate(direction)
     }
 
     private fun onBackPressButton(){

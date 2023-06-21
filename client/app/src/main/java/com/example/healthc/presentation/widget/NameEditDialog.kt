@@ -1,15 +1,16 @@
 package com.example.healthc.presentation.widget
 
+import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.view.WindowManager
 import com.example.healthc.databinding.DialogNameEditBinding
 import com.example.healthc.domain.use_case.ValidateName
-import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class NameEditDialog (
     context : Context,
     private val onDoneButtonClick: (String) -> Unit
-): BottomSheetDialog(context){
+): Dialog(context){
 
     private val binding by lazy { DialogNameEditBinding.inflate(layoutInflater) }
     private val validateName by lazy { ValidateName() }
@@ -17,6 +18,7 @@ class NameEditDialog (
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.setContentView(binding.root)
+        resizeDialog()
         initViews()
     }
 
@@ -39,5 +41,12 @@ class NameEditDialog (
         else{
             return true
         }
+    }
+
+    private fun resizeDialog() {
+        window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
     }
 }

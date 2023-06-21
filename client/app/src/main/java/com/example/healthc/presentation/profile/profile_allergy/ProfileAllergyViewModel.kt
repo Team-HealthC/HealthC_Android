@@ -8,7 +8,9 @@ import com.example.healthc.domain.use_case.GetProfile
 import com.example.healthc.domain.use_case.UpdateProfile
 import com.example.healthc.domain.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,54 +21,50 @@ class ProfileAllergyViewModel @Inject constructor(
     private val getProfileUseCase: GetProfile
 ): ViewModel() {
 
-    private val _profileUiEvent = MutableStateFlow<ProfileUiEvent>(ProfileUiEvent.Unit)
-    val profileUiEvent : StateFlow<ProfileUiEvent>
-        get() = _profileUiEvent
+    private val _profileUiEvent = MutableSharedFlow<ProfileUiEvent>()
+    val profileUiEvent : SharedFlow<ProfileUiEvent> get() = _profileUiEvent
 
-    val userAllergy = MutableLiveData<String>()
-    val userName = MutableLiveData<String>()
-    private val modifiedAllergyList = MutableLiveData<List<String>>(emptyList())
-    private val modifiedDiseaseList = MutableLiveData<List<String>>(emptyList())
+    private val _profileAllergy = MutableStateFlow<List<String>>(emptyList())
+    val profileAllergy : StateFlow<List<String>> get() = _profileAllergy
 
-    init{
-        getProfile()
-    }
+    private val _profileUserName = MutableStateFlow<String>("")
+    val profileUserName : StateFlow<String> get() = _profileUserName
 
-    private fun getProfile() {
+    fun getProfile() {
         viewModelScope.launch {
             val profileResult = getProfileUseCase()
             when(profileResult){
                 is Resource.Success -> {
                     val userInfo = profileResult.result
-                    userName.value = userInfo.name
-                    userAllergy.value = userInfo.allergy.joinToString(separator = ", ")
+                    _profileUserName.value = userInfo.name
+                    _profileAllergy.value = userInfo.allergy
                 }
                 is Resource.Failure -> {
-                    _profileUiEvent.value = ProfileUiEvent.Failure("사용자 정보를 가져오는데 실패하였습니다.")
+                    _profileUiEvent.emit(ProfileUiEvent.Failure("사용자 정보를 가져오는데 실패하였습니다."))
                 }
                 is Resource.Loading -> { }
             }
         }
     }
 
-    fun setAllergy(allergyList : MutableList<String>){
-        this.modifiedAllergyList.value = allergyList.toList()
+    fun setAllergy(allergyList : List<String>){
+        _profileAllergy.value = allergyList
     }
 
     fun updateProfile(){
         viewModelScope.launch{
             val profileEditResult = updateProfileUseCase(
                 UserInfo(
-                    requireNotNull(userName.value),
-                    requireNotNull(modifiedAllergyList.value)
+                    _profileUserName.value,
+                    _profileAllergy.value
                 )
             )
             when(profileEditResult){
                 is Resource.Success -> {
-                    _profileUiEvent.value = ProfileUiEvent.Success
+                    _profileUiEvent.emit(ProfileUiEvent.Success)
                 }
                 is Resource.Failure -> {
-                    _profileUiEvent.value = ProfileUiEvent.Failure("사용자 정보를 업데이트 하는데 실패하였습니다.")
+                    _profileUiEvent.emit(ProfileUiEvent.Failure("사용자 정보를 업데이트 하는데 실패하였습니다."))
                 }
                 is Resource.Loading -> { }
             }
@@ -76,6 +74,5 @@ class ProfileAllergyViewModel @Inject constructor(
     sealed class ProfileUiEvent {
         data class Failure(val message: String?) : ProfileUiEvent()
         object Success : ProfileUiEvent()
-        object Unit : ProfileUiEvent()
     }
 }
