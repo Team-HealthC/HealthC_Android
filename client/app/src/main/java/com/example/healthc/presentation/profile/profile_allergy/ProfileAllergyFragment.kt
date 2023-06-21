@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.forEach
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -48,7 +49,6 @@ class ProfileAllergyFragment : Fragment(){
         viewModel.profileUiEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                  when(it){
-                     is ProfileUiEvent.Unit -> {}
                      is ProfileUiEvent.Success -> {
                          navigateToProfile() 
                      }
@@ -57,23 +57,42 @@ class ProfileAllergyFragment : Fragment(){
                      }
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
+
+        viewModel.profileAllergy.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+            .onEach { list ->
+                if(list.isNotEmpty()){
+                    val chipGroup = binding.allergyChipGroup
+                    chipGroup.forEach { chip ->
+                        val text = chipGroup.findViewById<Chip>(chip.id).text.toString()
+                        if(text in list){
+                            chipGroup.check(chip.id)
+                        }
+                    }
+                    binding.profileEditUserHaveText.text = list.joinToString(", ")
+                }
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     private fun initView(){
+        viewModel.getProfile()
+
         binding.allergyChipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
             val allergyList : MutableList<String> = mutableListOf()
             checkedIds.forEach{ id ->
                 allergyList.add(group.findViewById<Chip>(id).text.toString())
             }
-            viewModel.setAllergy(allergyList)
+            viewModel.setAllergy(allergyList.toList())
+            binding.profileEditUserHaveText.text = allergyList.joinToString(", ")
+        }
+
+        binding.backToProfileButton.setOnClickListener {
+            navigateToProfile()
         }
     }
 
     private fun navigateToProfile(){
-        lifecycleScope.launchWhenStarted {
-            val direction = ProfileAllergyFragmentDirections.actionProfileAllergyFragmentToProfileFragment()
-            findNavController().navigate(direction)
-        }
+        val direction = ProfileAllergyFragmentDirections.actionProfileAllergyFragmentToProfileFragment()
+        findNavController().navigate(direction)
     }
 
     override fun onDestroyView() {
