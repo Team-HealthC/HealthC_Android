@@ -4,7 +4,7 @@ fun String.toIngredientEng(): String =
     when(this){
         "돼지고기" -> { "pork" }
 
-        "대두" -> { "soyBean" }
+        "대두" -> { "soybean" }
 
         "땅콩" -> { "peanut" }
 
