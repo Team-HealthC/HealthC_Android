@@ -2,10 +2,10 @@ package com.example.healthc.domain.model.product
 
 data class Product(
     val id: Int,
-    val ingredientList: String,
-    val likes: Int,
-    val nutrients: List<String>,
-    val title: String
+    val name: String,
+    val allergiesFree : String,
+    val ingredients: String,
+    val nutrients: String
 ){
-    constructor() : this(0, "", 0, emptyList(),"")
+    constructor() : this(0,"", "", "", "")
 }
