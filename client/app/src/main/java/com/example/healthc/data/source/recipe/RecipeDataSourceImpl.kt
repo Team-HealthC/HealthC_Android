@@ -47,7 +47,7 @@ class RecipeDataSourceImpl @Inject constructor(
         try{
             val bytes = service.getNutritionLabel(id = id).bytes()
             Resource.Success(
-                NutritionLabel(Base64.encodeToString(bytes, Base64.DEFAULT))
+                NutritionLabel(bytes)
             )
         } catch (e : Exception){
             e.printStackTrace()
