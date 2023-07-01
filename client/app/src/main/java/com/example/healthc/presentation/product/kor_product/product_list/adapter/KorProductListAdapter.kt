@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.allergy_information.kor_product.adapter
+package com.example.healthc.presentation.product.kor_product.product_list.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,15 +7,17 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.healthc.databinding.ItemKorProductBinding
 import com.example.healthc.domain.model.kor_product.KorProductInfo
-import com.example.healthc.presentation.allergy_information.kor_product.adapter.KorProductAdapter.KorProductViewHolder
+import com.example.healthc.presentation.product.kor_product.product_list.adapter.KorProductListAdapter.KorProductViewHolder
 
-class KorProductAdapter : ListAdapter<KorProductInfo, KorProductViewHolder>(KorProductInfoCallback){
+class KorProductListAdapter(
+    private val onItemClick : (Int) -> Unit
+) : ListAdapter<KorProductInfo, KorProductViewHolder>(KorProductInfoCallback){
     
     companion object {
         val KorProductInfoCallback = object : DiffUtil.ItemCallback<KorProductInfo>(){
             override fun areItemsTheSame(
                 oldItem: KorProductInfo, newItem: KorProductInfo): Boolean {
-                return oldItem.rnum == newItem.rnum
+                return oldItem.name == newItem.name
             }
 
             override fun areContentsTheSame(
@@ -42,6 +44,9 @@ class KorProductAdapter : ListAdapter<KorProductInfo, KorProductViewHolder>(KorP
         : RecyclerView.ViewHolder(binding.root) {
         fun bind(item : KorProductInfo) {
             binding.item = item
+            binding.root.setOnClickListener {
+                onItemClick(1) //TODO 수정
+            }
         }
     }
 }

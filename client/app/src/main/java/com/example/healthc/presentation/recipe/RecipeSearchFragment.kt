@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.allergy_information.recipe
+package com.example.healthc.presentation.recipe
 
 import android.content.Context
 import android.os.Bundle

@@ -22,16 +22,16 @@ data class ProductDto(
 ){
     fun toProduct(): Product = Product(
         id = id,
-        ingredientList = ingredientList,
-        likes = likes,
-        title = title,
-        nutrients = nutrition.nutrients.map{ it.name }
+        name = title,
+        allergiesFree = badges.joinToString(", "),
+        ingredients = ingredientList,
+        nutrients = nutrition.nutrients.map{ it.name }.joinToString(", ")
     )
 }
 
 data class ProductServingsDto(
     val number: Int,
-    val size: Int?,
+    val size: Double?,
     val unit: String
 )
 

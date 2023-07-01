@@ -1,7 +1,6 @@
 package com.example.healthc.utils
 
 import android.graphics.drawable.Drawable
-import android.util.Base64
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -40,8 +39,8 @@ object BindingAdapter {
 
     @JvmStatic
     @BindingAdapter("app:imageProductUrl", "app:placeholder")
-    fun loadProductImage(view: ImageView, src: String?, placeHolder: Drawable) {
-        if (src != null) {
+    fun loadProductImage(view: ImageView, src: Int, placeHolder: Drawable) {
+        if (src != 0) {
             Glide.with(view.context)
                 .load(BuildConfig.SPOON_API_PRODUCT_URL + src + "-90x90.jpeg")
                 .placeholder(placeHolder)
@@ -53,12 +52,11 @@ object BindingAdapter {
     }
 
     @JvmStatic
-    @BindingAdapter("app:ByteArrayImage", "app:placeholder")
-    fun loadByteArrayImage(view: ImageView, src: String?, placeHolder: Drawable) {
-        if (src != null) {
-            val image: ByteArray = Base64.decode(src, Base64.DEFAULT)
+    @BindingAdapter("app:encodedImage", "app:placeholder")
+    fun loadEncodedImage(view: ImageView, src: ByteArray, placeHolder: Drawable) {
+        if (src.isNotEmpty()) {
             Glide.with(view.context)
-                .load(image)
+                .load(src)
                 .placeholder(placeHolder)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .apply(RequestOptions().fitCenter())

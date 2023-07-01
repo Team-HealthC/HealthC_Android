@@ -8,13 +8,10 @@ data class KorProduct(
 )
 
 data class KorProductInfo(
-    val allergy: String, // 알러지 유발 물질
-    val capacity: String, // 용량
-    val imgurl1: String, // 이미지 소스
-    val manufacture: String, // 제조사
+    val allergies: String, // 알러지 유발 물질
+    val image: String, // 이미지 소스
     val nutrient: String, // 영양
-    val prdkind: String, // 제품 카테고리
-    val prdlstNm: String, // 제품 이름
-    val rawmtrl: String, // 원재료 구성
-    val rnum: String, // 번호
+    val category: String, // 제품 카테고리
+    val name: String, // 제품 이름
+    val rawMaterials : String, // 원재료 구성
 )

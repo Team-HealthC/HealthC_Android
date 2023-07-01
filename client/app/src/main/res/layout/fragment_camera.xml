@@ -10,18 +10,6 @@
         android:layout_height="match_parent"
         android:background="@color/black">
 
-        <TextView
-            android:id="@+id/cameraStateTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:textColor="@color/white"
-            android:elevation="1dp"
-            tools:text="hello world"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/camera_upper_cardView" />
-
         <androidx.cardview.widget.CardView
             android:id="@+id/camera_upper_cardView"
             android:layout_width="match_parent"
@@ -36,30 +24,6 @@
                 android:layout_height="match_parent"
                 android:padding="8dp">
 
-                <ImageButton
-                    android:id="@+id/toggle_camera_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_camera"
-                    app:backgroundTint="@android:color/transparent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/goToSearchButton"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/goToProfileButton"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/resize_ratio_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_aspect_ratio"
-                    app:backgroundTint="@android:color/transparent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/goToSearchButton"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/white" />
-
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/goToProfileButton"
                     android:layout_width="wrap_content"
@@ -67,9 +31,7 @@
                     android:src="@drawable/ic_baseline_person"
                     app:backgroundTint="@android:color/transparent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/toggle_camera_button"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:tint="@color/white" />
 
@@ -80,9 +42,7 @@
                     android:src="@drawable/ic_baseline_search_24"
                     app:backgroundTint="@android:color/transparent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/resize_ratio_button"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/toggle_camera_button"
+                    app:layout_constraintEnd_toStartOf="@id/goToProfileButton"
                     app:layout_constraintTop_toTopOf="parent"
                     app:tint="@color/white" />
 
@@ -93,45 +53,94 @@
             android:id="@+id/camera_downer_cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@android:color/transparent"
+            app:cardBackgroundColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="16dp">
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/camera_chip_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:chipSpacingHorizontal="32dp"
+                    app:selectionRequired="true"
+                    app:singleSelection="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/kor_ocr_chip"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/korea_ocr_camera"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        app:checkedIconEnabled="false"
+                        app:chipBackgroundColor="@color/camera_chip_background" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/od_camera_chip"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/object_detection_camera"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        app:checkedIconEnabled="false"
+                        app:chipBackgroundColor="@color/camera_chip_background" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/eng_ocr_chip"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/english_ocr_camera"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        app:checkedIconEnabled="false"
+                        app:chipBackgroundColor="@color/camera_chip_background" />
+
+                </com.google.android.material.chip.ChipGroup>
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/goToGalleryButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
+                    android:layout_margin="16dp"
                     android:src="@drawable/ic_baseline_image"
                     app:backgroundTint="@android:color/transparent"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/Capture_image_button"
                     app:layout_constraintEnd_toStartOf="@+id/Capture_image_button"
+                    app:layout_constraintHorizontal_bias="0.3"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/Capture_image_button"
                     app:tint="@color/white" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/Capture_image_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:backgroundTint="@color/green"
+                    android:layout_margin="16dp"
+                    app:backgroundTint="@color/light_gray"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/camera_chip_group" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/Switch_camera_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
                     android:src="@drawable/ic_baseline_switch_camera"
-                    app:backgroundTint="@android:color/transparent"
+                    app:backgroundTint="@color/light_black"
+                    app:layout_constraintHorizontal_bias="0.7"
                     app:layout_constraintBottom_toBottomOf="@+id/Capture_image_button"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/Capture_image_button"
@@ -145,10 +154,10 @@
             android:id="@+id/CameraPreview"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/camera_downer_cardView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/camera_upper_cardView">
 
         </androidx.camera.view.PreviewView>
 

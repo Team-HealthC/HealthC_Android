@@ -35,7 +35,6 @@ data class ProductItemDto(
 data class ProductItemXDto(
     val allergy: String,
     val barcode: String,
-    val capacity: String,
     val imgurl1: String,
     val imgurl2: String,
     val manufacture: String,
@@ -51,14 +50,11 @@ data class ProductItemXDto(
 ){
 
     fun toProductInfo() : KorProductInfo = KorProductInfo(
-        allergy = allergy,
-        capacity = capacity,
-        imgurl1 = imgurl1,
-        manufacture = manufacture,
+        allergies = allergy,
+        image = imgurl1,
         nutrient = nutrient,
-        prdkind = prdkind,
-        prdlstNm = prdlstNm,
-        rawmtrl = rawmtrl,
-        rnum = rnum
+        category = prdkind,
+        name = prdlstNm,
+        rawMaterials = rawmtrl
     )
 }

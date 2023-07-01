@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.allergy_information.product.product_search.adapter
+package com.example.healthc.presentation.product.product.product_list.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.healthc.databinding.ItemProductIdBinding
 import com.example.healthc.domain.model.product.ProductIdInfo
 
-class ProductIdAdapter(
+class ProductListAdapter(
     private val onItemClick : (Int) -> Unit
-) : ListAdapter<ProductIdInfo, ProductIdAdapter.ProductIdViewHolder>(ProductItemCallback){
+) : ListAdapter<ProductIdInfo, ProductListAdapter._ProductListViewHolder>(ProductItemCallback){
     
     companion object {
         val ProductItemCallback = object : DiffUtil.ItemCallback<ProductIdInfo>(){
@@ -28,18 +28,18 @@ class ProductIdAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductIdViewHolder {
-        return ProductIdViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): _ProductListViewHolder {
+        return _ProductListViewHolder(
             ItemProductIdBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         ))
     }
 
-    override fun onBindViewHolder(holder: ProductIdViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: _ProductListViewHolder, position: Int) {
         holder.bind(currentList[position])
     }
 
-    inner class ProductIdViewHolder(private val binding : ItemProductIdBinding)
+    inner class _ProductListViewHolder(private val binding : ItemProductIdBinding)
         : RecyclerView.ViewHolder(binding.root) {
         fun bind(item : ProductIdInfo) {
             binding.item = item
