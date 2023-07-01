@@ -2,11 +2,11 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    tools:context=".presentation.allergy_information.recipe.RecipeFragment" >
+    tools:context=".presentation.recipe.RecipeFragment" >
     <data>
         <variable
             name="viewModel"
-            type="com.example.healthc.presentation.allergy_information.recipe.RecipeViewModel"
+            type="com.example.healthc.presentation.recipe.RecipeViewModel"
             />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout

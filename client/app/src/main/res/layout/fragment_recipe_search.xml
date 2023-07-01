@@ -3,11 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".presentation.allergy_information.recipe.RecipeSearchFragment">
+    tools:context=".presentation.recipe.RecipeSearchFragment">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
+        android:background="@color/light_gray">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/ingredientSearchCardView"
@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" >
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -33,16 +33,19 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
 
-                <EditText
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/searchEditTextView"
+                    android:padding="8dp"
+                    android:background="@drawable/rounded_edit_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
-                    android:background="@color/ic_launcher_background"
                     android:hint="@string/food_search"
+                    android:imeOptions="actionSearch"
                     android:inputType="text"
                     android:singleLine="true"
-                    android:imeOptions="actionSearch"
+                    android:drawableEnd="@drawable/ic_baseline_search_24"
+                    android:drawableTint="@color/black"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/back_to_camera_button"
@@ -51,153 +54,208 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/food_title"
-            android:layout_width="wrap_content"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/allergiesCardView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="@string/food_title"
-            android:fontFamily="@font/sc_dream_nor"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ingredientSearchCardView" />
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/food_allergy_chip_group"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            app:chipSpacingHorizontal="16dp"
-            app:singleSelection="true"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/food_title">
+            app:layout_constraintTop_toBottomOf="@+id/ingredientSearchCardView">
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/peach_chip"
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/peach"
-                android:textColor="@color/chip_text_color"
-                app:chipBackgroundColor="@color/chip_background"
-                app:checkedIconEnabled="false"
-                />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/fork_chip"
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pork"
-                android:textColor="@color/chip_text_color"
-                app:chipBackgroundColor="@color/chip_background"
-                app:checkedIconEnabled="false"
-                />
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/food_allergy_chip_group"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    app:chipSpacingHorizontal="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/food_title"
+                    app:singleSelection="true">
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/egg_chip"
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/egg"
-                android:textColor="@color/chip_text_color"
-                app:chipBackgroundColor="@color/chip_background"
-                app:checkedIconEnabled="false"
-                />
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/peach_chip"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/peach"
+                        android:textColor="@color/chip_text_color"
+                        app:checkedIconEnabled="false"
+                        app:chipBackgroundColor="@color/chip_background" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/milk_chip"
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/milk"
-                android:textColor="@color/chip_text_color"
-                app:chipBackgroundColor="@color/chip_background"
-                app:checkedIconEnabled="false"
-                />
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/fork_chip"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pork"
+                        android:textColor="@color/chip_text_color"
+                        app:checkedIconEnabled="false"
+                        app:chipBackgroundColor="@color/chip_background" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/crustacean_chip"
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/crustacean"
-                android:textColor="@color/chip_text_color"
-                app:chipBackgroundColor="@color/chip_background"
-                app:checkedIconEnabled="false"
-                />
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/egg_chip"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/egg"
+                        android:textColor="@color/chip_text_color"
+                        app:checkedIconEnabled="false"
+                        app:chipBackgroundColor="@color/chip_background" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/bean_chip"
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/green"
-                android:text="@string/soyBean"
-                android:textColor="@color/chip_text_color"
-                app:chipBackgroundColor="@color/chip_background"
-                app:checkedIconEnabled="false"
-                />
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/milk_chip"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/milk"
+                        android:textColor="@color/chip_text_color"
+                        app:checkedIconEnabled="false"
+                        app:chipBackgroundColor="@color/chip_background" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/peanut_chip"
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/peanuts"
-                android:textColor="@color/chip_text_color"
-                app:chipBackgroundColor="@color/chip_background"
-                app:checkedIconEnabled="false"
-                />
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/crustacean_chip"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/crustacean"
+                        android:textColor="@color/chip_text_color"
+                        app:checkedIconEnabled="false"
+                        app:chipBackgroundColor="@color/chip_background" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/wheat_chip"
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/wheat"
-                android:textColor="@color/chip_text_color"
-                app:chipBackgroundColor="@color/chip_background"
-                app:checkedIconEnabled="false"
-                />
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/bean_chip"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/green"
+                        android:text="@string/soyBean"
+                        android:textColor="@color/chip_text_color"
+                        app:checkedIconEnabled="false"
+                        app:chipBackgroundColor="@color/chip_background" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/shellfish_chip"
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/shellfish"
-                android:textColor="@color/chip_text_color"
-                app:chipBackgroundColor="@color/chip_background"
-                app:checkedIconEnabled="false"
-                />
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/peanut_chip"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/peanuts"
+                        android:textColor="@color/chip_text_color"
+                        app:checkedIconEnabled="false"
+                        app:chipBackgroundColor="@color/chip_background" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/fish_chip"
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/green"
-                android:text="@string/fish"
-                android:textColor="@color/chip_text_color"
-                app:chipBackgroundColor="@color/chip_background"
-                app:checkedIconEnabled="false"
-                />
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/wheat_chip"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/wheat"
+                        android:textColor="@color/chip_text_color"
+                        app:checkedIconEnabled="false"
+                        app:chipBackgroundColor="@color/chip_background" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/nuts_chip"
-                style="@style/Widget.MaterialComponents.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/nuts"
-                android:textColor="@color/chip_text_color"
-                app:chipBackgroundColor="@color/chip_background"
-                app:checkedIconEnabled="false"
-                />
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/shellfish_chip"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/shellfish"
+                        android:textColor="@color/chip_text_color"
+                        app:checkedIconEnabled="false"
+                        app:chipBackgroundColor="@color/chip_background" />
 
-        </com.google.android.material.chip.ChipGroup>
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/fish_chip"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/green"
+                        android:text="@string/fish"
+                        android:textColor="@color/chip_text_color"
+                        app:checkedIconEnabled="false"
+                        app:chipBackgroundColor="@color/chip_background" />
 
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/nuts_chip"
+                        style="@style/Widget.MaterialComponents.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/nuts"
+                        android:textColor="@color/chip_text_color"
+                        app:checkedIconEnabled="false"
+                        app:chipBackgroundColor="@color/chip_background" />
+
+                </com.google.android.material.chip.ChipGroup>
+
+                <TextView
+                    android:id="@+id/food_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:fontFamily="@font/sc_dream_nor"
+                    android:text="@string/food_title"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/recipe_search_content_card"
+            android:layout_width="409dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/allergiesCardView" >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/sc_dream_nor"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:text="@string/recipe_search_title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:text="@string/recipe_search_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_baseline_search_24"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
