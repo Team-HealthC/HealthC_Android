@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.allergy_information.product
+package com.example.healthc.presentation.product.product.product_detail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -31,7 +31,7 @@ class ProductFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_product_search, container, false)
+        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_product, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         return binding.root
@@ -67,16 +67,13 @@ class ProductFragment : Fragment() {
     }
 
     private fun initViews(){
-        binding.backToProductButton.setOnClickListener{
-            navigateProduct()
+        binding.backToListButton.setOnClickListener{
+            navigateProductList()
         }
     }
 
-    private fun navigateProduct(){
-        lifecycleScope.launchWhenStarted {
-            val direction = ProductFragmentDirections.actionProductFragmentToProductSearchFragment()
-            findNavController().navigate(direction)
-        }
+    private fun navigateProductList(){
+        findNavController().popBackStack()
     }
 
     override fun onDestroy() {

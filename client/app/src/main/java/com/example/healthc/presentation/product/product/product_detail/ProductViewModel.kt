@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.allergy_information.product
+package com.example.healthc.presentation.product.product.product_detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,6 +8,7 @@ import com.example.healthc.domain.repository.ProductRepository
 import com.example.healthc.domain.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -15,12 +16,14 @@ import javax.inject.Inject
 class ProductViewModel @Inject constructor(
     private val repository : ProductRepository
 ): ViewModel() {
-    val product : MutableStateFlow<Product> = MutableStateFlow(Product())
-    val nutrients : MutableStateFlow<String> = MutableStateFlow("")
-    val productFact : MutableStateFlow<NutritionLabel> = MutableStateFlow(NutritionLabel(""))
 
-    private val _productInfoUiEvent =
-        MutableStateFlow<UiEvent>(UiEvent.Unit)
+    private val _productUiState : MutableStateFlow<Product> = MutableStateFlow(Product())
+    val productUiState : StateFlow<Product> get() = _productUiState
+
+    private val _productFact : MutableStateFlow<NutritionLabel> = MutableStateFlow(NutritionLabel())
+    val productFact : StateFlow<NutritionLabel> get() = _productFact
+
+    private val _productInfoUiEvent = MutableStateFlow<UiEvent>(UiEvent.Unit)
     val productInfoUiEvent get() = _productInfoUiEvent
 
     fun getProductInfo(id : Int){
@@ -28,8 +31,7 @@ class ProductViewModel @Inject constructor(
             val result = repository.getProduct(id)
             when(result){
                 is Resource.Success -> {
-                    product.value = result.result
-                    nutrients.value = result.result.nutrients.joinToString(", ")
+                    _productUiState.value = result.result
                 }
                 is Resource.Failure -> {
                     _productInfoUiEvent.value = UiEvent.Failure("상품 정보를 불러오는데 실패하였습니다.")
@@ -46,7 +48,7 @@ class ProductViewModel @Inject constructor(
             val result = repository.getNutritionLabel(id)
             when(result){
                 is Resource.Success -> {
-                    productFact.value = result.result
+                    _productFact.value = result.result
                 }
                 is Resource.Failure -> {
                     _productInfoUiEvent.value = UiEvent.ImageFailure("영양성분표를 들고오는데 실패하였습니다.")
