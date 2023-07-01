@@ -16,14 +16,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
-            android:layout_marginTop="8dp"
-            android:outlineProvider="none"
             android:background="@drawable/rounded_corner_button"
             android:fontFamily="@font/sc_dream_nor"
-            android:text="@string/dialog_search_product_eng"
+            android:outlineProvider="none"
+            android:text="@string/dialog_search_product"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dialog_kor_product_button" />
+            app:layout_constraintTop_toBottomOf="@+id/dismissButton" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/dialog_ingredient_button"
@@ -39,32 +38,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dialog_product_button" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/dialog_kor_product_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="@drawable/rounded_corner_button"
-            android:fontFamily="@font/sc_dream_nor"
-            android:outlineProvider="none"
-            android:text="@string/dialog_search_product_kor"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dialog_search_choice_title" />
 
-        <TextView
-            android:id="@+id/dialog_search_choice_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/sc_dream_bold"
-            android:text="@string/dialog_search_choice_title"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/dismissButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/dismissButton"
-            tools:text="알레르기 검색" />
+
 
         <ImageButton
             android:id="@+id/dismissButton"
