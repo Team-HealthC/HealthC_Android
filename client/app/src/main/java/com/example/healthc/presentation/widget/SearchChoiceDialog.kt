@@ -10,7 +10,6 @@ class SearchChoiceDialog(
     context : Context,
     private val onSearchProduct : () -> Unit,
     private val onSearchIngredient : () -> Unit,
-    private val onSearchKorProduct : () -> Unit,
 ): Dialog(context) {
     private val binding by lazy { DialogSearchChoiceBinding.inflate(layoutInflater) }
 
@@ -29,11 +28,6 @@ class SearchChoiceDialog(
 
         binding.dialogIngredientButton.setOnClickListener{
             onSearchIngredient()
-            dismiss()
-        }
-
-        binding.dialogKorProductButton.setOnClickListener {
-            onSearchKorProduct()
             dismiss()
         }
 
