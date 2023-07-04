@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentUserInfoBinding
 import com.example.healthc.domain.utils.Resource
@@ -53,6 +54,10 @@ class UserInfoFragment : Fragment() {
                 allergyList.add(group.findViewById<Chip>(id).text.toString())
             }
             viewModel.setAllergy(allergyList)
+        }
+
+        binding.backButton.setOnClickListener {
+            findNavController().popBackStack()
         }
     }
     private fun observeData(){
