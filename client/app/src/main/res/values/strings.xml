@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">HealthC</string>
-    <string name="sign_up_name">반가워요! 제이름은 헬씨에요. \n그쪽은 이름이 어떻게 되시나요?</string>
-    <string name="sign_up_email">사용할 이메일을 입력해주세요.</string>
-    <string name="sign_up_password">사용할 비밀번호를 입력해주세요.</string>
-    <string name="sign_up_info">갖고 있는 알레르기를 선택해주세요.</string>
+    <string name="sign_up_name">반가워요! 제이름은 헬씨에요. \n어떻게 불러드리면 될까요?</string>
+    <string name="sign_up_email">사용할 이메일을\n입력해주세요.</string>
+    <string name="sign_up_password">사용할 비밀번호를\n입력해주세요.</string>
+    <string name="sign_up_info">갖고있는 알레르기가 있다면\n선택해주세요.</string>
     <string name="splash_string">영양성분을 분석하는 스마트 돋보기 헬씨</string>
     <string name="sign_up">회원가입</string>
     <string name="sign_in">로그인</string>
@@ -14,7 +14,7 @@
     <string name="hint_password">비밀번호을 입력하세요.</string>
     <string name="hint_name">이름을 알려주세요.</string>
     <string name="hint_info">알레르기를 유발할 수 있는 성분을 가진 음식을 알려드릴게요!</string>
-    <string name="sign_in_healthc">헬씨에 오신걸 환영해요!</string>
+    <string name="sign_in_healthc">스마트 돋보기 헬씨에\n오신걸 환영해요!</string>
     <string name="sign_in_email">이메일을 입력하세요.</string>
     <string name="sign_in_password">비밀번호를 입력하세요.</string>
     <string name="email">이메일</string>
@@ -68,7 +68,7 @@
     <string name="english_ocr_camera">영어 성분표 인식</string>
     <string name="korea_ocr_camera">한국어 성분표 인식</string>
     <string name="profile_allergy_edit">알레르기 정보 수정</string>
-    <string name="dialog_search_choice_title">알레르기 검색</string>
+    <string name="dialog_search_choice_title">헬씨 사전 검색</string>
     <string name="recent_search">최근 검색</string>
     <string name="recipe_search_title">알레르기를 입력해보세요</string>
     <string name="recipe_search_content">알레르기 요소가 포함된 음식을\n확인할 수 있어요</string>
