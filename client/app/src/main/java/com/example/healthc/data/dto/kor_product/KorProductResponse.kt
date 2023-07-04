@@ -38,7 +38,7 @@ data class ProductItemXDto(
     val imgurl1: String,
     val imgurl2: String,
     val manufacture: String,
-    val nutrient: String,
+    val nutrient: String?,
     val prdkind: String,
     val prdkindstate: String,
     val prdlstNm: String,
@@ -52,7 +52,7 @@ data class ProductItemXDto(
     fun toProductInfo() : KorProductInfo = KorProductInfo(
         allergies = allergy,
         image = imgurl1,
-        nutrient = nutrient,
+        nutrient = nutrient ?: "",
         category = prdkind,
         name = prdlstNm,
         rawMaterials = rawmtrl
