@@ -22,6 +22,7 @@ data class ProductDto(
 ){
     fun toProduct(): Product = Product(
         id = id,
+        imageType = imageType,
         name = title,
         allergiesFree = badges.joinToString(", "),
         ingredients = ingredientList,
