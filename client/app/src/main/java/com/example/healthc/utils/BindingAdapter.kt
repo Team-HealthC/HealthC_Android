@@ -38,11 +38,11 @@ object BindingAdapter {
     }
 
     @JvmStatic
-    @BindingAdapter("app:imageProductUrl", "app:placeholder")
-    fun loadProductImage(view: ImageView, src: Int, placeHolder: Drawable) {
+    @BindingAdapter("app:imageProductUrl", "app:placeholder", "app:imageType")
+    fun loadProductImage(view: ImageView, src: Int, placeHolder: Drawable, imageType: String) {
         if (src != 0) {
             Glide.with(view.context)
-                .load(BuildConfig.SPOON_API_PRODUCT_URL + src + "-90x90.jpeg")
+                .load(BuildConfig.SPOON_API_PRODUCT_URL + src + "-312x231." + imageType)
                 .placeholder(placeHolder)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .apply(RequestOptions().fitCenter())
