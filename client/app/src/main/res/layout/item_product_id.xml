@@ -55,6 +55,7 @@
                     android:scaleType="fitXY"
                     app:imageProductUrl="@{item.id}"
                     app:placeholder="@{@drawable/health_c}"
+                    app:imageType="@{item.imageType}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
