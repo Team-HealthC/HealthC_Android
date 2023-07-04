@@ -22,7 +22,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="8dp">
+                android:paddingHorizontal="32dp"
+                android:paddingVertical="8dp">
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/goToProfileButton"
@@ -31,7 +32,7 @@
                     android:src="@drawable/ic_baseline_person"
                     app:backgroundTint="@android:color/transparent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:tint="@color/white" />
 
@@ -42,9 +43,21 @@
                     android:src="@drawable/ic_baseline_search_24"
                     app:backgroundTint="@android:color/transparent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/goToProfileButton"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:tint="@color/white" />
+
+                <ImageButton
+                    android:id="@+id/flash_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/baseline_flash_on_24"
+                    android:background="@color/black"
+                    app:tint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/goToSearchButton"
+                    app:layout_constraintStart_toEndOf="@+id/goToProfileButton"
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -117,7 +130,6 @@
                     app:backgroundTint="@android:color/transparent"
                     app:layout_constraintBottom_toBottomOf="@+id/Capture_image_button"
                     app:layout_constraintEnd_toStartOf="@+id/Capture_image_button"
-                    app:layout_constraintHorizontal_bias="0.3"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/Capture_image_button"
                     app:tint="@color/white" />
@@ -135,12 +147,12 @@
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/Switch_camera_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:scaleType="fitXY"
                     android:layout_margin="16dp"
-                    android:src="@drawable/ic_baseline_switch_camera"
-                    app:backgroundTint="@color/light_black"
-                    app:layout_constraintHorizontal_bias="0.7"
+                    android:src="@drawable/switch_camera"
+                    android:background="@color/black"
                     app:layout_constraintBottom_toBottomOf="@+id/Capture_image_button"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/Capture_image_button"

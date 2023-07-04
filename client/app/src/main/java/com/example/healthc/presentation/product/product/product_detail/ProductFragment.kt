@@ -60,7 +60,7 @@ class ProductFragment : Fragment() {
                     }
                     is ProductViewModel.UiEvent.ImageFailure ->{
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-                        binding.productImage.visibility = View.GONE
+                        binding.productNutritionLabelImage.visibility = View.GONE
                     }
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)

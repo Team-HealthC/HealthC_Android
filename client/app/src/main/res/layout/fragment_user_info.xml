@@ -13,16 +13,26 @@
         android:layout_height="match_parent"
         android:padding="16dp">
 
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_arrow_back_ios_new_24" />
+
         <TextView
             android:id="@+id/signUpInfoTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sign_up_info"
-            android:textSize="18sp"
             android:textColor="@color/black"
-            android:textStyle="bold"
+            android:textSize="24sp"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/sc_dream_nor"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/back_button" />
 
         <TextView
             android:id="@+id/signUpInfoHintTextView"
@@ -64,7 +74,7 @@
                 android:text="@string/peach"
                 android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
-                />
+                app:checkedIconEnabled="false" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/fork_chip"
@@ -74,6 +84,7 @@
                 android:text="@string/pork"
                 android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
+                app:checkedIconEnabled="false"
                 />
 
             <com.google.android.material.chip.Chip
@@ -84,6 +95,7 @@
                 android:text="@string/egg"
                 android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
+                app:checkedIconEnabled="false"
                 />
 
             <com.google.android.material.chip.Chip
@@ -94,6 +106,7 @@
                 android:text="@string/milk"
                 android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
+                app:checkedIconEnabled="false"
                 />
 
             <com.google.android.material.chip.Chip
@@ -104,7 +117,7 @@
                 android:text="@string/crustacean"
                 android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
-                />
+                app:checkedIconEnabled="false" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/bean_chip"
@@ -115,6 +128,7 @@
                 android:text="@string/soyBean"
                 android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
+                app:checkedIconEnabled="false"
                 />
 
             <com.google.android.material.chip.Chip
@@ -125,6 +139,7 @@
                 android:text="@string/peanuts"
                 android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
+                app:checkedIconEnabled="false"
                 />
 
             <com.google.android.material.chip.Chip
@@ -135,6 +150,7 @@
                 android:text="@string/wheat"
                 android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
+                app:checkedIconEnabled="false"
                 />
 
             <com.google.android.material.chip.Chip
@@ -145,6 +161,7 @@
                 android:text="@string/shellfish"
                 android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
+                app:checkedIconEnabled="false"
                 />
 
             <com.google.android.material.chip.Chip
@@ -156,6 +173,7 @@
                 android:text="@string/fish"
                 android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
+                app:checkedIconEnabled="false"
                 />
 
             <com.google.android.material.chip.Chip
@@ -166,6 +184,7 @@
                 android:text="@string/nuts"
                 android:textColor="@color/chip_text_color"
                 app:chipBackgroundColor="@color/chip_background"
+                app:checkedIconEnabled="false"
                 />
 
         </com.google.android.material.chip.ChipGroup>

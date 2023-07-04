@@ -68,12 +68,12 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/Capture_image_view"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:scaleType="fitXY"
             android:src="@drawable/health_c"
             app:layout_constraintEnd_toEndOf="@+id/profile_allergy_cardView"
-            app:layout_constraintTop_toTopOf="@+id/profileTitleTextView" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/sign_out_button"
@@ -113,10 +113,10 @@
 
         <ImageButton
             android:id="@+id/back_to_camera_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:layout_width="20dp"
+            android:layout_height="18dp"
             android:layout_marginStart="-8dp"
+            android:background="@color/white"
             app:layout_constraintStart_toStartOf="@+id/profileTitleTextView"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_baseline_arrow_back_ios_new_24" />

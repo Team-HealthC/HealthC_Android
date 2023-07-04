@@ -13,6 +13,15 @@
         android:layout_height="match_parent"
         android:padding="16dp">
 
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_arrow_back_ios_new_24" />
+
         <TextView
             android:id="@+id/signUpNameTextView"
             android:layout_width="wrap_content"
@@ -20,9 +29,10 @@
             android:text="@string/sign_up_name"
             android:textSize="24sp"
             android:textColor="@color/black"
-            android:textStyle="bold"
+            android:fontFamily="@font/sc_dream_nor"
+            android:layout_marginTop="32dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/back_button" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/signUpNameLayout"
