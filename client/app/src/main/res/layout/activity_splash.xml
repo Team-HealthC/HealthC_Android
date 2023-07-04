@@ -25,7 +25,7 @@
         android:layout_marginTop="16dp"
         android:textColor="@color/green"
         android:textSize="18sp"
-        android:fontFamily="@font/sc_dream_bold"
+        android:fontFamily="@font/sc_dream_nor"
         android:text="@string/splash_string"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
