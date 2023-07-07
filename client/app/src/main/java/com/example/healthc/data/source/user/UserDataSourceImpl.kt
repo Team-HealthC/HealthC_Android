@@ -1,7 +1,6 @@
 package com.example.healthc.data.source.user
 
 import com.example.healthc.data.dto.auth.UserInfoDto
-import com.example.healthc.data.utils.CollectionsUtil
 import com.example.healthc.data.utils.CollectionsUtil.Companion.DB_USERS
 import com.example.healthc.data.utils.await
 import com.example.healthc.di.IoDispatcher
@@ -54,7 +53,7 @@ class UserDataSourceImpl @Inject constructor(
     override suspend fun updateUserName(uid: String, userName: String): Resource<Unit>
             = withContext(coroutineDispatcher){
         try{
-            val result = fireStore.collection(CollectionsUtil.DB_USERS).document(uid).update(
+            fireStore.collection(DB_USERS).document(uid).update(
                 "name",
                 userName
             ).await()
