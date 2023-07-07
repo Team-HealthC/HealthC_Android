@@ -91,13 +91,11 @@ class TextDetectionFragment : Fragment() {
     }
 
     private fun observeData(){
-        viewModel.imageProcessEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+        viewModel.textDetectionUiEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                 when(it){
-                    is ImageProcessEvent.Unit -> {}
-
-                    is ImageProcessEvent.Success -> {
-                        PositiveSignDialog(requireContext()).show()
+                    is ImageProcessEvent.DetectedNothing -> {
+                        PositiveSignDialog(requireContext(), it.userAllergies).show()
                     }
 
                     is ImageProcessEvent.Detected -> {
@@ -115,10 +113,8 @@ class TextDetectionFragment : Fragment() {
     }
 
     private fun navigateToCamera(){
-        lifecycleScope.launchWhenStarted {
-            val direction = TextDetectionFragmentDirections.actionTextDetectionFragmentToCameraFragment()
-            findNavController().navigate(direction)
-        }
+        val direction = TextDetectionFragmentDirections.actionTextDetectionFragmentToCameraFragment()
+        findNavController().navigate(direction)
     }
 
     override fun onDestroyView() {
@@ -128,7 +124,7 @@ class TextDetectionFragment : Fragment() {
     }
 
     companion object{
-        const val ENG = "English"
-        const val KOR = "한국어"
+        const val ENG = "ENG"
+        const val KOR = "KOR"
     }
 }
