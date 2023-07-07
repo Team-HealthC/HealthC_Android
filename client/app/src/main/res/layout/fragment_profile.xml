@@ -115,7 +115,6 @@
             android:id="@+id/back_to_camera_button"
             android:layout_width="20dp"
             android:layout_height="18dp"
-            android:layout_marginStart="-8dp"
             android:background="@color/white"
             app:layout_constraintStart_toStartOf="@+id/profileTitleTextView"
             app:layout_constraintTop_toTopOf="parent"
