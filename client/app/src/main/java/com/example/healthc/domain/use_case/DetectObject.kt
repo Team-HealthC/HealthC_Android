@@ -7,19 +7,16 @@ import com.example.healthc.utils.toIngredientEng
 import com.google.firebase.auth.FirebaseAuth
 import javax.inject.Inject
 
-class DetectText @Inject constructor(
+class DetectObject @Inject constructor(
     private val userRepository: UserRepository,
     private val firebaseAuth: FirebaseAuth
 ){
-    suspend operator fun invoke(recognizedText: String, isEnglish: Boolean) : DetectTextResult {
+    suspend operator fun invoke(recognizedText: String) : DetectTextResult {
         val userInfo = userRepository.getUserInfo(requireNotNull(firebaseAuth.uid))
         val detectedList = ArrayList<String>()
         when(userInfo){
             is Resource.Success -> {
-                val userAllergies = if (isEnglish) { // 만약 재료가 영어인 경우
-                    userInfo.result.allergy.map{ it.toIngredientEng()}
-                }
-                else userInfo.result.allergy
+                val userAllergies = userInfo.result.allergy.map{ it.toIngredientEng()}
 
                 userAllergies.onEach { // 알러지 성분이 포함되었는지 검사
                     if(recognizedText.contains(it)){
@@ -46,7 +43,6 @@ class DetectText @Inject constructor(
             is Resource.Failure -> {
                 return DetectTextResult(false, false, emptyList())
             }
-
             is Resource.Loading -> {
                 return DetectTextResult(false, false, emptyList())
             }

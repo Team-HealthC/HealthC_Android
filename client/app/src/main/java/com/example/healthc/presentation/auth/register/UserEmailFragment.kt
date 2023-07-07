@@ -65,10 +65,8 @@ class UserEmailFragment : Fragment() {
     }
 
     private fun navigateToPassword() {
-        lifecycleScope.launchWhenStarted {
-            val direction = UserEmailFragmentDirections.actionUserEmailFragmentToUserPasswordFragment()
-            findNavController().navigate(direction)
-        }
+        val direction = UserEmailFragmentDirections.actionUserEmailFragmentToUserPasswordFragment()
+        findNavController().navigate(direction)
     }
 
     override fun onDestroyView() {

@@ -113,11 +113,8 @@ class RecipeFragment : Fragment() {
     }
 
     private fun navigateToFood(){
-        lifecycleScope.launchWhenStarted {
-            val direction = RecipeFragmentDirections
-                .actionRecipeFragmentToRecipeSearchFragment()
-            findNavController().navigate(direction)
-        }
+        val direction = RecipeFragmentDirections.actionRecipeFragmentToRecipeSearchFragment()
+        findNavController().navigate(direction)
     }
 
     private fun onBackPressButton(){

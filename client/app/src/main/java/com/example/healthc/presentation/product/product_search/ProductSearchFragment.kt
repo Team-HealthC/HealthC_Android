@@ -42,7 +42,7 @@ class ProductSearchFragment : Fragment() {
             navigateCamera()
         }
 
-        binding.ProductSearchEditTextView.setOnEditorActionListener { textView, id, event ->
+        binding.ProductSearchEditTextView.setOnEditorActionListener { textView, id, _ ->
             if(id == EditorInfo.IME_ACTION_SEARCH){
                 if(binding.productTypeChipGroup.checkedChipId == binding.korProductChip.id){
                     navigateToKorProductList(textView.text.toString())

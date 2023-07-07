@@ -72,10 +72,8 @@ class LoginFragment : Fragment() {
     }
 
     private fun navigateSignUp(){
-        lifecycleScope.launchWhenStarted {
-            val direction = LoginFragmentDirections.actionLoginFragmentToUserNameFragment()
-            findNavController().navigate(direction)
-        }
+        val direction = LoginFragmentDirections.actionLoginFragmentToUserNameFragment()
+        findNavController().navigate(direction)
     }
 
     private fun startMainActivity(){

@@ -123,40 +123,44 @@
 
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/goToGalleryButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:src="@drawable/ic_baseline_image"
-                    app:backgroundTint="@android:color/transparent"
-                    app:layout_constraintBottom_toBottomOf="@+id/Capture_image_button"
-                    app:layout_constraintEnd_toStartOf="@+id/Capture_image_button"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="32dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/gallery"
+                    android:background="@color/black"
+                    app:layout_constraintBottom_toBottomOf="@+id/capture_image_button"
+                    app:layout_constraintEnd_toStartOf="@+id/capture_image_button"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/Capture_image_button"
+                    app:layout_constraintTop_toTopOf="@id/capture_image_button"
                     app:tint="@color/white" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/Capture_image_button"
+                    android:id="@+id/capture_image_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
+                    app:fabCustomSize="64dp"
                     app:backgroundTint="@color/light_gray"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/camera_chip_group" />
 
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/Switch_camera_button"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:scaleType="fitXY"
-                    android:layout_margin="16dp"
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/switch_camera_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:clickable="true"
                     android:src="@drawable/switch_camera"
-                    android:background="@color/black"
-                    app:layout_constraintBottom_toBottomOf="@+id/Capture_image_button"
+                    app:backgroundTint="@color/light_black"
+                    app:fabCustomSize="48dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/capture_image_button"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/Capture_image_button"
-                    app:layout_constraintTop_toTopOf="@+id/Capture_image_button"
+                    app:layout_constraintStart_toEndOf="@+id/capture_image_button"
+                    app:layout_constraintTop_toTopOf="@+id/capture_image_button"
+                    app:maxImageSize="28dp"
                     app:tint="@color/white" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

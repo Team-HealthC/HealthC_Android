@@ -79,8 +79,6 @@ class ObjectDetectionFragment : Fragment() {
         viewModel.searchCategoryUiEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                 when(it){
-                    is UiEvent.Unit -> {}
-
                     is UiEvent.Success -> { // 객체 인식 성공
                         showDialog(it.category)
                         makeInvisibleProgressBar()
@@ -98,8 +96,8 @@ class ObjectDetectionFragment : Fragment() {
                         ).show()
                     }
 
-                    is UiEvent.DetectNoting -> { // 알러지 성분 불검출
-                        PositiveSignDialog(requireContext()).show()
+                    is UiEvent.DetectedNothing -> { // 알러지 성분 불검출
+                        PositiveSignDialog(requireContext(), it.userAllergies).show()
                     }
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)

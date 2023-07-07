@@ -8,15 +8,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/dialog_category_textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_margin="16dp"
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="18sp"
@@ -35,6 +33,7 @@
             android:textColor="@color/white"
             android:background="@drawable/rounded_corner_button"
             android:backgroundTint="@color/green"
+            android:layout_margin="16dp"
             android:paddingHorizontal="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -45,16 +44,16 @@
             android:id="@+id/dialog_object_detect_negButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/dialog_object_detect_neg_button"
-            android:textColor="@color/green"
+            android:layout_margin="16dp"
             android:background="@drawable/rounded_corner_button"
             android:backgroundTint="@color/white_yellow"
+            android:text="@string/dialog_object_detect_neg_button"
+            android:textColor="@color/green"
             android:paddingHorizontal="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/dialog_object_detect_posButton"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/dialog_object_detect_posButton" />
+            app:layout_constraintTop_toBottomOf="@+id/dialog_category_textView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

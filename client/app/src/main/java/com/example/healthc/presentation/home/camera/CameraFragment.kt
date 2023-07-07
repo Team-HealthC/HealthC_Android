@@ -19,7 +19,9 @@ import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentCameraBinding
@@ -27,7 +29,6 @@ import com.example.healthc.presentation.home.camera.contract.PickSinglePhotoCont
 import com.example.healthc.utils.getCurrentFileName
 import com.example.healthc.presentation.widget.SearchChoiceDialog
 import com.google.common.util.concurrent.ListenableFuture
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import land.sungbin.systemuicontroller.setNavigationBarColor
 import timber.log.Timber
@@ -100,12 +101,12 @@ class CameraFragment : Fragment() {
     }
 
     private fun initButton(){
-        binding.CaptureImageButton.setOnClickListener{
+        binding.captureImageButton.setOnClickListener{
             captureImage()
-            binding.CaptureImageButton.isEnabled = false
+            binding.captureImageButton.isEnabled = false
         }
 
-        binding.SwitchCameraButton.setOnClickListener{
+        binding.switchCameraButton.setOnClickListener{
             lensFacing = if (CameraSelector.LENS_FACING_FRONT == lensFacing) {
                 CameraSelector.LENS_FACING_BACK
             } else {
@@ -150,11 +151,7 @@ class CameraFragment : Fragment() {
         cameraProvider.unbindAll() // for rebinding
 
         imagePreview.setSurfaceProvider(binding.CameraPreview.surfaceProvider) // view 와 객체 결합
-        /*if(screenAspectRatio == AspectRatio.RATIO_4_3) {
-            binding.CameraPreview.scaleType = PreviewView.ScaleType.FIT_CENTER
-        }else{
-            binding.CameraPreview.scaleType = PreviewView.ScaleType.FILL_CENTER
-        }*/
+
         binding.CameraPreview.scaleType = PreviewView.ScaleType.FILL_CENTER
 
         cameraProvider.bindToLifecycle(this, cameraSelector, imagePreview,
@@ -194,51 +191,52 @@ class CameraFragment : Fragment() {
     }
 
     private fun navigateToML(imageUrl : String) {
-        lifecycleScope.launch(Dispatchers.Main) {
-            when(binding.cameraChipGroup.checkedChipId){
-                binding.engOcrChip.id -> {
-                    val direction = CameraFragmentDirections.actionCameraFragmentToTextDetectionFragment(
-                        imageUrl = imageUrl,
-                        language = ENG
-                    )
-                    findNavController().navigate(direction)
-                }
-                binding.korOcrChip.id -> {
-                    val direction = CameraFragmentDirections.actionCameraFragmentToTextDetectionFragment(
-                        imageUrl = imageUrl,
-                        language = KOR
-                    )
-                    findNavController().navigate(direction)
-                }
-                binding.odCameraChip.id -> {
-                    val direction = CameraFragmentDirections.actionCameraFragmentToObjectDetectionFragment(
-                        imageUrl = imageUrl
-                    )
-                    findNavController().navigate(direction)
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                when (binding.cameraChipGroup.checkedChipId) {
+                    binding.engOcrChip.id -> {
+                        navigateToOcr(imageUrl, OcrLanguage.KOR)
+                    }
+                    binding.korOcrChip.id -> {
+                        navigateToOcr(imageUrl, OcrLanguage.ENG)
+                    }
+                    binding.odCameraChip.id -> {
+                        navigateToObjectDetection(imageUrl)
+                    }
                 }
             }
         }
     }
 
     private fun navigateToProfile() {
-        lifecycleScope.launchWhenStarted {
-            val direction = CameraFragmentDirections.actionCameraFragmentToProfileFragment()
-            findNavController().navigate(direction)
-        }
+        val direction = CameraFragmentDirections.actionCameraFragmentToProfileFragment()
+        findNavController().navigate(direction)
     }
 
     private fun navigateToRecipe(){
-        lifecycleScope.launchWhenStarted {
-            val direction = CameraFragmentDirections.actionCameraFragmentToRecipeSearchFragment()
-            findNavController().navigate(direction)
-        }
+        val direction = CameraFragmentDirections.actionCameraFragmentToRecipeSearchFragment()
+        findNavController().navigate(direction)
     }
 
     private fun navigateToProduct(){
-        lifecycleScope.launchWhenStarted {
-            val direction = CameraFragmentDirections.actionCameraFragmentToProductSearchFragment()
-            findNavController().navigate(direction)
-        }
+        val direction = CameraFragmentDirections.actionCameraFragmentToProductSearchFragment()
+        findNavController().navigate(direction)
+    }
+
+    private fun navigateToOcr(imageUrl: String, language: OcrLanguage){
+        val direction = CameraFragmentDirections.actionCameraFragmentToTextDetectionFragment(
+            imageUrl = imageUrl,
+            language = language.toString()
+        )
+        findNavController().navigate(direction)
+    }
+
+    private fun navigateToObjectDetection(imageUrl: String){
+        findNavController().navigate(
+            CameraFragmentDirections.actionCameraFragmentToObjectDetectionFragment(
+                imageUrl
+            )
+        )
     }
 
     override fun onDestroyView() {
@@ -248,8 +246,7 @@ class CameraFragment : Fragment() {
         cameraSound.release()
     }
 
-    companion object{
-        const val ENG = "English"
-        const val KOR = "한국어"
+    private enum class OcrLanguage{
+        ENG, KOR
     }
 }
