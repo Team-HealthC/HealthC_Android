@@ -15,10 +15,6 @@ class DetectText @Inject constructor(
         val userInfo = userRepository.getUserInfo(requireNotNull(firebaseAuth.uid))
         val detectedList = ArrayList<String>()
         when(userInfo){
-            is Resource.Loading -> {
-                return DetectTextResult(false, false, emptyList())
-            }
-
             is Resource.Success -> {
                 val userAllergies = if (isEnglish) { // 만약 재료가 영어인 경우
                     userInfo.result.allergy.map{ it.toIngredientEng()}
@@ -42,12 +38,16 @@ class DetectText @Inject constructor(
                     DetectTextResult(
                         successful = true,
                         detected = false,
-                        detectedList = emptyList()
+                        detectedList = userInfo.result.allergy // 성공시 유저 알레르기 정보 반환
                     )
                 }
             }
 
             is Resource.Failure -> {
+                return DetectTextResult(false, false, emptyList())
+            }
+
+            is Resource.Loading -> {
                 return DetectTextResult(false, false, emptyList())
             }
         }
