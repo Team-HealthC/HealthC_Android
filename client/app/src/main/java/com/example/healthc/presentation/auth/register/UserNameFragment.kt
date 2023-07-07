@@ -65,10 +65,8 @@ class UserNameFragment : Fragment() {
     }
 
     private fun navigateToEmail() {
-        lifecycleScope.launchWhenStarted {
-            val direction = UserNameFragmentDirections.actionUserNameFragmentToUserEmailFragment()
-            findNavController().navigate(direction)
-        }
+        val direction = UserNameFragmentDirections.actionUserNameFragmentToUserEmailFragment()
+        findNavController().navigate(direction)
     }
 
     override fun onDestroyView() {

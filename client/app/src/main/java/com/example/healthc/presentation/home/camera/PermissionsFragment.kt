@@ -35,10 +35,8 @@ class PermissionsFragment : Fragment() {
     }
 
     private fun navigateToCamera() {
-        lifecycleScope.launchWhenStarted {
-            val direction = PermissionsFragmentDirections.actionPermissionsFragmentToCameraFragment()
-            findNavController().navigate(direction)
-        }
+        val direction = PermissionsFragmentDirections.actionPermissionsFragmentToCameraFragment()
+        findNavController().navigate(direction)
     }
 
     private val activityResultLauncher =

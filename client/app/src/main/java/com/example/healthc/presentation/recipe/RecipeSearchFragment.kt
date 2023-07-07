@@ -52,7 +52,7 @@ class RecipeSearchFragment : Fragment() {
             navigateToRecipe(checkedAllergy)
         }
 
-        binding.searchEditTextView.setOnEditorActionListener { textView, actionId, keyEvent ->
+        binding.searchEditTextView.setOnEditorActionListener { textView, actionId, _ ->
             if(actionId == EditorInfo.IME_ACTION_SEARCH){
                 navigateToRecipe(
                     textView.text.toString()
@@ -70,18 +70,14 @@ class RecipeSearchFragment : Fragment() {
     }
 
     private fun navigateToRecipe(allergy: String){
-        lifecycleScope.launchWhenStarted {
-            val direction = RecipeSearchFragmentDirections
-                .actionRecipeSearchFragmentToRecipeFragment(allergy)
-            findNavController().navigate(direction)
-        }
+        findNavController().navigate(
+            RecipeSearchFragmentDirections.actionRecipeSearchFragmentToRecipeFragment(allergy)
+        )
     }
 
     private fun navigateToCamera(){
-        lifecycleScope.launchWhenStarted {
-            val direction = RecipeSearchFragmentDirections.actionRecipeFragmentToCameraFragment()
-            findNavController().navigate(direction)
-        }
+        val direction = RecipeSearchFragmentDirections.actionRecipeFragmentToCameraFragment()
+        findNavController().navigate(direction)
     }
 
     private fun onBackPressButton(){

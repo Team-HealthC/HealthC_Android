@@ -65,10 +65,8 @@ class UserPasswordFragment : Fragment() {
     }
 
     private fun navigateToInfo() {
-        lifecycleScope.launchWhenStarted {
-            val direction = UserPasswordFragmentDirections.actionUserPasswordFragmentToUserInfoFragment()
-            findNavController().navigate(direction)
-        }
+        val direction = UserPasswordFragmentDirections.actionUserPasswordFragmentToUserInfoFragment()
+        findNavController().navigate(direction)
     }
 
     override fun onDestroyView() {
