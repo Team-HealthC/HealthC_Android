@@ -4,12 +4,15 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.healthc.R
 import com.example.healthc.presentation.auth.AuthActivity
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @SuppressLint("CustomSplashScreen")
@@ -22,13 +25,18 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+        checkCache()
+    }
 
-        lifecycleScope.launchWhenStarted {
-            delay(3000)
-            if(firebaseAuth.currentUser != null){
-                navigateToMainScreen()
-            }else{
-                navigateToAuthScreen()
+    private fun checkCache(){
+        lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                delay(3000)
+                if (firebaseAuth.currentUser != null) {
+                    navigateToMainScreen()
+                } else {
+                    navigateToAuthScreen()
+                }
             }
         }
     }
