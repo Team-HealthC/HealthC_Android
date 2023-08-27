@@ -1,8 +1,8 @@
-package com.example.healthc.data.dto.recipe
+package com.example.healthc.data.model.remote.recipe
 
 import com.example.healthc.domain.model.recipe.Recipe
 
-data class RecipeDto(
+data class RecipeResponse(
     val id: Int,
     val image: String,
     val imageType: String,

@@ -1,8 +1,9 @@
-package com.example.healthc.data.dto.product
+package com.example.healthc.data.model.remote.product
 
 import com.example.healthc.domain.model.product.Product
+import com.squareup.moshi.Json
 
-data class ProductDto(
+data class ProductResponse(
     val aisle: String,
     val badges: List<String>,
     val breadcrumbs: List<String>,
@@ -12,49 +13,49 @@ data class ProductDto(
     val importantBadges: List<String>,
     val ingredientCount: Int,
     val ingredientList: String,
-    val ingredients: List<ProductIngredientDto>,
+    val ingredients: List<ProductIngredientResponse>,
     val likes: Int,
-    val nutrition: ProductNutritionDto,
+    val nutrition: ProductNutritionResponse,
     val price: Double,
-    val servings: ProductServingsDto,
+    val servings: ProductServingResponse,
     val spoonacularScore: Double,
     val title: String
 ){
-    fun toProduct(): Product = Product(
+    fun toDomain(): Product = Product(
         id = id,
         imageType = imageType,
         name = title,
         allergiesFree = badges.joinToString(", "),
         ingredients = ingredientList,
-        nutrients = nutrition.nutrients.map{ it.name }.joinToString(", ")
+        nutrients = nutrition.nutrients.joinToString(", ") { it.name }
     )
 }
 
-data class ProductServingsDto(
+data class ProductServingResponse(
     val number: Int,
     val size: Double?,
     val unit: String
 )
 
-data class ProductNutritionDto(
-    val caloricBreakdown: ProductCaloricBreakdownDto,
-    val nutrients: List<ProductNutrientDto>
+data class ProductNutritionResponse(
+    val caloricBreakdown: ProductCaloricBreakdownResponse,
+    val nutrients: List<ProductNutrientResponse>
 )
 
-data class ProductNutrientDto(
+data class ProductNutrientResponse(
     val amount: Double,
     val name: String,
     val percentOfDailyNeeds: Double,
     val unit: String
 )
 
-data class ProductIngredientDto(
+data class ProductIngredientResponse(
     val description: String,
     val name: String,
-    val safety_level: String
+    @Json(name = "safety_level") val safetyLevel: String
 )
 
-data class ProductCaloricBreakdownDto(
+data class ProductCaloricBreakdownResponse(
     val percentCarbs: Double,
     val percentFat: Double,
     val percentProtein: Double
