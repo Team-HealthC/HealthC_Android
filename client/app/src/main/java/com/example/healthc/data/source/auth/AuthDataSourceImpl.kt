@@ -1,13 +1,11 @@
 package com.example.healthc.data.source.auth
 
-import com.example.healthc.data.dto.auth.UserDto
-import com.example.healthc.data.dto.auth.UserInfoDto
-import com.example.healthc.data.utils.CollectionsUtil.Companion.DB_USERS
-import com.example.healthc.domain.utils.Resource
+import com.example.healthc.data.model.remote.auth.UserAccountRequest
+import com.example.healthc.data.model.remote.auth.UserRequest
+import com.example.healthc.data.utils.DB_USERS
 import com.example.healthc.data.utils.await
 import com.example.healthc.di.IoDispatcher
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -18,38 +16,43 @@ class AuthDataSourceImpl @Inject constructor(
     private val fireStore: FirebaseFirestore,
     @IoDispatcher private val coroutineDispatcher: CoroutineDispatcher
 ): AuthDataSource{
-    override suspend fun signIn(userDto: UserDto): Resource<FirebaseUser>
-            = withContext(coroutineDispatcher){
-        try{
-            val result = firebaseAuth.signInWithEmailAndPassword(
-                userDto.email, userDto.password
+    override suspend fun signIn(userAccountRequest: UserAccountRequest): Result<Unit>
+    = withContext(coroutineDispatcher){
+        runCatching {
+            firebaseAuth.signInWithEmailAndPassword(
+                userAccountRequest.email, userAccountRequest.password
             ).await()
-            Resource.Success(checkNotNull(result.user))
-        }
-        catch(e : Exception){
+            Unit
+        }.onFailure {  e ->
             e.printStackTrace()
-            Resource.Failure(e)
         }
     }
+
     override suspend fun signUp(
-        userDto: UserDto,
-        userInfoDto: UserInfoDto,
-    ): Resource<FirebaseUser> = withContext(coroutineDispatcher){
-        try{
+        userAccountRequest: UserAccountRequest,
+        userRequest: UserRequest,
+    ): Result<Unit> = withContext(coroutineDispatcher){
+        runCatching {
             val result = firebaseAuth.createUserWithEmailAndPassword(
-                userDto.email, userDto.password
+                userAccountRequest.email, userAccountRequest.password
             ).await()
-            if(result.user != null){
-                // 사용자 정보 DB에 입력
-                fireStore.collection(DB_USERS).document(
-                    requireNotNull(result.user).uid
-                ).set(userInfoDto).await()
-            }
-            Resource.Success(checkNotNull(result.user))
-        }
-        catch(e : Exception){
+
+            val user = checkNotNull(result.user)
+            val collection = fireStore.collection(DB_USERS)
+            val document = collection.document(user.uid)
+
+            document.set(userRequest).await()
+            Unit
+        }.onFailure { e ->
             e.printStackTrace()
-            Resource.Failure(e)
+        }
+    }
+
+    override suspend fun signOut(): Result<Unit> = withContext(coroutineDispatcher){
+        runCatching {
+            firebaseAuth.signOut()
+        }.onFailure { e ->
+            e.printStackTrace()
         }
     }
 }
