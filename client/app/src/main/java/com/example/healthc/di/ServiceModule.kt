@@ -1,10 +1,10 @@
 package com.example.healthc.di
 
 import com.example.healthc.BuildConfig
-import com.example.healthc.data.remote.api.ProductService
-import com.example.healthc.data.remote.api.KorProductService
-import com.example.healthc.data.remote.api.ObjectDetectionService
-import com.example.healthc.data.remote.api.RecipeService
+import com.example.healthc.data.service.ProductService
+import com.example.healthc.data.service.KorProductService
+import com.example.healthc.data.service.ObjectDetectionService
+import com.example.healthc.data.service.RecipeService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,7 +18,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object ApiModule {
+object ServiceModule {
 
     @Singleton
     @Provides

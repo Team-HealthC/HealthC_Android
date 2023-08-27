@@ -1,8 +1,8 @@
-package com.example.healthc.data.remote.api
+package com.example.healthc.data.service
 
 import com.example.healthc.BuildConfig
-import com.example.healthc.data.dto.recipe.IngredientDto
-import com.example.healthc.data.dto.recipe.RecipeDto
+import com.example.healthc.data.model.remote.recipe.IngredientResultResponse
+import com.example.healthc.data.model.remote.recipe.RecipeResponse
 import okhttp3.ResponseBody
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -15,7 +15,7 @@ interface RecipeService {
         @Query("apiKey") apiKey: String = BuildConfig.SPOON_API_KEY,
         @Query("ingredients") ingredients : String,
         @Query("number") number : Int = 10
-    ) : List<RecipeDto>
+    ) : List<RecipeResponse>
 
     // 가공식품 라벨 찾기
     @GET("/recipes/{id}/nutritionLabel.png")
@@ -33,5 +33,5 @@ interface RecipeService {
         @Query("number") number : Int = 1,
         @Query("fillIngredients") fillIngredients : Boolean = true,
         @Query("ignorePantry") ignorePantry : Boolean = false
-    ) : IngredientDto
+    ) : IngredientResultResponse
 }
