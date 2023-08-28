@@ -7,11 +7,7 @@ import android.os.Bundle
 import android.view.WindowManager
 import com.example.healthc.databinding.DialogPositiveBinding
 
-class PositiveSignDialog(
-    context: Context,
-    private val userAllergies: List<String>
-) : Dialog(context){
-
+class PositiveSignDialog(context: Context) : Dialog(context){
     private val binding by lazy { DialogPositiveBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +23,7 @@ class PositiveSignDialog(
             dismiss()
         }
         binding.positiveDialogContent.text =
-            "해당 음식에는 ${userAllergies.joinToString(", ")}이(가)\n 포함되어 있지 않습니다."
+            "음식에 알레르기 요소가 포함되어 있지 않습니다."
     }
 
     private fun resizeDialog() {
