@@ -5,43 +5,43 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.healthc.databinding.ItemProductIdBinding
-import com.example.healthc.domain.model.product.ProductIdInfo
+import com.example.healthc.databinding.ItemProductBinding
+import com.example.healthc.domain.model.product.ProductItem
 
 class ProductListAdapter(
     private val onItemClick : (Int) -> Unit
-) : ListAdapter<ProductIdInfo, ProductListAdapter._ProductListViewHolder>(ProductItemCallback){
+) : ListAdapter<ProductItem, ProductListAdapter.ProductListViewHolder>(ProductItemCallback){
     
     companion object {
-        val ProductItemCallback = object : DiffUtil.ItemCallback<ProductIdInfo>(){
+        val ProductItemCallback = object : DiffUtil.ItemCallback<ProductItem>(){
             override fun areItemsTheSame(
-                oldItem: ProductIdInfo, newItem: ProductIdInfo): Boolean {
+                oldItem: ProductItem, newItem: ProductItem): Boolean {
                 return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
-                oldItem: ProductIdInfo,
-                newItem: ProductIdInfo
+                oldItem: ProductItem,
+                newItem: ProductItem
             ): Boolean {
                 return oldItem == newItem
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): _ProductListViewHolder {
-        return _ProductListViewHolder(
-            ItemProductIdBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductListViewHolder {
+        return ProductListViewHolder(
+            ItemProductBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         ))
     }
 
-    override fun onBindViewHolder(holder: _ProductListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ProductListViewHolder, position: Int) {
         holder.bind(currentList[position])
     }
 
-    inner class _ProductListViewHolder(private val binding : ItemProductIdBinding)
+    inner class ProductListViewHolder(private val binding : ItemProductBinding)
         : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item : ProductIdInfo) {
+        fun bind(item : ProductItem) {
             binding.item = item
             binding.root.setOnClickListener{
                 onItemClick(item.id)
