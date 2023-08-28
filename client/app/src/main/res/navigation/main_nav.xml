@@ -46,7 +46,7 @@
     </fragment>
     <fragment
         android:id="@+id/textDetectionFragment"
-        android:name="com.example.healthc.presentation.ml.text_detection.TextDetectionFragment"
+        android:name="com.example.healthc.presentation.detection.text_detection.TextDetectionFragment"
         android:label="TextDetectionFragment"
         tools:layout="@layout/fragment_text_detection" >
         <argument
@@ -65,19 +65,19 @@
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile" >
     <action
-            android:id="@+id/action_profileFragment_to_profileAllergyFragment"
-            app:destination="@id/profileAllergyFragment" />
+            android:id="@+id/action_profileFragment_to_editorFragment"
+            app:destination="@id/editorFragment" />
         <action
             android:id="@+id/action_profileFragment_to_cameraFragment"
             app:destination="@id/cameraFragment" />
     </fragment>
     <fragment
-        android:id="@+id/profileAllergyFragment"
-        android:name="com.example.healthc.presentation.profile.profile_allergy.ProfileAllergyFragment"
-        android:label="ProfileAllergyFragment"
-        tools:layout="@layout/fragment_profile_allergy" >
+        android:id="@+id/editorFragment"
+        android:name="com.example.healthc.presentation.profile.editor.EditorFragment"
+        android:label="EditorFragment"
+        tools:layout="@layout/fragment_editor" >
     <action
-            android:id="@+id/action_profileAllergyFragment_to_profileFragment"
+            android:id="@+id/action_editorFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
     </fragment>
     <fragment
@@ -110,7 +110,7 @@
     </fragment>
     <fragment
         android:id="@+id/objectDetectionFragment"
-        android:name="com.example.healthc.presentation.ml.object_detection.ObjectDetectionFragment"
+        android:name="com.example.healthc.presentation.detection.object_detection.ObjectDetectionFragment"
         android:label="ObjectDetectionFragment"
         tools:layout="@layout/fragment_object_detection" >
         <argument
