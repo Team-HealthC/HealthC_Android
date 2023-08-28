@@ -1,11 +1,11 @@
 package com.example.healthc.data.source.user
 
-import com.example.healthc.data.dto.auth.UserInfoDto
-import com.example.healthc.data.utils.CollectionsUtil.Companion.DB_USERS
+import com.example.healthc.data.model.remote.auth.UserRequest
+import com.example.healthc.data.model.remote.auth.UserResponse
+import com.example.healthc.data.utils.DB_USERS
 import com.example.healthc.data.utils.await
 import com.example.healthc.di.IoDispatcher
-import com.example.healthc.domain.model.auth.UserInfo
-import com.example.healthc.domain.utils.Resource
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import kotlinx.coroutines.CoroutineDispatcher
@@ -14,54 +14,49 @@ import javax.inject.Inject
 
 class UserDataSourceImpl @Inject constructor(
     private val fireStore : FirebaseFirestore,
+    private val fireBaseAuth: FirebaseAuth,
     @IoDispatcher private val coroutineDispatcher: CoroutineDispatcher
-): UserDataSource{
-    override suspend fun getUserInfo(uid: String): Resource<UserInfo>
+): UserDataSource {
+    override suspend fun getUser(): Result<UserResponse>
     = withContext(coroutineDispatcher){
-        try{
-            val result = fireStore.collection(DB_USERS).document(uid).get().await()
-                .toObject(UserInfoDto::class.java)
-            Resource.Success(
-                requireNotNull(result).toUserInfo()
-            )
-        }
-        catch (e : Exception){
+        runCatching {
+            val collection = fireStore.collection(DB_USERS)
+            val document = collection.document(requireNotNull(fireBaseAuth.uid))
+
+            val response = document.get().await().toObject(UserResponse::class.java)
+            checkNotNull(response)
+        }.onFailure { e ->
             e.printStackTrace()
-            Resource.Failure(e)
         }
     }
 
-    override suspend fun updateUserInfo(uid: String, userInfo: UserInfo): Resource<Unit>
-            = withContext(coroutineDispatcher){
-        try{
+    override suspend fun updateUser(userRequest: UserRequest): Result<Unit>
+    = withContext(coroutineDispatcher){
+        runCatching {
             val userInfoMap = mutableMapOf<String, Any>()
-            userInfoMap["allergy"] = userInfo.allergy
-            userInfoMap["name"] = userInfo.name
+            userInfoMap["allergies"] = userRequest.allergies
+            userInfoMap["name"] = userRequest.name
 
-            fireStore.collection(DB_USERS).document(uid).set(
-                userInfoMap,
-                SetOptions.merge()
-            ).await()
-            Resource.Success(Unit)
-        }
-        catch (e : Exception){
+            val collection = fireStore.collection(DB_USERS)
+            val document = collection.document(requireNotNull(fireBaseAuth.uid))
+
+            document.set(userInfoMap, SetOptions.merge()).await()
+            Unit
+        }.onFailure { e ->
             e.printStackTrace()
-            Resource.Failure(e)
         }
     }
 
-    override suspend fun updateUserName(uid: String, userName: String): Resource<Unit>
-            = withContext(coroutineDispatcher){
-        try{
-            fireStore.collection(DB_USERS).document(uid).update(
-                "name",
-                userName
-            ).await()
-            Resource.Success(Unit)
-        }
-        catch (e: Exception){
+    override suspend fun updateUserName(userName: String): Result<Unit>
+    = withContext(coroutineDispatcher){
+        runCatching {
+            val collection = fireStore.collection(DB_USERS)
+            val document = collection.document(requireNotNull(fireBaseAuth.uid))
+
+            document.update("name", userName).await()
+            Unit
+        }.onFailure { e ->
             e.printStackTrace()
-            Resource.Failure(e)
         }
     }
 }
