@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.healthc.presentation.profile.profile_allergy.ProfileAllergyViewModel"
+            type="com.example.healthc.presentation.profile.editor.EditorViewModel"
             />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,7 +33,7 @@
             android:textColor="@color/black"
             android:fontFamily="@font/sc_dream_nor"
             android:layout_marginTop="16dp"
-            android:text="@{@string/profile_allergy_title(viewModel.profileUserName)}"
+            android:text="@{@string/profile_allergy_title(viewModel.name)}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editProfileTitle" />
 

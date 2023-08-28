@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.profile.profile_allergy
+package com.example.healthc.presentation.profile.editor
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,27 +13,27 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.healthc.R
-import com.example.healthc.databinding.FragmentProfileAllergyBinding
-import com.example.healthc.presentation.profile.profile_allergy.ProfileAllergyViewModel.ProfileUiEvent
+import com.example.healthc.databinding.FragmentEditorBinding
+import com.example.healthc.presentation.profile.editor.EditorViewModel.EditorEvent
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
-class ProfileAllergyFragment : Fragment(){
+class EditorFragment : Fragment(){
 
-    private var _binding: FragmentProfileAllergyBinding? = null
-    private val binding get() = checkNotNull(_binding)
+    private var _binding: FragmentEditorBinding? = null
+    private val binding get() = requireNotNull(_binding)
 
-    private val viewModel : ProfileAllergyViewModel by viewModels()
+    private val viewModel : EditorViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile_allergy, container, false)
+        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_editor, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
@@ -46,19 +46,19 @@ class ProfileAllergyFragment : Fragment(){
     }
 
     private fun observeData(){
-        viewModel.profileUiEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+        viewModel.editorEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                  when(it){
-                     is ProfileUiEvent.Success -> {
-                         navigateToProfile() 
+                     is EditorEvent.Success -> {
+                         navigateToProfile()
                      }
-                     is ProfileUiEvent.Failure -> {
+                     is EditorEvent.Failure -> {
                          Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show() 
                      }
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
 
-        viewModel.profileAllergy.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+        viewModel.allergies.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach { list ->
                 if(list.isNotEmpty()){
                     val chipGroup = binding.allergyChipGroup
@@ -91,7 +91,7 @@ class ProfileAllergyFragment : Fragment(){
     }
 
     private fun navigateToProfile(){
-        val direction = ProfileAllergyFragmentDirections.actionProfileAllergyFragmentToProfileFragment()
+        val direction = EditorFragmentDirections.actionEditorFragmentToProfileFragment()
         findNavController().navigate(direction)
     }
 
