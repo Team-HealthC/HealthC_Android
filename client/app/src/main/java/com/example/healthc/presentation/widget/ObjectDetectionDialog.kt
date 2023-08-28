@@ -4,12 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import com.example.healthc.databinding.DialogObjectDetectionBinding
-import com.example.healthc.domain.model.object_detection.DetectedObject
+import com.example.healthc.domain.model.detection.ObjectDetection
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class ObjectDetectionDialog(
     context : Context,
-    private val category : DetectedObject,
+    private val objectDetection : ObjectDetection,
     private val onClickPosButton : (String) -> Unit,
     private val onClickNegButton : () -> Unit,
 ): BottomSheetDialog(context) {
@@ -24,7 +24,7 @@ class ObjectDetectionDialog(
 
     @SuppressLint("SetTextI18n")
     private fun initViews(){
-        binding.dialogCategoryTextView.text = "인식된 음식 : ${category.category}"
+        binding.dialogCategoryTextView.text = "인식된 음식 : ${objectDetection.category}"
 
         binding.dialogObjectDetectNegButton.setOnClickListener {
             onClickNegButton()
@@ -32,7 +32,7 @@ class ObjectDetectionDialog(
         }
 
         binding.dialogObjectDetectPosButton.setOnClickListener {
-            onClickPosButton(category.category)
+            onClickPosButton(objectDetection.category)
             dismiss()
         }
     }

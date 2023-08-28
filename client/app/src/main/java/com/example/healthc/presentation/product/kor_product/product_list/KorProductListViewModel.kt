@@ -2,9 +2,8 @@ package com.example.healthc.presentation.product.kor_product.product_list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.healthc.domain.model.kor_product.KorProductInfo
-import com.example.healthc.domain.repository.KorProductRepository
-import com.example.healthc.domain.utils.Resource
+import com.example.healthc.domain.model.kor_product.KorProduct
+import com.example.healthc.domain.usecase.kor_product.GetKorProductListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,40 +12,35 @@ import javax.inject.Inject
 
 @HiltViewModel
 class KorProductListViewModel @Inject constructor(
-    private val repository : KorProductRepository
+    private val getKorProductListUseCase: GetKorProductListUseCase
 ) : ViewModel() {
-    private val _korProductListUiState = MutableStateFlow<KorProductUiState>(KorProductUiState.Init)
-    val korProductListUiState : StateFlow<KorProductUiState> get() = _korProductListUiState
+    private val _korProductListState = MutableStateFlow<KorProductUiState>(KorProductUiState.Init)
+    val korProductListState : StateFlow<KorProductUiState> get() = _korProductListState
 
-    private val _queryUiState : MutableStateFlow<String> =MutableStateFlow<String>("")
-    val queryUiState : StateFlow<String> get() = _queryUiState
+    private val _query: MutableStateFlow<String> = MutableStateFlow<String>("")
+    val query: StateFlow<String> get() = _query
 
     fun getKorProductIds(query: String){
         viewModelScope.launch {
-            _queryUiState.value = query
-            val searchResult = repository.getKorProducts(_queryUiState.value)
-            when(searchResult){
-                is Resource.Loading -> { }
-
-                is Resource.Success -> {
-                    val result = searchResult.result
-                    if(result.items.isNotEmpty()){
-                        _korProductListUiState.value = KorProductUiState.Success(result.items)
-                    }else{
-                        _korProductListUiState.value = KorProductUiState.NotFounded
+            _query.value = query
+            getKorProductListUseCase(query)
+                .onSuccess { list ->
+                    if(list.isEmpty()){
+                        _korProductListState.value = KorProductUiState.NotFounded
+                    }
+                    else{
+                        _korProductListState.value = KorProductUiState.Success(list)
                     }
                 }
-
-                is Resource.Failure -> {
-                    _korProductListUiState.value = KorProductUiState.Failure
+                .onFailure {
+                    _korProductListState.value = KorProductUiState.Failure
                 }
-            }
         }
     }
 
     sealed class KorProductUiState {
         object Init : KorProductUiState()
-        data class Success(val foodIngredient: List<KorProductInfo>) : KorProductUiState()
+        data class Success(val foodIngredient: List<KorProduct>) : KorProductUiState()
         object Failure : KorProductUiState()
         object NotFounded: KorProductUiState()
     }

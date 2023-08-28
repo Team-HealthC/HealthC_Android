@@ -1,15 +1,12 @@
 package com.example.healthc.domain.repository
 
 import com.example.healthc.domain.model.auth.User
-import com.example.healthc.domain.model.auth.UserInfo
-import com.example.healthc.domain.utils.Resource
-import com.google.firebase.auth.FirebaseUser
+import com.example.healthc.domain.model.auth.UserAccount
 
 interface AuthRepository {
+    suspend fun signIn(userAccount: UserAccount) : Result<Unit>
 
-    suspend fun signIn(user: User) : Resource<FirebaseUser>
+    suspend fun signUp(userAccount: UserAccount, user: User): Result<Unit>
 
-    suspend fun signUp(user: User, userInfo: UserInfo): Resource<FirebaseUser>
-
-    fun signOut()
+    suspend fun signOut(): Result<Unit>
 }

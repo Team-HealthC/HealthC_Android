@@ -1,27 +1,19 @@
 package com.example.healthc.data.source.kor_product
 
-import com.example.healthc.data.remote.api.KorProductService
-import com.example.healthc.di.IoDispatcher
-import com.example.healthc.domain.model.kor_product.KorProduct
-import com.example.healthc.domain.utils.Resource
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.withContext
+import com.example.healthc.data.model.remote.kor_product.KorProductResponse
+import com.example.healthc.data.service.KorProductService
+import timber.log.Timber
 import javax.inject.Inject
 
 class KorProductDataSourceImpl @Inject constructor(
-    private val service : KorProductService,
-    @IoDispatcher private val coroutineDispatcher: CoroutineDispatcher
+    private val service : KorProductService
 ): KorProductDataSource {
-    override suspend fun getKorProduct(category: String): Resource<KorProduct>
-    = withContext(coroutineDispatcher){
-        try{
-            Resource.Success(
-                service.getKorProduct(prdlstNm = category).body.toKorProduct()
-            )
-        }
-        catch(e: Exception){
+    override suspend fun getKorProductList(category: String): Result<List<KorProductResponse>>{
+        return runCatching {
+            service.getKorProduct(prdlstNm = category).body.items.map{ it.item }
+        }.onFailure { e ->
             e.printStackTrace()
-            Resource.Failure(e)
+            Timber.e(e)
         }
     }
 }

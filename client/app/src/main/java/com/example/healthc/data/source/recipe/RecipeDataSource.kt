@@ -1,15 +1,13 @@
 package com.example.healthc.data.source.recipe
 
-import com.example.healthc.domain.model.recipe.Ingredient
-import com.example.healthc.domain.model.product.NutritionLabel
-import com.example.healthc.domain.model.recipe.Recipe
-import com.example.healthc.domain.utils.Resource
+import com.example.healthc.data.model.remote.recipe.IngredientResponse
+import com.example.healthc.data.model.remote.recipe.NutritionLabelResponse
+import com.example.healthc.data.model.remote.recipe.RecipeResponse
 
 interface RecipeDataSource {
-    suspend fun getRecipes(ingredient: String): Resource<List<Recipe>>
+    suspend fun getRecipeList(ingredient: String): Result<List<RecipeResponse>>
 
-    suspend fun getIngredients(dish : String) : Resource<Ingredient>
+    suspend fun getIngredientList(detectedObject : String) : Result<List<IngredientResponse>>
 
-    suspend fun getNutritionLabel(id: Int): Resource<NutritionLabel>
-
+    suspend fun getNutritionLabel(id: Int): Result<NutritionLabelResponse>
 }

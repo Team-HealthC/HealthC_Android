@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentProductBinding
+import com.example.healthc.presentation.product.product.product_detail.ProductViewModel.ProductEvent
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -22,7 +23,7 @@ import kotlinx.coroutines.flow.onEach
 class ProductFragment : Fragment() {
 
     private var _binding: FragmentProductBinding? = null
-    private val binding get() = checkNotNull(_binding)
+    private val binding get() = requireNotNull(_binding)
 
     private val viewModel : ProductViewModel by viewModels()
     private val args : ProductFragmentArgs by navArgs()
@@ -50,17 +51,15 @@ class ProductFragment : Fragment() {
     }
 
     private fun observeData(){
-        viewModel.productInfoUiEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+        viewModel.productEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                 when(it){
-                    is ProductViewModel.UiEvent.Unit -> {}
-
-                    is ProductViewModel.UiEvent.Failure -> {
+                    is ProductEvent.Failure -> {
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                     }
-                    is ProductViewModel.UiEvent.ImageFailure ->{
+                    is ProductEvent.ImageFailure ->{
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-                        binding.productNutritionLabelImage.visibility = View.GONE
+                        binding.productFactCard.visibility = View.GONE
                     }
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)

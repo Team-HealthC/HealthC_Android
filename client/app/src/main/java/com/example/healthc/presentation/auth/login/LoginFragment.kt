@@ -14,8 +14,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentLoginBinding
-import com.example.healthc.domain.utils.Resource
 import com.example.healthc.presentation.auth.AuthViewModel
+import com.example.healthc.presentation.auth.AuthViewModel.AuthEvent
 import com.example.healthc.presentation.home.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -25,7 +25,7 @@ import kotlinx.coroutines.flow.onEach
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
-    private val binding get() = checkNotNull(_binding)
+    private val binding get() = requireNotNull(_binding)
 
     private val viewModel by activityViewModels<AuthViewModel>()
 
@@ -50,23 +50,19 @@ class LoginFragment : Fragment() {
         viewModel.signInEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                 when(it){
-                    is Resource.Loading ->{
-                        // TODO loading screen
-                    }
-                    is Resource.Success -> {
+                    is AuthEvent.Success -> {
                         startMainActivity()
                     }
-                    is Resource.Failure -> {
+
+                    is AuthEvent.Failure -> {
                         Toast.makeText(requireContext(), "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show()
                     }
-                    else -> {}
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     private fun initView(){
         binding.goToSignUpButton.setOnClickListener {
-            viewModel.initInput()
             navigateSignUp()
         }
     }

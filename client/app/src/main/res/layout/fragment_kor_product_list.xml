@@ -32,7 +32,7 @@
                     android:layout_marginHorizontal="16dp"
                     android:textColor="@color/black"
                     android:textSize="16sp"
-                    android:text="@{viewModel.queryUiState}"
+                    android:text="@{viewModel.query}"
                     android:enabled="false"
                     app:layout_constraintBottom_toBottomOf="@+id/back_to_search_button"
                     app:layout_constraintEnd_toEndOf="parent"

@@ -4,15 +4,15 @@ import com.example.healthc.data.source.auth.AuthDataSource
 import com.example.healthc.data.source.auth.AuthDataSourceImpl
 import com.example.healthc.data.source.kor_product.KorProductDataSource
 import com.example.healthc.data.source.kor_product.KorProductDataSourceImpl
-import com.example.healthc.data.source.object_detection.ObjectDetectionDataSource
-import com.example.healthc.data.source.object_detection.ObjectDetectionDataSourceImpl
+import com.example.healthc.data.source.detection.DetectionDataSource
+import com.example.healthc.data.source.detection.DetectionDataSourceImpl
 import com.example.healthc.data.source.recipe.RecipeDataSource
 import com.example.healthc.data.source.recipe.RecipeDataSourceImpl
-import com.example.healthc.data.source.user.local.LocalUserDataSource
-import com.example.healthc.data.source.user.local.LocalUserDataSourceImpl
 import com.example.healthc.data.source.product.ProductDataSource
 import com.example.healthc.data.source.product.ProductDataSourceImpl
 import com.example.healthc.data.source.user.*
+import com.example.healthc.data.source.user.UserDataSource
+import com.example.healthc.data.source.user.UserDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -35,13 +35,6 @@ abstract class DataSourceModule {
         userDataSourceImpl: UserDataSourceImpl
     ): UserDataSource
 
-
-    @Binds
-    @Singleton
-    abstract fun provideLocalUserDataSource(
-        localUserDataSourceImpl: LocalUserDataSourceImpl
-    ): LocalUserDataSource
-
     @Binds
     @Singleton
     abstract fun providesKorProductDataSource(
@@ -50,14 +43,14 @@ abstract class DataSourceModule {
 
     @Binds
     @Singleton
-    abstract fun providesObjectDetectionDataSource(
-        objectDetectionDataSourceImpl: ObjectDetectionDataSourceImpl
-    ) : ObjectDetectionDataSource
+    abstract fun providesDetectionDataSource(
+        detectionDataSourceImpl: DetectionDataSourceImpl
+    ) : DetectionDataSource
 
     @Binds
     @Singleton
     abstract fun providesSearchProductInfoDataSource(
-        ProductataSourceImpl: ProductDataSourceImpl
+        productDataSourceImpl: ProductDataSourceImpl
     ) : ProductDataSource
 
     @Binds

@@ -1,12 +1,12 @@
 package com.example.healthc.data.source.user
 
-import com.example.healthc.domain.model.auth.UserInfo
-import com.example.healthc.domain.utils.Resource
+import com.example.healthc.data.model.remote.auth.UserRequest
+import com.example.healthc.data.model.remote.auth.UserResponse
 
 interface UserDataSource {
-    suspend fun getUserInfo(uid: String) : Resource<UserInfo>
+    suspend fun getUser() : Result<UserResponse>
 
-    suspend fun updateUserInfo(uid : String, userInfo : UserInfo) : Resource<Unit>
+    suspend fun updateUser(userRequest : UserRequest) : Result<Unit>
 
-    suspend fun updateUserName(uid: String, userName: String) : Resource<Unit>
+    suspend fun updateUserName(userName: String) : Result<Unit>
 }

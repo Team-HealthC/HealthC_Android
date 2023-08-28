@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentUserEmailBinding
 import com.example.healthc.presentation.auth.AuthViewModel
+import com.example.healthc.presentation.auth.AuthViewModel.AuthEvent
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -21,7 +22,7 @@ import kotlinx.coroutines.flow.onEach
 class UserEmailFragment : Fragment() {
 
     private var _binding: FragmentUserEmailBinding? = null
-    private val binding get() = checkNotNull(_binding)
+    private val binding get() = requireNotNull(_binding)
 
     private val viewModel by activityViewModels<AuthViewModel>()
 
@@ -49,17 +50,15 @@ class UserEmailFragment : Fragment() {
     }
 
     private fun observeData(){
-        viewModel.signUpUiEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+        viewModel.validationEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                 when (it) {
-                    is AuthViewModel.SignUpUiEvent.Success -> {
+                    is AuthEvent.Success -> {
                         navigateToPassword()
-                        viewModel.initState()
                     }
-                    is AuthViewModel.SignUpUiEvent.Failure -> {
+                    is AuthEvent.Failure -> {
                         binding.signUpEmailLayout.error = it.message
                     }
-                    is AuthViewModel.SignUpUiEvent.Unit -> {}
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
     }

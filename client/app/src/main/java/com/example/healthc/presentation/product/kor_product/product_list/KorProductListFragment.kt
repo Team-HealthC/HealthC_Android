@@ -28,6 +28,7 @@ class KorProductListFragment : Fragment() {
 
     private val viewModel : KorProductListViewModel by viewModels()
     private val args: KorProductListFragmentArgs by navArgs()
+
     private lateinit var adapter : KorProductListAdapter
 
     override fun onCreateView(
@@ -49,9 +50,7 @@ class KorProductListFragment : Fragment() {
     }
 
     private fun initAdapter(){
-        adapter = KorProductListAdapter(
-            onItemClick = { navigateToDetail()}
-        )
+        adapter = KorProductListAdapter()
         binding.korProductListRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.korProductListRecyclerView.adapter = adapter
     }
@@ -67,7 +66,7 @@ class KorProductListFragment : Fragment() {
     }
 
     private fun observeData(){
-        viewModel.korProductListUiState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+        viewModel.korProductListState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                 when(it){
                     is KorProductUiState.Init -> { }
@@ -83,12 +82,6 @@ class KorProductListFragment : Fragment() {
                     }
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
-    }
-
-    private fun navigateToDetail(){
-        findNavController().navigate(
-            KorProductListFragmentDirections.actionKorProductListFragmentToKorProductFragment()
-        )
     }
 
     private fun navigateToSearch(){

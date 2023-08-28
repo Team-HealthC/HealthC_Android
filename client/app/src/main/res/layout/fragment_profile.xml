@@ -93,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/sc_dream_nor"
-            android:text="@{@string/profile_title(viewModel.userInfo.name)}"
+            android:text="@{@string/profile_title(viewModel.userUiState.name)}"
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"

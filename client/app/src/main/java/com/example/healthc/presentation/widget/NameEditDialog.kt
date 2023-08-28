@@ -5,7 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.WindowManager
 import com.example.healthc.databinding.DialogNameEditBinding
-import com.example.healthc.domain.use_case.ValidateName
+import com.example.healthc.domain.usecase.validation.ValidateNameUseCase
 
 class NameEditDialog (
     context : Context,
@@ -13,7 +13,7 @@ class NameEditDialog (
 ): Dialog(context){
 
     private val binding by lazy { DialogNameEditBinding.inflate(layoutInflater) }
-    private val validateName by lazy { ValidateName() }
+    private val validateNameUseCase by lazy { ValidateNameUseCase() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +33,7 @@ class NameEditDialog (
 
     private fun validateName(): Boolean{
         val name = binding.dialogEditNameTextView.text.toString()
-        val validateResult = validateName(name)
+        val validateResult = validateNameUseCase(name)
         if(!validateResult.successful){
             binding.dialogEditNameLayout.error = validateResult.errorMessage
             return false
