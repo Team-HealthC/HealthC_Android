@@ -19,7 +19,7 @@ import com.google.android.material.chip.Chip
 class RecipeSearchFragment : Fragment() {
 
     private var _binding: FragmentRecipeSearchBinding? = null
-    private val binding get() = checkNotNull(_binding)
+    private val binding get() = requireNotNull(_binding)
 
     private lateinit var callback: OnBackPressedCallback
 
