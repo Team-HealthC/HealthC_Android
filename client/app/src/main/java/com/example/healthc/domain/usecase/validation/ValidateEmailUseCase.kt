@@ -1,9 +1,9 @@
-package com.example.healthc.domain.use_case
+package com.example.healthc.domain.usecase.validation
 
 import android.util.Patterns
 import com.example.healthc.domain.model.validation.ValidationResult
 
-class ValidateEmail {
+class ValidateEmailUseCase {
     operator fun invoke(email: String): ValidationResult{
         if (email.isBlank()) {
             return ValidationResult(

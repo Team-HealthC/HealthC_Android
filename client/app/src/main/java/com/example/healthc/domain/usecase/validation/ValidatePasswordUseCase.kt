@@ -1,8 +1,8 @@
-package com.example.healthc.domain.use_case
+package com.example.healthc.domain.usecase.validation
 
 import com.example.healthc.domain.model.validation.ValidationResult
 
-class ValidatePassword {
+class ValidatePasswordUseCase {
     operator fun invoke(password: String): ValidationResult {
         if (password.length < 8) {
             return ValidationResult(

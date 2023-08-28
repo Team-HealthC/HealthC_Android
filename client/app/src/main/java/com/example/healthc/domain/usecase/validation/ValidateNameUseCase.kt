@@ -1,8 +1,8 @@
-package com.example.healthc.domain.use_case
+package com.example.healthc.domain.usecase.validation
 
 import com.example.healthc.domain.model.validation.ValidationResult
 
-class ValidateName {
+class ValidateNameUseCase {
     operator fun invoke(nickName: String): ValidationResult {
         if (nickName.length !in 2..9) {
             return ValidationResult(
