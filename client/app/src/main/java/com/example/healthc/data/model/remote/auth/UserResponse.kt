@@ -6,6 +6,11 @@ data class UserResponse(
     val name: String,
     val allergies: List<String>
 ){
+    constructor(): this(
+        name = "",
+        allergies = emptyList()
+    )
+
     fun toDomain() = User(
         name = name,
         allergies = allergies
