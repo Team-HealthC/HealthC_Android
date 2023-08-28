@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.ml.text_detection
+package com.example.healthc.presentation.detection.text_detection
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,7 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentTextDetectionBinding
-import com.example.healthc.presentation.ml.text_detection.TextDetectionViewModel.ImageProcessEvent
+import com.example.healthc.presentation.detection.text_detection.TextDetectionViewModel.TextDetectionEvent
 import com.example.healthc.presentation.widget.NegativeSignDialog
 import com.example.healthc.presentation.widget.PositiveSignDialog
 import com.google.mlkit.vision.common.InputImage
@@ -80,7 +80,7 @@ class TextDetectionFragment : Fragment() {
         textRecognizer.process(image)
             .addOnSuccessListener { text ->
                 val recognizedText = text.text.replace("\n", "")
-                viewModel.detectImage(recognizedText)
+                viewModel.detectImage(recognizedText, )
             }
             .addOnFailureListener {
                 Toast.makeText(requireContext(), "인식할 수 있는 글자가 없습니다.", Toast.LENGTH_SHORT).show()
@@ -94,18 +94,15 @@ class TextDetectionFragment : Fragment() {
         viewModel.textDetectionUiEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                 when(it){
-                    is ImageProcessEvent.DetectedNothing -> {
-                        PositiveSignDialog(requireContext(), it.userAllergies).show()
+                    is TextDetectionEvent.Detected -> {
+                        showNegativeDialog(it.detectedList)
                     }
 
-                    is ImageProcessEvent.Detected -> {
-                        NegativeSignDialog(
-                            context = requireContext(),
-                            detectedList = it.detectedList
-                        ).show()
+                    is TextDetectionEvent.NotDetected -> {
+                        showPositiveDialog()
                     }
 
-                    is ImageProcessEvent.Failure -> {
+                    is TextDetectionEvent.Failure -> {
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -115,6 +112,17 @@ class TextDetectionFragment : Fragment() {
     private fun navigateToCamera(){
         val direction = TextDetectionFragmentDirections.actionTextDetectionFragmentToCameraFragment()
         findNavController().navigate(direction)
+    }
+
+    private fun showNegativeDialog(detectedList: List<String>){
+        NegativeSignDialog(
+            context = requireContext(),
+            detectedList = detectedList
+        ).show()
+    }
+
+    private fun showPositiveDialog(){
+        PositiveSignDialog(context = requireContext()).show()
     }
 
     override fun onDestroyView() {
