@@ -6,23 +6,21 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.healthc.databinding.ItemKorProductBinding
-import com.example.healthc.domain.model.kor_product.KorProductInfo
+import com.example.healthc.domain.model.kor_product.KorProduct
 import com.example.healthc.presentation.product.kor_product.product_list.adapter.KorProductListAdapter.KorProductViewHolder
 
-class KorProductListAdapter(
-    private val onItemClick : (Int) -> Unit
-) : ListAdapter<KorProductInfo, KorProductViewHolder>(KorProductInfoCallback){
+class KorProductListAdapter: ListAdapter<KorProduct, KorProductViewHolder>(KorProductCallback){
     
     companion object {
-        val KorProductInfoCallback = object : DiffUtil.ItemCallback<KorProductInfo>(){
+        val KorProductCallback = object : DiffUtil.ItemCallback<KorProduct>(){
             override fun areItemsTheSame(
-                oldItem: KorProductInfo, newItem: KorProductInfo): Boolean {
+                oldItem: KorProduct, newItem: KorProduct): Boolean {
                 return oldItem.name == newItem.name
             }
 
             override fun areContentsTheSame(
-                oldItem: KorProductInfo,
-                newItem: KorProductInfo
+                oldItem: KorProduct,
+                newItem: KorProduct
             ): Boolean {
                 return oldItem == newItem
             }
@@ -42,11 +40,8 @@ class KorProductListAdapter(
 
     inner class KorProductViewHolder(private val binding : ItemKorProductBinding)
         : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item : KorProductInfo) {
+        fun bind(item : KorProduct) {
             binding.item = item
-            binding.root.setOnClickListener {
-                onItemClick(1) //TODO 수정
-            }
         }
     }
 }
