@@ -1,37 +1,26 @@
 package com.example.healthc.data.source.product
 
-import com.example.healthc.data.remote.api.ProductService
-import com.example.healthc.di.IoDispatcher
-import com.example.healthc.domain.model.product.Product
-import com.example.healthc.domain.model.product.ProductId
-import com.example.healthc.domain.utils.Resource
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.withContext
+import com.example.healthc.data.model.remote.product.ProductItemResponse
+import com.example.healthc.data.model.remote.product.ProductResponse
+import com.example.healthc.data.service.ProductService
 import javax.inject.Inject
 
 class ProductDataSourceImpl @Inject constructor(
-    private val service : ProductService,
-    @IoDispatcher private val coroutineDispatcher: CoroutineDispatcher
+    private val service : ProductService
 ) : ProductDataSource {
-    override suspend fun getProduct(id: Int): Resource<Product>
-    = withContext(coroutineDispatcher){
-        try{
-            Resource.Success(
-                service.getProduct(id = id).toProduct()
-            )
-        } catch(e: Exception){
+    override suspend fun getProduct(id: Int): Result<ProductResponse>{
+        return runCatching {
+            service.getProduct(id = id)
+        }.onFailure { e ->
             e.printStackTrace()
-            Resource.Failure(e)
         }
     }
 
-    override suspend fun getProductIds(query: String): Resource<ProductId>
-            = withContext(coroutineDispatcher){
-        try{
-            Resource.Success(service.getProductId(query = query).toProductId())
-        } catch(e: Exception){
+    override suspend fun getProductList(query: String): Result<List<ProductItemResponse>>{
+        return runCatching {
+            service.getProductId(query = query).products
+        }.onFailure { e ->
             e.printStackTrace()
-            Resource.Failure(e)
         }
     }
 }

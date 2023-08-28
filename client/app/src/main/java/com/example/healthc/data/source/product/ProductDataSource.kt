@@ -1,11 +1,9 @@
 package com.example.healthc.data.source.product
 
-import com.example.healthc.domain.model.product.Product
-import com.example.healthc.domain.model.product.ProductId
-import com.example.healthc.domain.utils.Resource
+import com.example.healthc.data.model.remote.product.ProductItemResponse
+import com.example.healthc.data.model.remote.product.ProductResponse
 
 interface ProductDataSource {
-    suspend fun getProductIds(query: String) : Resource<ProductId>
-    suspend fun getProduct(id: Int) : Resource<Product>
-
+    suspend fun getProductList(query: String) : Result<List<ProductItemResponse>>
+    suspend fun getProduct(id: Int) : Result<ProductResponse>
 }
