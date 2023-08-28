@@ -1,8 +1,7 @@
 package com.example.healthc.data.source.kor_product
 
-import com.example.healthc.domain.model.kor_product.KorProduct
-import com.example.healthc.domain.utils.Resource
+import com.example.healthc.data.model.remote.kor_product.KorProductResponse
 
 interface KorProductDataSource {
-    suspend fun getKorProduct(category: String): Resource<KorProduct>
+    suspend fun getKorProductList(category: String): Result<List<KorProductResponse>>
 }
