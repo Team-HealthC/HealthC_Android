@@ -1,13 +1,11 @@
 package com.example.healthc.presentation.profile
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -19,10 +17,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentProfileBinding
 import com.example.healthc.presentation.auth.AuthActivity
-import com.example.healthc.presentation.auth.AuthViewModel
-import com.example.healthc.presentation.profile.profile_allergy.adapter.ProfileAllergyAdapter
-import com.example.healthc.presentation.profile.ProfileViewModel.ProfileUiEvent
+import com.example.healthc.presentation.profile.adapter.ProfileAllergyAdapter
 import com.example.healthc.presentation.widget.NameEditDialog
+import com.example.healthc.presentation.profile.ProfileViewModel.ProfileEvent
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -31,19 +28,11 @@ import kotlinx.coroutines.flow.onEach
 class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
-    private val binding get() = checkNotNull(_binding)
+    private val binding get() = requireNotNull(_binding)
 
-    private val authViewModel : AuthViewModel by viewModels()
     private val viewModel : ProfileViewModel by viewModels()
 
-    private lateinit var callback: OnBackPressedCallback
-
     private lateinit var profileAllergyAdapter: ProfileAllergyAdapter
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        onBackPressButton()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -72,16 +61,15 @@ class ProfileFragment : Fragment() {
         viewModel.profileUiEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                 when(it){
-                    is ProfileUiEvent.Unit -> {}
-
-                    is ProfileUiEvent.Success -> {
-                        profileAllergyAdapter.submitList(it.userInfo.allergy)
-                    }
-
-                    is ProfileUiEvent.Failure -> {
+                    is ProfileEvent.Failure -> {
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                     }
                 }
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
+
+        viewModel.userUiState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+            .onEach { list ->
+                profileAllergyAdapter.submitList(list.allergies)
             }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
@@ -95,7 +83,6 @@ class ProfileFragment : Fragment() {
         }
 
         binding.signOutButton.setOnClickListener{
-            authViewModel.signOut() // 로그아웃
             startAuthActivity() // 로그인 화면으로 전환
         }
 
@@ -130,7 +117,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun navigateToEditProfile(){
-        val direction = ProfileFragmentDirections.actionProfileFragmentToProfileAllergyFragment()
+        val direction = ProfileFragmentDirections.actionProfileFragmentToEditorFragment()
         findNavController().navigate(direction)
     }
 
@@ -139,18 +126,8 @@ class ProfileFragment : Fragment() {
         findNavController().navigate(direction)
     }
 
-    private fun onBackPressButton(){
-        callback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                navigateToCamera()
-            }
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
-    }
-
     override fun onDestroyView() {
         _binding = null
-        callback.remove()
         super.onDestroyView()
     }
 }
