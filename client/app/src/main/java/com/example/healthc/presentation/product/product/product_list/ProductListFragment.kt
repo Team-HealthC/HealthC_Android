@@ -77,7 +77,7 @@ class ProductListFragment : Fragment() {
 
                     }
                     is ProductListUiState.Success -> {
-                        adapter.submitList(it.productId.products)
+                        adapter.submitList(it.productList)
                     }
                     is ProductListUiState.Failure -> {
 
