@@ -1,4 +1,4 @@
-package com.example.healthc.presentation.ml.object_detection
+package com.example.healthc.presentation.detection.object_detection
 
 import android.net.Uri
 import android.os.Bundle
@@ -15,11 +15,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentObjectDetectionBinding
-import com.example.healthc.domain.model.object_detection.DetectedObject
-import com.example.healthc.presentation.ml.object_detection.ObjectDetectionViewModel.UiEvent
+import com.example.healthc.domain.model.detection.ObjectDetection
+import com.example.healthc.presentation.detection.object_detection.ObjectDetectionViewModel.ObjectDetectionEvent
 import com.example.healthc.presentation.widget.NegativeSignDialog
-import com.example.healthc.presentation.widget.PositiveSignDialog
 import com.example.healthc.presentation.widget.ObjectDetectionDialog
+import com.example.healthc.presentation.widget.PositiveSignDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -28,7 +28,7 @@ import kotlinx.coroutines.flow.onEach
 class ObjectDetectionFragment : Fragment() {
 
     private var _binding: FragmentObjectDetectionBinding? = null
-    private val binding get() = checkNotNull(_binding)
+    private val binding get() = requireNotNull(_binding)
 
     private val viewModel : ObjectDetectionViewModel by viewModels()
     private val args : ObjectDetectionFragmentArgs by navArgs()
@@ -64,10 +64,12 @@ class ObjectDetectionFragment : Fragment() {
             val bytes = ByteArray(inputStream.available())
             inputStream.read(bytes)
             viewModel.postImage(bytes)
-        }else{
+        }
+        else{
             Toast.makeText(requireContext(), "알 수 없는 오류가 발생하였습니다.", Toast.LENGTH_SHORT).show()
             navigateToCamera()
         }
+        inputStream?.close()
     }
 
     private fun navigateToCamera(){
@@ -76,48 +78,57 @@ class ObjectDetectionFragment : Fragment() {
     }
 
     private fun observeData(){
-        viewModel.searchCategoryUiEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+        viewModel.objectDetectionEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                 when(it){
-                    is UiEvent.Success -> { // 객체 인식 성공
-                        showDialog(it.category)
-                        makeInvisibleProgressBar()
+                    is ObjectDetectionEvent.Success -> { // 객체 인식 성공
+                        showObjectDetectionDialog(it.category)
+                        eraseProgressBar()
                     }
 
-                    is UiEvent.Failure -> { // 객체 인식 실패
+                    is ObjectDetectionEvent.Failure -> { // 객체 인식 실패
                         Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-                        makeInvisibleProgressBar()
+                        eraseProgressBar()
                     }
 
-                    is UiEvent.Detected -> { // 알러지 성분 검출
-                        NegativeSignDialog(
-                            context = requireContext(),
-                            detectedList = it.detectedList
-                        ).show()
-                    }
-
-                    is UiEvent.DetectedNothing -> { // 알러지 성분 불검출
-                        PositiveSignDialog(requireContext(), it.userAllergies).show()
+                    is ObjectDetectionEvent.Detected -> { // 알러지 성분 검출
+                        if(it.detectedList.isEmpty()){
+                            showPositiveDialog()
+                        }
+                        else{
+                            showNegativeDialog(it.detectedList)
+                        }
                     }
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
-    private fun makeInvisibleProgressBar(){
+    private fun eraseProgressBar(){
         binding.progressBar.visibility = View.GONE
     }
 
-    private fun showDialog(category: DetectedObject){
+    private fun showObjectDetectionDialog(objectDetection: ObjectDetection){
         ObjectDetectionDialog(
             context = requireContext(),
-            category = category,
+            objectDetection = objectDetection,
             onClickNegButton = {
                 navigateToCamera()
             },
-            onClickPosButton = {
-                viewModel.searchIngredients(it)
+            onClickPosButton = { detectedObject ->
+                viewModel.checkAllergies(detectedObject = detectedObject)
             }
         ).show()
+    }
+
+    private fun showNegativeDialog(detectedList: List<String>){
+        NegativeSignDialog(
+            context = requireContext(),
+            detectedList = detectedList
+        ).show()
+    }
+
+    private fun showPositiveDialog(){
+        PositiveSignDialog(context = requireContext()).show()
     }
 
     override fun onDestroyView() {
