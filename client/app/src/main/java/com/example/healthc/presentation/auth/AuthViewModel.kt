@@ -1,121 +1,109 @@
 package com.example.healthc.presentation.auth
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.healthc.domain.repository.AuthRepository
 import com.example.healthc.domain.model.auth.User
-import com.example.healthc.domain.model.auth.UserInfo
-import com.example.healthc.domain.use_case.ValidateEmail
-import com.example.healthc.domain.use_case.ValidateName
-import com.example.healthc.domain.use_case.ValidatePassword
-import com.example.healthc.domain.utils.Resource
-import com.google.firebase.auth.FirebaseUser
+import com.example.healthc.domain.model.auth.UserAccount
+import com.example.healthc.domain.usecase.auth.SignInUseCase
+import com.example.healthc.domain.usecase.auth.SignUpUseCase
+import com.example.healthc.domain.usecase.validation.ValidateEmailUseCase
+import com.example.healthc.domain.usecase.validation.ValidateNameUseCase
+import com.example.healthc.domain.usecase.validation.ValidatePasswordUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val authRepository: AuthRepository
+    private val signInUseCase: SignInUseCase,
+    private val signUpUseCase: SignUpUseCase
 ) : ViewModel() {
 
-    private val _signUpUiEvent = MutableStateFlow<SignUpUiEvent>(SignUpUiEvent.Unit)
-    val signUpUiEvent : StateFlow<SignUpUiEvent>
-        get() = _signUpUiEvent
+    private val _validationEvent = MutableSharedFlow<AuthEvent>()
+    val validationEvent: SharedFlow<AuthEvent> get() = _validationEvent
 
-    private val _signUpEvent = MutableStateFlow<Resource<FirebaseUser>?>(null)
-    val signUpEvent : StateFlow<Resource<FirebaseUser>?>
-        get() = _signUpEvent
+    private val _signUpEvent = MutableSharedFlow<AuthEvent>()
+    val signUpEvent: SharedFlow<AuthEvent> get() = _signUpEvent
 
-    private val _signInEvent = MutableStateFlow<Resource<FirebaseUser>?>(null)
-    val signInEvent : StateFlow<Resource<FirebaseUser>?>
-        get() = _signInEvent
+    private val _signInEvent = MutableSharedFlow<AuthEvent>()
+    val signInEvent: SharedFlow<AuthEvent> get() = _signInEvent
 
-    // 사용자 input
-    val email = MutableLiveData<String>("")
-    val password = MutableLiveData<String>("")
-    val name = MutableLiveData<String>("")
-    private val allergyList = MutableLiveData<List<String>>(emptyList())
-
-    // 유효성 검사
-    private val validateEmailUseCase by lazy { ValidateEmail() }
-    private val validatePasswordUseCase by lazy { ValidatePassword() }
-    private val validateNameUseCase by lazy { ValidateName() }
+    // User
+    val email: MutableStateFlow<String> = MutableStateFlow<String>("")
+    val password: MutableStateFlow<String> = MutableStateFlow<String>("")
+    val name: MutableStateFlow<String> = MutableStateFlow<String>("")
+    val allergies: MutableStateFlow<List<String>> = MutableStateFlow<List<String>>(emptyList())
 
     fun validateEmail(){
-        val result = validateEmailUseCase(requireNotNull(email.value))
-        if(result.successful){
-            _signUpUiEvent.value = SignUpUiEvent.Success
-        }else{
-            _signUpUiEvent.value = SignUpUiEvent.Failure(result.errorMessage)
+        viewModelScope.launch {
+            val validateEmailUseCase = ValidateEmailUseCase()
+            val result = validateEmailUseCase(email.value)
+            if(result.successful){
+                _validationEvent.emit(AuthEvent.Success)
+            }else{
+                _validationEvent.emit(AuthEvent.Failure(result.errorMessage))
+            }
         }
     }
 
     fun validatePassword(){
-        val result = validatePasswordUseCase(requireNotNull(password.value))
-        if(result.successful){
-            _signUpUiEvent.value = SignUpUiEvent.Success
-        }else{
-            _signUpUiEvent.value = SignUpUiEvent.Failure(result.errorMessage)
+        viewModelScope.launch {
+            val validatePasswordUseCase = ValidatePasswordUseCase()
+            val result = validatePasswordUseCase(password.value)
+            if(result.successful){
+                _validationEvent.emit(AuthEvent.Success)
+            }else{
+                _validationEvent.emit(AuthEvent.Failure(result.errorMessage))
+            }
         }
     }
 
     fun validateName(){
-        val result = validateNameUseCase(requireNotNull(name.value))
-        if(result.successful){
-            _signUpUiEvent.value = SignUpUiEvent.Success
-        }else{
-            _signUpUiEvent.value = SignUpUiEvent.Failure(result.errorMessage)
+        viewModelScope.launch {
+            val validateNameUseCase = ValidateNameUseCase()
+            val result = validateNameUseCase(name.value)
+            if(result.successful){
+                _validationEvent.emit(AuthEvent.Success)
+            }else{
+                _validationEvent.emit(AuthEvent.Failure(result.errorMessage))
+            }
         }
     }
 
-    fun setAllergy(allergyList : MutableList<String>){
-        this.allergyList.value = allergyList.toList()
+    fun setAllergy(allergyList : List<String>){
+        allergies.value = allergyList
     }
 
     fun signInUser(){
         viewModelScope.launch {
-            _signInEvent.value = Resource.Loading
-            val result = authRepository.signIn(
-                User(requireNotNull(email.value), requireNotNull(password.value)),
-            )
-            _signInEvent.value = result
+            signInUseCase(
+                UserAccount(email.value, password.value)
+            ).onSuccess {
+                _signInEvent.emit(AuthEvent.Success)
+            }.onFailure { error ->
+                _signInEvent.emit(AuthEvent.Failure(error.message))
+            }
         }
     }
 
     fun signUpUser(){
         viewModelScope.launch {
-            _signUpEvent.value = Resource.Loading
-            val result = authRepository.signUp(
-                User(requireNotNull(email.value), requireNotNull(password.value)),
-                UserInfo(requireNotNull(name.value), requireNotNull(allergyList.value))
-            )
-            _signUpEvent.value = result
+            signUpUseCase(
+                userAccount = UserAccount(email.value, password.value),
+                user = User(name.value, allergies.value)
+            ).onSuccess {
+                _signUpEvent.emit(AuthEvent.Success)
+            }.onFailure { error ->
+                _signUpEvent.emit(AuthEvent.Failure(error.message))
+            }
         }
     }
 
-    fun initState(){
-        _signUpUiEvent.value = SignUpUiEvent.Unit
-    }
-
-    // 로그인 -> 회원가입으로 넘어갈 때
-    fun initInput(){
-        email.value = ""
-        password.value = ""
-    }
-
-    fun signOut() {
-        authRepository.signOut()
-        _signInEvent.value = null
-        _signUpEvent.value = null
-    }
-
-    sealed class SignUpUiEvent {
-        data class Failure(val message: String?) : SignUpUiEvent()
-        object Success : SignUpUiEvent()
-        object Unit : SignUpUiEvent()
+    sealed class AuthEvent {
+        data class Failure(val message: String?) : AuthEvent()
+        object Success : AuthEvent()
     }
 }
