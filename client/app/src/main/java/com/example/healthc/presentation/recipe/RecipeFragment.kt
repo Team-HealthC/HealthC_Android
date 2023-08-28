@@ -1,13 +1,11 @@
 package com.example.healthc.presentation.recipe
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
@@ -18,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentRecipeBinding
 import com.example.healthc.presentation.recipe.adapter.RecipeAdapter
+import com.example.healthc.presentation.recipe.RecipeViewModel.RecipeEvent
+import com.example.healthc.presentation.recipe.RecipeViewModel.RecipeUiState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -26,18 +26,12 @@ import kotlinx.coroutines.flow.onEach
 class RecipeFragment : Fragment() {
 
     private var _binding: FragmentRecipeBinding? = null
-    private val binding get() = checkNotNull(_binding)
+    private val binding get() = requireNotNull(_binding)
 
-    private val viewModel : RecipeViewModel by viewModels()
-    private val args : RecipeFragmentArgs by navArgs()
+    private val viewModel: RecipeViewModel by viewModels()
+    private val args: RecipeFragmentArgs by navArgs()
 
-    private lateinit var callback: OnBackPressedCallback
     private lateinit var recipeAdapter: RecipeAdapter
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        onBackPressButton()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,34 +52,37 @@ class RecipeFragment : Fragment() {
     }
 
     private fun observeData(){
-        viewModel.searchDishUiEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+        viewModel.recipeEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                 when(it){
-                    is RecipeViewModel.SearchDishUiEvent.Unit -> {
-
-                    }
-
-                    is RecipeViewModel.SearchDishUiEvent.Success -> {
-                        hideProgressbar()
-                        recipeAdapter.submitList(it.dish)
-                    }
-
-                    is RecipeViewModel.SearchDishUiEvent.NotFounded -> {
-                        hideProgressbar()
-                        showNotFoundedTextView()
-                    }
-
-                    is RecipeViewModel.SearchDishUiEvent.Failure -> {
+                    is RecipeEvent.Failure -> {
                         hideProgressbar()
                         Toast.makeText(requireContext(),
                             "음식 정보를 불러오는데 실패하였습니다.", Toast.LENGTH_SHORT).show()
                     }
                 }
-            }
-            .launchIn(viewLifecycleOwner.lifecycleScope)
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
+
+        viewModel.recipeListUiState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+            .onEach {
+                when(it){
+                    is RecipeUiState.Init -> { }
+
+                    is RecipeUiState.NotFounded -> {
+                        showNotFoundedSign()
+                        hideProgressbar()
+                    }
+
+                    is RecipeUiState.Success -> {
+                        recipeAdapter.submitList(it.list)
+                        hideProgressbar()
+                    }
+                }
+
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
-    private fun showNotFoundedTextView(){
+    private fun showNotFoundedSign(){
         with(binding.notFoundedIngredientTextView){
             this.visibility = View.VISIBLE
         }
@@ -117,18 +114,8 @@ class RecipeFragment : Fragment() {
         findNavController().navigate(direction)
     }
 
-    private fun onBackPressButton(){
-        callback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                navigateToFood()
-            }
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
-        callback.remove()
         _binding = null
     }
 }
