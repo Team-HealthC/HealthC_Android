@@ -1,7 +1,6 @@
 package com.example.healthc.data.model.remote.kor_product
 
 import com.example.healthc.domain.model.kor_product.KorProduct
-import com.squareup.moshi.Json
 
 data class KorProductResultResponse(
     val header: KorProductResponseHeader,
@@ -14,13 +13,16 @@ data class KorProductResponseHeader(
 )
 
 data class KorProductResponseBody(
-    val items: List<KorProductResponse>,
+    val items: List<KorProductResponseItem>,
     val totalCount: String,
     val pageNo: String,
     val numOfRows: String
 )
 
-@Json(name = "item")
+data class KorProductResponseItem(
+    val item: KorProductResponse
+)
+
 data class KorProductResponse(
     val allergy: String,
     val barcode: String,
