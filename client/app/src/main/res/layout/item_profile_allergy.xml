@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
-            name="item"
-            type="com.example.healthc.presentation.profile.model.ProfileUiModel"
-            />
+            name="model"
+            type="com.example.healthc.domain.model.auth.Allergy" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -30,8 +29,6 @@
                 android:layout_height="30dp"
                 android:layout_margin="8dp"
                 android:scaleType="fitXY"
-                app:imageIngredientUrl="@{item.imageSrc}"
-                app:placeholder="@{@drawable/health_c}"
                 android:src="@drawable/health_c"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +41,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:layout_margin="8dp"
-                android:text="@{item.allergy}"
+                android:text="@{model.allergy}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/item_allergy_imageView"
                 app:layout_constraintStart_toStartOf="@+id/item_allergy_imageView"
