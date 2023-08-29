@@ -16,4 +16,10 @@ class KorProductRepositoryImpl @Inject constructor(
             Timber.e(e)
         }
     }
+
+    override suspend fun getKorProduct(id: String): Result<KorProduct> {
+        return korProductDataSource.getKorProduct(id).mapCatching { response ->
+            response.toDomain()
+        }
+    }
 }
