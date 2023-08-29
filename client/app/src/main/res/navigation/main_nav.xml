@@ -157,6 +157,10 @@
         <action
             android:id="@+id/action_korProductFragment_to_korProductListFragment"
             app:destination="@id/korProductListFragment" />
+        <argument
+            android:name="id"
+            android:defaultValue=""
+            app:argType="string"/>
     </fragment>
     <fragment
         android:id="@+id/productListFragment"
