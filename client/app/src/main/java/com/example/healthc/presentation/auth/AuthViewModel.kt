@@ -2,7 +2,6 @@ package com.example.healthc.presentation.auth
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.healthc.domain.model.auth.User
 import com.example.healthc.domain.model.auth.UserAccount
 import com.example.healthc.domain.usecase.auth.SignInUseCase
 import com.example.healthc.domain.usecase.auth.SignUpUseCase
@@ -35,7 +34,7 @@ class AuthViewModel @Inject constructor(
     val email: MutableStateFlow<String> = MutableStateFlow<String>("")
     val password: MutableStateFlow<String> = MutableStateFlow<String>("")
     val name: MutableStateFlow<String> = MutableStateFlow<String>("")
-    val allergies: MutableStateFlow<List<String>> = MutableStateFlow<List<String>>(emptyList())
+    val allergies: MutableStateFlow<List<String>> = MutableStateFlow(emptyList())
 
     fun validateEmail(){
         viewModelScope.launch {
@@ -93,7 +92,8 @@ class AuthViewModel @Inject constructor(
         viewModelScope.launch {
             signUpUseCase(
                 userAccount = UserAccount(email.value, password.value),
-                user = User(name.value, allergies.value)
+                name = name.value,
+                allergies = allergies.value
             ).onSuccess {
                 _signUpEvent.emit(AuthEvent.Success)
             }.onFailure { error ->

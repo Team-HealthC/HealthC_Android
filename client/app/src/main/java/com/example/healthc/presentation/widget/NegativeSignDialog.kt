@@ -5,10 +5,11 @@ import android.content.Context
 import android.os.Bundle
 import android.view.WindowManager
 import com.example.healthc.databinding.DialogNegativeBinding
+import com.example.healthc.domain.model.auth.Allergy
 
 class NegativeSignDialog(
     context: Context,
-    private val detectedList : List<String>,
+    private val detectedList : List<Allergy>,
 ) : Dialog(context){
 
     private val binding by lazy { DialogNegativeBinding.inflate(layoutInflater) }

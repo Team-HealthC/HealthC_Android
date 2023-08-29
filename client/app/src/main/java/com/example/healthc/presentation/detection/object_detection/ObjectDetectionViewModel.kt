@@ -2,6 +2,7 @@ package com.example.healthc.presentation.detection.object_detection
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.healthc.domain.model.auth.Allergy
 import com.example.healthc.domain.model.detection.ObjectDetection
 import com.example.healthc.domain.usecase.detection.CheckAllergiesInImageUseCase
 import com.example.healthc.domain.usecase.detection.GetDetectedObjectUseCase
@@ -56,6 +57,6 @@ class ObjectDetectionViewModel @Inject constructor(
     sealed class ObjectDetectionEvent {
         data class Failure(val message : String?) : ObjectDetectionEvent()
         data class Success(val category: ObjectDetection) : ObjectDetectionEvent()
-        data class Detected(val detectedList : List<String>) : ObjectDetectionEvent()
+        data class Detected(val detectedList : List<Allergy>) : ObjectDetectionEvent()
     }
 }
