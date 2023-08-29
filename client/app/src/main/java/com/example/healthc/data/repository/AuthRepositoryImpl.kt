@@ -17,10 +17,12 @@ class AuthRepositoryImpl @Inject constructor(
         )
     }
 
-    override suspend fun signUp(userAccount: UserAccount, user: User): Result<Unit> {
+    override suspend fun signUp(
+        userAccount: UserAccount, name: String, allergies: List<String>
+    ): Result<Unit> {
         return authDataSource.signUp(
             userAccountRequest = UserAccountRequest(userAccount.email, userAccount.password),
-            userRequest = UserRequest(user.name, user.allergies)
+            userRequest = UserRequest(name, allergies)
         )
     }
 
