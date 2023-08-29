@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,14 +14,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentTextDetectionBinding
+import com.example.healthc.domain.model.auth.Allergy
 import com.example.healthc.presentation.detection.text_detection.TextDetectionViewModel.TextDetectionEvent
+import com.example.healthc.presentation.detection.text_detection.model.OcrLanguage
 import com.example.healthc.presentation.widget.NegativeSignDialog
 import com.example.healthc.presentation.widget.PositiveSignDialog
-import com.google.mlkit.vision.common.InputImage
-import com.google.mlkit.vision.text.TextRecognition
-import com.google.mlkit.vision.text.TextRecognizer
-import com.google.mlkit.vision.text.korean.KoreanTextRecognizerOptions
-import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -31,12 +27,10 @@ import kotlinx.coroutines.flow.onEach
 class TextDetectionFragment : Fragment() {
 
     private var _binding: FragmentTextDetectionBinding? = null
-    private val binding get() = checkNotNull(_binding)
+    private val binding get() = requireNotNull(_binding)
 
     private val viewModel : TextDetectionViewModel by viewModels()
     private val args : TextDetectionFragmentArgs by navArgs()
-
-    private lateinit var textRecognizer : TextRecognizer
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,6 +45,7 @@ class TextDetectionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
+        initData()
         observeData()
     }
 
@@ -58,36 +53,20 @@ class TextDetectionFragment : Fragment() {
         binding.backToCameraButton.setOnClickListener{
             navigateToCamera()
         }
-
-        when (args.language) {
-            KOR -> {
-                textRecognizer = TextRecognition.getClient(KoreanTextRecognizerOptions.Builder().build())
-            }
-            ENG -> {
-                textRecognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
-            }
-            else -> {
-                Toast.makeText(requireContext(), "알 수 없는 오류가 발생하였습니다.", Toast.LENGTH_SHORT).show()
-                navigateToCamera()
-            }
-        }
-        recognizeText()
-        viewModel.setImageUrl(args.imageUrl) // set ImageUri
     }
 
-    private fun recognizeText(){
-        val image = InputImage.fromFilePath(requireContext(), args.imageUrl.toUri())
-        textRecognizer.process(image)
-            .addOnSuccessListener { text ->
-                val recognizedText = text.text.replace("\n", "")
-                viewModel.detectImage(recognizedText, )
+    private fun initData(){
+        viewModel.setImageUrl(args.imageUrl) // set ImageUri
+
+        when(args.language){
+            OcrLanguage.KOR -> {
+                viewModel.checkAllergiesInKoreanText()
             }
-            .addOnFailureListener {
-                Toast.makeText(requireContext(), "인식할 수 있는 글자가 없습니다.", Toast.LENGTH_SHORT).show()
+
+            OcrLanguage.ENG -> {
+                viewModel.checkAllergiesInEnglishText()
             }
-            .addOnCanceledListener {
-                Toast.makeText(requireContext(), "인식에 실패하였습니다. 다시 촬영 해주세요.", Toast.LENGTH_SHORT).show()
-            }
+        }
     }
 
     private fun observeData(){
@@ -109,12 +88,7 @@ class TextDetectionFragment : Fragment() {
             }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
-    private fun navigateToCamera(){
-        val direction = TextDetectionFragmentDirections.actionTextDetectionFragmentToCameraFragment()
-        findNavController().navigate(direction)
-    }
-
-    private fun showNegativeDialog(detectedList: List<String>){
+    private fun showNegativeDialog(detectedList: List<Allergy>){
         NegativeSignDialog(
             context = requireContext(),
             detectedList = detectedList
@@ -125,14 +99,13 @@ class TextDetectionFragment : Fragment() {
         PositiveSignDialog(context = requireContext()).show()
     }
 
-    override fun onDestroyView() {
-        _binding = null
-        textRecognizer.close()
-        super.onDestroyView()
+    private fun navigateToCamera(){
+        val direction = TextDetectionFragmentDirections.actionTextDetectionFragmentToCameraFragment()
+        findNavController().navigate(direction)
     }
 
-    companion object{
-        const val ENG = "ENG"
-        const val KOR = "KOR"
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 }
