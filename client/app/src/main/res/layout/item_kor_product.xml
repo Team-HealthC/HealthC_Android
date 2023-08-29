@@ -9,14 +9,16 @@
             type="com.example.healthc.domain.model.kor_product.KorProduct"
             />
     </data>
+
     <androidx.cardview.widget.CardView
+        android:id="@+id/cd_kor_product_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="0dp">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -48,35 +50,35 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
+                android:fontFamily="@font/sc_dream_nor"
                 android:text="@{item.name}"
                 android:textColor="@color/black"
-                android:fontFamily="@font/sc_dream_nor"
                 android:textSize="16sp"
-                tools:text="김치찌개"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/cardView2"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="김치찌개" />
 
             <TextView
                 android:id="@+id/kor_product_item_category"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:text="@{item.category}"
                 android:fontFamily="@font/sc_dream_nor"
+                android:text="@{item.category}"
                 android:textSize="14sp"
-                tools:text="찌개"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/cardView2"
-                app:layout_constraintTop_toBottomOf="@+id/kor_product_item_name" />
+                app:layout_constraintTop_toBottomOf="@+id/kor_product_item_name"
+                tools:text="찌개" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/light_gray"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
