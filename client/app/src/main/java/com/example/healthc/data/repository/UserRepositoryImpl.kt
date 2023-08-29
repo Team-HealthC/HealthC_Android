@@ -15,9 +15,9 @@ class UserRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun updateUser(user: User) : Result<Unit> {
+    override suspend fun updateUser(name: String, allegies: List<String>) : Result<Unit> {
         return userDataSource.updateUser(
-            UserRequest(user.name, user.allergies)
+            UserRequest(name, allegies)
         )
     }
 

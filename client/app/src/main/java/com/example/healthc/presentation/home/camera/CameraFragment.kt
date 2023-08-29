@@ -25,6 +25,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentCameraBinding
+import com.example.healthc.presentation.detection.text_detection.model.OcrLanguage
 import com.example.healthc.presentation.home.camera.contract.PickSinglePhotoContract
 import com.example.healthc.utils.getCurrentFileName
 import com.example.healthc.presentation.widget.SearchChoiceDialog
@@ -195,10 +196,10 @@ class CameraFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 when (binding.cameraChipGroup.checkedChipId) {
                     binding.engOcrChip.id -> {
-                        navigateToOcr(imageUrl, OcrLanguage.KOR)
+                        navigateToOcr(imageUrl, OcrLanguage.ENG)
                     }
                     binding.korOcrChip.id -> {
-                        navigateToOcr(imageUrl, OcrLanguage.ENG)
+                        navigateToOcr(imageUrl, OcrLanguage.KOR)
                     }
                     binding.odCameraChip.id -> {
                         navigateToObjectDetection(imageUrl)
@@ -226,7 +227,7 @@ class CameraFragment : Fragment() {
     private fun navigateToOcr(imageUrl: String, language: OcrLanguage){
         val direction = CameraFragmentDirections.actionCameraFragmentToTextDetectionFragment(
             imageUrl = imageUrl,
-            language = language.toString()
+            language = language
         )
         findNavController().navigate(direction)
     }
@@ -244,9 +245,5 @@ class CameraFragment : Fragment() {
         super.onDestroyView()
         cameraExecutor.shutdown()
         cameraSound.release()
-    }
-
-    private enum class OcrLanguage{
-        ENG, KOR
     }
 }

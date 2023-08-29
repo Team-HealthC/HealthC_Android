@@ -17,7 +17,8 @@
                 app:argType="string"/>
             <argument
                 android:name="language"
-                app:argType="string"/>
+                android:defaultValue="KOR"
+                app:argType="com.example.healthc.presentation.detection.text_detection.model.OcrLanguage"/>
         </action>
         <action
             android:id="@+id/action_cameraFragment_to_profileFragment"
@@ -54,7 +55,8 @@
             app:argType="string"/>
         <argument
             android:name="language"
-            app:argType="string"/>
+            android:defaultValue="KOR"
+            app:argType="com.example.healthc.presentation.detection.text_detection.model.OcrLanguage"/>
         <action
             android:id="@+id/action_textDetectionFragment_to_cameraFragment"
             app:destination="@id/cameraFragment" />

@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.healthc.R
 import com.example.healthc.databinding.FragmentObjectDetectionBinding
+import com.example.healthc.domain.model.auth.Allergy
 import com.example.healthc.domain.model.detection.ObjectDetection
 import com.example.healthc.presentation.detection.object_detection.ObjectDetectionViewModel.ObjectDetectionEvent
 import com.example.healthc.presentation.widget.NegativeSignDialog
@@ -120,7 +121,7 @@ class ObjectDetectionFragment : Fragment() {
         ).show()
     }
 
-    private fun showNegativeDialog(detectedList: List<String>){
+    private fun showNegativeDialog(detectedList: List<Allergy>){
         NegativeSignDialog(
             context = requireContext(),
             detectedList = detectedList

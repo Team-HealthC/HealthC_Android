@@ -20,7 +20,7 @@ class EditorViewModel @Inject constructor(
     private val _editorEvent: MutableSharedFlow<EditorEvent> = MutableSharedFlow<EditorEvent>()
     val editorEvent: SharedFlow<EditorEvent> get() = _editorEvent
 
-    private val _allergies: MutableStateFlow<List<String>> = MutableStateFlow<List<String>>(emptyList())
+    private val _allergies: MutableStateFlow<List<String>> = MutableStateFlow(emptyList())
     val allergies : StateFlow<List<String>> get() = _allergies
 
     private val _name: MutableStateFlow<String> = MutableStateFlow<String>("")
@@ -34,7 +34,7 @@ class EditorViewModel @Inject constructor(
         viewModelScope.launch {
             getUserUseCase()
                 .onSuccess {  user ->
-                    _allergies.value = user.allergies
+                    _allergies.value = user.allergies.map{ it.allergy }
                     _name.value = user.name
                 }
                 .onFailure { error ->

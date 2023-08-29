@@ -2,9 +2,9 @@ package com.example.healthc.presentation.recipe
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.healthc.domain.model.auth.Allergy
 import com.example.healthc.domain.model.recipe.Recipe
 import com.example.healthc.domain.usecase.recipe.GetRecipeListUseCase
-import com.example.healthc.utils.toIngredientEng
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,16 +25,17 @@ class RecipeViewModel @Inject constructor(
         = MutableStateFlow(RecipeUiState.Init)
     val recipeListUiState: StateFlow<RecipeUiState> get() = _recipeListUiState
 
-    private val _allergy: MutableStateFlow<String> = MutableStateFlow<String>("")
-    val allergy: StateFlow<String> get() = _allergy
+    private val _allergy: MutableStateFlow<Allergy> = MutableStateFlow(Allergy())
+    val allergy: StateFlow<Allergy> get() = _allergy
 
     fun setAllergy(allergy: String){
-        _allergy.value = allergy
+        _allergy.value = Allergy(allergy)
     }
 
     fun getFoodIngredient(){
         viewModelScope.launch {
-            getRecipeListUseCase(_allergy.value.toIngredientEng())
+            val allergy = _allergy.value.toEnglish().toString()
+            getRecipeListUseCase(allergy)
                 .onSuccess { list ->
                     if(list.isNotEmpty()){
                         _recipeListUiState.emit(RecipeUiState.Success(list))
