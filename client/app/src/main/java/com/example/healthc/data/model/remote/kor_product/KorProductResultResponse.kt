@@ -40,6 +40,7 @@ data class KorProductResponse(
     val seller: String
 ){
     fun toDomain() : KorProduct = KorProduct(
+        id = prdlstReportNo,
         allergies = allergy,
         image = imgurl1,
         nutrient = nutrient ?: "",

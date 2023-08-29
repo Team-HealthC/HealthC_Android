@@ -17,14 +17,6 @@ interface RecipeService {
         @Query("number") number : Int = 10
     ) : List<RecipeResponse>
 
-    // 가공식품 라벨 찾기
-    @GET("/recipes/{id}/nutritionLabel.png")
-    suspend fun getNutritionLabel(
-        @Path("id") id : Int,
-        @Query("apiKey") apiKey: String = BuildConfig.SPOON_API_KEY,
-        @Query("showIngredients") showIngredient : Boolean = true
-    ) : ResponseBody
-
     // 해당 메뉴에 재료 찾기
     @GET("/recipes/complexSearch")
     suspend fun getIngredients(

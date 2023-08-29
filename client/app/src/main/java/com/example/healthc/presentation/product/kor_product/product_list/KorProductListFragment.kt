@@ -50,7 +50,11 @@ class KorProductListFragment : Fragment() {
     }
 
     private fun initAdapter(){
-        adapter = KorProductListAdapter()
+        adapter = KorProductListAdapter(
+            onItemClick = { id ->
+                navigateToDetail(id)
+            }
+        )
         binding.korProductListRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.korProductListRecyclerView.adapter = adapter
     }
@@ -62,7 +66,7 @@ class KorProductListFragment : Fragment() {
     }
 
     private fun initViewModelStates(){
-        viewModel.getKorProductIds(args.query)
+        viewModel.getKorProductList(args.query)
     }
 
     private fun observeData(){
@@ -87,6 +91,12 @@ class KorProductListFragment : Fragment() {
     private fun navigateToSearch(){
         findNavController().navigate(
             KorProductListFragmentDirections.actionKorProductListFragmentToProductSearchFragment()
+        )
+    }
+
+    private fun navigateToDetail(id: String){
+        findNavController().navigate(
+            KorProductListFragmentDirections.actionKorProductListFragmentToKorProductFragment(id)
         )
     }
 

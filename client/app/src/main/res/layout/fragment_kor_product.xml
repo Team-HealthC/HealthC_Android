@@ -3,12 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     tools:context=".presentation.recipe.RecipeFragment" >
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.healthc.presentation.product.kor_product.product_detail.KorProductViewModel" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/kor_product_list_card"
+            android:id="@+id/kor_product_top_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -21,19 +26,20 @@
                 android:padding="16dp">
 
                 <TextView
-                    android:id="@+id/kor_product_list_query_text"
+                    android:id="@+id/kor_product_query_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:textColor="@color/black"
                     android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/back_to_search_button"
+                    android:text="@{viewModel.korProductUiState.name}"
+                    app:layout_constraintBottom_toBottomOf="@+id/back_kor_product_button"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/back_to_search_button"
-                    app:layout_constraintTop_toTopOf="@+id/back_to_search_button" />
+                    app:layout_constraintStart_toEndOf="@+id/back_kor_product_button"
+                    app:layout_constraintTop_toTopOf="@+id/back_kor_product_button" />
 
                 <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/back_to_search_button"
+                    android:id="@+id/back_kor_product_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/ic_launcher_background"
@@ -43,6 +49,169 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/kor_product_top_card">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/kor_product_detail_image_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/kor_product_image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="200dp"
+                            android:layout_marginVertical="16dp"
+                            app:imageUrl="@{viewModel.korProductUiState.image}"
+                            app:placeholder="@{@drawable/health_c}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:srcCompat="@drawable/rotating_icon" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/kor_product_info_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/kor_product_detail_image_card">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/kor_product_ingredient_textView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginTop="8dp"
+                            android:text="@{viewModel.korProductUiState.rawMaterials}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/view"
+                            tools:text="나트륨, 백그라운드, 김밥, 안녕하세요." />
+
+                        <TextView
+                            android:id="@+id/kor_product_nutrients_textView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginTop="8dp"
+                            android:text="@{viewModel.korProductUiState.nutrient}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/view5"
+                            tools:text="나트륨, 백그라운드, 김밥, 안녕하세요." />
+
+                        <TextView
+                            android:id="@+id/kor_product_detail_allergies_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:fontFamily="@font/sc_dream_nor"
+                            android:text="@string/product_detail_allergies_title"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <View
+                            android:id="@+id/view"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginHorizontal="16dp"
+                            android:background="@color/dark_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/kor_product_detail_allergies_title" />
+
+                        <TextView
+                            android:id="@+id/kor_product_detail_nutrients_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:fontFamily="@font/sc_dream_nor"
+                            android:text="@string/product_detail_nutrients_title"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/kor_product_ingredient_textView" />
+
+                        <View
+                            android:id="@+id/view5"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginHorizontal="16dp"
+                            android:background="@color/dark_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/kor_product_detail_nutrients_title" />
+
+                        <TextView
+                            android:id="@+id/kor_product_allergy_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:fontFamily="@font/sc_dream_nor"
+                            android:text="@string/include_allergies_title"
+                            android:textColor="@color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/kor_product_nutrients_textView" />
+
+                        <View
+                            android:id="@+id/view6"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginHorizontal="16dp"
+                            android:background="@color/dark_gray"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/kor_product_allergy_title" />
+
+                        <TextView
+                            android:id="@+id/kor_product_allergy_text"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="16dp"
+                            android:text="@{viewModel.korProductUiState.allergies}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/view6"
+                            tools:text="알러지 프리" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

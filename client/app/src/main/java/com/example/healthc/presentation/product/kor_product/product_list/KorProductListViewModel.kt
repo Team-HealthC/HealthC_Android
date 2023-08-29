@@ -20,7 +20,7 @@ class KorProductListViewModel @Inject constructor(
     private val _query: MutableStateFlow<String> = MutableStateFlow<String>("")
     val query: StateFlow<String> get() = _query
 
-    fun getKorProductIds(query: String){
+    fun getKorProductList(query: String){
         viewModelScope.launch {
             _query.value = query
             getKorProductListUseCase(query)

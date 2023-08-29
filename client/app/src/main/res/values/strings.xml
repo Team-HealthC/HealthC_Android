@@ -81,4 +81,5 @@
     <string name="product_detail_allergies_title">포함된 원재료</string>
     <string name="food_fact_title">영양 성분표</string>
     <string name="allergies_free">포함되지 않은 알러지 성분</string>
+    <string name="include_allergies_title">포함된 알러지 성분</string>
 </resources>

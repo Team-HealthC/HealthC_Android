@@ -246,6 +246,7 @@
                             android:layout_height="400dp"
                             android:layout_marginTop="16dp"
                             android:layout_marginBottom="16dp"
+                            android:visibility="gone"
                             app:encodedImage="@{viewModel.productFact.label}"
                             app:placeholder="@{@drawable/health_c}"
                             tools:src="@drawable/health_c_transparent"

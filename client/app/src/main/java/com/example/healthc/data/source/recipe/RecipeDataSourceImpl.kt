@@ -1,7 +1,6 @@
 package com.example.healthc.data.source.recipe
 
 import com.example.healthc.data.model.remote.recipe.IngredientResponse
-import com.example.healthc.data.model.remote.recipe.NutritionLabelResponse
 import com.example.healthc.data.model.remote.recipe.RecipeResponse
 import com.example.healthc.data.service.RecipeService
 import javax.inject.Inject
@@ -27,16 +26,6 @@ class RecipeDataSourceImpl @Inject constructor(
                 }
             }
             list
-        }.onFailure { e ->
-            e.printStackTrace()
-        }
-    }
-
-    override suspend fun getNutritionLabel(id: Int): Result<NutritionLabelResponse>{
-        return runCatching {
-            NutritionLabelResponse(
-                service.getNutritionLabel(id = id).bytes()
-            )
         }.onFailure { e ->
             e.printStackTrace()
         }

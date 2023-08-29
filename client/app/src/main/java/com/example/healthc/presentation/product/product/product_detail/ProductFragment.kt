@@ -47,7 +47,7 @@ class ProductFragment : Fragment() {
 
     private fun initViewModel(){
         viewModel.getProductInfo(args.productId)
-        viewModel.getProductFact(args.productId)
+        // viewModel.getProductFact(args.productId)
     }
 
     private fun observeData(){

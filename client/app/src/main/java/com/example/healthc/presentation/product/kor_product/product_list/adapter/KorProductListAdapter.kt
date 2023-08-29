@@ -9,7 +9,9 @@ import com.example.healthc.databinding.ItemKorProductBinding
 import com.example.healthc.domain.model.kor_product.KorProduct
 import com.example.healthc.presentation.product.kor_product.product_list.adapter.KorProductListAdapter.KorProductViewHolder
 
-class KorProductListAdapter: ListAdapter<KorProduct, KorProductViewHolder>(KorProductCallback){
+class KorProductListAdapter(
+    private val onItemClick: (String) -> Unit
+): ListAdapter<KorProduct, KorProductViewHolder>(KorProductCallback){
     
     companion object {
         val KorProductCallback = object : DiffUtil.ItemCallback<KorProduct>(){
@@ -42,6 +44,9 @@ class KorProductListAdapter: ListAdapter<KorProduct, KorProductViewHolder>(KorPr
         : RecyclerView.ViewHolder(binding.root) {
         fun bind(item : KorProduct) {
             binding.item = item
+            binding.cdKorProductItem.setOnClickListener {
+                onItemClick(item.id)
+            }
         }
     }
 }

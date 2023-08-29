@@ -8,12 +8,20 @@ import javax.inject.Inject
 class KorProductDataSourceImpl @Inject constructor(
     private val service : KorProductService
 ): KorProductDataSource {
-    override suspend fun getKorProductList(category: String): Result<List<KorProductResponse>>{
+    override suspend fun getKorProductList(query: String): Result<List<KorProductResponse>>{
         return runCatching {
-            service.getKorProduct(prdlstNm = category).body.items.map{ it.item }
+            service.getKorProductList(query = query).body.items.map{ it.item }
         }.onFailure { e ->
             e.printStackTrace()
             Timber.e(e)
+        }
+    }
+
+    override suspend fun getKorProduct(id: String): Result<KorProductResponse> {
+        return runCatching {
+            service.getKorProduct(id = id).body.items.map{ it.item }.first()
+        }.onFailure { e ->
+            e.printStackTrace()
         }
     }
 }
