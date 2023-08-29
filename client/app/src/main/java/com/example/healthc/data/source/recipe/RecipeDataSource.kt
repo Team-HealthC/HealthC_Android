@@ -8,6 +8,4 @@ interface RecipeDataSource {
     suspend fun getRecipeList(ingredient: String): Result<List<RecipeResponse>>
 
     suspend fun getIngredientList(detectedObject : String) : Result<List<IngredientResponse>>
-
-    suspend fun getNutritionLabel(id: Int): Result<NutritionLabelResponse>
 }
