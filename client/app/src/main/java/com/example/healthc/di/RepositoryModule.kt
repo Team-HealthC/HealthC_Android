@@ -28,8 +28,8 @@ object RepositoryModule {
 
     @Provides
     fun providesProductRepository(
-        productDataSource: ProductDataSource, recipeDataSource: RecipeDataSource
-    ): ProductRepository = ProductRepositoryImpl(productDataSource, recipeDataSource)
+        productDataSource: ProductDataSource
+    ): ProductRepository = ProductRepositoryImpl(productDataSource)
 
     @Provides
     fun providesKorProductRepository(korProductDataSource: KorProductDataSource)
