@@ -74,26 +74,22 @@ Details of the functional contents are as follows :
 - Minumum SDK 23
 - Kotlin
     - Coroutines & Flow 
-- Dagger-Hilt
-- CameraX
 - Android Jetpack
-    - LiveData & ViewModel
     - Navigation Component
     - DataBinding & ViewBinding
+    - CameraX
+- Dagger-Hilt
 - Firebase
-    - Firebase Analytics
+    - Firebase Analytics, Crsahlytics
     - Firebase Auth, FireStore
-- Local 
-    - Room
-    - Gson
 - Remote
-    - Retrofit
-    - Moshi
-    - OkHttp3
+    - Retrofit & Moshi & OkHttp3
+- ML Kit
+    - Text Recognition
 - Glide
 - Material Components
-- ML Kit
 - Timber
+- [verison_catalog](./client/gradle/libs.version.toml)
 
 <h2>Project Proposal</h2>
 https://treejin99.notion.site/5ce7db7993854eb0905c0623e723dcf5
