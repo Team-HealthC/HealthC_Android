@@ -32,7 +32,7 @@ data class ProductResponse(
 }
 
 data class ProductServingResponse(
-    val number: Int,
+    val number: Double,
     val size: Double?,
     val unit: String
 )
