@@ -34,7 +34,7 @@ class RecipeViewModel @Inject constructor(
 
     fun getFoodIngredient(){
         viewModelScope.launch {
-            val allergy = _allergy.value.toEnglish().toString()
+            val allergy = _allergy.value.toEnglish().allergy
             getRecipeListUseCase(allergy)
                 .onSuccess { list ->
                     if(list.isNotEmpty()){
