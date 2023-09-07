@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.healthc.presentation.detection.object_detection.ObjectDetectionViewModel"
+            type="com.healthc.app.presentation.detection.object_detection.ObjectDetectionViewModel"
             />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout

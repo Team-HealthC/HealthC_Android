@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.healthc.presentation.detection.text_detection.TextDetectionViewModel"
+            type="com.healthc.app.presentation.detection.text_detection.TextDetectionViewModel"
             />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,7 +34,5 @@
             app:backgroundTint="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.healthc.presentation.profile.ProfileViewModel"
+            type="com.healthc.app.presentation.profile.ProfileViewModel"
             />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout

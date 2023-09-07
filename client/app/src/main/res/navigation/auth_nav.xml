@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/userEmailFragment"
-        android:name="com.example.healthc.presentation.auth.register.UserEmailFragment"
+        android:name="com.healthc.app.presentation.auth.register.UserEmailFragment"
         android:label="UserEmailFragment"
         tools:layout="@layout/fragment_user_email" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/userPasswordFragment"
-        android:name="com.example.healthc.presentation.auth.register.UserPasswordFragment"
+        android:name="com.healthc.app.presentation.auth.register.UserPasswordFragment"
         android:label="UserPasswordFragment"
         tools:layout="@layout/fragment_user_password" >
     <action
@@ -25,12 +25,12 @@
     </fragment>
     <fragment
         android:id="@+id/userInfoFragment"
-        android:name="com.example.healthc.presentation.auth.register.UserInfoFragment"
+        android:name="com.healthc.app.presentation.auth.register.UserInfoFragment"
         android:label="UserInfoFragment"
         tools:layout="@layout/fragment_user_info" />
     <fragment
         android:id="@+id/userNameFragment"
-        android:name="com.example.healthc.presentation.auth.register.UserNameFragment"
+        android:name="com.healthc.app.presentation.auth.register.UserNameFragment"
         android:label="userNameFragment"
         tools:layout="@layout/fragment_user_name" >
     <action
@@ -39,7 +39,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.healthc.presentation.auth.login.LoginFragment"
+        android:name="com.healthc.app.presentation.auth.login.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login" >
     <action
