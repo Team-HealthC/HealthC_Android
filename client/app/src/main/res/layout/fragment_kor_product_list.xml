@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.healthc.presentation.product.kor_product.product_list.KorProductListViewModel" />
+            type="com.healthc.app.presentation.product.kor_product.product_list.KorProductListViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

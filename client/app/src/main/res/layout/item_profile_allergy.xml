@@ -5,7 +5,7 @@
     <data>
         <variable
             name="model"
-            type="com.example.healthc.domain.model.auth.Allergy" />
+            type="com.healthc.domain.model.auth.Allergy" />
     </data>
 
     <androidx.cardview.widget.CardView

@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.healthc.presentation.auth.AuthViewModel"
+            type="com.healthc.app.presentation.auth.AuthViewModel"
             />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -6,7 +6,7 @@
     app:startDestination="@id/permissionsFragment">
     <fragment
         android:id="@+id/cameraFragment"
-        android:name="com.example.healthc.presentation.home.camera.CameraFragment"
+        android:name="com.healthc.app.presentation.home.camera.CameraFragment"
         android:label="fragment_camera"
         tools:layout="@layout/fragment_camera" >
         <action
@@ -18,7 +18,7 @@
             <argument
                 android:name="language"
                 android:defaultValue="KOR"
-                app:argType="com.example.healthc.presentation.detection.text_detection.model.OcrLanguage"/>
+                app:argType="com.healthc.app.presentation.detection.text_detection.model.OcrLanguage"/>
         </action>
         <action
             android:id="@+id/action_cameraFragment_to_profileFragment"
@@ -39,7 +39,7 @@
     </fragment>
     <fragment
         android:id="@+id/permissionsFragment"
-        android:name="com.example.healthc.presentation.home.camera.PermissionsFragment"
+        android:name="com.healthc.app.presentation.home.camera.PermissionsFragment"
         android:label="PermissionsFragment" >
         <action
             android:id="@+id/action_permissionsFragment_to_cameraFragment"
@@ -47,7 +47,7 @@
     </fragment>
     <fragment
         android:id="@+id/textDetectionFragment"
-        android:name="com.example.healthc.presentation.detection.text_detection.TextDetectionFragment"
+        android:name="com.healthc.app.presentation.detection.text_detection.TextDetectionFragment"
         android:label="TextDetectionFragment"
         tools:layout="@layout/fragment_text_detection" >
         <argument
@@ -56,14 +56,14 @@
         <argument
             android:name="language"
             android:defaultValue="KOR"
-            app:argType="com.example.healthc.presentation.detection.text_detection.model.OcrLanguage"/>
+            app:argType="com.healthc.app.presentation.detection.text_detection.model.OcrLanguage"/>
         <action
             android:id="@+id/action_textDetectionFragment_to_cameraFragment"
             app:destination="@id/cameraFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.healthc.presentation.profile.ProfileFragment"
+        android:name="com.healthc.app.presentation.profile.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile" >
     <action
@@ -75,7 +75,7 @@
     </fragment>
     <fragment
         android:id="@+id/editorFragment"
-        android:name="com.example.healthc.presentation.profile.editor.EditorFragment"
+        android:name="com.healthc.app.presentation.profile.editor.EditorFragment"
         android:label="EditorFragment"
         tools:layout="@layout/fragment_editor" >
     <action
@@ -84,7 +84,7 @@
     </fragment>
     <fragment
         android:id="@+id/recipeSearchFragment"
-        android:name="com.example.healthc.presentation.recipe.RecipeSearchFragment"
+        android:name="com.healthc.app.presentation.recipe.RecipeSearchFragment"
         android:label="RecipeSearchFragment"
         tools:layout="@layout/fragment_recipe_search" >
         <action
@@ -100,7 +100,7 @@
     </fragment>
     <fragment
         android:id="@+id/recipeFragment"
-        android:name="com.example.healthc.presentation.recipe.RecipeFragment"
+        android:name="com.healthc.app.presentation.recipe.RecipeFragment"
         android:label="RecipeFragment"
         tools:layout="@layout/fragment_recipe" >
         <argument
@@ -112,7 +112,7 @@
     </fragment>
     <fragment
         android:id="@+id/objectDetectionFragment"
-        android:name="com.example.healthc.presentation.detection.object_detection.ObjectDetectionFragment"
+        android:name="com.healthc.app.presentation.detection.object_detection.ObjectDetectionFragment"
         android:label="ObjectDetectionFragment"
         tools:layout="@layout/fragment_object_detection" >
         <argument
@@ -124,7 +124,7 @@
     </fragment>
     <fragment
         android:id="@+id/productSearchFragment"
-        android:name="com.example.healthc.presentation.product.product_search.ProductSearchFragment"
+        android:name="com.healthc.app.presentation.product.product_search.ProductSearchFragment"
         android:label="ProductSearchFragment"
         tools:layout="@layout/fragment_product_search" >
         <action
@@ -139,7 +139,7 @@
     </fragment>
     <fragment
         android:id="@+id/productFragment"
-        android:name="com.example.healthc.presentation.product.product.product_detail.ProductFragment"
+        android:name="com.healthc.app.presentation.product.product.product_detail.ProductFragment"
         android:label="ProductFragment"
         tools:layout="@layout/fragment_product" >
         <argument
@@ -151,7 +151,7 @@
     </fragment>
     <fragment
         android:id="@+id/korProductFragment"
-        android:name="com.example.healthc.presentation.product.kor_product.product_detail.KorProductFragment"
+        android:name="com.healthc.app.presentation.product.kor_product.product_detail.KorProductFragment"
         android:label="KorProductFragment"
         tools:layout="@layout/fragment_kor_product" >
         <action
@@ -164,7 +164,7 @@
     </fragment>
     <fragment
         android:id="@+id/productListFragment"
-        android:name="com.example.healthc.presentation.product.product.product_list.ProductListFragment"
+        android:name="com.healthc.app.presentation.product.product.product_list.ProductListFragment"
         android:label="ProductListFragment" >
         <action
             android:id="@+id/action_productListFragment_to_productFragment"
@@ -178,7 +178,7 @@
     </fragment>
     <fragment
         android:id="@+id/korProductListFragment"
-        android:name="com.example.healthc.presentation.product.kor_product.product_list.KorProductListFragment"
+        android:name="com.healthc.app.presentation.product.kor_product.product_list.KorProductListFragment"
         android:label="KorProductListFragment" >
         <action
             android:id="@+id/action_korProductListFragment_to_korProductFragment"

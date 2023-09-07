@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.example.healthc.domain.model.recipe.Recipe"
+            type="com.healthc.domain.model.recipe.Recipe"
             />
     </data>
 

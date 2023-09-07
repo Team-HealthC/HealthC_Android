@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.healthc.presentation.recipe.RecipeViewModel"
+            type="com.healthc.app.presentation.recipe.RecipeViewModel"
             />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,7 +31,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
-                    android:text="@{@string/search_ingredient_title(viewModel.allergy)}"
+                    android:text="@{@string/search_ingredient_title(viewModel.allergy.allergy)}"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="@+id/back_to_food_button"
