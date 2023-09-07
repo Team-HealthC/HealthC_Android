@@ -89,7 +89,7 @@ Details of the functional contents are as follows :
 - Glide
 - Material Components
 - Timber
-- [verison_catalog](./client/gradle/libs.version.toml)
+- [verison_catalog](https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/client/gradle/libs.version.toml)
 
 <h2>Project Proposal</h2>
 https://treejin99.notion.site/5ce7db7993854eb0905c0623e723dcf5
