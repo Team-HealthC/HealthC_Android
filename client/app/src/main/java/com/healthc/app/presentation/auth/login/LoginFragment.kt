@@ -65,6 +65,8 @@ class LoginFragment : Fragment() {
         binding.goToSignUpButton.setOnClickListener {
             navigateSignUp()
         }
+
+        viewModel.clearUserInput()
     }
 
     private fun navigateSignUp(){

@@ -34,7 +34,7 @@ class AuthViewModel @Inject constructor(
     val email: MutableStateFlow<String> = MutableStateFlow<String>("")
     val password: MutableStateFlow<String> = MutableStateFlow<String>("")
     val name: MutableStateFlow<String> = MutableStateFlow<String>("")
-    val allergies: MutableStateFlow<List<String>> = MutableStateFlow(emptyList())
+    private val allergies: MutableStateFlow<List<String>> = MutableStateFlow(emptyList())
 
     fun validateEmail(){
         viewModelScope.launch {
@@ -100,6 +100,15 @@ class AuthViewModel @Inject constructor(
                 _signUpEvent.emit(AuthEvent.Failure(error.message))
             }
         }
+    }
+
+    fun clearUserInput(){
+        email.value = TEXT_EMPTY
+        password.value = TEXT_EMPTY
+    }
+
+    companion object{
+        const val TEXT_EMPTY = ""
     }
 
     sealed class AuthEvent {
