@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val getUserUseCase: GetUserUseCase,
-    private val updateUserNameUseCase : UpdateUserNameUseCase
+    private val updateUserNameUseCase : UpdateUserNameUseCase,
 ): ViewModel() {
 
     private val _userUiState: MutableStateFlow<User> = MutableStateFlow<User>(User())
@@ -32,6 +32,7 @@ class ProfileViewModel @Inject constructor(
                     _userUiState.value = user
                 }
                 .onFailure { error ->
+                    // TODO 권한이 없는 경우, 구현 (Firebase 만료)
                     _profileUiEvent.emit(ProfileEvent.Failure(error.message))
                 }
         }

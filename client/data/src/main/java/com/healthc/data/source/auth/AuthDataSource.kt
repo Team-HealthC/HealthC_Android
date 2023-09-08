@@ -9,4 +9,6 @@ interface AuthDataSource {
     suspend fun signUp(userAccountRequest: UserAccountRequest, userRequest: UserRequest) : Result<Unit>
 
     suspend fun signOut(): Result<Unit>
+
+    suspend fun deregister(): Result<Unit>
 }

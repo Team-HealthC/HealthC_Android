@@ -41,6 +41,7 @@ class UserNameFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         observeData()
         initButton()
+        initData()
     }
 
     private fun initButton(){
@@ -61,6 +62,10 @@ class UserNameFragment : Fragment() {
                     }
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
+    }
+
+    private fun initData(){
+        viewModel.clearUserInput()
     }
 
     private fun navigateToEmail() {

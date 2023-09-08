@@ -8,4 +8,6 @@ interface AuthRepository {
     suspend fun signUp(userAccount: UserAccount, name: String, allergies: List<String>): Result<Unit>
 
     suspend fun signOut(): Result<Unit>
+
+    suspend fun deregister(): Result<Unit>
 }
