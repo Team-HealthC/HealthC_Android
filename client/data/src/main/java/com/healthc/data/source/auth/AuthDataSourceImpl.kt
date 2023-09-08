@@ -55,4 +55,14 @@ class AuthDataSourceImpl @Inject constructor(
             e.printStackTrace()
         }
     }
+
+    override suspend fun deregister(): Result<Unit> = withContext(coroutineDispatcher){
+        runCatching {
+            val user = checkNotNull(firebaseAuth.currentUser)
+            user.delete().await()
+            Unit
+        }.onFailure { e ->
+            e.printStackTrace()
+        }
+    }
 }

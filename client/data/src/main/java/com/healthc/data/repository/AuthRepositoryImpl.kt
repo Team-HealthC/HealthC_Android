@@ -28,4 +28,8 @@ class AuthRepositoryImpl @Inject constructor(
     override suspend fun signOut(): Result<Unit> {
         return authDataSource.signOut()
     }
+
+    override suspend fun deregister(): Result<Unit> {
+        return authDataSource.deregister()
+    }
 }
