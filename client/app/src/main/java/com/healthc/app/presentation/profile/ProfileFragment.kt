@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.healthc.app.R
 import com.healthc.app.databinding.FragmentProfileBinding
-import com.healthc.app.presentation.auth.AuthActivity
 import com.healthc.app.presentation.profile.adapter.ProfileAllergyAdapter
 import com.healthc.app.presentation.widget.NameEditDialog
 import com.healthc.app.presentation.profile.ProfileViewModel.ProfileEvent
@@ -82,12 +81,12 @@ class ProfileFragment : Fragment() {
             navigateToEditProfile()
         }
 
-        binding.signOutButton.setOnClickListener{
-            startAuthActivity() // 로그인 화면으로 전환
-        }
-
         binding.backToCameraButton.setOnClickListener {
             navigateToCamera()
+        }
+
+        binding.btProfileAccount.setOnClickListener {
+            navigateToAccount()
         }
     }
 
@@ -110,12 +109,6 @@ class ProfileFragment : Fragment() {
         ).show()
     }
 
-    private fun startAuthActivity() {
-        val intent = Intent(requireContext(), AuthActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        startActivity(intent)
-    }
-
     private fun navigateToEditProfile(){
         val direction = ProfileFragmentDirections.actionProfileFragmentToEditorFragment()
         findNavController().navigate(direction)
@@ -123,6 +116,11 @@ class ProfileFragment : Fragment() {
 
     private fun navigateToCamera(){
         val direction = ProfileFragmentDirections.actionProfileFragmentToCameraFragment()
+        findNavController().navigate(direction)
+    }
+
+    private fun navigateToAccount() {
+        val direction = ProfileFragmentDirections.actionProfileFragmentToAccountFragment()
         findNavController().navigate(direction)
     }
 
