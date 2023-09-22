@@ -71,7 +71,7 @@ Details of the functional contents are as follows :
 
 ## Android Tech Stack</h2>
 
-- Minumum SDK 23
+- Minumum SDK 26 Target Sdk 34
 - Kotlin
     - Coroutines & Flow 
 - Android Jetpack
