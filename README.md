@@ -17,24 +17,7 @@ Using "OCR" and "Object Detection" technologies, HealthC reads labels or ingredi
 If you use "HealthC" for the first time, you need to get sign up. <br>
 You can sign up according to the description and order in the following picture:
 
-
-<p>
-<img src="https://user-images.githubusercontent.com/90708425/229324413-74240f15-35d4-42d7-98fc-b2fedbface01.png" width="30%" height="40%">
-<img src="https://user-images.githubusercontent.com/90708425/229324463-e78bce02-db97-4010-9ef8-4f25bc38afb6.png" width="30%" height="40%">
-<img src="https://user-images.githubusercontent.com/90708425/229324492-4585c0ed-f048-4ae4-9c42-8edc8d304c1c.png" width="30%" height="40%">
-</p>
-
-<p>
-<img src="https://user-images.githubusercontent.com/90708425/229324663-aba000c4-8ec2-4428-a52d-4ea0ccf81c35.png" width="30%" height="40%">
-<img src="https://user-images.githubusercontent.com/90708425/229324594-84684427-6756-45b2-87ed-3267acba2943.png" width="30%" height="40%">
-</p>
-
-
 ### 2. Take a Photo with HealthC!
-<p align="center">
-<img src="https://user-images.githubusercontent.com/90708425/229352598-499482f6-10fd-4270-beba-a1c411f1efae.png" width="30%" height="40%">
-</p>
-
 If you finish Sign In/Up your account, you can use Healthc's food scanner
 Details of the functional contents are as follows :
 
@@ -49,22 +32,20 @@ Details of the functional contents are as follows :
 
 ### 3. Menu Detail Description
 1. User Profile
-<p>
-<img src="https://user-images.githubusercontent.com/90708425/229353091-67049de4-44aa-4e79-a2ee-dd2336e5e368.png" width="30%" height="40%">
-<img src="https://user-images.githubusercontent.com/90708425/229353677-5ffeda41-21a8-4b9f-8660-623aa9817185.png" width="30%" height="40%">
-</p>
-
-
 2. Choose HealthC Camera mode
-<p>
-<img src="https://user-images.githubusercontent.com/90708425/229353300-08b9d17b-5363-45b1-947b-82698374d607.png" width="30%" height="40%">
-</p>
-
-
 3. Searching for Nutritional/Allergic components
-<p>
-<img src="https://user-images.githubusercontent.com/90708425/229353820-0abfa5df-b6bd-4117-b92d-cfa9b6b6e6e3.png" width="30%" height="40%">
-</p>
+
+## FEATURES
+|       뷰       |                                                              1                                                              |                                                              2                                                              |                                                              3                                                              |                                                              4                                                              |
+|:-------------:|:---------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------:|
+| 스플래쉬 <br> 로그인 | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/splash.jpeg"/> | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/signin.jpeg"/> |                                                                                                                             |                                                                                                                             |
+| 회원가입 | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/signup1.jpeg"/> | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/signup2.jpeg"/> | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/signup3.jpeg"/> | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/signup4.jpeg"/> |
+|  음식 분석 <br> 영양성분표 분석 | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/home.jpeg"/> | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/analysis2.jpeg"/> | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/analysis_pos.jpeg"/> | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/analysis_neg.jpeg"/> |
+| 재료 검색 <br> 가공식품 검색  | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/recipe1.jpeg"/> | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/recipe2.jpeg"/> | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/dictionary_search.jpeg"/> |
+|   가공식품 사전   | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/dictionary_korea1.jpeg"/> | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/dictionary_korea2.jpeg"/> | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/dictionary_foriegn.jpeg"/> | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/dictionary_forien2.jpeg"/> |
+| 프로필 <br> 계정관리 | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/mypage.jpeg"/> | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/mypage2.jpeg"/> | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/mypage3.jpeg"/> |
+<br>
+
 
 
 ## Android Tech Stack</h2>
