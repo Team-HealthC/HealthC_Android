@@ -9,7 +9,7 @@ import com.healthc.domain.model.auth.Allergy
 
 class NegativeSignDialog(
     context: Context,
-    private val detectedList : List<Allergy>,
+    private val allergyList : List<Allergy>,
 ) : Dialog(context){
 
     private val binding by lazy { DialogNegativeBinding.inflate(layoutInflater) }
@@ -22,6 +22,7 @@ class NegativeSignDialog(
     }
 
     private fun initViews(){
+        val detectedList: List<String> = allergyList.map{ it.allergy }
         val content = "해당 음식에는 ${detectedList.joinToString(", ")}이(가) 포함되어 있습니다."
         binding.negativeDialogContent.text = content
 

@@ -91,7 +91,7 @@ class TextDetectionFragment : Fragment() {
     private fun showNegativeDialog(detectedList: List<Allergy>){
         NegativeSignDialog(
             context = requireContext(),
-            detectedList = detectedList
+            allergyList = detectedList
         ).show()
     }
 
