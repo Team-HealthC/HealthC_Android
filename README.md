@@ -13,7 +13,7 @@ Using "OCR" and "Object Detection" technologies, HealthC reads labels or ingredi
 
 ## How to use HealthC
 
-### 1. Sign Upyour account!
+### 1. SignUp your account!
 If you use "HealthC" for the first time, you need to get sign up. <br>
 You can sign up according to the description and order in the following picture:
 
@@ -23,17 +23,14 @@ Details of the functional contents are as follows :
 
 1. User Profile : You can check or modify the information about you.
 2. Choose HealthC Camera mode : You can change your camera mode as OCR(Korean, English) or Object Detection
-3. Searching for Nutritional/Allergic components : Searching for Korean or Foregin Nutritional Ingredients of Processed Food or allergy-causing food
-4. Change camera resolution
-5. Current Camera Mode
-6. Open device's gallery
-7. Photo button
-8. Change front/rear camera
+3. Change camera resolution
+4. Current Camera Mode
+5. Open device's gallery
+6. Photo button
+7. Change front/rear camera
 
-### 3. Menu Detail Description
-1. User Profile
-2. Choose HealthC Camera mode
-3. Searching for Nutritional/Allergic components
+### 3. Search for Allergies
+Searching for Nutritional/Allergic components : Searching for Korean or Foregin Nutritional Ingredients of Processed Food or allergy-causing food
 
 ## FEATURES
 |       뷰       |                                                              1                                                              |                                                              2                                                              |                                                              3                                                              |                                                              4                                                              |
@@ -45,8 +42,6 @@ Details of the functional contents are as follows :
 |  `가공식품 사전`  | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/dictionary_korea1.jpeg"/> | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/dictionary_korea2.jpeg"/> | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/dictionary_foriegn.jpeg"/> | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/dictionary_forien2.jpeg"/> |
 |  `프로필` <br> `계정관리`  | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/mypage.jpeg"/> | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/mypage2.jpeg"/> | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/mypage3.jpeg"/> |
 <br>
-
-
 
 ## Android Tech Stack</h2>
 
