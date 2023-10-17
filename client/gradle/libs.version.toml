@@ -31,7 +31,7 @@ google-text-recognition = "19.0.0"
 google-text-recognition-korean = "16.0.0"
 
 retrofit = "2.9.0"
-okhttp = "4.11.0"
+okhttp = "4.12.0"
 junit = "4.13.2"
 hilt = "2.48"
 timber = "5.0.1"
