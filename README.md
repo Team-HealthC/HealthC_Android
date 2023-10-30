@@ -58,8 +58,7 @@ Searching for Nutritional/Allergic components : Searching for Korean or Foregin 
     - Firebase Auth, FireStore
 - Remote
     - Retrofit & Moshi & OkHttp3
-- ML Kit
-    - Text Recognition
+- Google ML Kits Text Recognition
 - Glide
 - Material Components
 - Timber
