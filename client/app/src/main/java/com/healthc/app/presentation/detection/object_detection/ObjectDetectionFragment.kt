@@ -1,5 +1,9 @@
 package com.healthc.app.presentation.detection.object_detection
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Matrix
+import android.media.ExifInterface
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -24,6 +28,7 @@ import com.healthc.app.presentation.widget.PositiveSignDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import java.io.BufferedInputStream
 
 @AndroidEntryPoint
 class ObjectDetectionFragment : Fragment() {
@@ -60,22 +65,70 @@ class ObjectDetectionFragment : Fragment() {
     }
 
     private fun loadImage(){
-        val inputStream = requireActivity().contentResolver.openInputStream(Uri.parse(args.imageUrl))
-        if(inputStream != null) {
-            val bytes = ByteArray(inputStream.available())
-            inputStream.read(bytes)
-            viewModel.postImage(bytes)
+        val imageUri = Uri.parse(args.imageUrl)
+        val bufferedInputStream = BufferedInputStream(
+            requireContext()
+            .contentResolver
+            .openInputStream(imageUri)
+        )
+
+        bufferedInputStream.mark(bufferedInputStream.available())
+
+        BitmapFactory.Options().run {
+            inJustDecodeBounds = false
+
+            val bitmap = BitmapFactory.decodeStream(
+                bufferedInputStream, null, this // padding null, this option
+            )
+
+            if(bitmap == null) {
+               Toast.makeText(
+                   requireActivity(), "이미지를 불러오는데 실패하였습니다.", Toast.LENGTH_SHORT
+               ).show()
+            }  else {
+                rotateImageIfRequired(bitmap, imageUri)
+            }
         }
-        else{
-            Toast.makeText(requireContext(), "알 수 없는 오류가 발생하였습니다.", Toast.LENGTH_SHORT).show()
-            navigateToCamera()
-        }
-        inputStream?.close()
+
+        bufferedInputStream.close()
     }
 
-    private fun navigateToCamera(){
-        val direction = ObjectDetectionFragmentDirections.actionObjectDetectionFragmentToCameraFragment()
-        findNavController().navigate(direction)
+    private fun rotateImageIfRequired(bitmap: Bitmap, uri: Uri) {
+        val inputStream = requireContext()
+            .contentResolver
+            .openInputStream(uri) ?: return
+
+        // 회전 정보 확인
+        val exif = ExifInterface(inputStream)
+        val orientation =  exif.getAttributeInt(
+            ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL
+        )
+
+        // 회전한 각도에 따라 이미지 회전
+        val rotatedBitmap : Bitmap = when (orientation) {
+            ExifInterface.ORIENTATION_ROTATE_90 -> rotateImage(bitmap, 90)
+            ExifInterface.ORIENTATION_ROTATE_180 -> rotateImage(bitmap, 180)
+            ExifInterface.ORIENTATION_ROTATE_270 -> rotateImage(bitmap, 270)
+            else -> bitmap
+        }
+
+        viewModel.executeObjectDetection(
+            resizeBitmap(rotatedBitmap) // resize Bitmap
+        )
+
+        inputStream.close()
+    }
+
+    private fun rotateImage(bitmap: Bitmap, degree: Int): Bitmap {
+        val matrix = Matrix()
+        matrix.postRotate(degree.toFloat())
+        return Bitmap.createBitmap(
+            bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true
+        )
+    }
+
+    private fun resizeBitmap(bitmap: Bitmap): Bitmap {
+        return Bitmap.createScaledBitmap(bitmap, IMAGE_DEFAULT_WIDTH, IMAGE_DEFAULT_HEIGHT, true)
     }
 
     private fun observeData(){
@@ -132,8 +185,18 @@ class ObjectDetectionFragment : Fragment() {
         PositiveSignDialog(context = requireContext()).show()
     }
 
+    private fun navigateToCamera(){
+        val direction = ObjectDetectionFragmentDirections.actionObjectDetectionFragmentToCameraFragment()
+        findNavController().navigate(direction)
+    }
+
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+    }
+
+    companion object {
+        const val IMAGE_DEFAULT_HEIGHT = 640
+        const val IMAGE_DEFAULT_WIDTH = 640
     }
 }
