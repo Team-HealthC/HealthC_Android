@@ -113,7 +113,7 @@ class ObjectDetectionFragment : Fragment() {
         }
 
         viewModel.executeObjectDetection(
-            resizeBitmap(rotatedBitmap) // resize Bitmap
+            resizeBitmap(rotatedBitmap) // 이미지 크기 조정
         )
 
         inputStream.close()
