@@ -49,6 +49,9 @@ dependencies {
     implementation(platform(libs.google.firebase))
     implementation(libs.bundles.firebase)
 
+    // pytorch
+    implementation(libs.bundles.pytorch)
+
     // timber
     implementation(libs.timber)
 }
