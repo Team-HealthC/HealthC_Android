@@ -3,7 +3,6 @@ package com.healthc.app.presentation.detection.object_detection
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
-import android.media.ExifInterface
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
@@ -19,16 +19,21 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.healthc.app.R
 import com.healthc.app.databinding.FragmentObjectDetectionBinding
-import com.healthc.domain.model.auth.Allergy
-import com.healthc.domain.model.detection.ObjectDetection
 import com.healthc.app.presentation.detection.object_detection.ObjectDetectionViewModel.ObjectDetectionEvent
 import com.healthc.app.presentation.widget.NegativeSignDialog
 import com.healthc.app.presentation.widget.ObjectDetectionDialog
 import com.healthc.app.presentation.widget.PositiveSignDialog
+import com.healthc.domain.model.auth.Allergy
+import com.healthc.domain.model.detection.ObjectDetection
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import timber.log.Timber
 import java.io.BufferedInputStream
+import java.io.BufferedReader
+import java.io.InputStreamReader
 
 @AndroidEntryPoint
 class ObjectDetectionFragment : Fragment() {
@@ -51,9 +56,9 @@ class ObjectDetectionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadImage()
-        observeData()
         initViews()
+        observeData()
+        loadImage()
     }
 
     private fun initViews() {
@@ -86,14 +91,14 @@ class ObjectDetectionFragment : Fragment() {
                    requireActivity(), "이미지를 불러오는데 실패하였습니다.", Toast.LENGTH_SHORT
                ).show()
             }  else {
-                rotateImageIfRequired(bitmap, imageUri)
+                preprocessImage(bitmap, imageUri)
             }
         }
 
         bufferedInputStream.close()
     }
 
-    private fun rotateImageIfRequired(bitmap: Bitmap, uri: Uri) {
+    private fun preprocessImage(bitmap: Bitmap, uri: Uri) {
         val inputStream = requireContext()
             .contentResolver
             .openInputStream(uri) ?: return
@@ -103,6 +108,7 @@ class ObjectDetectionFragment : Fragment() {
         val orientation =  exif.getAttributeInt(
             ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL
         )
+        inputStream.close()
 
         // 회전한 각도에 따라 이미지 회전
         val rotatedBitmap : Bitmap = when (orientation) {
@@ -111,12 +117,14 @@ class ObjectDetectionFragment : Fragment() {
             ExifInterface.ORIENTATION_ROTATE_270 -> rotateImage(bitmap, 270)
             else -> bitmap
         }
+        // 640*640에 맞게 이미지 리사이징
+        val resultBitmap = resizeBitmap(rotatedBitmap)
 
         viewModel.executeObjectDetection(
-            resizeBitmap(rotatedBitmap) // 이미지 크기 조정
+            resultBitmap,
+            binding.CaptureImageView.width.toFloat(),
+            binding.CaptureImageView.height.toFloat(),
         )
-
-        inputStream.close()
     }
 
     private fun rotateImage(bitmap: Bitmap, degree: Int): Bitmap {
@@ -134,37 +142,43 @@ class ObjectDetectionFragment : Fragment() {
     private fun observeData(){
         viewModel.objectDetectionEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
-                when(it){
-                    is ObjectDetectionEvent.Success -> { // 객체 인식 성공
-                        showObjectDetectionDialog(it.category)
-                        eraseProgressBar()
-                    }
-
+                when (it) {
                     is ObjectDetectionEvent.Failure -> { // 객체 인식 실패
-                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), it.error.message, Toast.LENGTH_SHORT).show()
                         eraseProgressBar()
                     }
 
-                    is ObjectDetectionEvent.Detected -> { // 알러지 성분 검출
+                    /*is ObjectDetectionEvent.Detected -> { // 알러지 성분 검출
                         if(it.detectedList.isEmpty()){
                             showPositiveDialog()
                         }
                         else{
                             showNegativeDialog(it.detectedList)
                         }
-                    }
+                    }*/
                 }
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
+
+        viewModel.detectedObjectUiState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+            .onEach {
+                when (it) {
+                    is ObjectDetectionViewModel.ObjectDetectionUiState.Success -> {
+                        val classes = getLabelClasses()
+                        val detectedObject = classes[it.objectDetectionResult.classIndex]
+                        showObjectDetectionDialog(detectedObject)
+
+                        eraseProgressBar()
+                    }
+                    is ObjectDetectionViewModel.ObjectDetectionUiState.Init -> {}
+                }
+
             }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
-    private fun eraseProgressBar(){
-        binding.progressBar.visibility = View.GONE
-    }
-
-    private fun showObjectDetectionDialog(objectDetection: ObjectDetection){
+    private fun showObjectDetectionDialog(detectedObject: String){
         ObjectDetectionDialog(
             context = requireContext(),
-            objectDetection = objectDetection,
+            detectedObject = detectedObject,
             onClickNegButton = {
                 navigateToCamera()
             },
@@ -172,6 +186,21 @@ class ObjectDetectionFragment : Fragment() {
                 viewModel.checkAllergies(detectedObject = detectedObject)
             }
         ).show()
+    }
+
+    // 에셋으로부터 라벨 가져오기
+    private fun getLabelClasses(): List<String> {
+        val br = BufferedReader(
+            InputStreamReader(requireContext().assets.open("labels_ko.txt"))
+        )
+        var line: String?
+        val classes: MutableList<String> = mutableListOf()
+
+        while ((br.readLine().also { line = it }) != null) {
+            line?.let { classes.add(it) }
+        }
+
+        return classes
     }
 
     private fun showNegativeDialog(detectedList: List<Allergy>){
@@ -183,6 +212,10 @@ class ObjectDetectionFragment : Fragment() {
 
     private fun showPositiveDialog(){
         PositiveSignDialog(context = requireContext()).show()
+    }
+
+    private fun eraseProgressBar(){
+        binding.progressBar.visibility = View.GONE
     }
 
     private fun navigateToCamera(){
