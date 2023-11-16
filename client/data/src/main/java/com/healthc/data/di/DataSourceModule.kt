@@ -6,6 +6,8 @@ import com.healthc.data.source.kor_product.KorProductDataSource
 import com.healthc.data.source.kor_product.KorProductDataSourceImpl
 import com.healthc.data.source.detection.DetectionDataSource
 import com.healthc.data.source.detection.DetectionDataSourceImpl
+import com.healthc.data.source.detection.LocalDetectionDataSource
+import com.healthc.data.source.detection.LocalDetectionDataSourceImpl
 import com.healthc.data.source.recipe.RecipeDataSource
 import com.healthc.data.source.recipe.RecipeDataSourceImpl
 import com.healthc.data.source.product.ProductDataSource
@@ -25,37 +27,43 @@ abstract class DataSourceModule {
 
     @Binds
     @Singleton
-    abstract fun provideAuthDataSource(
+    abstract fun bindsAuthDataSource(
         authDataSourceImpl: AuthDataSourceImpl
     ): AuthDataSource
 
     @Binds
     @Singleton
-    abstract fun providesUserDataSource(
+    abstract fun bindsUserDataSource(
         userDataSourceImpl: UserDataSourceImpl
     ): UserDataSource
 
     @Binds
     @Singleton
-    abstract fun providesKorProductDataSource(
+    abstract fun bindsKorProductDataSource(
         korProductDataSourceImpl : KorProductDataSourceImpl
     ) : KorProductDataSource
 
     @Binds
     @Singleton
-    abstract fun providesDetectionDataSource(
+    abstract fun bindsDetectionDataSource(
         detectionDataSourceImpl: DetectionDataSourceImpl
     ) : DetectionDataSource
 
     @Binds
     @Singleton
-    abstract fun providesSearchProductInfoDataSource(
+    abstract fun bindsSearchProductInfoDataSource(
         productDataSourceImpl: ProductDataSourceImpl
     ) : ProductDataSource
 
     @Binds
     @Singleton
-    abstract fun providesRecipeDataSource(
+    abstract fun bindsRecipeDataSource(
         recipeDataSourceImpl: RecipeDataSourceImpl
     ): RecipeDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindsLocalDetectionDataSource(
+        localDetectionDataSourceImpl: LocalDetectionDataSourceImpl
+    ): LocalDetectionDataSource
 }
