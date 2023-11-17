@@ -8,6 +8,8 @@ import com.healthc.data.source.detection.DetectionDataSource
 import com.healthc.data.source.detection.DetectionDataSourceImpl
 import com.healthc.data.source.detection.LocalDetectionDataSource
 import com.healthc.data.source.detection.LocalDetectionDataSourceImpl
+import com.healthc.data.source.ingredient.IngredientDataSource
+import com.healthc.data.source.ingredient.IngredientDataSourceImpl
 import com.healthc.data.source.recipe.RecipeDataSource
 import com.healthc.data.source.recipe.RecipeDataSourceImpl
 import com.healthc.data.source.product.ProductDataSource
@@ -66,4 +68,10 @@ abstract class DataSourceModule {
     abstract fun bindsLocalDetectionDataSource(
         localDetectionDataSourceImpl: LocalDetectionDataSourceImpl
     ): LocalDetectionDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindsIngredientDataSource(
+        ingredientDataSourceImpl: IngredientDataSourceImpl
+    ): IngredientDataSource
 }
