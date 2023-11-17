@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.exifinterface.media.ExifInterface
@@ -19,18 +20,16 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.healthc.app.R
 import com.healthc.app.databinding.FragmentObjectDetectionBinding
+import com.healthc.app.presentation.detection.object_detection.ObjectDetectionViewModel.ObjectDetectionUiState
 import com.healthc.app.presentation.detection.object_detection.ObjectDetectionViewModel.ObjectDetectionEvent
 import com.healthc.app.presentation.widget.NegativeSignDialog
 import com.healthc.app.presentation.widget.ObjectDetectionDialog
 import com.healthc.app.presentation.widget.PositiveSignDialog
+import com.healthc.data.model.local.detection.ObjectDetectionResult
 import com.healthc.domain.model.auth.Allergy
-import com.healthc.domain.model.detection.ObjectDetection
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import timber.log.Timber
 import java.io.BufferedInputStream
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -58,7 +57,6 @@ class ObjectDetectionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         observeData()
-        loadImage()
     }
 
     private fun initViews() {
@@ -67,9 +65,19 @@ class ObjectDetectionFragment : Fragment() {
         binding.backToCameraButton.setOnClickListener {
             navigateToCamera()
         }
+
+        // 이미지 크기 측정을 위해, 크기가 정해진 후 이미지 전처리 시작
+        with(binding.CaptureImageView) {
+            viewTreeObserver.addOnGlobalLayoutListener(object: OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    viewTreeObserver.removeOnGlobalLayoutListener(this)
+                    loadPreprocessedImage()
+                }
+            })
+        }
     }
 
-    private fun loadImage(){
+    private fun loadPreprocessedImage(){
         val imageUri = Uri.parse(args.imageUrl)
         val bufferedInputStream = BufferedInputStream(
             requireContext()
@@ -117,13 +125,16 @@ class ObjectDetectionFragment : Fragment() {
             ExifInterface.ORIENTATION_ROTATE_270 -> rotateImage(bitmap, 270)
             else -> bitmap
         }
+
         // 640*640에 맞게 이미지 리사이징
-        val resultBitmap = resizeBitmap(rotatedBitmap)
+        val preprocessedBitmap = resizeBitmap(rotatedBitmap)
 
         viewModel.executeObjectDetection(
-            resultBitmap,
-            binding.CaptureImageView.width.toFloat(),
-            binding.CaptureImageView.height.toFloat(),
+            bitmap = preprocessedBitmap,
+            inputImageWidth = rotatedBitmap.width.toFloat(), // 리사이징 전 사진의 너비
+            inputImageHeight = rotatedBitmap.height.toFloat(), // 리사이징 전 사진의 높이
+            imageViewWidth = binding.CaptureImageView.width.toFloat(),
+            imageViewHeight = binding.CaptureImageView.height.toFloat(),
         )
     }
 
@@ -162,23 +173,31 @@ class ObjectDetectionFragment : Fragment() {
         viewModel.detectedObjectUiState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                 when (it) {
-                    is ObjectDetectionViewModel.ObjectDetectionUiState.Success -> {
-                        val classes = getLabelClasses()
-                        val detectedObject = classes[it.objectDetectionResult.classIndex]
-                        showObjectDetectionDialog(detectedObject)
+                    is ObjectDetectionUiState.Init -> {}
 
+                    is ObjectDetectionUiState.Success -> {
                         eraseProgressBar()
+
+                        // Object Detection Result Dialog
+                        showObjectDetectionDialog(it.objectDetectionResultList)
+
+                        // Object Detection Rectangle Draw
+                        val classes = getLabelClasses()
+                        with(binding.objectDetectionResultView) {
+                            visibility = View.VISIBLE
+                            setObjectDetectionResult(it.objectDetectionResultList, classes)
+                            invalidate()
+                        }
                     }
-                    is ObjectDetectionViewModel.ObjectDetectionUiState.Init -> {}
                 }
 
             }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
-    private fun showObjectDetectionDialog(detectedObject: String){
+    private fun showObjectDetectionDialog(objectDetectionResult: List<ObjectDetectionResult>){
         ObjectDetectionDialog(
             context = requireContext(),
-            detectedObject = detectedObject,
+            objectDetectionResult = objectDetectionResult,
             onClickNegButton = {
                 navigateToCamera()
             },
@@ -224,8 +243,8 @@ class ObjectDetectionFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        _binding = null
         super.onDestroyView()
+        _binding = null
     }
 
     companion object {
