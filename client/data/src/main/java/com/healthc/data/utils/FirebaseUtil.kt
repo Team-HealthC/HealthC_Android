@@ -19,3 +19,4 @@ suspend fun <T> Task<T>.await(): T {
 }
 
 const val DB_USERS = "Users"
+const val DB_INGREDIENTS = "Ingredients"
