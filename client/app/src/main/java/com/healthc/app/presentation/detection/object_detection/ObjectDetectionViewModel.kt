@@ -6,12 +6,14 @@ import androidx.lifecycle.viewModelScope
 import com.healthc.data.model.local.detection.InputImage
 import com.healthc.data.model.local.detection.ObjectDetectionResult
 import com.healthc.data.source.detection.LocalDetectionDataSource
+import com.healthc.domain.model.auth.Allergy
 import com.healthc.domain.usecase.detection.CheckAllergiesInImageUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -28,6 +30,9 @@ class ObjectDetectionViewModel @Inject constructor(
     private val _detectedObjectUiState: MutableStateFlow<ObjectDetectionUiState> =
         MutableStateFlow(ObjectDetectionUiState.Init)
     val detectedObjectUiState: StateFlow<ObjectDetectionUiState> = _detectedObjectUiState.asStateFlow()
+
+    private val _detectedAllergiesUiEvent: MutableSharedFlow<List<Allergy>> = MutableSharedFlow()
+    val detectedAllergiesUiEvent: SharedFlow<List<Allergy>> = _detectedAllergiesUiEvent.asSharedFlow()
 
     private val _objectDetectionEvent = MutableSharedFlow<ObjectDetectionEvent>()
     val objectDetectionEvent : SharedFlow<ObjectDetectionEvent> get() = _objectDetectionEvent
@@ -64,7 +69,7 @@ class ObjectDetectionViewModel @Inject constructor(
         viewModelScope.launch {
             checkAllergiesInImageUseCase(detectedObject)
                 .onSuccess { result ->
-                    // _objectDetectionEvent.emit(ObjectDetectionEvent.Detected(result))
+                    _detectedAllergiesUiEvent.emit(result)
                 }
                 .onFailure { error ->
                     _objectDetectionEvent.emit(ObjectDetectionEvent.Failure(error))

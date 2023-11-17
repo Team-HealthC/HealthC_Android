@@ -62,7 +62,7 @@
     <string name="dialog_image_process_eng">영어 성분표 인식 카메라</string>
     <string name="dialog_object_detect_title">판별된 음식 : %1$s </string>
     <string name="dialog_object_detect_pos_button">알레르기 요소 확인</string>
-    <string name="dialog_object_detect_neg_button">한번 더 촬영</string>
+    <string name="dialog_object_detect_neg_button">한번 더 촬영하기</string>
     <string name="not_founded">%1$s에 대한 검색 결과를 찾을 수 없습니다.</string>
     <string name="object_detection_camera">음식 인식</string>
     <string name="english_ocr_camera">영어 성분표 인식</string>
@@ -85,5 +85,7 @@
     <string name="deregister">계정 탈퇴</string>
     <string name="account">계정 관리</string>
     <string name="terms">이용 약관</string>
-    <string name="failed_object_detection_title">음식을 인식할 수 없습니다.\n 더 멀리서 찍거나, 다른 사진을 사용해주세요 !</string>
+    <string name="failed_object_detection_title">음식을 인식할 수 없습니다.\n더 멀리서 찍거나, 다른 사진을 사용해주세요 !</string>
+    <string name="object_detection_result">인식된 음식</string>
+    <string name="food_detection">음식 인식</string>
 </resources>
