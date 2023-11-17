@@ -85,5 +85,7 @@
     <string name="deregister">계정 탈퇴</string>
     <string name="account">계정 관리</string>
     <string name="terms">이용 약관</string>
-    <string name="failed_object_detection_title">음식을 인식할 수 없습니다.\n 더 멀리서 찍거나, 다른 사진을 사용해주세요 !</string>
+    <string name="failed_object_detection_title">음식을 인식할 수 없습니다.\n더 멀리서 찍거나, 다른 사진을 사용해주세요 !</string>
+    <string name="object_detection_result">인식된 음식</string>
+    <string name="food_detection">음식 인식</string>
 </resources>
