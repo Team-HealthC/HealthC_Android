@@ -10,6 +10,7 @@ import com.healthc.data.model.local.detection.ObjectDetectionResult
 
 class ObjectDetectionAdapter(
     private val classes: List<String>,
+    private val onClick: (String) -> Unit,
 ): ListAdapter<ObjectDetectionResult, ObjectDetectionAdapter.ObjectDetectionViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ObjectDetectionViewHolder {
@@ -28,10 +29,15 @@ class ObjectDetectionAdapter(
         private val binding: ItemObjectDetectionBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(objectDetectionResult: ObjectDetectionResult) {
-            binding.tvODItemObject.text = classes[objectDetectionResult.classIndex]
+            val detectedObject = classes[objectDetectionResult.classIndex]
+            binding.tvODItemObject.text = detectedObject
 
             val score = objectDetectionResult.score * 100
             binding.tvODItemScore.text = "${String.format("%.2f", score)}%"
+
+            binding.cdODItem.setOnClickListener {
+                onClick(detectedObject)
+            }
         }
     }
 
