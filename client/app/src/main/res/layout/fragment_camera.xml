@@ -49,8 +49,8 @@
 
                 <ImageButton
                     android:id="@+id/flash_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:src="@drawable/baseline_flash_on_24"
                     android:background="@color/black"
                     app:tint="@color/white"
@@ -121,25 +121,27 @@
 
                 </com.google.android.material.chip.ChipGroup>
 
-                <androidx.appcompat.widget.AppCompatImageButton
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/goToGalleryButton"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="32dp"
-                    android:scaleType="fitXY"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
                     android:src="@drawable/gallery"
-                    android:background="@color/black"
+                    app:backgroundTint="@color/light_black"
+                    app:fabCustomSize="48dp"
+                    app:maxImageSize="24dp"
+                    app:tint="@color/white"
                     app:layout_constraintBottom_toBottomOf="@+id/capture_image_button"
                     app:layout_constraintEnd_toStartOf="@+id/capture_image_button"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/capture_image_button"
-                    app:tint="@color/white" />
+                    app:layout_constraintTop_toTopOf="@id/capture_image_button" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/capture_image_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="32dp"
                     app:fabCustomSize="64dp"
                     app:backgroundTint="@color/light_gray"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -151,17 +153,16 @@
                     android:id="@+id/switch_camera_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="32dp"
                     android:clickable="true"
                     android:src="@drawable/switch_camera"
                     app:backgroundTint="@color/light_black"
                     app:fabCustomSize="48dp"
+                    app:maxImageSize="32dp"
+                    app:tint="@color/white"
                     app:layout_constraintBottom_toBottomOf="@+id/capture_image_button"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/capture_image_button"
-                    app:layout_constraintTop_toTopOf="@+id/capture_image_button"
-                    app:maxImageSize="28dp"
-                    app:tint="@color/white" />
+                    app:layout_constraintTop_toTopOf="@+id/capture_image_button" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
