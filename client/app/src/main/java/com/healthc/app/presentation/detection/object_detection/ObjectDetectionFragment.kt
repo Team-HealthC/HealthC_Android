@@ -18,12 +18,14 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.healthc.app.R
 import com.healthc.app.databinding.FragmentObjectDetectionBinding
 import com.healthc.app.presentation.detection.object_detection.ObjectDetectionViewModel.ObjectDetectionUiState
 import com.healthc.app.presentation.detection.object_detection.ObjectDetectionViewModel.ObjectDetectionEvent
+import com.healthc.app.presentation.detection.object_detection.adapter.ObjectDetectionAdapter
 import com.healthc.app.presentation.widget.NegativeSignDialog
-import com.healthc.app.presentation.widget.ObjectDetectionDialog
 import com.healthc.app.presentation.widget.PositiveSignDialog
 import com.healthc.data.model.local.detection.ObjectDetectionResult
 import com.healthc.domain.model.auth.Allergy
@@ -42,6 +44,7 @@ class ObjectDetectionFragment : Fragment() {
 
     private val viewModel : ObjectDetectionViewModel by viewModels()
     private val args : ObjectDetectionFragmentArgs by navArgs()
+    private lateinit var objectDetectionAdapter: ObjectDetectionAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,8 +69,12 @@ class ObjectDetectionFragment : Fragment() {
             navigateToCamera()
         }
 
+        binding.btODBackCamera.setOnClickListener {
+            navigateToCamera()
+        }
+
         // 이미지 크기 측정을 위해, 크기가 정해진 후 이미지 전처리 시작
-        with(binding.CaptureImageView) {
+        with(binding.ivODObjectImage) {
             viewTreeObserver.addOnGlobalLayoutListener(object: OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
                     viewTreeObserver.removeOnGlobalLayoutListener(this)
@@ -77,12 +84,82 @@ class ObjectDetectionFragment : Fragment() {
         }
     }
 
+    private fun observeData(){
+        viewModel.objectDetectionEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+            .onEach {
+                when (it) {
+                    is ObjectDetectionEvent.Failure -> { // 객체 인식 실패
+                        initViewsIfFailedDetection(it.error)
+                    }
+                }
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
+
+        viewModel.detectedObjectUiState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+            .onEach {
+                when (it) {
+                    is ObjectDetectionUiState.Init -> {}
+
+                    is ObjectDetectionUiState.Success -> { // 객체 인식 성공
+                        if(it.objectDetectionResultList.isEmpty()) {
+                            initViewsIfNotDetected()
+                        } else {
+                            initViewsIfDetected(it.objectDetectionResultList)
+                        }
+                    }
+                }
+
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
+    }
+
+    private fun initViewsIfFailedDetection(error: Throwable) {
+        Toast.makeText(requireContext(), error.message, Toast.LENGTH_SHORT).show()
+        binding.progressBar.visibility = View.GONE
+        binding.cdODBottom.visibility = View.GONE
+    }
+
+    private fun initViewsIfNotDetected() {
+        with(binding) {
+            progressBar.visibility = View.GONE
+            tvODResultTitle.text = resources.getString(R.string.failed_object_detection_title)
+        }
+    }
+
+    private fun initViewsIfDetected(
+        objectDetectionResultList: List<ObjectDetectionResult>
+    ) {
+        // Object Detection Rectangle Draw
+        val classes = getLabelClasses()
+        with(binding.objectDetectionResultView) {
+            visibility = View.VISIBLE
+            setObjectDetectionResult(objectDetectionResultList, classes)
+            invalidate()
+        }
+        binding.progressBar.visibility = View.GONE
+
+        // 검출된 음식 리스트 초기화
+        initAdapter(objectDetectionResultList, classes)
+    }
+
+    private fun initAdapter(
+        objectDetectionResultList: List<ObjectDetectionResult>,
+        classes: List<String>
+    ) {
+        objectDetectionAdapter = ObjectDetectionAdapter(classes)
+        objectDetectionAdapter.submitList(objectDetectionResultList)
+        with(binding.rvODDetectedObject) {
+            this.layoutManager = LinearLayoutManager(
+                requireContext(), RecyclerView.HORIZONTAL, false
+            )
+            this.adapter = objectDetectionAdapter
+        }
+    }
+
     private fun loadPreprocessedImage(){
         val imageUri = Uri.parse(args.imageUrl)
         val bufferedInputStream = BufferedInputStream(
             requireContext()
-            .contentResolver
-            .openInputStream(imageUri)
+                .contentResolver
+                .openInputStream(imageUri)
         )
 
         bufferedInputStream.mark(bufferedInputStream.available())
@@ -95,9 +172,9 @@ class ObjectDetectionFragment : Fragment() {
             )
 
             if(bitmap == null) {
-               Toast.makeText(
-                   requireActivity(), "이미지를 불러오는데 실패하였습니다.", Toast.LENGTH_SHORT
-               ).show()
+                Toast.makeText(
+                    requireActivity(), "이미지를 불러오는데 실패하였습니다.", Toast.LENGTH_SHORT
+                ).show()
             }  else {
                 preprocessImage(bitmap, imageUri)
             }
@@ -133,8 +210,8 @@ class ObjectDetectionFragment : Fragment() {
             bitmap = preprocessedBitmap,
             inputImageWidth = rotatedBitmap.width.toFloat(), // 리사이징 전 사진의 너비
             inputImageHeight = rotatedBitmap.height.toFloat(), // 리사이징 전 사진의 높이
-            imageViewWidth = binding.CaptureImageView.width.toFloat(),
-            imageViewHeight = binding.CaptureImageView.height.toFloat(),
+            imageViewWidth = binding.ivODObjectImage.width.toFloat(),
+            imageViewHeight = binding.ivODObjectImage.height.toFloat(),
         )
     }
 
@@ -150,64 +227,7 @@ class ObjectDetectionFragment : Fragment() {
         return Bitmap.createScaledBitmap(bitmap, IMAGE_DEFAULT_WIDTH, IMAGE_DEFAULT_HEIGHT, true)
     }
 
-    private fun observeData(){
-        viewModel.objectDetectionEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
-            .onEach {
-                when (it) {
-                    is ObjectDetectionEvent.Failure -> { // 객체 인식 실패
-                        Toast.makeText(requireContext(), it.error.message, Toast.LENGTH_SHORT).show()
-                        eraseProgressBar()
-                    }
-
-                    /*is ObjectDetectionEvent.Detected -> { // 알러지 성분 검출
-                        if(it.detectedList.isEmpty()){
-                            showPositiveDialog()
-                        }
-                        else{
-                            showNegativeDialog(it.detectedList)
-                        }
-                    }*/
-                }
-            }.launchIn(viewLifecycleOwner.lifecycleScope)
-
-        viewModel.detectedObjectUiState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
-            .onEach {
-                when (it) {
-                    is ObjectDetectionUiState.Init -> {}
-
-                    is ObjectDetectionUiState.Success -> {
-                        eraseProgressBar()
-
-                        // Object Detection Result Dialog
-                        showObjectDetectionDialog(it.objectDetectionResultList)
-
-                        // Object Detection Rectangle Draw
-                        val classes = getLabelClasses()
-                        with(binding.objectDetectionResultView) {
-                            visibility = View.VISIBLE
-                            setObjectDetectionResult(it.objectDetectionResultList, classes)
-                            invalidate()
-                        }
-                    }
-                }
-
-            }.launchIn(viewLifecycleOwner.lifecycleScope)
-    }
-
-    private fun showObjectDetectionDialog(objectDetectionResult: List<ObjectDetectionResult>){
-        ObjectDetectionDialog(
-            context = requireContext(),
-            objectDetectionResult = objectDetectionResult,
-            onClickNegButton = {
-                navigateToCamera()
-            },
-            onClickPosButton = { detectedObject ->
-                viewModel.checkAllergies(detectedObject = detectedObject)
-            }
-        ).show()
-    }
-
-    // 에셋으로부터 라벨 가져오기
+    // assets 으로부터 라벨 가져오기
     private fun getLabelClasses(): List<String> {
         val br = BufferedReader(
             InputStreamReader(requireContext().assets.open("labels_ko.txt"))
@@ -231,10 +251,6 @@ class ObjectDetectionFragment : Fragment() {
 
     private fun showPositiveDialog(){
         PositiveSignDialog(context = requireContext()).show()
-    }
-
-    private fun eraseProgressBar(){
-        binding.progressBar.visibility = View.GONE
     }
 
     private fun navigateToCamera(){
