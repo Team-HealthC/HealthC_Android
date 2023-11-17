@@ -4,6 +4,7 @@ import com.healthc.data.repository.*
 import com.healthc.data.source.auth.AuthDataSource
 import com.healthc.data.source.kor_product.KorProductDataSource
 import com.healthc.data.source.detection.DetectionDataSource
+import com.healthc.data.source.ingredient.IngredientDataSource
 import com.healthc.data.source.product.ProductDataSource
 import com.healthc.data.source.recipe.RecipeDataSource
 import com.healthc.data.source.user.UserDataSource
@@ -12,6 +13,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
@@ -44,4 +46,10 @@ object RepositoryModule {
     fun providesRecipeRepository(
         recipeDataSource: RecipeDataSource
     ): RecipeRepository = RecipeRepositoryImpl(recipeDataSource)
+
+    @Provides
+    @Singleton
+    fun providesIngredientRepository(
+       ingredientDataSource: IngredientDataSource
+    ): IngredientRepository = IngredientRepositoryImpl(ingredientDataSource)
 }
