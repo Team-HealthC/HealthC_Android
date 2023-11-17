@@ -3,7 +3,7 @@ package com.healthc.data.utils;
 import android.graphics.Rect;
 
 import com.healthc.data.model.local.detection.ObjectDetectionResult;
-import com.healthc.domain.model.detection.PreprocessedImage;
+import com.healthc.data.model.local.detection.PreprocessedImage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -109,7 +109,7 @@ public class PrePostProcessor {
                 int classIndex = 0;
                 for (int j = 0; j < mOutputColumn - 5; j++) {
                     if (outputs[i* mOutputColumn + 5 + j] > max) {
-                        max = outputs[i* mOutputColumn +5+j];
+                        max = outputs[i* mOutputColumn + 5 + j];
                         classIndex = j;
                     }
                 }
@@ -123,7 +123,7 @@ public class PrePostProcessor {
 
                 // 각 인덱스마다, 인식 후 인식률과 함께 삽입
                 ObjectDetectionResult ObjectDetectionResult =
-                        new ObjectDetectionResult(classIndex, outputs[i*mOutputColumn+4], rect);
+                        new ObjectDetectionResult(classIndex, outputs[i * mOutputColumn + 4], rect);
 
                 ObjectDetectionResults.add(ObjectDetectionResult);
             }
