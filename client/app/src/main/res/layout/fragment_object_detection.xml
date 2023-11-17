@@ -104,6 +104,7 @@
                         android:backgroundTint="@color/green"
                         android:text="@string/dialog_object_detect_neg_button"
                         android:textColor="@color/white"
+                        android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
