@@ -1,4 +1,4 @@
-package com.healthc.domain.model.detection
+package com.healthc.data.model.local.detection
 
 data class PreprocessedImage (
     val inputImageScaleX: Float,

@@ -2,9 +2,10 @@ package com.healthc.data.source.detection
 
 import android.graphics.Bitmap
 import com.healthc.data.di.DefaultDispatcher
+import com.healthc.data.model.local.detection.InputImage
 import com.healthc.data.model.local.detection.ObjectDetectionResult
 import com.healthc.data.utils.PrePostProcessor
-import com.healthc.domain.model.detection.getPreprocessingImage
+import com.healthc.data.model.local.detection.getPreprocessingImage
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import org.pytorch.IValue
@@ -18,24 +19,24 @@ class LocalDetectionDataSourceImpl @Inject constructor(
     @DefaultDispatcher private val coroutineDispatcher: CoroutineDispatcher
 ): LocalDetectionDataSource {
     override suspend fun getDetectedObject(
-        bitmap: Bitmap,
-        imageViewWidth: Float,
-        imageViewHeight: Float,
+        inputImage: InputImage
     ): Result<List<ObjectDetectionResult>> =
         withContext(coroutineDispatcher) {
             runCatching {
-                val tensor = transformBitmapToTensor(bitmap)
-                val outputs = getTensorOutput(tensor)
+                with(inputImage) {
+                    val tensor = transformBitmapToTensor(bitmap)
+                    val outputs = getTensorOutput(tensor)
 
-               PrePostProcessor.outputsToNMSPredictions(
-                    outputs,
-                    getPreprocessingImage(
-                        inputImageWidth = bitmap.width.toFloat(),
-                        inputImageHeight = bitmap.height.toFloat(),
-                        imageViewWidth = imageViewWidth,
-                        imageViewHeight = imageViewHeight,
-                    )
-                ).toList()
+                    PrePostProcessor.outputsToNMSPredictions(
+                        outputs,
+                        getPreprocessingImage(
+                            inputImageWidth = inputImageWidth,
+                            inputImageHeight = inputImageHeight,
+                            imageViewWidth = imageViewWidth,
+                            imageViewHeight = imageViewHeight,
+                        )
+                    ).toList()
+                }
             }
         }
 
