@@ -3,10 +3,10 @@ package com.healthc.app.presentation.detection.object_detection
 import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.healthc.data.model.local.detection.InputImage
 import com.healthc.data.model.local.detection.ObjectDetectionResult
 import com.healthc.data.source.detection.LocalDetectionDataSource
 import com.healthc.domain.usecase.detection.CheckAllergiesInImageUseCase
-import com.healthc.domain.usecase.detection.GetDetectedObjectUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,13 +14,11 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class ObjectDetectionViewModel @Inject constructor(
     private val checkAllergiesInImageUseCase : CheckAllergiesInImageUseCase,
-    private val getDetectObjectUseCase: GetDetectedObjectUseCase,
     private val localDetectionDataSource: LocalDetectionDataSource,
 ) : ViewModel() {
 
@@ -38,24 +36,24 @@ class ObjectDetectionViewModel @Inject constructor(
         _imageUrl.value = imageUrl
     }
 
-    fun postImage(byteArray: ByteArray) {
-        viewModelScope.launch {
-            getDetectObjectUseCase(byteArray)
-                .onSuccess {  result ->
-                    // _objectDetectionEvent.emit(ObjectDetectionEvent.Success(result))
-                }
-                .onFailure { error ->
-                    _objectDetectionEvent.emit(ObjectDetectionEvent.Failure(error))
-                }
-        }
-    }
-
-    fun executeObjectDetection(bitmap: Bitmap, imageViewWidth: Float, imageViewHeight: Float) {
+    fun executeObjectDetection(
+        bitmap: Bitmap,
+        inputImageWidth: Float,
+        inputImageHeight: Float,
+        imageViewWidth: Float,
+        imageViewHeight: Float,
+    ) {
         viewModelScope.launch {
             localDetectionDataSource.getDetectedObject(
-                bitmap, imageViewWidth, imageViewHeight
+                InputImage(
+                    bitmap = bitmap,
+                    inputImageWidth = inputImageWidth,
+                    inputImageHeight = inputImageHeight,
+                    imageViewWidth = imageViewWidth,
+                    imageViewHeight = imageViewHeight,
+                )
             ).onSuccess { resultList ->
-                _detectedObjectUiState.value = ObjectDetectionUiState.Success(resultList.first())
+                _detectedObjectUiState.value = ObjectDetectionUiState.Success(resultList)
             }.onFailure { error ->
                 _objectDetectionEvent.emit(ObjectDetectionEvent.Failure(error))
             }
@@ -76,7 +74,9 @@ class ObjectDetectionViewModel @Inject constructor(
 
     sealed class ObjectDetectionUiState {
         data object Init : ObjectDetectionUiState()
-        data class Success(val objectDetectionResult : ObjectDetectionResult) : ObjectDetectionUiState()
+        data class Success(
+            val objectDetectionResultList : List<ObjectDetectionResult>
+        ) : ObjectDetectionUiState()
     }
 
     sealed class ObjectDetectionEvent {

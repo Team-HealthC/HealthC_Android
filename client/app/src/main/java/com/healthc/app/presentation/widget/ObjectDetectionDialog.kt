@@ -5,10 +5,12 @@ import android.content.Context
 import android.os.Bundle
 import com.healthc.app.databinding.DialogObjectDetectionBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.healthc.app.R
+import com.healthc.data.model.local.detection.ObjectDetectionResult
 
 class ObjectDetectionDialog(
     context : Context,
-    private val detectedObject : String,
+    private val objectDetectionResult : List<ObjectDetectionResult>,
     private val onClickPosButton : (String) -> Unit,
     private val onClickNegButton : () -> Unit,
 ): BottomSheetDialog(context) {
@@ -18,12 +20,16 @@ class ObjectDetectionDialog(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.setContentView(binding.root)
-        initViews()
+        if(objectDetectionResult.isEmpty()) {
+            initViewsIfFailedDetection()
+        } else {
+            initViewsIfSuccessfulDetection()
+        }
     }
 
     @SuppressLint("SetTextI18n")
-    private fun initViews(){
-        binding.dialogCategoryTextView.text = "인식된 음식 : $detectedObject"
+    private fun initViewsIfSuccessfulDetection(){
+        // binding.dialogCategoryTextView.text = "인식된 음식 : $detectedObject"
 
         binding.dialogObjectDetectNegButton.setOnClickListener {
             onClickNegButton()
@@ -31,7 +37,19 @@ class ObjectDetectionDialog(
         }
 
         binding.dialogObjectDetectPosButton.setOnClickListener {
-            onClickPosButton(detectedObject)
+            // onClickPosButton(detectedObject)
+            dismiss()
+        }
+    }
+
+    private fun initViewsIfFailedDetection() {
+        binding.dialogCategoryTextView.text =
+            context.resources.getString(R.string.failed_object_detection_title)
+
+        binding.dialogObjectDetectPosButton.isEnabled = false
+
+        binding.dialogObjectDetectNegButton.setOnClickListener {
+            onClickNegButton()
             dismiss()
         }
     }
