@@ -107,7 +107,15 @@ class ObjectDetectionFragment : Fragment() {
                         }
                     }
                 }
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
 
+        viewModel.detectedAllergiesUiEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+            .onEach { detectedAllergies ->
+                if(detectedAllergies.isEmpty()) {
+                    showPositiveDialog()
+                } else {
+                    showNegativeDialog(detectedAllergies = detectedAllergies)
+                }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
@@ -144,7 +152,12 @@ class ObjectDetectionFragment : Fragment() {
         objectDetectionResultList: List<ObjectDetectionResult>,
         classes: List<String>
     ) {
-        objectDetectionAdapter = ObjectDetectionAdapter(classes)
+        objectDetectionAdapter = ObjectDetectionAdapter(
+            classes = classes,
+            onClick = { detectedObject ->
+                viewModel.checkAllergies(detectedObject)
+            }
+        )
         objectDetectionAdapter.submitList(objectDetectionResultList)
         with(binding.rvODDetectedObject) {
             this.layoutManager = LinearLayoutManager(
@@ -242,10 +255,10 @@ class ObjectDetectionFragment : Fragment() {
         return classes
     }
 
-    private fun showNegativeDialog(detectedList: List<Allergy>){
+    private fun showNegativeDialog(detectedAllergies: List<Allergy>){
         NegativeSignDialog(
             context = requireContext(),
-            allergyList = detectedList
+            detectedAllergies = detectedAllergies
         ).show()
     }
 
