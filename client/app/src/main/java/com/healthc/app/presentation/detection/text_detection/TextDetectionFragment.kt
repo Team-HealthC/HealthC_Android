@@ -39,6 +39,7 @@ class TextDetectionFragment : Fragment() {
     ): View {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_text_detection, container, false)
         binding.viewModel = viewModel // xml viewModel init
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
@@ -91,7 +92,7 @@ class TextDetectionFragment : Fragment() {
     private fun showNegativeDialog(detectedList: List<Allergy>){
         NegativeSignDialog(
             context = requireContext(),
-            allergyList = detectedList
+            detectedAllergies = detectedList
         ).show()
     }
 

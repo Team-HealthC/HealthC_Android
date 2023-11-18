@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,6 +25,9 @@ class TextDetectionViewModel @Inject constructor(
     private val _imageUrl: MutableStateFlow<String> = MutableStateFlow("")
     val imageUrl: StateFlow<String> get() = _imageUrl
 
+    private val _recognizedText: MutableStateFlow<String> = MutableStateFlow("")
+    val recognizedText: StateFlow<String> = _recognizedText.asStateFlow()
+
     fun setImageUrl(imageUrl : String){
         _imageUrl.value = imageUrl
     }
@@ -31,9 +35,10 @@ class TextDetectionViewModel @Inject constructor(
     fun checkAllergiesInKoreanText() {
         viewModelScope.launch {
             checkAllergiesInKoreanTextUseCase(_imageUrl.value)
-                .onSuccess { list ->
-                    if(list.isNotEmpty())
-                        _textDetectionUiEvent.emit(TextDetectionEvent.Detected(list))
+                .onSuccess { result ->
+                    _recognizedText.value = result.recognizedText
+                    if(result.allergies.isNotEmpty())
+                        _textDetectionUiEvent.emit(TextDetectionEvent.Detected(result.allergies))
                     else
                         _textDetectionUiEvent.emit(TextDetectionEvent.NotDetected)
                 }
@@ -46,9 +51,10 @@ class TextDetectionViewModel @Inject constructor(
     fun checkAllergiesInEnglishText() {
         viewModelScope.launch {
             checkAllergiesInEnglishTextUseCase(_imageUrl.value)
-                .onSuccess { list ->
-                    if(list.isNotEmpty())
-                        _textDetectionUiEvent.emit(TextDetectionEvent.Detected(list))
+                .onSuccess { result ->
+                    _recognizedText.value = result.recognizedText
+                    if(result.allergies.isNotEmpty())
+                        _textDetectionUiEvent.emit(TextDetectionEvent.Detected(result.allergies))
                     else
                         _textDetectionUiEvent.emit(TextDetectionEvent.NotDetected)
                 }
