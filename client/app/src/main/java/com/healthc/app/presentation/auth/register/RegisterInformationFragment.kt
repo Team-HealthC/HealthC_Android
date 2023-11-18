@@ -11,17 +11,17 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.healthc.app.R
-import com.healthc.app.databinding.FragmentUserNameBinding
+import com.healthc.app.databinding.FragmentRegisterInformationBinding
 import com.healthc.app.presentation.auth.AuthViewModel
-import com.healthc.app.presentation.auth.AuthViewModel.AuthEvent
+import com.healthc.app.presentation.auth.AuthViewModel.ValidateEvent
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
-class UserNameFragment : Fragment() {
+class RegisterInformationFragment : Fragment() {
 
-    private var _binding: FragmentUserNameBinding? = null
+    private var _binding: FragmentRegisterInformationBinding? = null
     private val binding get() = requireNotNull(_binding)
 
     private val viewModel by activityViewModels<AuthViewModel>()
@@ -31,7 +31,7 @@ class UserNameFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user_name, container, false)
+        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register_information, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
@@ -54,11 +54,17 @@ class UserNameFragment : Fragment() {
         viewModel.validationEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                 when (it) {
-                    is AuthEvent.Success -> {
+                    is ValidateEvent.Success -> {
                         navigateToEmail()
                     }
-                    is AuthEvent.Failure -> {
+                    is ValidateEvent.InvalidName -> {
                         binding.signUpNameLayout.error = it.message
+                    }
+                    is ValidateEvent.InvalidEmail -> {
+                        binding.signUpEmailLayout.error = it.message
+                    }
+                    is ValidateEvent.InvalidPassword -> {
+                        binding.signUpPasswordEditLayout.error = it.message
                     }
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
@@ -69,7 +75,8 @@ class UserNameFragment : Fragment() {
     }
 
     private fun navigateToEmail() {
-        val direction = UserNameFragmentDirections.actionUserNameFragmentToUserEmailFragment()
+        val direction = RegisterInformationFragmentDirections
+            .actionRegisterInformationFragmentToRegisterAllergyFragment()
         findNavController().navigate(direction)
     }
 
