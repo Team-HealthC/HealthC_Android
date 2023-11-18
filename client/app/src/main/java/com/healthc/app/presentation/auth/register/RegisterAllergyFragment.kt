@@ -13,19 +13,19 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.healthc.app.R
-import com.healthc.app.databinding.FragmentUserInfoBinding
 import com.healthc.app.presentation.auth.AuthViewModel
 import com.healthc.app.presentation.auth.AuthViewModel.AuthEvent
-import com.healthc.app.presentation.home.MainActivity
+import com.healthc.app.presentation.main.MainActivity
 import com.google.android.material.chip.Chip
+import com.healthc.app.databinding.FragmentRegisterAllergyBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
-class UserInfoFragment : Fragment() {
+class RegisterAllergyFragment : Fragment() {
 
-    private var _binding: FragmentUserInfoBinding? = null
+    private var _binding: FragmentRegisterAllergyBinding? = null
     private val binding get() = requireNotNull(_binding)
 
     private val viewModel by activityViewModels<AuthViewModel>()
@@ -35,7 +35,7 @@ class UserInfoFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user_info, container, false)
+        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register_allergy, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
@@ -60,6 +60,7 @@ class UserInfoFragment : Fragment() {
             findNavController().popBackStack()
         }
     }
+
     private fun observeData(){
         viewModel.signUpEvent.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
@@ -69,7 +70,11 @@ class UserInfoFragment : Fragment() {
                     }
 
                     is AuthEvent.Failure -> {
-                        Toast.makeText(requireContext(), "회원가입에 실패하였습니다.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "회원가입에 실패하였습니다.",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
