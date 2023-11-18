@@ -71,7 +71,7 @@ class ProductSearchFragment : Fragment() {
     }
 
     private fun navigateCamera(){
-        val direction = ProductSearchFragmentDirections.actionProductSearchFragmentToCameraFragment()
+        val direction = ProductSearchFragmentDirections.actionProductSearchFragmentToHomeFragment()
         findNavController().navigate(direction)
     }
 

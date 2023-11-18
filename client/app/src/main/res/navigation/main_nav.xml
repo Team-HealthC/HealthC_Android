@@ -3,10 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/permissionsFragment">
+    app:startDestination="@id/homeFragment">
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.healthc.app.presentation.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_permissionsFragment"
+            app:destination="@id/permissionsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_productSearchFragment"
+            app:destination="@id/productSearchFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_recipeSearchFragment"
+            app:destination="@id/recipeSearchFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/cameraFragment"
-        android:name="com.healthc.app.presentation.home.camera.CameraFragment"
+        android:name="com.healthc.app.presentation.camera.CameraFragment"
         android:label="fragment_camera"
         tools:layout="@layout/fragment_camera" >
         <action
@@ -21,12 +39,6 @@
                 app:argType="com.healthc.app.presentation.detection.text_detection.model.OcrLanguage"/>
         </action>
         <action
-            android:id="@+id/action_cameraFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
-        <action
-            android:id="@+id/action_cameraFragment_to_recipeSearchFragment"
-            app:destination="@id/recipeSearchFragment" />
-        <action
             android:id="@+id/action_cameraFragment_to_objectDetectionFragment"
             app:destination="@id/objectDetectionFragment" >
             <argument
@@ -34,12 +46,12 @@
                 app:argType="string"/>
         </action>
         <action
-            android:id="@+id/action_cameraFragment_to_productSearchFragment"
-            app:destination="@id/productSearchFragment" />
+            android:id="@+id/action_cameraFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/permissionsFragment"
-        android:name="com.healthc.app.presentation.home.camera.PermissionsFragment"
+        android:name="com.healthc.app.presentation.camera.PermissionsFragment"
         android:label="PermissionsFragment" >
         <action
             android:id="@+id/action_permissionsFragment_to_cameraFragment"
@@ -70,11 +82,11 @@
             android:id="@+id/action_profileFragment_to_editorFragment"
             app:destination="@id/editorFragment" />
         <action
-            android:id="@+id/action_profileFragment_to_cameraFragment"
-            app:destination="@id/cameraFragment" />
-        <action
             android:id="@+id/action_profileFragment_to_accountFragment"
             app:destination="@id/accountFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/editorFragment"
@@ -98,8 +110,8 @@
                 app:argType="string"/>
         </action>
         <action
-            android:id="@+id/action_recipeFragment_to_cameraFragment"
-            app:destination="@id/cameraFragment" />
+            android:id="@+id/action_recipeSearchFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/recipeFragment"
@@ -131,14 +143,14 @@
         android:label="ProductSearchFragment"
         tools:layout="@layout/fragment_product_search" >
         <action
-            android:id="@+id/action_productSearchFragment_to_cameraFragment"
-            app:destination="@id/cameraFragment" />
-        <action
             android:id="@+id/action_productSearchFragment_to_korProductListFragment"
             app:destination="@id/korProductListFragment" />
         <action
             android:id="@+id/action_productSearchFragment_to_productListFragment"
             app:destination="@id/productListFragment" />
+        <action
+            android:id="@+id/action_productSearchFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/productFragment"
