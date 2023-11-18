@@ -1,4 +1,4 @@
-package com.healthc.app.presentation.home
+package com.healthc.app.presentation.splash
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -10,6 +10,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.healthc.app.R
 import com.healthc.app.presentation.auth.AuthActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.healthc.app.presentation.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

@@ -1,4 +1,4 @@
-package com.healthc.app.presentation.home.camera.contract
+package com.healthc.app.presentation.camera.contract
 
 import android.app.Activity
 import android.content.Context

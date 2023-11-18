@@ -82,7 +82,7 @@ class ProfileFragment : Fragment() {
         }
 
         binding.backToCameraButton.setOnClickListener {
-            navigateToCamera()
+            navigateToHome()
         }
 
         binding.btProfileAccount.setOnClickListener {
@@ -114,8 +114,8 @@ class ProfileFragment : Fragment() {
         findNavController().navigate(direction)
     }
 
-    private fun navigateToCamera(){
-        val direction = ProfileFragmentDirections.actionProfileFragmentToCameraFragment()
+    private fun navigateToHome(){
+        val direction = ProfileFragmentDirections.actionProfileFragmentToHomeFragment()
         findNavController().navigate(direction)
     }
 

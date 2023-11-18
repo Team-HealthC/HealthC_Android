@@ -1,4 +1,4 @@
-package com.healthc.app.presentation.home.camera
+package com.healthc.app.presentation.camera
 
 import android.content.ContentValues
 import android.content.Context
@@ -11,6 +11,7 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.launch
 import androidx.camera.core.*
@@ -25,9 +26,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.healthc.app.databinding.FragmentCameraBinding
 import com.healthc.app.presentation.detection.text_detection.model.OcrLanguage
-import com.healthc.app.presentation.home.camera.contract.PickSinglePhotoContract
+import com.healthc.app.presentation.camera.contract.PickSinglePhotoContract
 import com.healthc.app.utils.getCurrentFileName
-import com.healthc.app.presentation.widget.SearchChoiceDialog
 import com.google.common.util.concurrent.ListenableFuture
 import com.healthc.app.R
 import kotlinx.coroutines.launch
@@ -54,13 +54,20 @@ class CameraFragment : Fragment() {
 
     private lateinit var singlePhotoPickerLauncher : ActivityResultLauncher<Void?>
 
+    private val callback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            navigateToHome()
+        }
+    }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         singlePhotoPickerLauncher =  registerForActivityResult(PickSinglePhotoContract()) { imageUri: Uri? ->
             if (imageUri != null) {
-                navigateToML(imageUri.toString())
+                navigateToDetection(imageUri.toString())
             }
         }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
 
     override fun onCreateView(
@@ -89,6 +96,10 @@ class CameraFragment : Fragment() {
 
     private fun initView(){
         binding.cameraChipGroup.check(binding.odCameraChip.id) // initial chip state
+
+        binding.btCameraCancel.setOnClickListener {
+            navigateToHome()
+        }
     }
 
     private fun setUpCamera(){
@@ -115,14 +126,6 @@ class CameraFragment : Fragment() {
             }
             // 카메라 렌즈 바인딩 변경으로, UseCases 재설정
             bindCameraUseCases()
-        }
-
-        binding.goToProfileButton.setOnClickListener{
-            navigateToProfile()
-        }
-
-        binding.goToSearchButton.setOnClickListener{
-            showSearchDialog()
         }
 
         binding.goToGalleryButton.setOnClickListener{
@@ -168,7 +171,7 @@ class CameraFragment : Fragment() {
         imageCapture.takePicture(outputFileOptions, cameraExecutor,
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                    navigateToML(outputFileResults.savedUri.toString())
+                    navigateToDetection(outputFileResults.savedUri.toString())
                 }
 
                 override fun onError(exception: ImageCaptureException) {
@@ -179,27 +182,19 @@ class CameraFragment : Fragment() {
         startCaptureSound()
     }
 
-    private fun showSearchDialog(){
-        SearchChoiceDialog(
-            requireContext(),
-            onSearchIngredient = { navigateToRecipe() },
-            onSearchProduct = { navigateToProduct() },
-        ).show()
-    }
-
     private fun startCaptureSound(){
         cameraSound.play(SHUTTER_CLICK) // camera sound
     }
 
-    private fun navigateToML(imageUrl : String) {
+    private fun navigateToDetection(imageUrl : String) {
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 when (binding.cameraChipGroup.checkedChipId) {
                     binding.engOcrChip.id -> {
-                        navigateToOcr(imageUrl, OcrLanguage.ENG)
+                        navigateToTextDetection(imageUrl, OcrLanguage.ENG)
                     }
                     binding.korOcrChip.id -> {
-                        navigateToOcr(imageUrl, OcrLanguage.KOR)
+                        navigateToTextDetection(imageUrl, OcrLanguage.KOR)
                     }
                     binding.odCameraChip.id -> {
                         navigateToObjectDetection(imageUrl)
@@ -209,22 +204,7 @@ class CameraFragment : Fragment() {
         }
     }
 
-    private fun navigateToProfile() {
-        val direction = CameraFragmentDirections.actionCameraFragmentToProfileFragment()
-        findNavController().navigate(direction)
-    }
-
-    private fun navigateToRecipe(){
-        val direction = CameraFragmentDirections.actionCameraFragmentToRecipeSearchFragment()
-        findNavController().navigate(direction)
-    }
-
-    private fun navigateToProduct(){
-        val direction = CameraFragmentDirections.actionCameraFragmentToProductSearchFragment()
-        findNavController().navigate(direction)
-    }
-
-    private fun navigateToOcr(imageUrl: String, language: OcrLanguage){
+    private fun navigateToTextDetection(imageUrl: String, language: OcrLanguage){
         val direction = CameraFragmentDirections.actionCameraFragmentToTextDetectionFragment(
             imageUrl = imageUrl,
             language = language
@@ -238,6 +218,17 @@ class CameraFragment : Fragment() {
                 imageUrl
             )
         )
+    }
+
+    private fun navigateToHome() {
+        findNavController().navigate(
+            CameraFragmentDirections.actionCameraFragmentToHomeFragment()
+        )
+    }
+
+    override fun onDetach() {
+        callback.remove()
+        super.onDetach()
     }
 
     override fun onDestroyView() {

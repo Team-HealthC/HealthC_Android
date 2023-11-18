@@ -16,7 +16,7 @@ import com.healthc.app.R
 import com.healthc.app.databinding.FragmentLoginBinding
 import com.healthc.app.presentation.auth.AuthViewModel
 import com.healthc.app.presentation.auth.AuthViewModel.AuthEvent
-import com.healthc.app.presentation.home.MainActivity
+import com.healthc.app.presentation.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -70,7 +70,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun navigateSignUp(){
-        val direction = LoginFragmentDirections.actionLoginFragmentToUserNameFragment()
+        val direction = LoginFragmentDirections.actionLoginFragmentToRegisterInformationFragment()
         findNavController().navigate(direction)
     }
 

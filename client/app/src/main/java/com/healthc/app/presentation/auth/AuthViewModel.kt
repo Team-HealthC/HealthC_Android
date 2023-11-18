@@ -21,8 +21,8 @@ class AuthViewModel @Inject constructor(
     private val signUpUseCase: SignUpUseCase
 ) : ViewModel() {
 
-    private val _validationEvent = MutableSharedFlow<AuthEvent>()
-    val validationEvent: SharedFlow<AuthEvent> get() = _validationEvent
+    private val _validationEvent = MutableSharedFlow<ValidateEvent>()
+    val validationEvent: SharedFlow<ValidateEvent> get() = _validationEvent
 
     private val _signUpEvent = MutableSharedFlow<AuthEvent>()
     val signUpEvent: SharedFlow<AuthEvent> get() = _signUpEvent
@@ -36,40 +36,45 @@ class AuthViewModel @Inject constructor(
     val name: MutableStateFlow<String> = MutableStateFlow<String>("")
     private val allergies: MutableStateFlow<List<String>> = MutableStateFlow(emptyList())
 
-    fun validateEmail(){
-        viewModelScope.launch {
-            val validateEmailUseCase = ValidateEmailUseCase()
-            val result = validateEmailUseCase(email.value)
-            if(result.successful){
-                _validationEvent.emit(AuthEvent.Success)
-            }else{
-                _validationEvent.emit(AuthEvent.Failure(result.errorMessage))
+    fun validateInput() {
+        if(validateName() && validateEmail() && validatePassword()) {
+            viewModelScope.launch {
+                _validationEvent.emit(ValidateEvent.Success)
             }
         }
     }
 
-    fun validatePassword(){
-        viewModelScope.launch {
-            val validatePasswordUseCase = ValidatePasswordUseCase()
-            val result = validatePasswordUseCase(password.value)
-            if(result.successful){
-                _validationEvent.emit(AuthEvent.Success)
-            }else{
-                _validationEvent.emit(AuthEvent.Failure(result.errorMessage))
+    private fun validateEmail() : Boolean {
+        val validateEmailUseCase = ValidateEmailUseCase()
+        val result = validateEmailUseCase(email.value)
+        if (result.successful.not()) {
+            viewModelScope.launch {
+                _validationEvent.emit(ValidateEvent.InvalidEmail(result.errorMessage))
             }
         }
+        return result.successful
     }
 
-    fun validateName(){
-        viewModelScope.launch {
-            val validateNameUseCase = ValidateNameUseCase()
-            val result = validateNameUseCase(name.value)
-            if(result.successful){
-                _validationEvent.emit(AuthEvent.Success)
-            }else{
-                _validationEvent.emit(AuthEvent.Failure(result.errorMessage))
+    private fun validatePassword() : Boolean{
+        val validatePasswordUseCase = ValidatePasswordUseCase()
+        val result = validatePasswordUseCase(password.value)
+        if (result.successful.not()) {
+            viewModelScope.launch {
+                _validationEvent.emit(ValidateEvent.InvalidPassword(result.errorMessage))
             }
         }
+        return result.successful
+    }
+
+    private fun validateName() : Boolean{
+        val validateNameUseCase = ValidateNameUseCase()
+        val result = validateNameUseCase(name.value)
+        if (result.successful.not()) {
+            viewModelScope.launch {
+                _validationEvent.emit(ValidateEvent.InvalidName(result.errorMessage))
+            }
+        }
+        return result.successful
     }
 
     fun setAllergy(allergyList : List<String>){
@@ -107,12 +112,19 @@ class AuthViewModel @Inject constructor(
         password.value = TEXT_EMPTY
     }
 
-    companion object{
-        const val TEXT_EMPTY = ""
+    sealed class ValidateEvent {
+        data class InvalidName(val message: String?) : ValidateEvent()
+        data class InvalidEmail(val message: String?) : ValidateEvent()
+        data class InvalidPassword(val message: String?) : ValidateEvent()
+        data object Success : ValidateEvent()
     }
 
     sealed class AuthEvent {
-        data class Failure(val message: String?) : AuthEvent()
-        object Success : AuthEvent()
+        data class Failure(val message: String?): AuthEvent()
+        data object Success : AuthEvent()
+    }
+
+    companion object{
+        const val TEXT_EMPTY = ""
     }
 }

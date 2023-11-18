@@ -6,44 +6,27 @@
     app:startDestination="@id/loginFragment">
 
     <fragment
-        android:id="@+id/userEmailFragment"
-        android:name="com.healthc.app.presentation.auth.register.UserEmailFragment"
-        android:label="UserEmailFragment"
-        tools:layout="@layout/fragment_user_email" >
-        <action
-            android:id="@+id/action_userEmailFragment_to_userPasswordFragment"
-            app:destination="@id/userPasswordFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/userPasswordFragment"
-        android:name="com.healthc.app.presentation.auth.register.UserPasswordFragment"
-        android:label="UserPasswordFragment"
-        tools:layout="@layout/fragment_user_password" >
-    <action
-            android:id="@+id/action_userPasswordFragment_to_userInfoFragment"
-            app:destination="@id/userInfoFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/userInfoFragment"
-        android:name="com.healthc.app.presentation.auth.register.UserInfoFragment"
-        android:label="UserInfoFragment"
-        tools:layout="@layout/fragment_user_info" />
-    <fragment
-        android:id="@+id/userNameFragment"
-        android:name="com.healthc.app.presentation.auth.register.UserNameFragment"
-        android:label="userNameFragment"
-        tools:layout="@layout/fragment_user_name" >
-    <action
-            android:id="@+id/action_userNameFragment_to_userEmailFragment"
-            app:destination="@id/userEmailFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/loginFragment"
         android:name="com.healthc.app.presentation.auth.login.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login" >
-    <action
-            android:id="@+id/action_loginFragment_to_userNameFragment"
-            app:destination="@id/userNameFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_registerInformationFragment"
+            app:destination="@id/registerInformationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerAllergyFragment"
+        android:name="com.healthc.app.presentation.auth.register.RegisterAllergyFragment"
+        android:label="RegisterAllergyFragment" />
+    <fragment
+        android:id="@+id/registerInformationFragment"
+        android:name="com.healthc.app.presentation.auth.register.RegisterInformationFragment"
+        android:label="RegisterInformationFragment" >
+        <action
+            android:id="@+id/action_registerInformationFragment_to_registerAllergyFragment"
+            app:destination="@id/registerAllergyFragment" />
+        <action
+            android:id="@+id/action_registerInformationFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
 </navigation>
