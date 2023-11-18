@@ -27,7 +27,6 @@ class RegisterAllergyFragment : Fragment() {
 
     private var _binding: FragmentRegisterAllergyBinding? = null
     private val binding get() = requireNotNull(_binding)
-
     private val viewModel by activityViewModels<AuthViewModel>()
 
     override fun onCreateView(

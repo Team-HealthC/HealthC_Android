@@ -190,14 +190,14 @@
         </com.google.android.material.chip.ChipGroup>
 
         <Button
-            android:id="@+id/signUpInfoDoneButton"
-            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:id="@+id/bt_register_allergy_done"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:textColor="@color/white"
             android:backgroundTint="@color/green"
             android:text="@string/done"
+            android:padding="10dp"
             android:onClick="@{() -> viewModel.signUpUser()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
