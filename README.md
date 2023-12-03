@@ -48,6 +48,9 @@
 
 ## 🎨 헬씨 시연 영상 
 <a href="https://drive.google.com/file/d/1EdEJ5ebg3CXA_j33hI_aczbtt8KkhJ0G/view?usp=sharing">헬씨 시연 영상</a>
+<br>
+<br>
+
 
 ## 🫛 Android Tech Stack</h2>
 
@@ -70,9 +73,11 @@
 - Material Components
 - Timber
 - [verison_catalog](https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/client/gradle/libs.version.toml)
+<br>
 
 <h2>프로젝트 제안서</h2>
 https://treejin99.notion.site/5ce7db7993854eb0905c0623e723dcf5
+<br>
 
 <h2>프로젝트 발표자료</h2>
 https://www.miricanvas.com/v/11rxz6u
