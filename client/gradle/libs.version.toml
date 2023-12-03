@@ -35,7 +35,7 @@ okhttp = "4.11.0"
 junit = "4.13.2"
 hilt = "2.48"
 timber = "5.0.1"
-glide = "4.15.1"
+glide = "4.16.0"
 systemuicontroller = "1.0.1"
 pytorch = "1.12.2"
 
