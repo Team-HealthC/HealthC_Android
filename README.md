@@ -46,6 +46,9 @@
 |  `프로필` <br> `계정관리`  | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/mypage.jpeg"/> | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/mypage2.jpeg"/> | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/mypage3.jpeg"/> |
 <br>
 
+## 🎨 헬씨 시연 영상 
+<a href="https://drive.google.com/file/d/1EdEJ5ebg3CXA_j33hI_aczbtt8KkhJ0G/view?usp=sharing">헬씨 시연 영상</a>
+
 ## 🫛 Android Tech Stack</h2>
 
 - Minumum SDK 26 Target Sdk 34
