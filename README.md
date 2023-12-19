@@ -17,7 +17,7 @@
 
 ◌ 현재까지 식품 알러지를 예방할 수 있는 유일한 방법은 알러지를 일으키는 식품을 먹지 않는 것뿐이에요.
 
-<img width="256" alt="image" src="https://file.notion.so/f/f/e775383b-efe0-417a-b4f6-ce259eedcdee/186e7d8a-1cea-4d8b-8e53-c6b3498a1485/Untitled.png?id=6108a89e-0b95-45bf-9f0d-5277f2119131&table=block&spaceId=e775383b-efe0-417a-b4f6-ce259eedcdee&expirationTimestamp=1701684000000&signature=wmV9YxAtaJo5V1l8WmR0wKmbTBOnOFFXNyrcg7PURfQ&downloadName=Untitled.png">
+<img width="256" alt="image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROPB3p2qlwjJc2WiFQUahwc39RzJxd8x-8Sg&usqp=CAU">
 
 (출처: gettyimagesBank)
 
