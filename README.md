@@ -34,7 +34,7 @@
 - 나의 알러지를 검색해, 주의해야할 음식을 확인할 수 있어요.
 <br>
 
-### 🥑 헬씨 어플리케이션의 프로세스는 다음과 같아요 
+### 🥑 헬씨 어플리케이션의 사용자 여정
 
 1. 사용자의 개인정보와 앓고 있는 질환 및 알러지 입력 
 2. 프로그램에 내재된 카메라 열기  
@@ -51,6 +51,10 @@
 |  `재료 검색` <br> `가공식품 검색`  | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/recipe1.jpeg"/> | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/recipe2.jpeg"/> | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/dictionary_search.jpeg"/> |
 |  `가공식품 사전`  | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/dictionary_korea1.jpeg"/> | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/dictionary_korea2.jpeg"/> | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/dictionary_foriegn.jpeg"/> | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/dictionary_forien2.jpeg"/> |
 |  `프로필` <br> `계정관리`  | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/mypage.jpeg"/> | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/mypage2.jpeg"/> | <img width="200px" src="https://github.com/Solution-Challenge-HealthC/HealthC_Android/blob/main/image/mypage3.jpeg"/> |
+<br>
+
+## 🪟 헬씨 포스터 
+![image](https://github.com/Team-HealthC/HealthC_Android/assets/77484719/b824b5e4-a83f-43e6-a90b-9cd592c2ab98)
 <br>
 
 ## 🎨 헬씨 시연 영상 
